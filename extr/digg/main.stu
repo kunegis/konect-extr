@@ -1,0 +1,58 @@
+
+@all:  meta.digg-votes out.digg-votes meta.digg-friends out.digg-friends;
+
+meta.digg-votes;
+meta.digg-friends;
+
+out.digg-votes:  digg_votes1.csv
+{
+	{
+		echo '% bip positive'
+		<digg_votes1.csv sed -re 's,,\
+,g' | 
+		sed -re 's/^"([0-9]+)","([0-9]+)","([0-9]+)"/\2	\3	1	\1/' | 
+		../mkuniq 
+	} >out.digg-votes
+}
+
+digg_votes1.csv: digg_votes.zip
+{
+	set -e
+	rm -f digg_votes1.csv
+	unzip -P digg2009_user digg_votes.zip
+	[ -r digg_votes1.csv ] || exit 1
+	touch digg_votes1.csv
+}
+
+digg_votes.zip:
+{
+	set -e
+	wget http://www.isi.edu/~lerman/downloads/digg_votes.zip -O digg_votes.zip
+	touch digg_votes.zip
+}
+
+out.digg-friends:  digg_friends.csv
+{
+	{
+		echo '% asym unweighted'
+		<digg_friends.csv sed -re 's/^"([0-9]+)","([0-9]+)","([0-9]+)","([0-9]+)"/\3	\4	1	\2/' | 
+		sed -re '/^([0-9]+)\s+\1\s/d' |
+		../mkuniq1
+	} >out.digg-friends
+}
+
+digg_friends.csv:  digg_friends.zip
+{
+	set -e
+	rm -f digg_friends.csv
+	unzip -P digg2009_user digg_friends.zip
+	[ -r digg_friends.csv ] || exit 1
+	touch digg_friends.csv
+}
+ 
+digg_friends.zip:
+{
+	set -e 
+	wget http://www.isi.edu/~lerman/downloads/digg_friends.zip -O digg_friends.zip
+	touch digg_friends.zip
+}

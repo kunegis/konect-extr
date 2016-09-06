@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Cut
+name: CiteULike u-t
+description: User–tag assignment
+url: http://www.citeulike.org/faq/data.adp
+cite: konect:emamy07 
+extr: citeulike
+fullname: CiteULike user–tag
+long-description:  This is the bipartite network of users and tags in CiteULike.  Each edge represents a tag assignment that connects a user and a tag.  Since a user can assign a tag to multiple publications, the network contains multiple edges. The edges are annotated with the creation time of the tag assignment. 
+tags: #regenerate
+entity-names:  user, tag
+relationship-names:  assignment

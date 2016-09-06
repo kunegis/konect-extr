@@ -1,0 +1,15 @@
+#! /bin/sh
+#
+# Generate cat weight distribution.
+#
+# INPUT 
+#	dat-petster/ent.petster_orig-cat.weight
+#
+# OUTPUT 
+#	dat-petster/weight.cat
+#
+
+# Note:  some cats have negative weight; remove them. 
+
+< dat-petster/ent.petster_orig-cat.weight sed -re 's,lbs\.,,;/^\s*$/d;/-/d' |
+sort -n | uniq -c >dat-petster/weight.cat

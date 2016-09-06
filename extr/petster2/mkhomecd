@@ -1,0 +1,40 @@
+#! /usr/bin/perl
+#
+# Convert Cat/Dog home files to canonical form.  This is mostly
+# resolving HTML entities.
+#
+# This uses STDIN/STDOUT.
+#
+
+use strict;
+use warnings;
+
+binmode(STDIN,  ":utf8");
+binmode(STDOUT, ":utf8");
+
+use HTML::Entities;
+
+while (<>) {
+
+    chomp; 
+
+    my $line = $_;
+
+    if ($line =~ m/&#1057;&#1072;&#1085;&#1082;&#1090;-&#10, Russian Federation/) {
+	$line= "Saint Petersburg, Russia";
+    }
+
+    $line = decode_entities($line); 
+
+    $line =~ s/^([.,]|\s)+$//;
+    $line =~ s/^.*\[hidden\].*$//;
+
+    chomp $line; 
+
+    # Google Maps would decode this as an address in Abu Dhabi 
+    if ($line eq "HQ") {
+	$line= "";
+    }
+    
+    print "$line\n";
+}

@@ -1,0 +1,10 @@
+category: Affiliation
+code: YG
+name: YouTube
+description: User–group memberships
+url: http://socialnetworks.mpi-sws.org/data-imc2007.html
+cite: konect:mislove2 
+extr: wosn
+long-description: This is the bipartite network of YouTube users and their group memberships. The nodes are users and groups, and an edge between a user and a group denotes a group membership. 
+entity-names:  user, group
+relationship-names:  membership

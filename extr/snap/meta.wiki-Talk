@@ -1,0 +1,20 @@
+category: Communication
+code: WK
+name: Wikipedia, English
+description: User–user userpage message
+url: http://snap.stanford.edu/data/wiki-Talk.html
+cite: konect:leskovec207 
+extr: snap
+entity-names: user
+relationship-names: message 
+long-description: This is the communication network of the English Wikipedia. Nodes represent users of the English Wikipedia, and an edge from user A to user B denotes that user A has written a message on the talk page of user B. 
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_wiki_talk_user: <http://konect.uni-koblenz.de/networks/wiki-Talk/User/> .
+n3-prefix-k: konect_wiki_talk_page: <http://konect.uni-koblenz.de/networks/wiki-Talk/Wall/> .
+n3-prefix-l: konect_wiki_talk_post: <http://konect.uni-koblenz.de/networks/wiki-Talk/Post/> .
+n3-type-m: sioc:UserAccount
+n3-nodedata-n-1: konect_wiki_talk_page:i$k a sioc:Forum .
+n3-nodedata-n-2: konect_wiki_talk_page:i$k sioc:has_moderator $n .
+n3-type-l: sioc:Post
+n3-edgedata-1: $l sioc:has_container konect_wiki_talk_page:i$k .
+n3-edgedata-2: $l sioc:has_creator $m .

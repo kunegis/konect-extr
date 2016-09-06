@@ -1,0 +1,9 @@
+category: Ratings
+code: CI
+name: CoSiMo (simulation)
+description: Person–item rating
+url: http://www.uni-koblenz-landau.de/koblenz/fb4/AGStaab/Persons/Schwagereit
+cite: schwagereit:cosimo
+extr: cosimo
+entity-names: person,item
+relationship-names: rating

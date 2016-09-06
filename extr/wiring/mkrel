@@ -1,0 +1,49 @@
+#! /usr/bin/perl -w
+#
+# Create the relationship file from the wiring.{pos,neg} file. 
+#
+# ARGUMENTS
+#	$1 	"pos" or "neg"
+#
+# INPUT
+#	wiring.$1	The input file
+#
+# OUTPUT
+#	rel.$1		The relationship file
+#
+
+use strict;
+
+my $name = $ARGV[0]; 
+
+my $ret = ''; 
+my $count = 0; 
+
+open(WIRING, "<wiring.$name"); 
+
+my $from = 0; 
+
+while (<WIRING>)
+{
+    ++ $from; 
+    my @weights = split;
+    my $to = 0;
+    for my $weight (@weights)
+    {
+	++$to; 
+	if ($weight == 1)
+	{
+	    ++ $count; 
+	    $ret .= "$from $to\n"; 
+	}
+    }
+}
+
+close(WIRING) or die;
+
+open(REL,  ">rel.$name"); 
+
+print REL "% sym unweighted\n% $count $from $from\n% ent.tribe ent.tribe\n$ret"; 
+
+close(REL) or die; 
+

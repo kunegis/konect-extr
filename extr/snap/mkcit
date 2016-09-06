@@ -1,0 +1,96 @@
+#! /usr/bin/perl -w
+#
+# Generate co-citation network on stdout. 
+#
+# PARAMETERS
+#	$1	name of dataset, e.g. "cit-HepPh"
+#
+# INPUT FILES 
+#	out/$1.txt
+#	out/$1-dates.txt
+#
+# STDOUT
+#	The data without header lines, and with internal IDs
+#
+
+use strict; 
+
+use Date::Parse;
+
+my $dataset = $ARGV[0]; 
+
+open(DATES, "<out/$dataset-dates.txt") or die; 
+
+my %citers = (); 
+
+my $maxTimestamp = 0; 
+
+while (<DATES>)
+{
+   /^([0-9]+)\s+(\S+)/ or next;
+
+   my $citer = $1;
+   my $date = $2; 
+
+   my $timestamp = str2time($date); 
+
+   $citers{$citer} = $timestamp; 
+
+   if ($timestamp > $maxTimestamp)
+   {
+       $maxTimestamp = $timestamp; 
+   }
+}
+
+close(DATES) or die; 
+
+open(TXT, "<out/$dataset.txt") or die; 
+
+my $last_citer = -1; 
+
+my @citeds = (); 
+
+## print "% sym unweighted\n"; 
+
+sub purge
+{
+    foreach my $i (@citeds)
+    {
+	foreach my $j (@citeds)
+	{
+	    next if $i eq $j; 
+	    my $timestamp = 1 + $maxTimestamp; 
+	    if (exists $citers{$last_citer})
+	    {
+		$timestamp = $citers{$last_citer}; 
+	    }
+	    print "$i $j 1 $timestamp\n"; 
+	}
+    }
+}
+
+while (<TXT>)
+{
+    /^([0-9]+)\s+([0-9]+)/
+	or next; 
+
+    my $citer = $1; 
+    my $cited = $2; 
+
+    if ($citer != $last_citer)
+    {
+	if ($last_citer >= 0)
+	{
+	    purge; 
+	    @citeds = (); 
+	}
+
+	$last_citer = $citer; 
+    }
+
+    push(@citeds, $cited); 
+}
+
+purge; 
+
+close(TXT) or die;

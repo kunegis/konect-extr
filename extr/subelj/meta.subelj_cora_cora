@@ -1,0 +1,10 @@
+category: Citation
+code: CC
+name: Cora citation
+description: Paper–paper citations
+entity-names: paper
+extr: subelj
+url: http://lovro.lpt.fri.uni-lj.si/support.jsp
+long-description: This is the cora citation network. The network is directed. Nodes represent scientific papers. An edge between two nodes indicates that the left node cites the right node. 
+relationship-names: citation
+cite: konect:dependency4

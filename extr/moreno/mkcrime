@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+#sort first using -k2n -k3nr
+
+use strict;
+use warnings;
+my $suspects={};
+my $duals={};
+my $crime=-1;
+while(<STDIN>){
+ chomp;
+ /([0-9]+) ([0-9]+) ([124])/ or die "Invalid input line $_";
+ if($crime ne $2){
+	if($crime >0){
+		&printduals;
+	}
+
+	$crime=$2;
+	for (keys %$suspects)
+{	
+	delete $suspects->{$_};
+}
+       for (keys %$duals)
+{
+	delete $duals->{$_};
+}
+ }  
+
+ if($3==2 || $3 == 4){
+ 	$suspects->{$1} = $1;
+	$duals->{$1}=$1 if  ($3 == 4);
+ }
+ 
+ if($3==1)
+{
+  for (keys %$suspects){
+	print "$_ $1\n";
+ }
+
+}
+
+}
+&printduals;
+
+
+sub printduals()
+{
+	for my $d (keys %$duals)
+{
+  for my $s (keys %$suspects){
+        print "$s $d\n";
+ }
+
+}
+       for (keys %$duals)
+{
+        delete $duals->{$_};
+}
+
+}

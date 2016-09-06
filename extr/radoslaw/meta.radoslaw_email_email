@@ -1,0 +1,20 @@
+category: Communication 
+code: RA
+name: Manufacturing emails
+description: Employee–employee email
+entity-names: employee,employee
+extr: radoslaw
+url: http://www.ii.pwr.wroc.pl/~michalski/index.php?content=datasets#manufacturing
+long-description: This is the internal email communication network between employees of a mid-sized manufacturing company. The network is directed and nodes represent employees. The left node represents the sender and the right node represents the recipient. Edges between two nodes are individual emails. 
+relationship-names: email
+cite: konect:radoslaw
+timeiso: 2010-01-01/2010-09-30
+tags: #loop
+n3-prefix-m: konect_radoslaw_email_employee: <http://konect.uni-koblenz.de/networks/radoslaw_email/Employee/> .
+n3-type-m: foaf:Person
+n3-prefix-l: konect_radoslaw_email_email: <http://konect.uni-koblenz.de/networks/radoslaw_email/Email/> .
+n3-add-prefix-1: nmo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nmo#> .
+n3-type-l: nmo:Email
+n3-edgedata-1: $l nmo:from $m .
+n3-edgedata-2: $l nmo:to $n .
+n3-edgedata-3: $l nmo:sentDate $timestamp .

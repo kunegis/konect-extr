@@ -1,0 +1,55 @@
+#! /bin/sh
+#
+# Build a dataset.
+#
+# INVOCATION
+#	$1	Name of dataset 
+#
+
+network="$1"
+
+#
+# Remove weights
+#
+if expr $network : '^as-caida' >/dev/null ; then
+	rm_weights="sed -re s,\\s*\\S+\$,,"
+else
+	rm_weights=cat
+fi
+
+#
+# Remove loops
+#
+if [ "$network" = ca-AstroPh ] || [ "$network" = soc-LiveJournal1 ]
+then
+	rm_loops="../mkrmdup"
+else
+	rm_loops=cat
+fi
+
+#
+# Format:  only collaboration networks are undirected 
+#
+format=asym
+if expr $network : ^ca- >/dev/null      ; then format=sym ; fi
+if expr $network : ^roadNet- >/dev/null ; then format=sym ; fi
+if expr $network : '^as[2-]' >/dev/null ; then format=sym ; fi
+if expr $network : ^loc-gowalla_edges >/dev/null   ; then format=sym ; fi
+if expr $network : ^loc-brightkite_edges >/dev/null   ; then format=sym ; fi
+if expr $network : ^com- >/dev/null ; then format=sym ; fi
+ 
+#
+# Weights 
+#
+weights=unweighted
+if expr $network : ^soc-sign- >/dev/null ; then
+	weights=signed
+fi
+
+{ 
+	<out/"$network".txt sed -re '/^#/d' | 
+	sed -re 's/\t/ /g' |  
+	$rm_weights | 
+	$rm_loops | 
+	../mkrel "$format" "$weights"
+} >out/out."$network"

@@ -1,0 +1,10 @@
+category: HumanContact
+code: Mt
+name: Train bombing
+description: Terrorist–terrorist contacts
+entity-names: terrorist
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#train
+long-description: This undirected network contains contacts between suspected terrorists involved in the train bombing of Madrid on March 11, 2004 as reconstructed from newspapers. A node represents a terrorist and an edge between two terrorists shows that there was a contact between the two terroists. The edge weights denote how 'strong' a connection was. This includes friendship and co-participating in training camps or previous attacks. 
+relationship-names: contact
+cite: konect:hayes

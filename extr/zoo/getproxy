@@ -1,0 +1,29 @@
+#! /usr/bin/perl -w
+#
+# Return a random proxy.
+#
+
+use strict; 
+
+open PROXIES, "<proxies" or die "Cannot open proxies:  $!"; 
+
+my @proxies;
+
+while (<PROXIES>) 
+{
+    /^([-0-9.:a-zA-Z]+)/ or next;
+    push @proxies, $1;
+}
+
+close PROXIES or die "Cannot close proxies:  $!"; 
+
+my $count = @proxies;
+my $index = int($count * rand() * rand() * rand());
+
+# print "count = $count\n";
+# print "index = $index\n"; 
+
+my $proxy = $proxies[$index];
+
+print "$proxy\n"; 
+

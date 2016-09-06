@@ -1,0 +1,12 @@
+category: Social
+code: EP
+name: Epinions
+fullname: Epinions trust
+description: User–user trust/distrust
+url: http://www.trustlet.org/wiki/Extended_Epinions_dataset
+cite: konect:massa05 
+extr: epinions
+long-description: This is the trust and distrust network of Epinions, an online product rating site. The network consist of individual users connected by directed trust and distrust links. Edges have the weight +1 for trust and −1 for distrust. Note that a user can trust or distrust himself, and therefore the network contains loops.
+tags: #loop
+entity-names: user
+relationship-names: trust 

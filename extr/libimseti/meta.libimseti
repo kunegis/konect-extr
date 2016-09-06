@@ -1,0 +1,10 @@
+category: Social
+code: LI
+name: Libimseti.cz
+description: User–user profile rating
+url: http://www.occamslab.com/petricek/data/
+cite: konect:brozovsky07, konect:kunegis2012
+extr:libimseti
+long-description: Libimseti.cz (also spelled Líbímseti.cz; from Czech <i>Líbím se ti</i>, "Do you like me") is a Czech dating site. This is the network of ratings given by users of Libimseti.cz to other users. The network is unipartite, directed, and edges represent ratings on a scale from 1 to 10.
+entity-names: user
+relationship-names: rating  

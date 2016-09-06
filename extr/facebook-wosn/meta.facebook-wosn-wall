@@ -1,0 +1,23 @@
+category: Communication
+code: Ow
+name: Facebook
+fullname: Facebook wall posts
+description: User–user wall post
+entity-names: user
+relationship-names: wall post 
+url: http://socialnetworks.mpi-sws.org/data-wosn2009.html
+cite: viswanath09
+extr: facebook-wosn
+long-description:  The is the directed network of a small subset of posts to other user's wall on Facebook.  The nodes of the network are Facebook users, and each directed edge represents one post, linking the users writing a post to the users whose wall the post is written on.  Since users may write multiple posts on a wall, the network allows multiple edges connecting a single node pair.  Since users may write on their own wall, the network contains loops.
+tags:  #loop
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_facebook_w_w_user: <http://konect.uni-koblenz.de/networks/facebook-wosn-wall/User/> .
+n3-prefix-k: konect_facebook_w_w_wall: <http://konect.uni-koblenz.de/networks/facebook-wosn-wall/Wall/> .
+n3-prefix-l: konect_facebook_w_w_post: <http://konect.uni-koblenz.de/networks/facebook-wosn-wall/Post/> .
+n3-type-m: sioc:UserAccount
+n3-nodedata-n-1: konect_facebook_w_w_wall:i$k a sioc:Forum .
+n3-nodedata-n-2: konect_facebook_w_w_wall:i$k sioc:has_moderator $n .
+n3-type-l: sioc:Post
+n3-edgedata-1: $l sioc:has_container konect_facebook_w_w_wall:i$k .
+n3-edgedata-2: $l sioc:has_creator $m .
+n3-edgedata-3: $l sioc:last_activity_date $timestamp .

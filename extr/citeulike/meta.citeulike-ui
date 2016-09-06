@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Cui
+name: CiteULike u-i
+description: User–publication assignment
+url: http://www.citeulike.org/faq/data.adp
+cite: konect:emamy07 
+extr: citeulike
+fullname: CiteULike user–publication
+long-description:  This is the bipartite network of users and publications in CiteULike.  Each edge represents a tag assignment that connects a users and a publication.  Since a user can be assign multiple tags to a publication, the network contains multiple edges. The edges are annotated with the creation time of the tag assignment. 
+tags: #regenerate
+entity-names:  user, publication
+relationship-names:  tag assignment

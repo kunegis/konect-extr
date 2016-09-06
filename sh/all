@@ -1,0 +1,9 @@
+#!/bin/bash
+directories=$(find . -maxdepth 1 -type d)
+for i in $directories;do
+	if [ $i != "." ]; then
+		cd $i
+		nice make
+		cd ..
+	fi
+done

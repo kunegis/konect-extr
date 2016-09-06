@@ -1,0 +1,36 @@
+#
+# Metabolic network for Homo sapiens.  See:
+#
+# http://www.reactome.org/pages/download-data/ 
+#
+# This project uses Stu instead of Make.  Get it at 
+#
+# https://github.com/kunegis/stu
+#
+
+% version 1.15
+
+@all:  out.reactome meta.reactome;
+
+>out.reactome:  <homo_sapiens.mitab.interactions.txt
+{
+	echo '% sym unweighted' 
+	# Note: '-r' is a non-POSIX extension by GNU sed.  Another
+	# non-POSIX synonym for it is '-E'.  POSIX sed does not support
+	# extended regular expressions. 
+	sed -re '1d;s,^\s*(\S+)\s+(\S+)\s.*$,\1 \2,' | ../mkuniq1 
+}
+
+
+homo_sapiens.mitab.interactions.txt:
+{
+	wget http://www.reactome.org/download/current/homo_sapiens.mitab.interactions.txt.gz -O homo_sapiens.mitab.interactions.txt.gz
+	gunzip homo_sapiens.mitab.interactions.txt.gz
+	[ -r homo_sapiens.mitab.interactions.txt ] || exit 1
+	touch homo_sapiens.mitab.interactions.txt
+}
+
+@clean
+{
+	rm -f out.reactome *.txt *.gz
+}

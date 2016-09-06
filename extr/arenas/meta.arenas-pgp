@@ -1,0 +1,12 @@
+category: OnlineContact
+code: PG
+name: Pretty Good Privacy
+description: User–user interactions
+url: http://deim.urv.cat/~aarenas/data/welcome.htm
+cite: konect:boguna 
+extr: arenas
+long-description: This is the interaction network of users of the Pretty Good Privacy (PGP) algorithm. The network contains only the giant connected component of the network.
+entity-names: user
+relationship-names: interaction 
+tags:  #lcc #incomplete
+

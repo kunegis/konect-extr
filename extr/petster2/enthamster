@@ -1,0 +1,151 @@
+#! /usr/bin/perl
+#
+# Generate the Hamster entity file (original IDs).
+#
+# INPUT 
+#	petster-data/hamsterster/hamsters/*
+#
+# OUTPUT 
+#	dat-petster/ent.petster_orig-hamster.*
+#
+
+use strict;
+use warnings;
+
+opendir(DIR, "petster-data/hamsterster/hamsters/") or die "$!";
+my @filenames = sort readdir(DIR);
+closedir DIR or die "$!";
+
+open OUT_ORIGID,           ">dat-petster/ent.petster_orig-hamster.origid"           or die "$!"; 
+open OUT_NAME,             ">dat-petster/ent.petster_orig-hamster.name"             or die "$!"; 
+open OUT_JOINED,           ">dat-petster/ent.petster_orig-hamster.joined"           or die "$!"; 
+open OUT_SPECIES,          ">dat-petster/ent.petster_orig-hamster.species"          or die "$!"; 
+open OUT_COLORING,         ">dat-petster/ent.petster_orig-hamster.coloring"         or die "$!"; 
+open OUT_SEX,              ">dat-petster/ent.petster_orig-hamster.sex"              or die "$!"; 
+open OUT_BIRTHDAY,         ">dat-petster/ent.petster_orig-hamster.birthday"         or die "$!"; 
+open OUT_AGE,              ">dat-petster/ent.petster_orig-hamster.age"              or die "$!"; 
+open OUT_HOMETOWN,         ">dat-petster/ent.petster_orig-hamster.hometown"         or die "$!"; 
+open OUT_FAVORITETOY,      ">dat-petster/ent.petster_orig-hamster.favoritetoy"      or die "$!"; 
+open OUT_FAVORITEACTIVITY, ">dat-petster/ent.petster_orig-hamster.favoriteactivity" or die "$!"; 
+open OUT_FAVORITEFOOD,     ">dat-petster/ent.petster_orig-hamster.favoritefood"     or die "$!"; 
+
+foreach my $origid(@filenames) {
+
+    next if $origid eq "." || $origid eq ".."; 
+
+    my $path = "petster-data/hamsterster/hamsters/$origid";
+
+    open IN, "<$path" or die "$!";
+
+    my $name;
+    my $joined;
+    my $species;
+    my $coloring;
+    my $sex;
+    my $birthday;
+    my $age;
+    my $hometown; 
+    my $favoritetoy;
+    my $favoriteactivity;
+    my $favoritefood; 
+
+    while (<IN>) {
+
+	chomp; 
+
+	my $line = $_;
+
+	if ($line =~ /<div class="big">/) {
+	    $line = <IN>;  chomp $line; 
+	    if (not $line =~ /^\s*(.+\S)\s*<br>/) {
+		print STDERR "*** No name found in «$path»\n"; 
+		exit 1;
+	    }
+	    $name = "$1";
+	}
+
+	if ($line =~ /<b>Member Since<\/b>:\s*([^<]*)<br>/i) {
+	    $joined = "$1";
+	}
+
+	if ($line =~ /<b>Species<\/b>:\s*(.*?)<br>/) {
+	    $species = $1;
+	    $species =~ s/<[^>]*>//g;
+	}
+	
+	if ($line =~ /<b>Coloring<\/b>:\s*([^<]*)<br>/) {
+	    $coloring = "$1";
+	}
+
+	if ($line =~ /<b>Gender<\/b>:\s*([^<]*)<br>/) {
+	    my $gender = "$1";
+	    if    ($gender eq "Male"  )  { $sex = 1; }
+	    elsif ($gender eq "Female")  { $sex = 2; }
+	    else {
+		print STDERR "*** Unknown sex in «$path»\n"; 
+		exit 1;
+	    }
+	}
+	
+	if ($line =~ /<b>Birthday<\/b>:\s*([^<]*)<br>/) {
+	    $birthday = "$1";
+	}
+	
+	if ($line =~ /<b>Age<\/b>:\s*([^<]*)<br>/) {
+	    $age = "$1";
+	}
+	
+	if ($line =~ /<b>Hometown<\/b>:\s*([^<]*)<br>/) {
+	    $hometown = "$1";
+	}
+
+	if ($line =~ /<b>Favorite Toy<\/b>:\s*([^<]*)<br>/) {
+	    $favoritetoy = "$1";
+	}
+	
+	if ($line =~ /<b>Favorite Activity<\/b>:\s*([^<]*)<br>/) {
+	    $favoriteactivity = "$1";
+	}
+
+	if ($line =~ /<b>Favorite Food<\/b>:\s*([^<]*)<br>/) {
+	    $favoritefood = "$1";
+	}
+    }
+
+    close IN or die "$!";
+
+    if (! defined $name) {
+	print STDERR "### name missing in «$path»\n";
+	exit 1;
+    }
+
+    if (! defined $favoritetoy)       { $favoritetoy      = ""; }
+    if (! defined $favoriteactivity)  { $favoriteactivity = ""; }
+    if (! defined $favoritefood)      { $favoritefood     = ""; }
+
+    print OUT_ORIGID           "$origid\n"; 
+    print OUT_NAME             "$name\n"; 
+    print OUT_JOINED           "$joined\n"; 
+    print OUT_SPECIES          "$species\n"; 
+    print OUT_COLORING         "$coloring\n"; 
+    print OUT_SEX              "$sex\n"; 
+    print OUT_BIRTHDAY         "$birthday\n"; 
+    print OUT_AGE              "$age\n"; 
+    print OUT_HOMETOWN         "$hometown\n"; 
+    print OUT_FAVORITETOY      "$favoritetoy\n"; 
+    print OUT_FAVORITEACTIVITY "$favoriteactivity\n"; 
+    print OUT_FAVORITEFOOD     "$favoritefood\n"; 
+}
+
+close OUT_ORIGID           or die "$!";
+close OUT_NAME             or die "$!";
+close OUT_JOINED           or die "$!";
+close OUT_SPECIES          or die "$!";
+close OUT_COLORING         or die "$!";
+close OUT_SEX              or die "$!"; 
+close OUT_BIRTHDAY         or die "$!"; 
+close OUT_AGE              or die "$!"; 
+close OUT_HOMETOWN         or die "$!"; 
+close OUT_FAVORITETOY      or die "$!"; 
+close OUT_FAVORITEACTIVITY or die "$!"; 
+close OUT_FAVORITEFOOD     or die "$!"; 

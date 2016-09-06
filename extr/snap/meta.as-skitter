@@ -1,0 +1,11 @@
+category: Computer
+code: SK
+name: Skitter
+description: AS–AS connections
+url: http://snap.stanford.edu/data/as-skitter.html
+cite: konect:leskovec107 
+extr: snap
+long-description:  This is the undirected network of autonomous system on the Internet connected to each other, from the Skitter project.
+entity-names: autonomous system
+relationship-names: connection
+

@@ -1,0 +1,24 @@
+#
+# The famous dolphin social network
+#
+
+% version 1.9
+
+@all:  out.dolphins meta.dolphins;
+
+>out.dolphins:  <dolphins.net
+{
+	echo '% sym unweighted'
+	<dolphins.net sed -re 's,^\s*([0-9]+)\s+([0-9]+)\s*$,\1	\2,;t;d' 
+}
+
+dolphins.net:
+{
+	wget http://vlado.fmf.uni-lj.si/pub/networks/data/bio/dolphins.net -O dolphins.net
+	touch -c dolphins.net
+}
+
+@clean:
+{
+	rm -f out.* *.net 
+}

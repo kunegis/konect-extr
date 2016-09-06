@@ -1,0 +1,23 @@
+#! /bin/sh
+#
+# Generate the user list.
+#
+# INPUT
+#	ml-data/u.user
+#
+# OUTPUT
+#	ent.user
+#
+
+set -e
+
+{
+    echo '%'
+    tail -n1 ml-data/u.user | sed -re 's,\|.*,,;s,^,% ,'
+    echo '% ent dat.age dat.gender dat.occupation dat.zip-code'
+
+    sed <ml-data/u.user -re '
+	s,^([0-9]+)\|([0-9]+)\|([MF])\|([[:alnum:]]+)\|([[:alnum:]]+)$,\1 \2 "\3" "\4" "\5",
+    '
+} >ent.user
+

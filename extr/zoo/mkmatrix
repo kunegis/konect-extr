@@ -1,0 +1,87 @@
+#! /usr/bin/perl -w
+#
+# Generate the numerical matrix file and adjacency file. 
+#
+# INPUT:
+#   out.userids  File with user name-ID mapping
+#   out.corpus   Corpus using user names
+#
+# OUTPUT:  out.matrix
+#   On each line:  USER-A-ID USER-B-ID REL
+#   where the IDs are numbers and REL is ±1.
+#   IDs start are one and are continuous.
+#   Lines are sorted by USER-A-ID, then by USER-B-ID. 
+#   The matrix can be loaded into Matlab using load() and spconvert(). 
+#
+# OUTPUT:  out.adj
+#   Adjacency file, each line is:  USER_A_ID USER_B_ID
+#   Lines are sorted by USER_A_ID first, then USER_B_ID.
+#   The data is undirected and unweighted
+#
+
+use strict;
+
+open(OUT_USERIDS, "<out.userids") or die;
+
+my %userids=();
+
+while (<OUT_USERIDS>) 
+{
+    /([0-9]+) (.*)/;
+    my $userid=$1;
+    my $username=$2;
+
+    $userids{$username} = $userid;
+}
+
+close(OUT_USERIDS) or die;
+
+my %relids=( "+", "+1", 
+	     "-", "-1");
+
+# By user ID, the list of adjacent user IDs.
+my %adj= ();
+
+open(OUT_CORPUS, "<out.corpus") or die;
+open(OUT_MATRIX, ">out.matrix") or die;
+
+print OUT_MATRIX "% asym signed\n"; 
+
+while (<OUT_CORPUS>)
+{
+    /([^ ]+) ([^ ]+) ([+-])/;
+
+    my $user_source= $1;
+    my $user_target= $2;
+    my $rel        = $3;
+
+    my $id_source = $userids{$user_source};
+    my $id_target = $userids{$user_target};
+
+    print OUT_MATRIX $id_source ." ". $id_target ." ". $relids{$rel} . "\n";
+
+    $adj{$id_source} = {} unless $adj{$id_source};
+    $adj{$id_target} = {} unless $adj{$id_target};
+    my $p_neighbors_source = $adj{$id_source};
+    my $p_neighbors_target = $adj{$id_target};
+    $p_neighbors_source->{$id_target}=1;
+    $p_neighbors_target->{$id_source}=1;
+}
+
+close(OUT_CORPUS) or die;
+close(OUT_MATRIX) or die; 
+
+open(OUT_ADJ, ">out.adj") or die "Opening out.adj:  $!";
+
+foreach (sort {$a <=> $b} keys %adj) {
+    my $id_source = $_; 
+    my $p_neighbors = $adj{$id_source};
+    my %neighbors = %$p_neighbors; 
+
+    foreach (sort {$a <=> $b} keys %neighbors) {
+	my $id_target = $_; 
+	print OUT_ADJ "$id_source $id_target\n"; 
+    }
+}
+
+close(OUT_ADJ) or die "Closing out.adj:  $!";

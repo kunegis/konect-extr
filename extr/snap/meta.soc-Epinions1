@@ -1,0 +1,10 @@
+category: Social
+code: ES
+name: Epinions
+description: User–user trust
+url: http://snap.stanford.edu/data/soc-Epinions1.html
+cite: konect:richardson2003
+extr: snap
+entity-names: user
+relationship-names: trust 
+long-description: This is the trust network from the online social network Epinions. Nodes are users of Epinions and directed edges represent trust between the users.

@@ -1,0 +1,13 @@
+category: Folksonomy
+code: Dut
+name: Delicious ut
+description: User–tag assignment
+url: http://dai-labor.de/IRML/datasets
+cite: wetzker:delicious-cookbook
+extr: delicious
+fullname: Delicious user–tag
+long-description: This network contains user–tag relations from http://delicious.com/. Left nodes represent users, right nodes represent tags and an edge shows that a user tagged an URL using the tag represented by the right node.
+tags:  #incomplete
+entity-names: user,tag
+relationship-names: usage
+

@@ -1,0 +1,30 @@
+#! /bin/sh
+#
+# Convert from a "home" location string to a the canonical location name
+# from Google Maps. 
+#
+
+./geoescape |
+while read -r name
+do
+    if [ -z "$name" ]
+    then
+	echo 
+	continue
+    fi
+
+    filename="geocache/$name"
+
+    if [ -d "$filename" ]
+    then
+	echo >&2 "*** Is a directory:  '$filename'"
+	exit 1
+    fi
+
+    if [ -e "$filename" ]
+    then
+	echo "$(<"$filename" sed -re 's,^\s*<formatted_address>(.*)</formatted_address>\s*$,\1,;tx;d;b;:x;q')"
+    else
+	echo 
+    fi
+done

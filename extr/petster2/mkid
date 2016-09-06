@@ -1,0 +1,30 @@
+#! /usr/bin/perl
+# 
+# Transform categorical data to numerical.  The empty string is always
+# mapped to zero.  
+#
+
+use strict;
+use warnings;
+
+binmode(STDIN, ":utf8");
+
+my $next_id= 1;
+my %new_ids = ();
+
+while (<>) {
+    my $id_old = $_;
+
+    if ($id_old =~ /^\s*$/) {
+	print "0\n";
+	next; 
+    }
+
+    my $id_new = $new_ids{$id_old};
+    if (! exists $new_ids{$id_old}) {
+	$id_new = $next_id;
+	$new_ids{$id_old} = $id_new;
+	++ $next_id;
+    }
+    print "$id_new\n";
+}

@@ -1,0 +1,10 @@
+category: Affiliation
+code: SC
+name: South African Companies
+description: Person–company leaderships
+entity-names: person,company
+extr: brunson
+url: https://github.com/corybrunson/triadic
+long-description: This bipartite network contains person–company shared leadership relations of "the five most representative companies" that are claimed to represent "the small inner ring of South African Finance". Left nodes represent persons and right nodes represent companies. An edge between a person and a company shows that the person had a leadership position in that company.
+relationship-names: leadership
+cite: konect:hobson

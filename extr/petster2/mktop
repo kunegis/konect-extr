@@ -1,0 +1,6 @@
+#! /bin/sh
+#
+# Extract the most-occuring lines in the input.  Write to output. 
+#
+
+sort | uniq -c | sort -rn 

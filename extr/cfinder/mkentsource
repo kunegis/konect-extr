@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while read line
+do
+ read x y <<< `IFS='	'; echo "$line"`
+ echo "$x"
+ echo "$y"
+done

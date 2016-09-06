@@ -1,0 +1,41 @@
+@all: [dep.outs];
+
+>LANGS: { echo ar de en es fr it nl pt ru zh }
+
+>dep.outs: LANGS
+{
+    for LANG in $(cat LANGS) ; do
+        echo "out/out.wiki_talk_$LANG"
+    done
+}
+
+wiki-talk-dataset.tar.gz:
+{
+    wget https://zenodo.org/record/49561/files/wiki-talk-dataset.tar.gz -O wiki-talk-dataset.tar.gz
+    touch -c wiki-talk-dataset.tar.gz
+}
+
+data/ar-wiki-talk: wiki-talk-dataset.tar.gz
+{
+    tar -xvf wiki-talk-dataset.tar.gz
+    touch -c data/*
+}
+
+data/$LANG-wiki-talk: !data/ar-wiki-talk {}
+
+out/:
+{
+    mkdir -p out
+}
+
+out/out.wiki_talk_$LANGU: !data/$LANGU-wiki-talk !out/ mktime ../mkuniq1
+{
+    ./mktime data/$LANGU-wiki-talk | ../mkuniq1 > out/out.wiki_talk_$LANGU
+    touch out/out.wiki_talk_$LANGU
+}
+
+@clean:
+{
+    rm -f LANGS *.gz dep.*
+    rm -rf data/ out/
+}

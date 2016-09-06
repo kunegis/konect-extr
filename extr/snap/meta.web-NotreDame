@@ -1,0 +1,11 @@
+category: Hyperlink
+code: ND
+name: Notre Dame
+entity-names: webpage
+description: Webpage–webpage hyperlinks
+url: http://snap.stanford.edu/data/web-NotreDame.html
+extr: snap
+long-description: This is the directed network of hyperlinks between the web pages from the website of the University of Notre Dame.  
+cite: konect:albert1999
+relationship-names: hyperlink
+tags: #loop

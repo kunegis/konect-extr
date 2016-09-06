@@ -1,0 +1,23 @@
+#! /bin/bash
+
+trap 'rm wo.tmp' EXIT
+
+find . -iname 'meta.*' | while read line
+do
+	[ "$(echo $line | grep '.svn/')" ] && continue;
+	echo "file: $line"
+	[ "$(grep 'entity-names' $line | wc -l)" == "1" ] || { echo "please check $line"; continue; }
+	ename=$(grep 'entity-names' $line)
+	lnode=$(<<<"$ename" cut -d',' -f1 | cut -d':' -f2 | sed 's/\ *,/,/g')
+	rnode=$(<<<"$ename" cut -d',' -f2 | sed 's/,\ *\(\S\+\)/,\1/g; s/\s*$//g')
+	[ "$lnode" == "$rnode" ] || continue;
+	echo "update: $ename -> $lnode"
+	grep -v 'entity-names' $line > wo.tmp
+	echo -n 'entity-names: ' >>wo.tmp
+	echo "$lnode" >>wo.tmp
+	#cat wo.tmp
+	cp wo.tmp "$line"
+	exit
+done 
+#entity-names: 
+#relationship-names: 

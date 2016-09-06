@@ -1,0 +1,74 @@
+#! /bin/sh
+#
+# Create the adjacency file from the mail directory.
+#
+# ENVIRONMENT
+#	$verbose
+#
+# INPUT
+#	maildir
+#
+# OUTPUT
+#	out.enron
+#
+
+TMPFILE=${TMP:-/tmp}/`basename $0`.$$
+
+[ "$verbose" ] && { exec 4>&2 ; } || { exec 4>/dev/null ; }
+
+exec 3>$TMPFILE
+
+find maildir -type f |
+while read file
+do
+    echo >&4 FILE=»$file«
+    from="`sed <$file -re '/^From:/!d;s,^From:,,;s,\s,,g;q'`"
+    echo >&4 FROM=»$from«
+    to="`sed <$file -re '
+/^(|X-)To:/!d
+s,^(|X-)To:,,
+s,\s,,g
+p
+:loop
+s,.*,,
+n
+ttmp;:tmp
+s,^	,,
+Tquit
+s,\s,,g
+p
+bloop
+:quit
+Q
+'`"
+    echo >&4 TO=»$to«
+	
+
+    rawdate="`sed <$file -re '/^Date:/!d;s,^Date:,,;s,,,;s,^ ,,;q'`"
+
+    date="`date 2>/dev/null -d \"$rawdate\" +%s`"
+
+    if [ $? \!= 0 ] ; then
+	continue 
+    fi
+
+    if [ -z "$date" ] ; then
+	echo >&2 '*** error DATE=' "»$DATE«"
+	echo >&2 "RAWDATE=»$rawdate«"
+	exit 1
+    fi
+
+    echo "$to" | sed -re 's/,/\
+/g' | sed -e '/^$/d' |
+    while read to_line
+    do
+	echo >&4 '	TO_LINE'=»$to_line«    
+	echo >&3 $from $to_line 1 $date
+    done
+    
+done
+
+echo >out.enron '% asym positive'
+
+<$TMPFILE grep -v no[_.]address@enron.com | ../mkuniq1 | sort -u >>out.enron
+

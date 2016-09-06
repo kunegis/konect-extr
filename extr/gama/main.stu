@@ -1,0 +1,43 @@
+% version 2.4
+
+@all:  rel.pos rel.neg ent.tribe @pca; 
+
+plot:
+{
+	mkdir -p plot
+}
+
+gama.dat:
+{
+	wget http://vlado.fmf.uni-lj.si/pub/networks/data/Ucinet/gama.dat -O gama.dat
+	touch -c gama.dat
+}
+
+>gama.pos:  gama.dat
+{
+	tail -n32 gama.dat | head -n16 
+}
+
+>gama.neg:  gama.dat
+{
+	tail -n16 gama.dat
+}
+
+rel.$name:  gama.$name mkrel
+{
+	./mkrel "$name"
+}
+
+ent.tribe:  gama.dat mkent
+{
+	./mkent
+}
+
+@pca:  plot/pca.a.eps; 
+
+plot/pca.a.eps:  rel.pos rel.neg pca.m -p plot octave
+{
+	./octave pca.m 
+}
+
+octave = -o ../../konect-analysis/octave;

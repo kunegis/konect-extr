@@ -1,0 +1,11 @@
+#!/bin/sh
+for i in "aria2c --seed-time=0" "bittorrent-console" "btdownloadheadless.bittornado" "btdownloadheadless.bittorrent"; do
+	#echo "testing $i";
+	#echo "`which $i`";
+	if [ "`which $i`" != "" ]; then
+		echo "using $i";
+		echo "downloading $1";
+		echo `$i $1`;
+		break;
+	fi	
+done

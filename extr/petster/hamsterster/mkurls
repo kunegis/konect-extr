@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+for i in `cat ids.txt`; do 
+	#echo $i;
+	wget "http://hamsterster.com/?pet=$i&friends=all" -O "hamsters/$i"
+done

@@ -1,0 +1,11 @@
+category: Affiliation
+code: RL
+name: Record labels
+description: Artist–record label memberships
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2 
+extr: dbpedia
+long-description: This is the bipartite network of musical artists and their record labels from DBpedia. Nodes in the network are artists and record labels. Each edge connects an artist with a record label under which the artist has performed. The edges correspond to the &lt;http://dbpedia.org/ontology/recordLabel&gt; relationships in DBpedia. 
+tags: #regenerate
+entity-names:  artist, record
+relationship-names:  membership

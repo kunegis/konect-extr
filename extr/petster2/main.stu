@@ -1,0 +1,1015 @@
+
+% version 1.6
+
+@all:  @paper @files @geo @unused;
+
+#
+# @paper - Everything needed in the paper 
+# We also include tests. 
+#
+
+@paper:	
+	@stat @stat_household @auc @degree @joinedcheck @names
+	@favoriteactivity @pph @power_pph @cluscod @assortativity
+	@weight @birthday @pyramid @homophily @spectral
+;
+
+#
+# @unused - Not used at the moment
+#
+
+@unused:
+	@country @sex
+	dat-petster/ent.petster-hamster.favoritefood
+	dat-petster/ent.petster-hamster.favoritetoy
+;
+
+#
+# Matlab 
+#
+
+MATLABPATH:
+{
+    echo -n "$PWD/../../matlab:$PWD/konect-toolbox:$PWD/../../analysis/lib/matlab_bgl:$PWD/../../analysis/lib" >MATLABPATH
+}
+
+#
+# Data with original IDs.  These files contain the links exactly how
+# they where crawled, and are therefore not necessarily complete.  The
+# original IDs are not continuous and therefore these file are not
+# suitable for Matlab.  IDs of Hamsters are unique, and IDs on the joint
+# Cat/Dog space are unique too. 
+#
+
+dat-petster/out.petster_orig-hamster-friend:
+	hamsterfriends
+	petster-data/hamsterster/hamsters
+{
+    ./hamsterfriends
+}
+
+dat-petster/out.petster_orig-hamster-family:
+	hamsterfamily
+	petster-data/hamsterster/hamsters
+{
+    ./hamsterfamily
+}
+
+dat-petster/ent.petster_orig-hamster.origid:
+	enthamster
+	petster-data/hamsterster/hamsters
+{
+    ./enthamster
+}
+
+dat-petster/out.petster_orig-cat-friend:
+	catfriends
+	petster-data/catster/pals
+{
+    ./catfriends 
+}
+
+dat-petster/out.petster_orig-dog-friend:
+	dogfriends
+	petster-data/dogster/pals
+{
+    ./dogfriends 
+}
+
+dat-petster/out.petster_orig-catdog-family:
+	catdogfamily
+	petster-data/catster/cats/
+	petster-data/dogster/dogs/
+{
+    ./catdogfamily
+}
+
+dat-petster/out.petster_orig-cat-family:
+	catfamily
+	dat-petster/out.petster_orig-catdog-family
+	petster-data/catster/cats/
+{
+    ./catfamily
+}
+
+dat-petster/out.petster_orig-dog-family:
+	dogfamily
+	dat-petster/out.petster_orig-catdog-family
+	petster-data/dogster/dogs/
+{
+    ./dogfamily
+}
+
+dat-petster/ent.petster_orig-cat.origid:
+	entcat
+	petster-data/catster/cats
+{
+    ./entcat
+}
+
+dat-petster/ent.petster_orig-dog.origid:
+	entdog
+	petster-data/dogster/dogs
+{
+    ./entdog
+}
+
+dat-petster/ent.petster_orig-$SPECIES.$SOMETHING:  
+	dat-petster/ent.petster_orig-$SPECIES.origid; 
+
+#
+# @cont - Data with continuous IDs and curated info.  
+# The generated networks have new, continuous IDs, and also multiple
+# edges and loops are removed.  Entity files are all in UTF-8 with
+# corrected data.  The IDs are consistent across both friend and family
+# networks of a single species. 
+#
+
+# Out files
+
+@cont.$SPECIES:
+	dat-petster/out.petster-$SPECIES-friend 
+	dat-petster/out.petster-$SPECIES-family
+	dat-petster/n.$SPECIES;
+
+dat-petster/out.petster-$SPECIES-family:
+	dat-petster/out.petster-$SPECIES-friend;
+
+dat-petster/n.$SPECIES: dat-petster/out.petster-$SPECIES-friend;
+
+dat-petster/out.petster-$SPECIES-friend:
+	cont_species.m $[MATLABPATH]
+	dat-petster/out.petster_orig-$SPECIES-friend
+	dat-petster/out.petster_orig-$SPECIES-family
+	dat-petster/ent.petster_orig-$SPECIES.origid
+{
+    ./matlab cont_species.m 
+}
+
+dat-petster/out.petster-catdog-friend:
+	cont_catdog.m $[MATLABPATH]
+	dat-petster/out.petster_orig-cat-friend
+	dat-petster/out.petster_orig-dog-friend
+	dat-petster/out.petster_orig-catdog-family
+{
+    ./matlab cont_catdog.m 
+}
+
+# Date entity files
+
+>dat-petster/ent.petster-$SPECIES.birthday:
+	mkdate
+	<dat-petster/ent.petster_orig-$SPECIES.birthday
+{
+    ./mkdate 
+}
+
+>dat-petster/ent.petster-$SPECIES.joined:
+	mkdate
+	<dat-petster/ent.petster_orig-$SPECIES.joined
+{
+    ./mkdate 
+}
+
+# Hamster text files are windows-1252 instead of UTF-8 
+
+>dat-petster/ent.petster-hamster.favoriteactivity:  
+	<dat-petster/ent.petster_orig-hamster.favoriteactivity 
+{ 
+	recode windows-1252..utf-8 
+}
+
+>dat-petster/ent.petster-hamster.favoritefood:  
+	<dat-petster/ent.petster_orig-hamster.favoritefood
+{ 
+	recode windows-1252..utf-8
+}
+
+>dat-petster/ent.petster-hamster.favoritetoy:  
+	<dat-petster/ent.petster_orig-hamster.favoritetoy
+{
+	recode windows-1252..utf-8
+}
+
+>dat-petster/ent.petster-hamster.home:  
+	<dat-petster/ent.petster_orig-hamster.hometown
+	mkhome
+{
+	recode windows-1252..utf-8 | ./mkhome
+}
+
+>dat-petster/ent.petster-hamster.name:  
+	<dat-petster/ent.petster_orig-hamster.name
+{ 
+	recode windows-1252..utf-8
+}
+
+# Cat and dog homes:  decode HTML entities
+>dat-petster/ent.petster-$SPECIES.home:  
+	<dat-petster/ent.petster_orig-$SPECIES.home
+	mkhomecd
+{
+    ./mkhomecd 
+
+    if [ "$(wc -l <dat-petster/ent.petster_orig-"$SPECIES".home)" != \
+	 "$(wc -l <dat-petster/ent.petster-"$SPECIES".home)" ] ; then
+	echo >&2 "*** Invalid number of lines"
+	exit 1
+    fi
+    
+}
+
+# Race:  This is race for cat and dog, but species for hamsters
+
+dat-petster/ent.petster-hamster.race:  dat-petster/ent.petster_orig-hamster.species
+{
+    cp dat-petster/ent.petster_orig-hamster.species dat-petster/ent.petster-hamster.race
+}
+
+# Cat weight:  given in lbs; convert to kilogram
+>dat-petster/ent.petster-cat.weight:
+	<dat-petster/ent.petster_orig-cat.weight
+	mkweight
+{
+	./mkweight 
+}
+
+# Dog weight is a categorical variable
+dat-petster/ent.petster-dog.weightrange:
+	dat-petster/ent.petster_orig-dog.weight
+{
+    cp dat-petster/ent.petster_orig-dog.weight dat-petster/ent.petster-dog.weightrange
+}
+
+# *-id features are numerical representations of categorical data.  Each
+# categorical feature is replaced by integers starting at one. 
+>dat-petster/ent.petster-$SPECIES.$TYPE-id:
+	<dat-petster/ent.petster-$SPECIES.$TYPE
+	mkid
+{
+    ./mkid 
+}
+
+# Other files:  just copy 
+dat-petster/ent.petster-$SPECIES.$TYPE:  dat-petster/ent.petster_orig-$SPECIES.$TYPE
+{
+    cp dat-petster/ent.petster_orig-$SPECIES.$TYPE dat-petster/ent.petster-$SPECIES.$TYPE
+}
+
+#
+# @stat - Statistics
+#
+
+@stat:  
+	@stat.hamster @stat.cat @stat.dog @stat.catdog
+	dat-petster/n.hamster dat-petster/n.cat dat-petster/n.dog
+; 
+
+@stat.$SPECIES:  dat-petster/stat.$SPECIES;
+
+dat-petster/stat.$SPECIES:
+	stat_species.m $[&MATLABPATH]
+	dat-petster/out.petster-$SPECIES-friend 
+	dat-petster/out.petster-$SPECIES-family
+{
+    ./matlab stat_species.m
+}
+
+#
+# @degree - Degree distributions
+#
+
+@degree:  plot-petster/degree.a.eps;
+
+plot-petster/degree.a.eps:
+	petster_degree.m $[&MATLABPATH]
+	petster_colors.m
+	dat-petster/out.petster-hamster-friend
+	dat-petster/out.petster-hamster-household
+	dat-petster/out.petster-cat-friend
+	dat-petster/out.petster-cat-household
+	dat-petster/out.petster-dog-friend
+	dat-petster/out.petster-dog-household
+#	dat-petster/out.petster-catdog-friend
+{
+    ./matlab petster_degree.m 
+}
+
+#
+# @birthday - Histogram of Hamster birthdays 
+#
+
+@birthday:  
+	plot-petster/birthday.hamster.a.eps 
+	plot-petster/birthday.cat.a.eps 
+	plot-petster/birthday.dog.a.eps
+;
+
+plot-petster/birthday.$SPECIES.a.eps:
+	petster_birthday.m $[&MATLABPATH]
+	dat-petster/ent.petster-$SPECIES.birthday
+{
+    ./matlab petster_birthday.m 
+}
+
+#
+# @pyramid - Age pyramid
+#
+
+@pyramid:  
+	plot-petster/pyramid.a.hamster.eps
+	plot-petster/pyramid.a.cat.eps
+	plot-petster/pyramid.a.dog.eps
+;
+
+plot-petster/pyramid.a.$SPECIES.eps:
+	$[&MATLABPATH] petster_pyramid.m 
+	dat-petster/ent.petster-$SPECIES.sex
+	dat-petster/ent.petster-$SPECIES.birthday
+{
+    ./matlab petster_pyramid.m 
+}
+
+#
+# @joined - Histogram of join dates
+#
+
+@joined:  @joined.hamster @joined.cat @joined.dog plot-petster/joined.a.eps; 
+
+@joined.$SPECIES:  plot-petster/joined.$SPECIES.a.eps;
+
+plot-petster/joined.$SPECIES.a.eps:
+	petster_joined.m $[&MATLABPATH]
+	dat-petster/ent.petster-$SPECIES.joined
+{
+    ./matlab petster_joined.m 
+}
+
+plot-petster/joined.a.eps:
+	petster_joined_all.m $[&MATLABPATH]
+	petster_colors.m
+	dat-petster/ent.petster-cat.joined
+	dat-petster/ent.petster-dog.joined
+	dat-petster/ent.petster-hamster.joined
+{
+    ./matlab petster_joined_all.m 
+}
+
+#
+# @sex - Pie chart of sex by species
+#
+
+@sex:  plot-petster/sex.a.eps;
+
+plot-petster/sex.a.eps:
+	petster_sex.m $[&MATLABPATH]
+	dat-petster/ent.petster_orig-hamster.sex
+	dat-petster/ent.petster_orig-cat.sex
+	dat-petster/ent.petster_orig-dog.sex
+{
+    ./matlab petster_sex.m 
+}
+
+#
+# @names - Most popular names 
+#
+
+@names:  @names.hamster @names.cat @names.dog; 
+
+@names.$SPECIES:  
+	dat-petster/names.$SPECIES~1 
+	dat-petster/names.$SPECIES~2
+	dat-petster/names.$SPECIES; 
+
+>dat-petster/ent.petster-$SPECIES.nameclean:
+	nameclean
+	<dat-petster/ent.petster-$SPECIES.name
+{
+    ./nameclean
+}
+
+>dat-petster/ent.petster-$SPECIES.nameclean.rep:
+	mkrep 
+	<dat-petster/ent.petster-$SPECIES.nameclean
+{
+    ./mkrep 
+}
+
+>dat-petster/names.$SPECIES:
+	mktop
+	<dat-petster/ent.petster-$SPECIES.nameclean.rep
+{
+    ./mktop 
+}
+
+# Ent files by sex
+
+dat-petster/ent.petster-$SPECIES~$SEX.nameclean:
+	dat-petster/ent.petster-$SPECIES.nameclean
+	dat-petster/ent.petster-$SPECIES.sex
+{
+    [ "$(wc -l dat-petster/ent.petster-"$SPECIES".nameclean | sed -re 's,^(\s*[0-9]+\s+).*$,\1,')" = "$(wc -l dat-petster/ent.petster-"$SPECIES".sex | sed -re 's,^(\s*[0-9]+\s+).*$,\1,')" ] || { echo >&2 '*** wrong number of lines' ; exit 1 ; }
+    paste dat-petster/ent.petster-$SPECIES.sex dat-petster/ent.petster-$SPECIES.nameclean |
+    sed -re '/^'"$SEX"'\s/!d;s/^\S+\s//' >dat-petster/ent.petster-$SPECIES~$SEX.nameclean
+}
+
+#
+# @race - Only for cats and dogs
+#
+
+@race:  dat-petster/race.all dat-petster/race.hamster;
+
+>dat-petster/race.$SPECIES:
+	<dat-petster/ent.petster-$SPECIES.race
+{
+	sed -re 's,/,\
+,g' | sed -re 's,^\s+,,;s,\s+$,,;/^$/d' | sort | uniq -c | sort -rn 
+}
+
+dat-petster/race.all:
+	dat-petster/race.cat dat-petster/race.dog
+{
+    paste dat-petster/race.cat dat-petster/race.dog | head | 
+    sed -re 's,[0-9]+,\&,g;s,^\s*\&,,;s,$, \\\\,' >dat-petster/race.all 
+}
+
+>dat-petster/race.hamster:
+	<dat-petster/ent.petster-hamster.race
+{
+	sort | uniq -c | sort -rn 
+}
+
+#
+# @coloring  
+#
+
+@coloring:  
+	dat-petster/coloring.hamster
+	dat-petster/coloring.cat
+;
+
+>dat-petster/coloring.$SPECIES:
+	<dat-petster/ent.petster_orig-$SPECIES.coloring
+{
+	sed -re '/^\s*$/d' | sort | 
+	uniq -c | sort -rn 
+}
+
+#
+# @favoriteactivity - Only for hamsters
+#
+
+@favoriteactivity:  dat-petster/favoriteactivity.hamster;
+
+>dat-petster/favoriteactivity.hamster:
+	<dat-petster/ent.petster-hamster.favoriteactivity
+{
+	sed -re 's/(\s|,|&amp;)/\
+/g' | sed -re 's,^\s+,,;s,\s+$,,;/^$/d' | tr A-Z a-z | sed -re '/ing$/!d' |
+	sort | uniq -c | sort -rn 
+}
+
+#
+# @weight - Weight distribution - Only cats and dogs
+#
+
+@weight:  @weight.cat @weight.dog;
+
+@weight.$SPECIES:  plot-petster/weight.a.$SPECIES.eps;
+
+plot-petster/weight.a.cat.eps:
+	dat-petster/weight.cat
+	petster_weight_cat.m $[&MATLABPATH]
+{
+    ./matlab petster_weight_cat.m 
+}
+
+plot-petster/weight.a.dog.eps:
+	dat-petster/weight.dog
+	petster_weight_dog.m $[&MATLABPATH]
+{
+    ./matlab petster_weight_dog.m 
+}
+
+dat-petster/weight.cat:
+	dat-petster/ent.petster_orig-cat.weight
+	weightcat
+{
+    ./weightcat
+}
+
+dat-petster/weight.dog:
+	dat-petster/ent.petster_orig-dog.weight
+	weightdog
+{
+    ./weightdog 
+}
+
+#
+# @household - Household-level links
+# 
+
+@household:  @household.hamster @household.cat @household.dog @household.catdog; 
+
+@household.$SPECIES:  
+	dat-petster/household.$SPECIES
+	dat-petster/h.$SPECIES
+;
+
+# Household IDs of all pets.  The Pet IDs are those used in @cont. 
+dat-petster/household.$SPECIES:
+	petster_household.m $[&MATLABPATH]
+	dat-petster/out.petster-$SPECIES-friend 
+	dat-petster/out.petster-$SPECIES-family
+	dat-petster/n.$SPECIES
+{
+    ./matlab petster_household.m 
+}
+
+dat-petster/h.$SPECIES:  dat-petster/household.$SPECIES; 
+
+#
+# @stat_household
+#
+
+@stat_household:  @stat_household.hamster @stat_household.cat @stat_household.dog @stat_household.catdog;
+
+@stat_household.$SPECIES:  dat-petster/stat_household.$SPECIES;
+
+dat-petster/stat_household.$SPECIES:
+	petster_stat_household.m $[&MATLABPATH]
+	dat-petster/n.$SPECIES
+	dat-petster/h.$SPECIES
+{
+    ./matlab petster_stat_household.m 
+}
+
+#
+# @pph - Plot of pets per household distribution
+#
+
+@pph:  plot-petster/pph.a.eps;
+
+plot-petster/pph.a.eps:
+	dat-petster/household.hamster
+	dat-petster/household.cat
+	dat-petster/household.dog
+	dat-petster/household.catdog
+	petster_pph.m $[&MATLABPATH]
+	petster_line_styles.m petster_colors.m 
+{
+    ./matlab petster_pph.m 
+}
+
+#
+# @power_pph - Power law analysis of the pets per household distribution
+#
+
+@power_pph:  @power_pph.hamster @power_pph.cat @power_pph.dog @power_pph.catdog;
+
+@power_pph.$SPECIES:  dat-petster/power_pph.$SPECIES;
+
+dat-petster/power_pph.$SPECIES:
+	dat-petster/household.$SPECIES
+	petster_power_pph.m $[&MATLABPATH]
+{
+    ./matlab petster_power_pph.m 
+}
+
+#
+# Household-level networks
+#
+
+dat-petster/out.petster-$SPECIES-household:
+	dat-petster/household.$SPECIES
+	dat-petster/out.petster-$SPECIES-friend
+	dat-petster/h.$SPECIES
+	petster_out_household.m $[&MATLABPATH]
+{
+    ./matlab petster_out_household.m 
+}
+
+# 
+# @deploy
+#
+
+@files:  [FILES];
+
+FILES:
+{
+    echo >FILES \
+	dat-petster/out.petster-hamster-friend \
+	dat-petster/out.petster-cat-friend     \
+	dat-petster/out.petster-dog-friend     \
+	dat-petster/out.petster-catdog-friend  \
+	dat-petster/out.petster-hamster-household   \
+	dat-petster/out.petster-cat-household       \
+	dat-petster/out.petster-dog-household       \
+	dat-petster/out.petster-catdog-household    \
+	meta.petster-hamster-friend \
+	meta.petster-cat-friend     \
+	meta.petster-dog-friend     \
+	meta.petster-catdog-friend  \
+	meta.petster-hamster-household   \
+	meta.petster-cat-household       \
+	meta.petster-dog-household       \
+	meta.petster-catdog-household    \
+}
+
+@deploy:  @files
+{
+    rsync -vt $(cat FILES) \
+	../konect/dat/petster2/
+}
+
+#
+# @geo - Geolocations
+#
+
+@geo:
+	dat-petster/homes  # Input file for geolocation 
+	plot-petster/latlong.a.hamster.eps
+	plot-petster/latlong.a.cat.eps
+	plot-petster/latlong.a.dog.eps
+	dat-petster/homes-counts
+;
+
+# List of all homes 
+dat-petster/homes:
+	dat-petster/ent.petster-hamster.home
+	dat-petster/ent.petster-cat.home
+	dat-petster/ent.petster-dog.home
+{
+    cat	\
+	dat-petster/ent.petster-hamster.home \
+	dat-petster/ent.petster-cat.home     \
+	dat-petster/ent.petster-dog.home     \
+	| sort | sed -re '/^\s*$/d' | uniq -c | sort -rn | sed -re 's,^\s*[0-9]+\s*,,' >dat-petster/homes
+}
+
+dat-petster/homes-counts:
+	dat-petster/ent.petster-hamster.home
+	dat-petster/ent.petster-cat.home
+	dat-petster/ent.petster-dog.home
+{
+    cat	\
+	dat-petster/ent.petster-hamster.home \
+	dat-petster/ent.petster-cat.home     \
+	dat-petster/ent.petster-dog.home     \
+	| sort | sed -re '/^\s*$/d' | uniq -c | sort -rn >dat-petster/homes-counts
+}
+
+# Coordinates
+>dat-petster/ent.petster-$SPECIES.latlong:
+	<dat-petster/ent.petster-$SPECIES.home
+	mklatlong
+	geocache
+{
+    ./mklatlong 
+
+    if [ "$(wc -l <dat-petster/ent.petster-$SPECIES.latlong)" != \
+	 "$(wc -l <dat-petster/ent.petster-$SPECIES.home)" ] ; then
+	echo >&2 "*** Invalid number of lines"
+	exit 1
+    fi
+}
+
+# Canonical location name 
+>dat-petster/ent.petster-$SPECIES.homecanon:
+	<dat-petster/ent.petster-$SPECIES.home
+	mkhomecanon
+	geocache
+{
+    ./mkhomecanon 
+
+    if [ "$(wc -l <dat-petster/ent.petster-$SPECIES.homecanon)" != \
+	 "$(wc -l <dat-petster/ent.petster-$SPECIES.home)" ] ; then
+	echo >&2 "*** Invalid number of lines"
+	exit 1
+    fi
+}
+
+# Distribution plot
+plot-petster/latlong.a.$SPECIES.eps:
+	dat-petster/ent.petster-$SPECIES.latlong
+	$[&MATLABPATH] petster_latlong.m 
+{
+    ./matlab petster_latlong.m 
+}
+
+#
+# @home
+#
+
+@home:  @home.hamster @home.cat @home.dog; 
+
+@home.$SPECIES:  dat-petster/homes.$SPECIES;
+
+>dat-petster/homes.$SPECIES:
+	<dat-petster/ent.petster-$SPECIES.homecanon
+{
+    sed -re '/^\s*$/d' | sort | uniq -c | sort -rn 
+}
+
+#
+# @country
+#
+
+@country:  @country.hamster @country.cat @country.dog; 
+
+@country.$SPECIES:  dat-petster/country.$SPECIES;
+
+>dat-petster/country.$SPECIES:
+	<dat-petster/ent.petster-$SPECIES.homecanon
+{
+    sed -re 's/^.*,\s*([^,]*)$/\1/;/^$/d' | sort | uniq -c | sort -rn 
+}
+
+#
+# Testset
+#
+
+@testset:
+	dat-petster/testset.hamster.mat
+	dat-petster/testset.cat.mat
+	dat-petster/testset.dog.mat;
+
+dat-petster/testset.$SPECIES.mat:
+	$[&MATLABPATH] petster_testset.m 
+	dat-petster/household.$SPECIES
+	dat-petster/n.$SPECIES
+	dat-petster/h.$SPECIES
+{
+    ./matlab petster_testset.m 
+}
+
+#
+# Compute features
+#
+
+@feature:  @feature.hamster @feature.cat @feature.dog; 
+
+@feature.$SPECIES:
+	dat-petster/feature.$SPECIES.mat;
+
+
+dat-petster/feature.$SPECIES.mat:
+	$[&MATLABPATH] petster_feature.m 
+	dat-petster/testset.$SPECIES.mat
+	dat-petster/out.petster-$SPECIES-friend
+	dat-petster/n.$SPECIES
+	dat-petster/ent.petster-$SPECIES.race 
+	dat-petster/ent.petster-$SPECIES.sex
+	dat-petster/ent.petster-$SPECIES.joined
+	dat-petster/ent.petster-$SPECIES.latlong
+	dat-petster/ent.petster-$SPECIES.birthday
+	dat-petster/ent.petster-$SPECIES.joinage
+	[dat-petster/dep.feature.$SPECIES]
+{
+    ./matlab petster_feature.m 
+}
+
+dat-petster/dep.feature.$SPECIES:
+{
+    {
+	if [ "$SPECIES" != dog ] ; then
+	    echo dat-petster/ent.petster-$SPECIES.coloring
+	fi
+	if [ "$SPECIES" = cat ] ; then
+	    echo dat-petster/ent.petster-$SPECIES.weight 
+	fi
+	if [ "$SPECIES" = dog ] ; then
+	    echo dat-petster/ent.petster-$SPECIES.weightrange 
+	fi
+    } >dat-petster/dep.feature.$SPECIES
+}
+
+#
+# @joinage - Join age, i.e. age of pet at time of profile creation 
+#
+
+@joinage:  @joinage.hamster @joinage.cat @joinage.dog;
+
+@joinage.$SPECIES:  plot-petster/joinage.a.$SPECIES.eps;
+
+plot-petster/joinage.a.$SPECIES.eps:
+	dat-petster/ent.petster-$SPECIES.joinage
+	$[&MATLABPATH] petster_joinage_plot.m
+{
+    ./matlab petster_joinage_plot.m 
+}
+
+dat-petster/ent.petster-$SPECIES.joinage:
+	dat-petster/ent.petster-$SPECIES.birthday
+	dat-petster/ent.petster-$SPECIES.joined
+	$[&MATLABPATH] petster_joinage.m
+{
+    ./matlab petster_joinage.m 
+}
+
+#
+# @joinedcheck - Check whether all pets in the same household all have the
+# same join date.
+#
+
+@joinedcheck:  @joinedcheck.hamster @joinedcheck.cat @joinedcheck.dog;
+
+@joinedcheck.$SPECIES:  dat-petster/joinedcheck.$SPECIES;
+
+dat-petster/joinedcheck.$SPECIES:
+	dat-petster/ent.petster-$SPECIES.joined
+	dat-petster/household.$SPECIES
+	$[&MATLABPATH] petster_joinedcheck.m 	
+{
+    ./matlab petster_joinedcheck.m 
+}
+
+#
+# @auc - AUC of individual features
+#
+
+@auc:  tex-petster/auc.tex;
+
+@auc.$SPECIES:  dat-petster/auc.$SPECIES.mat;
+
+dat-petster/auc.$SPECIES.mat:
+	dat-petster/feature.$SPECIES.mat
+	$[&MATLABPATH] petster_auc.m 
+{
+    ./matlab petster_auc.m 
+}
+
+tex-petster/auc.tex:
+	dat-petster/auc.hamster.mat
+	dat-petster/reg.hamster.mat
+	dat-petster/regauc.hamster.mat
+	dat-petster/auc.cat.mat
+	dat-petster/reg.cat.mat
+	dat-petster/regauc.cat.mat
+	dat-petster/auc.dog.mat
+	dat-petster/reg.dog.mat
+	dat-petster/regauc.dog.mat
+	$[&MATLABPATH] petster_auc_tex.m 
+{
+    ./matlab petster_auc_tex.m 
+}
+
+dat-petster/reg.$SPECIES.mat:
+	dat-petster/feature.$SPECIES.mat
+	$[&MATLABPATH] petster_reg.m
+{
+    ./matlab petster_reg.m 
+}
+
+dat-petster/regauc.$SPECIES.mat:
+	dat-petster/regfeature.$SPECIES.mat
+	$[&MATLABPATH] petster_regauc.m 
+{
+    ./matlab petster_regauc.m 
+}
+
+dat-petster/regfeature.$SPECIES.mat:
+	dat-petster/reg.$SPECIES.mat
+	dat-petster/feature.$SPECIES.mat
+	$[&MATLABPATH] petster_regfeature.m
+{
+    ./matlab petster_regfeature.m 
+}
+
+#
+# @cluscod - Clustering coefficient distribution
+#
+
+@cluscod:  plot-petster/cluscod.a.eps;
+
+plot-petster/cluscod.a.eps:
+	dat-petster/out.petster-hamster-friend
+	dat-petster/out.petster-hamster-household
+	dat-petster/out.petster-cat-friend
+	dat-petster/out.petster-cat-household
+	dat-petster/out.petster-dog-friend
+	dat-petster/out.petster-dog-household
+	dat-petster/n.hamster
+	dat-petster/n.cat
+	dat-petster/n.dog
+	dat-petster/h.hamster
+	dat-petster/h.cat
+	dat-petster/h.dog
+	$[&MATLABPATH] petster_cluscod.m 
+{
+    ./matlab petster_cluscod.m 
+}
+
+#
+# @assortativity 
+#
+
+@assortativity:  plot-petster/assortativity.a.eps;
+
+plot-petster/assortativity.a.eps:
+	dat-petster/out.petster-hamster-friend
+	dat-petster/out.petster-hamster-household
+	dat-petster/out.petster-cat-friend
+	dat-petster/out.petster-cat-household
+	dat-petster/out.petster-dog-friend
+	dat-petster/out.petster-dog-household
+	dat-petster/n.hamster
+	dat-petster/n.cat
+	dat-petster/n.dog
+	dat-petster/h.hamster
+	dat-petster/h.cat
+	dat-petster/h.dog
+	$[&MATLABPATH] petster_assortativity.m petster_assortativity_one.m 
+{
+    ./matlab petster_assortativity.m 
+}
+
+#
+# @homophily - Homophily analysis
+#
+
+@homophily:  tex-petster/homophily.tex;
+
+tex-petster/homophily.tex:
+	$[&MATLABPATH] petster_homophily.m petster_homophily_format.m 
+	dat-petster/homophily.hamster.mat
+	dat-petster/homophily.cat.mat
+	dat-petster/homophily.dog.mat
+{
+    ./matlab petster_homophily.m 
+}
+
+dat-petster/homophily.$SPECIES.mat:
+	$[&MATLABPATH] petster_homophily_one.m
+	dat-petster/n.$SPECIES
+	dat-petster/h.$SPECIES
+	dat-petster/out.petster-$SPECIES-friend 
+	dat-petster/ent.petster-$SPECIES.birthday 
+	dat-petster/ent.petster-$SPECIES.sex
+	dat-petster/ent.petster-$SPECIES.joined
+	dat-petster/ent.petster-$SPECIES.joinage
+	dat-petster/ent.petster-$SPECIES.race-id
+	[dat-petster/dep.homophily.$SPECIES]
+{
+    ./matlab petster_homophily_one.m 
+}
+
+dat-petster/dep.homophily.$SPECIES:
+{
+    {
+	if [ $SPECIES = cat ] ; then
+	    echo dat-petster/ent.petster-$SPECIES.weight
+	fi
+	if [ $SPECIES != dog ] ; then
+	    echo dat-petster/ent.petster-$SPECIES.coloring-id
+	fi
+	if [ $SPECIES = dog ] ; then
+	    echo dat-petster/ent.petster-$SPECIES.weightrange-id
+	fi
+    } >dat-petster/dep.homophily.$SPECIES
+}
+
+#
+# Spectral analysis
+#
+
+@spectral:  
+	plot-petster/spectral.a.hamster.eps
+	plot-petster/spectral.a.cat.eps
+	plot-petster/spectral.a.dog.eps
+	dat-petster/diagonality.hamster
+	dat-petster/diagonality.cat
+	dat-petster/diagonality.dog
+;
+
+dat-petster/decomposition.$SPECIES.mat:
+	$[&MATLABPATH] petster_decomposition.m 
+	dat-petster/out.petster-$SPECIES-friend
+	dat-petster/n.$SPECIES
+{
+    ./matlab petster_decomposition.m 
+}
+
+dat-petster/delta.$SPECIES.mat:
+	$[&MATLABPATH] petster_delta.m 
+	dat-petster/n.$SPECIES
+	dat-petster/h.$SPECIES
+	dat-petster/decomposition.$SPECIES.mat
+	dat-petster/household.$SPECIES
+{
+    ./matlab petster_delta.m
+}
+
+plot-petster/spectral.a.$SPECIES.eps:
+	$[&MATLABPATH] petster_spectral.m 
+	dat-petster/delta.$SPECIES.mat
+{
+    ./matlab petster_spectral.m 
+}
+
+dat-petster/diagonality.$SPECIES:
+	$[&MATLABPATH] petster_diagonality.m 
+	dat-petster/delta.$SPECIES.mat
+{
+    ./matlab petster_diagonality.m
+}

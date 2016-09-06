@@ -1,0 +1,11 @@
+category: Rating
+code: BX
+name: BookCrossing (implicit)
+description: User–book rating
+entity-names: user,book
+extr: bookcrossing
+url: http://www.informatik.uni-freiburg.de/~cziegler/BX/
+long-description: This network contains information about books read by members of the BookCrossing community. Nodes of the network are users and books, and an edge denotes that a user has interacted with a book. 
+relationship-names: rating
+cite: konect:bookcrossing
+timeiso: 2004-08-01/2004-09-01

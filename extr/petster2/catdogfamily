@@ -1,0 +1,76 @@
+#! /usr/bin/perl
+#
+# INPUT 
+#	petster-data/catster/cats/
+#	petster-data/dogster/dogs/
+#
+# OUTPUT
+#	dat-petster/out.petster_orig-catdog-family
+#
+
+use strict;
+use warnings;
+
+opendir (IN, "petster-data/catster/cats/") or die "$!";
+my @cats = sort readdir(IN);
+closedir IN or die "$!";
+opendir (IN, "petster-data/dogster/dogs/") or die "$!";
+my @dogs = sort readdir(IN);
+closedir IN or die "$!";
+
+foreach my $cat(@cats) {
+    $cat = "petster-data/catster/cats/".$cat;
+}
+foreach my $dog(@dogs){
+    $dog = "petster-data/dogster/dogs/".$dog;
+}
+
+my @petarray = (@cats, @dogs);
+
+open F_OUT,">dat-petster/out.petster_orig-catdog-family" or die "$!";
+print F_OUT "% sym unweighted\n";
+
+# Missing entries 
+my %mcats = ();
+my %mdogs = ();
+
+foreach my $petfile(@petarray) {
+    if ($petfile =~ /(\d+)$/) {
+	my $petid = $1;
+	open F_IN, "<$petfile" or die "$!";
+	while (<F_IN>) {
+	    my $line = $_;
+	    if ($line =~ /<span class=subheader>Meet my family<\/span><br>(.*?)<\/table>/) {
+		my $familyinfo = $1;
+		while ($familyinfo =~ /<a href="\/([^\/]*)\/(\d+)"/gi) {
+		    if ((($1 eq "dogs") 
+			 && (-e "petster-data/dogster/dogs/$2")) 
+			|| (-e "petster-data/catster/cats/$2")) {
+			print F_OUT "$petid $2\n";
+		    } else {
+			if ($1 eq "dogs") {
+			    if (!(-e "petster-data/dogster/dogs/$2")) {
+				$mdogs{$2} = 1;
+			    }
+			} elsif (!(-e "petster-data/catster/cats/$2")){
+			    $mcats{$2} = 1;
+			}
+		    }
+		}
+		last; 
+	    }
+	}
+	close F_IN or die "$!";
+    }
+}
+
+if ((scalar keys %mcats) != 0) {
+    my $n = scalar %mcats; 
+    print STDERR "*** $n missing cats\n";
+}
+if ((scalar keys %mdogs) != 0) {
+    my $n = scalar %mdogs; 
+    print STDERR "*** $n missing dogs\n";
+}
+
+close F_OUT or die "$!";

@@ -1,0 +1,10 @@
+category: Animal
+code: MK
+name: Kangaroo
+description: Kangaroo-kangaroo interactions
+entity-names: kangaroo
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#kangaroo
+long-description: This undirected network contains interactions between free-ranging grey kangaroos. A node represents a kangaroo and an edge between two kangaroos shows that there was an interaction between them. The edge values denote the total count of interactions.
+relationship-names: interaction
+cite: konect:grant

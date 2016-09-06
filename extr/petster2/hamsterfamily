@@ -1,0 +1,33 @@
+#! /usr/bin/perl
+#
+# INPUT
+#	Everything in the directory petster-data/hamsterster/hamsters/
+# 
+# OUTPUT
+#	dat-petster/out.petster_orig-hamster-family
+#
+
+use strict;
+use warnings;
+
+opendir(IN, "petster-data/hamsterster/hamsters/") or die "$!";
+my @hamsters = sort readdir(IN);
+closedir IN or die "$!";
+
+open F_OUT, ">dat-petster/out.petster_orig-hamster-family" or die "$!";
+print F_OUT "% sym unweighted\n";
+
+foreach my $id(@hamsters) {
+    my $hamsterfile = "petster-data/hamsterster/hamsters/$id";
+    open F_IN, "<$hamsterfile" or die "$!";
+    my $data = join("", <F_IN>); 
+    close F_IN or die "$!";
+    if ($data =~ /alt="my family">(.*?)<\/center>/si) {
+	my $familydata = $1;
+	while ($familydata =~ /<a href="\/\?pet=(\d+)">/gsi) {
+	    print F_OUT "$id\t$1\n";
+	}
+    }
+}
+
+close F_OUT or die "$!";

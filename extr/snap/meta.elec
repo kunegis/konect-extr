@@ -1,0 +1,11 @@
+category: OnlineContact
+code: EL
+name: Wikipedia elections
+description: Editor–editor votes
+url: http://snap.stanford.edu/data/wiki-Vote.html
+cite: konect:leskovec207 
+extr: snap
+long-description: This is the network of users from the English Wikipedia that voted for and against each other in admin elections. Nodes represent individual users, and edges represent votes. Edges can be positive ("for" vote) and negative ("against" vote). Each edge is annotated with the date of the vote. In the original dataset from the SNAP website, certain timestamps are from after 2050; the corresponding edges are not included in this version of the network.
+tags: #incomplete #loop
+entity-names: user
+relationship-names: vote 

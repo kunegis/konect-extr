@@ -1,0 +1,97 @@
+#! /bin/sh
+#
+# Generate plot of out.maxit
+#
+# Parameters:
+#     $1              input file
+#     $MIN_K, $MAX_K  (optional) show only this range of k
+# 
+# TODO use also for threshold
+#
+
+TMP_BASE=${TMP-/tmp}/`basename $0`
+
+[ "$verbose" ] && exec 3>&1 || exec 3>/dev/null
+
+[ "$1" ] || { echo >&2 "Invocation:  $0 INPUTFILE" ; exit 1; }
+
+#
+# Ks
+#
+ks="`<$1 sed -re '/^[a-z_0-9]/!d;s,[^0-9.]+, ,g;s,^ [0-9]+ ([0-9]+) [0-9.]+$,\1,' | sort -nu `"
+
+if [ "$MIN_K" -o "$MAX_K" ]
+then
+    new_ks=
+    for k in $ks
+    do
+      [ '(' -z "$MIN_K" -o $k -ge "$MIN_K" ')' -a '(' -z "$MAX_K" -o $k -le "$MAX_K" ')' ] &&
+      new_ks="$new_ks $k"
+    done
+    ks="$new_ks"
+    echo >&3 ks=$ks
+fi
+
+for k in $ks
+do
+ sed <$1 -re '/^[^0-9]+[0-9]+[^0-9]+'$k'[^0-9]/!d;s,[^0-9]+([0-9]+)[^0-9]+[0-9]+[^0-9]+([0-9.]+)$,\1 \2,' |
+ sort -n >$TMP_BASE.$k
+done
+
+#
+# METHODs
+#
+methods="`<$1 sed -e '/^[a-z_0-9]/!d;s,[^a-z_0-9].*,,' | uniq | sort -n`"
+echo >&3 methods=$methods
+for method in $methods
+do
+  >$TMP_BASE.$method sed $1 -e '/^'$method'[^a-z_0-9]/!d;s,^[a-z_0-9]*,,;s,^[^0-9]*,,'
+done
+
+# 
+# By K
+# 
+{
+    cat <<EOF
+
+set terminal postscript eps enhanced color
+set output "$1.eps"
+EOF
+
+    echo -n "plot "
+
+    first=1
+
+    for k in $ks
+    do
+      [ $first -eq 1 ] || echo -n ", " 
+      first=0
+      echo -n "  \"$TMP_BASE.$k\" title \"k = $k\" with lines lw 6" 
+    done
+
+    echo
+
+} | tee $TMP_BASE.out | gnuplot 
+
+#
+# By METHOD
+#
+{
+    cat <<EOF
+
+set terminal postscript eps enhanced color
+set output "${1}2.eps"
+EOF
+
+    echo -n "plot "
+
+    for method in $methods
+    do
+      expr "$methods" : "$method"'.*' >/dev/null ||
+      echo -n ", "
+      echo -n "  \"$TMP_BASE.$method\" title \"`echo $method | sed -e 's,_, ,g'`\" with lines lw 6" 
+    done
+
+    echo
+
+} | tee $TMP_BASE.out | gnuplot 

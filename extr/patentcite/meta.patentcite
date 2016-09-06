@@ -1,0 +1,10 @@
+category: Citation
+code: PC
+name: US patents
+description: Patent–patent citations
+url: http://www.nber.org/patents/
+cite: b376
+long-description:  This is the citation network of patents registered with the United States Patent and Trademark Office.  Each node is a patent, and a directed edge represents a patent and an edge represents a citation.  The network contain loops, i.e., self-citations.
+tags: #acyclic
+entity-names: patent
+relationship-names:  citation

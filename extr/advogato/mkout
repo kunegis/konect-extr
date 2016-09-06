@@ -1,0 +1,46 @@
+#! /bin/bash
+#
+# Generate the Advogato outfile.
+#
+# The weights are mapped to .6, .8 and 1.
+# The "observer" status is ignored because it is not used by Advogato's
+# own algorithm. 
+#
+# INPUT
+#	graph.dot
+#
+# OUTPUT
+#	out.advogato
+#
+
+#TMP_BASE=${TMP:-/tmp}/advogato.$$
+
+
+#TMPFILE=$(mktemp advogato.XXXXXXXXXX)
+#trap "rm $TMPFILE" EXIT
+<graph.dot sed -re '
+/->/!d
+s,\s*(\S+) -> (\S+) \[level="([A-Za-z]+)"];,\1 \2 \3,
+s,Apprentice$,.6,
+s,Journeyer$,.8,
+s,Master$,1,
+/Observer/d
+' | ../mkrel --enforce-edgeweights --+ent=ent.advogato.user.name:STDIN 'asym' 'posweighted' >out.advogato
+
+#<$TMPFILE ../mkrel --+ent=ent.advogato.user.name:$TMPFILE:
+
+#| ../mkuniq1 >$TMP_BASE
+
+#USER_COUNT="`<$TMP_BASE sed -re 's,([0-9]+) ([0-9]+) [.0-9]+,\1\\
+#\2,' | sort -n | tail -n1`"
+
+#REL_COUNT="`wc -l $TMP_BASE | cut -f1 -d ' '`"
+#
+#{
+#    echo "% asym posweighted"
+ #   echo "% $REL_COUNT $USER_COUNT $USER_COUNT"
+#    echo "% ent.developer ent.developer weight.certificate"
+#    cat $TMP_BASE
+#} >out.advogato
+
+

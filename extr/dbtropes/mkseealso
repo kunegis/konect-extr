@@ -1,0 +1,58 @@
+#! /usr/bin/perl
+#
+# Extract seeAlso links from dbtropes.nt file based on its structure.  
+#
+# INPUT 
+#	dbtropes.nt
+#
+# OUTPUT 
+#	dbtropes-seealso.txt
+#
+
+use strict;
+use warnings; 
+
+my $resource_uri="<http://dbtropes.org/resource/";
+my $see_also_uri="<http://www.w3.org/2000/01/rdf-schema#seeAlso>";
+
+my $input_filename  = 'dbtropes.nt';
+my $output_filename = 'dbtropes-seealso.txt';
+
+# TODO remove count
+my $count=0;
+
+# open file for writing
+open(my $output_fh, '>', $output_filename) or die "Could not open file '$output_filename' $!";
+
+# open file for reading
+open my $input_fh, '<', $input_filename or die "Cannot open $input_filename: $!";
+
+while(my $line = <$input_fh>) {
+	chomp $line;
+	# get subject 
+	my $subject=$line;
+ 	$subject =~ s/^$resource_uri//;
+ 	$subject =~ s/>.*//;
+		
+	# get object 
+	my $object=$line;
+	$object =~ s/.*$resource_uri//;
+ 	$object =~ s/>.*//;
+
+	if($line =~ /$see_also_uri/){
+		#write mapping to file
+		print_line("$subject\t$object");
+	}
+	
+	# TODO remove count
+	#if($count++>1000){
+	#	last;
+	#}
+	
+}
+close $output_fh or die "$!";
+
+sub print_line{
+	print $output_fh "@_\n";
+	#print @_;
+}

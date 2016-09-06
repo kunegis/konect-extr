@@ -1,0 +1,28 @@
+#! /usr/bin/perl -w
+#
+# Return a random agent.
+#
+
+use strict; 
+
+open AGENTS, "<agents" or die "Cannot open agents:  $!"; 
+
+my @agents;
+
+while (<AGENTS>) 
+{
+    push @agents, $_;
+}
+
+close AGENTS or die "Cannot close agents:  $!"; 
+
+my $count = @agents;
+my $index = int(rand(@agents)); 
+
+# print "count = $count\n";
+# print "index = $index\n"; 
+
+my $agent = $agents[$index];
+
+print "$agent\n"; 
+

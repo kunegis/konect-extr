@@ -1,0 +1,180 @@
+#
+# Interwiki and intrawiki links from language Wikipedias. 
+#
+
+# We only take the main Wikipedia namespace into account.
+
+# "Wikipedia-ID" (wid) always refers to the Wikipedia-internal page ID, as
+# used as the key in all Wikipedia SQL tables.  Wikipedia-IDs are unique
+# within one language Wikipedia, across all of that language Wikipedia's
+# namespaces.  
+
+# "Article-Name" (aname) is the name of the article.  (We only use
+# articles from the main namespace.)
+
+#
+# Filenames:
+#	out/id.* 	Using Wikipedia article IDs, consistent over all
+# 			files  
+#	out/out.*	Using continuous IDs, specific to each file
+# 			(this is not very useful for interwiki links) 
+#
+
+#
+# Note:  The variable "$LANGUAGE" is used as part of the current locale,
+# so we don't use it here.   
+#
+
+% version 1.9
+
+@all:  @intrawiki @interwiki; 
+
+@clean:
+{
+	rm -rf out
+	rm -f dep.* codes codes.html
+}
+
+out:  { mkdir -p out }
+
+codes.html:
+{
+	wget -q 'http://www-01.sil.org/iso639-3/codes.asp?order=639_2&letter=%25' -O codes.html
+	touch -c codes.html
+}
+
+# Tab-separated LANGUAGE_CODE -- LANGUAGE_NAME mapping 
+>codes:  <codes.html mkcodes
+{
+	./mkcodes | sort -u
+}
+
+#
+# Intrawiki networks
+#
+
+@intrawiki: [dep.intrawiki];
+
+>dep.intrawiki:  LANGS 
+{
+	for LANG in $(cat LANGS) ; do
+		echo out/meta.wikipedia_link_"$LANG"
+		echo out/out.wikipedia_link_"$LANG"
+	done
+}
+
+>out/meta.wikipedia_link_$LANG:
+	!out <meta.template-intrawiki codes
+{
+	NAME="$(<codes sed -re '/^'"$LANG"'	/!d;s,^.*	,,')"
+	echo >&2 "NAME=⟨$NAME⟩"
+	sed -re '
+		s,\$\{LANG\},'"$LANG"',g
+		s,\$\{NAME\},'"$NAME"',g
+	'
+}
+
+# The network using continuous IDs 
+>out/out.wikipedia_link_$LANG0:
+	<out/id.wikipedia_link_$LANG0
+{
+	echo '% asym unweighted'
+	../mkuniq1 
+}
+
+# The network using Wikipedia-IDs
+out/id.wikipedia_link_$LANG0:	
+	mkintrawiki
+	out/page_$LANG0.sql
+	out/pagelinks_$LANG0.sql
+{
+	./mkintrawiki 
+}
+
+# The 'pagelinks' table contains information about which article (by
+# Wikipedia-ID) links to which article (by title and namespace). 
+
+out/pagelinks_$LANG.sql: 
+	out/pagelinks_$LANG.sql.gz 
+{
+	gzip -dfvk out/pagelinks_$LANG.sql.gz
+	touch -c out/pagelinks_$LANG.sql
+}
+
+out/pagelinks_$LANG.sql.gz:  !out
+{
+	wget -q http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pagelinks.sql.gz -O out/pagelinks_$LANG.sql.gz
+	touch -c out/pagelinks_$LANG.sql.gz
+}
+
+#
+# Interwiki networks
+#
+
+@interwiki: [dep.interwiki]; 
+
+>dep.interwiki:  LANGS
+{
+	for LANG1 in $(cat LANGS) ; do
+		for LANG2 in $(cat LANGS) ; do
+			if [ "$LANG1" = "$LANG2" ] ; then 
+				continue
+			fi
+			echo out/meta.wikipedia_link_"$LANG1"_"$LANG2"
+			echo out/out.wikipedia_link_"$LANG1"_"$LANG2"
+		done
+	done
+}
+
+out/meta.wikipedia_link_${LANG1}_${LANG2}:
+	!out mkmetainterwiki
+{
+	./mkmetainterwiki "$LANG1" "$LANG2"
+}
+
+>out/out.wikipedia_link_${LANG1}_${LANG2}:
+	<out/id.wikipedia_link_${LANG1}_${LANG2}
+{
+	echo '% bip unweighted'
+	../mkuniq 
+}
+
+# With Wikipedia article IDs
+out/id.wikipedia_link_${LANG1}_${LANG2}:   
+	mkinterwiki
+	out/page_$LANG2.sql 
+	out/langlinks_$LANG1.sql
+{
+	./mkinterwiki
+}
+
+out/langlinks_$LANG.sql: 
+	out/langlinks_$LANG.sql.gz 
+{
+	gzip -dfvk out/langlinks_$LANG.sql.gz
+	touch -c out/langlinks_$LANG.sql
+}
+
+out/langlinks_$LANG.sql.gz: !out
+{
+	wget -q http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-langlinks.sql.gz -O out/langlinks_$LANG.sql.gz
+	touch -c out/langlinks_$LANG.sql.gz
+}
+
+#
+# Common files.  These are the information about each page.  We use it
+# to get the Wikipedia-ID -- Article-Title mapping. 
+#
+
+out/page_$LANG.sql: out/page_$LANG.sql.gz 
+{
+	gzip -dfvk out/page_$LANG.sql.gz
+	touch -c out/page_$LANG.sql
+}
+
+out/page_$LANG.sql.gz:  !out
+{
+	wget -q http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-page.sql.gz -O out/page_$LANG.sql.gz
+	touch -c out/page_$LANG.sql.gz
+}
+

@@ -1,0 +1,50 @@
+% version 1.9
+
+@all:  
+	out.filmtipset_rating  meta.filmtipset_rating 
+	out.filmtipset_comment meta.filmtipset_comment 
+	out.filmtipset_friend  meta.filmtipset_friend
+;
+
+filmtipset:   own/filmtipset.tar.bz2
+{
+	tar xfvvj own/filmtipset.tar.bz2
+	touch -c filmtipset
+}
+
+rel.rating:  filmtipset mkrating
+{
+	./mkrating
+}
+
+rel.comment:  filmtipset mkcomment
+{
+	./mkcomment
+}
+
+rel.friend:  filmtipset mkfriend
+{
+	./mkfriend
+}
+
+>out.filmtipset_rating:  <rel.rating
+{
+	../mkuniq 
+}
+
+out.filmtipset_comment:  rel.comment ../c/d.mkuniq
+{
+	../c/d.mkuniq rel.comment out.filmtipset_comment
+}
+
+>out.filmtipset_friend:  <rel.friend
+{
+	echo '% sym unweighted' 
+	../mkuniq1 | ../mksym 
+}
+
+
+@clean: 
+{
+	rm -f filmtipset.tar.bz2 out.* rel.* filmtipset
+}

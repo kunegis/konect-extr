@@ -1,0 +1,10 @@
+category: Rating
+code: M3
+name: MovieLens 10M
+description: User–movie rating
+url: http://www.grouplens.org/node/73
+cite: www.grouplens.org/node/73
+extr: movielens-10m
+long-description: This bipartite network contains ten million movie ratings from http://movielens.umn.edu/. Left nodes are users and right nodes are movies. An edge between a user and a movie indicates that the user has rated the movie with the rating value attached to the edge.
+entity-names: user,movie
+relationship-names: rating 

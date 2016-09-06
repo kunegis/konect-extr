@@ -1,0 +1,11 @@
+code: W2
+name: WikiSigned
+category: OnlineContact
+cite: konect:maniu2011
+description: User–user interactions
+entity-names: user
+extr: wikisigned
+url: http://perso.telecom-paristech.fr/~maniu/wikisigned/datasets.html
+long-description: This undirected signed network contains interpreted interactions between the users of the English Wikipedia that have edited pages about politics. Each interaction, such as text editing, reverts, restores and votes are given a positive or negative value. The result can be interpreted as a web of trust. An edge represents an interaction and a node represents a user. Note that a user may revert his own edits, and thus this network contains negatively weighted loops.  The dataset is based on a set of 563 articles from the politics domain of the English Wikipedia. 
+relationship-names: interaction
+tags:  #loop

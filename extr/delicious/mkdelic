@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+use Time::Local;
+use MIME::Base64;
+use Encode;
+my @line;
+my $pos1=$ARGV[0];
+my $pos2=$ARGV[1];
+
+
+DATA:while (<STDIN>)
+{
+chomp;
+ @line=split(/ /,$_);
+ if(scalar(@line)!=5)
+	{next;}
+ foreach $str (@line)
+ {
+  if($str=~/^\s*$/)
+	{next DATA;}
+ }
+ my $out="";
+ my ($y,$m,$d)=split('-',$line[0]);
+ $date=timelocal(0,0,0,$d,$m-1,$y);
+ $out=myencode($line[$pos1])." ".myencode($line[$pos2])." 1 ".$date;
+ if ($out=~/^\S+\s+\S+\s+\d+\s+\d+$/)
+	{
+	print $out."\n";
+#	print STDERR "LINE IS @line / out is $out\n";
+	}
+}
+
+sub myencode{
+my ($s)=@_;
+if ($s =~/^.* .*$/)
+	{$s="\"$s\"";}
+return $s;
+#return encode_base64(encode("UTF-8", $s),'');
+}
+

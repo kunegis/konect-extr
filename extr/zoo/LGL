@@ -1,0 +1,13 @@
+LGL is the large graph layout package.  Installation is very ad-hoc.  I
+tested version LGL-1.1.   Set $LGL to the LGL root package.  
+
+
+How to setup LGL
+================
+
+To configure LGL:  only run setup.pl -i, then put lglayout2D in the path.  
+(We don't need lgl.pl)
+
+To compile the java programs:  cd Java && CLASSPATH="$CLASSPATH:`pwd`" ./build.sh
+(Apparently their java has "." in the path per default.)
+

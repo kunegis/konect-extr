@@ -1,0 +1,11 @@
+category: Rating
+code: Bx
+name: BookCrossing (ratings)
+description: User–book rating
+entity-names: user,book
+extr: bookcrossing
+url: http://www.informatik.uni-freiburg.de/~cziegler/BX/
+long-description: This is the bipartite book rating network of the BookCrossing community.  Rating values are integers between one and ten, where ten represents the best score. An edge shows that a user has rated a book. Nodes in the left column are users; nodes in the right column are books.  
+relationship-names: rating
+cite: konect:bookcrossing
+timeiso: 2004-08-01/2004-09-01

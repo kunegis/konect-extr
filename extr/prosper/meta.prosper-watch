@@ -1,0 +1,10 @@
+category: Interaction
+code: PW
+name: Prosper.com
+description: Member–listing watch
+url: http://www.prosper.com/tools/DataExport.aspx
+cite: prosper
+extr: prosper
+long-description: This is the bipartite network of members of the loan website Prosper.com watching individual listings.
+entity-names:  member, listing
+relationship-names:  watch

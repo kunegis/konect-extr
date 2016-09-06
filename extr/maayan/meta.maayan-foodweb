@@ -1,0 +1,12 @@
+
+name:  Little Rock Lake
+code:  ML
+url:   http://research.mssm.edu/maayan/datasets/qualitative_networks.shtml
+category:  Trophic
+description:  Entity–entity food sources
+cite:  konect:little-rock-lake
+long-description:  The is the food web of Little Rock Lake, Wisconsin in the United States of America. Nodes in this network are autotrophs, herbivores, carnivores and decomposers; links represent food sources.
+entity-names:  autotroph/herbivore/carnivore/decomposer
+relationship-names:  food source
+extr:  maayan
+tags:  #loop

@@ -1,0 +1,11 @@
+name: Baidu internal
+code: BAi
+url: http://zhishi.me/
+category: Hyperlink
+fullname: Baidu internal links
+description: Article–article link
+long-description: This is the directed network of hyperlinks between the articles of the Chinese online encyclopedia Baidu (百度百科, http://baike.baidu.com/). 
+entity-names: article
+extr: zhishi
+cite: konect:zhishi
+tags: #loop

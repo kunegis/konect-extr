@@ -1,0 +1,11 @@
+category: Software
+code: Dz
+name: JUNG dependency
+fullname: JUNG and Colt dependency
+description: Class–class dependencies
+entity-names: class
+extr: subelj
+url: http://lovro.lpt.fri.uni-lj.si/support.jsp
+long-description: This is the software class dependency network of the JUNG 2.0.1 and Colt 1.2.0 libraries, namespaces edu.uci.ics.jung and cern. The network is directed. Nodes represent classes. An edge between them indicates that the class represented by the left node depends on the class represented by the right node. 
+relationship-names: dependency
+cite: konect:dependency1

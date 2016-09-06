@@ -1,0 +1,11 @@
+category: Rating
+code: J1
+name: Jester 100
+description: User–joke ratings
+entity-names: user,joke
+extr: jester
+url: http://eigentaste.berkeley.edu/dataset/
+long-description: This weighted network contains information about how users rated a total ammount of 100 jokes. Not every user rated every joke. Rating values are continuous values between −10 and +10. An edge shows that a user has rated a joke. Left nodes are users and right nodes are jokes.  
+relationship-names: rating
+cite: konect:jester
+timeiso: 1999/2003

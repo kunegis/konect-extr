@@ -1,0 +1,10 @@
+category: Interaction
+code: Sw
+name: Southern women 2
+description: Woman–event participation
+entity-names: woman,event
+extr: brunson
+url: https://github.com/corybrunson/triadic
+long-description: This bipartite dataset shows the participation of women in social events over a nine-month period. The data was collected in the Southern United States of America in the 1930s. In comparison to the other southern women dataset this network only consists of African-American women. There is an edge for every woman who participates in an event. The left node represents a woman and the ride lnode represents an event.
+relationship-names: participation
+cite: konect:southernwomen

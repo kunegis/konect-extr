@@ -1,0 +1,10 @@
+name: Highland tribes
+code: HT
+url: http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm#gama
+description: Tribe–tribe ties
+category: HumanSocial
+long-description: This is the signed social network of tribes of the Gahuku–Gama alliance structure of the Eastern Central Highlands of New Guinea, from Kenneth Read (1954). The network contains sixteen tribes connected by friendship ("rova") and enmity ("hina"). 
+extr: ucidata
+cite: konect:kenneth54
+entity-names: tribe
+relationship-names: friendship 

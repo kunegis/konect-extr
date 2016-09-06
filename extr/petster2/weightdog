@@ -1,0 +1,16 @@
+#! /bin/sh
+
+set -e 
+
+exec >dat-petster/weight.dog
+
+# Note:  grep will return 1 when no lines are found, making this script
+# fail on purpose.  In other words, there must be at least one of each. 
+
+grep -cF '1-10 lbs' dat-petster/ent.petster_orig-dog.weight 
+grep -cF '11-25 lbs' dat-petster/ent.petster_orig-dog.weight 
+grep -cF '26-50 lbs' dat-petster/ent.petster_orig-dog.weight 
+grep -cF '51-100 lbs' dat-petster/ent.petster_orig-dog.weight 
+grep -cF '100+ lbs' dat-petster/ent.petster_orig-dog.weight 
+
+

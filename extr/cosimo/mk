@@ -1,0 +1,12 @@
+#! /bin/sh
+
+{
+
+    echo '% bip signed' 
+
+    <ActionLog-05-27-jerome1-1.log sed -re '
+/^Rating\(/!d
+s/Rating\(([0-9]+),([0-9]+),pos,([0-9]+)\)/\1 \2 1 \3/
+s/Rating\(([0-9]+),([0-9]+),neg,([0-9]+)\)/\1 \2 -1 \3/
+' | ../mkuniq ; 
+} >out.cosimo

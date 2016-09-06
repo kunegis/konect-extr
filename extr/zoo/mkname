@@ -1,0 +1,9 @@
+#! /bin/sh
+#
+# Find out the user ID of a user with a specific name.
+#
+# $1   the name
+#
+
+>"out.$1" sed <out.userids -e '/ '"$1"'$/!d;s,^\([0-9]*\).*$,\1,'
+

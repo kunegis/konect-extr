@@ -1,0 +1,107 @@
+#! /usr/bin/perl
+#
+# Check a file for errors.  Arguments are optional, and are derived from
+# filename and content if not given.    
+#
+# INVOCATION
+#
+#   chksanity [--autodetect] [--type=<TYPE>] [--timestamp] [--weighted] [--header] --file <FILE>
+#
+#	--autodetect: Try to figure out arguments from input file. Default is true. Will not change arguments that are given via command line.
+#	--noautodetect: Do not set options related to file content.
+# 	--type:	specify the type of input data. Supports only 'out' currently. If not given the type is derived from the file name.
+#	--header: Throw an error if the file-header is missing or invalid. Default is true.
+#	FILE:	path to the file to check
+#
+# Type specific arguments:
+#	TYPE=out
+#		--timestamp: Throws an error if a relation has no timestamp / timestamp is invalid
+#		--weighted: Throws an error if a relation has no weight.
+#		--bipartite: Treat the network as bipartite.
+#		--nobipartite: Tread the network as unipartite.
+#
+
+use Getopt::Long;
+
+my $opt_timestamp='';
+my $opt_weighted='';
+my $opt_type='';
+my $opt_auto='1';
+my $opt_bip='';
+my $opt_file='';
+my $opt_igh="0";
+
+GetOptions('ignore-header'=>\$opt_igh,'file=s' => \$opt_file,'bipartite!' => \$opt_bip,'autodetect!' => \$opt_auto,'timestamp' => \$opt_timestamp,'weighted' => \$opt_weighted, 'type=s' => \$opt_type) or die "An error occured during processing of the arguments"."\n";
+die "Missing filename"."\n" if not $opt_file;
+if($opt_auto)
+{
+	if ($opt_type eq '' and $opt_file =~ /out\..*/) {$opt_type='out';}
+}
+
+#currently:
+print $opt_type;
+die "Only type 'out' is supported."."\n" if $opt_type ne 'out';
+if($opt_type eq 'out') {chkout() or die "\nFail.\n";}
+
+print "Success\n";
+exit 0;
+
+sub chkout
+{
+open FILE, "<".$opt_file or die $!;
+my $line='';
+my $i=0;
+
+my $format;
+my $weights;
+my $crel;
+my $csub;
+my $cobj;
+
+my $number=0;
+
+if(not $opt_igh){
+HEADER:{do
+{
+ die "File is empty or only contains header"."\n" if(eof(FILE));
+ $line=<FILE>;
+ chomp $line;
+ $i++;
+ if(not $line =~ /^\%\ .*/)
+ {
+  if ($line =~ /^\%.*/) {print STDERR "Space missing in header after %!"}
+  if($i != 3) {die "Invalid header (format/size): ".$line."\n";}else{last HEADER;}
+ }
+ chomp $line;
+ my @l =  split /\ /,$line;
+ if($i==1){
+  die "Invalid header:".$line."\n" if(scalar(@l)!=3);
+  (undef,$format,$weight) = @l;
+  die "Invalid network format: ".$format."\n" if ($format ne "sym" and $format ne "asym" and $format ne "bip");
+  die "Invalid network weight: ".$weight."\n" if ($weight ne "weighted" and $weight ne "signed" and  $weight ne "positive" and  $weight ne "unweighted" );
+	 
+ }elsif($i==2){
+  die "Invalid header:".$line."\n" if(scalar(@l)!=4);
+  (undef,$crel,$csub,$cobj)=@l;
+ }
+}while(1);}
+$number=2;
+}
+
+while(<FILE>)
+{
+$number++;
+chomp;
+if ($opt_timestamp){
+/^\d+\ \d+\ \d+\ \d+$/ or die "invalid line '".$_."'@".$number."\n";
+next;
+}
+if ($opt_weighted) { 
+/^\d+\ \d+\ \d+$/ or die "invalid line '".$_."'@".$number."\n";
+next;
+}
+/^\d+\ \d+.*$/ or die "invalid line '".$_."'@".$number."\n";
+}
+close FILE;
+return 1;
+}

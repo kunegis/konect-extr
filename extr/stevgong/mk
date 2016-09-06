@@ -1,0 +1,30 @@
+#! /usr/bin/perl -w
+
+use strict;
+use warnings;
+
+#The social-attribute network is stored as adjacency lists
+#each line corresponds to a social node : ID #soc-neighbors #attri-neighbors soc-neighbor-list attri-neighbor-list
+#ID, id of a social node, starting from 0
+##soc-neighbors, the number of social neighbors
+##attri-neighbors, the number of attribute neighbors
+#soc-neighbor-list, the list of IDs of social neighbors
+#attri-neighbor-list, the list of IDs of attribute neighbors. Attribute IDs are negative and start from -1
+#0 5 5 3462 2300 825 38 104 -1 -2 -3 -4 -6
+my $s = "0";
+$s = "1" if ( $ARGV[0] eq "attrib" );
+while (<STDIN>)
+{
+ chomp;
+ my @items = split / /;
+ my @sl;
+ if ( $s eq "0" )
+ {
+  @sl = @items[3 .. 2+$items[1]];  
+ }else{
+  @sl = @items[3+$items[1] .. $#items];
+ }
+ foreach (@sl){
+  print $items[0]." ".$_."\n";
+ }
+}

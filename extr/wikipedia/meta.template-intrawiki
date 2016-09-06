@@ -1,0 +1,9 @@
+name: Wikipedia links, ${LANG}
+code: W${LANG}
+fullname: Wikipedia links, ${NAME}
+long-description:  This network consists of the wikilinks of the Wikipedia in the ${NAME} language (${LANG}).  Nodes are Wikipedia articles, and directed edges are hyperlinks.  Only pages in the article namespace are included. 
+url: http://dumps.wikimedia.org/
+category: Hyperlink
+description: Article–article wikilink
+extr: wikipedia
+tags: #loop #regenerate

@@ -1,0 +1,30 @@
+#! /usr/bin/perl
+#
+
+use strict; 
+
+use Time::Local; 
+
+open(IN, "<data/rating.txt"); 
+
+while (<IN>)
+{
+    /([0-9]+)\s+([0-9]+)\s+([0-9]+)\s+[0-9]+\s+([0-9]{4})\/([0-9]{2})\/([0-9]{2})\s+.*/
+	or die "*** Syntax error:  $_"; 
+    
+    my $item = $1; 
+    my $user = $2; 
+    my $rating = $3;
+    my $year = $4;
+    my $month = $5;
+    my $day = $6; 
+
+    # Treat ratings of 6 as ratings of 5
+    if ($rating == 6) { $rating = 5; }
+    
+    my $date = timelocal(0, 0, 0, $day, -1+$month, $year);
+
+    print "$user $item $rating $date\n"; 
+}
+
+close(IN) or die; 

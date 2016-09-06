@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Bui
+name: BibSonomy u-i
+description: User–publication assignment
+url: http://www.kde.cs.uni-kassel.de/bibsonomy/dumps
+cite: konect:bibsonomy
+extr: bibsonomy
+fullname: BibSonomy user–publication
+long-description:  This is the bipartite user–publication network from BibSonomy. Each edge represents a tag assignment.  The network allows multiple edge, i.e., a user may give multiple tags to a single publication.  The network is complete as it is taken from the official BibSonomy dump.
+tags: #regenerate
+entity-names:  user, publication
+relationship-names:  tag assignment

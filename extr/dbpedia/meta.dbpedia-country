@@ -1,0 +1,12 @@
+category: Affiliation
+code: CN
+name: Countries
+description: Entity–country affiliations
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2
+extr: dbpedia
+long-description: This is the bipartite network of entities from DBpedia and their affiliated countries. Each edge in the network connects an entity (such as a person) with a country associated with that person. The edges correspond to the &lt;http://dbpedia.org/ontology/country&gt; relationships in DBpedia. The countries include former countries, empires and kingdoms as well as disputed country-like entities; therefore, the number of country-nodes is much higher than the number of presently existing countries.
+tags: #regenerate
+entity-names:  entity, country
+relationship-names:  affiliation
+

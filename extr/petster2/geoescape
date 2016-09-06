@@ -1,0 +1,17 @@
+#! /usr/bin/perl
+
+use warnings;
+use strict; 
+
+use URI::Escape; 
+
+while (<>) {
+
+    chomp;
+
+    my $line = $_;
+
+    $line = uri_escape($line); 
+
+    print "$line\n";
+}

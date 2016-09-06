@@ -1,0 +1,10 @@
+category: Affiliation
+code: BM
+name: Club membership
+description: Person–organization memberships
+entity-names: person,organization
+extr: brunson
+url: https://github.com/corybrunson/triadic
+long-description: This bipartite network contains membership information of corporate executive officers in social organizations such as clubs and boards. Left nodes represent persons and right nodes represent social organisations. An edge between a person and a social organization shows that the person is a member.
+relationship-names: membership
+cite: konect:faust

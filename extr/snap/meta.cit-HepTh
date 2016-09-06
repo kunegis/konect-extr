@@ -1,0 +1,11 @@
+category: Citation
+code: THc
+name: arXiv hep-th
+description: Publication–publication citations
+url: http://snap.stanford.edu/data/cit-HepTh.html
+cite: konect:leskovec107
+extr: snap
+long-description: This is the network of publications in the arXiv's High Energy Physics – Theory (hep-th) section. The directed links that connect the publications are citations.
+tags:  #loop
+entity-names: publication
+relationship-names: citation

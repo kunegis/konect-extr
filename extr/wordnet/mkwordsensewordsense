@@ -1,0 +1,4 @@
+#! /bin/sed -rf 
+
+/^\s*<[^ ]+instances\/wordsense[^ ]+>\s+[^ ]+\s+<[^ ]+instances\/wordsense[^ ]+>\s+.\s*$/!d
+s,^\s*(<[^ ]+instances\/wordsense[^ ]+>)\s+[^ ]+\s+(<[^ ]+instances\/wordsense[^ ]+>)\s+.\s*$,\1 \2,

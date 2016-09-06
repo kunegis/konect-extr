@@ -1,0 +1,10 @@
+category: Social
+code: CY
+name: Youtube friendship
+description: User–user friendship
+url: http://snap.stanford.edu/data/com-Youtube.html
+cite: konect:leskovec2012
+extr: snap
+entity-names: user
+relationship-names: friendship 
+long-description: This is the friendship network of the video-sharing site Youtube. Nodes are users and an undirected edge between two nodes indicates a friendship.

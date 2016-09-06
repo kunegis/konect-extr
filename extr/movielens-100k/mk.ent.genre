@@ -1,0 +1,26 @@
+#! /bin/sh
+#
+# Generate the genre list.
+#
+# INPUT
+#	ml-data/u.genre
+#
+# OUTPUT
+#	ent.genre
+#
+
+set -e
+
+COUNT="`tail -n3 ml-data/u.genre | sed -re '/^$/d' | tail -n1 | sed -re 's,^.*\|,,'`"
+
+{
+    echo '%'
+    echo "% $COUNT"
+    echo "% ent dat.name"
+
+    sed <ml-data/u.genre -re '
+	/^$/d
+	/^unknown\|/d
+	s,([[:alpha:]'\'' -]+)\|([0-9]+),\2 "\1",
+    '
+} >ent.genre

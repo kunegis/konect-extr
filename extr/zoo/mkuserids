@@ -1,0 +1,30 @@
+#! /bin/sh
+#
+# User index, with IDs.
+# On each line, a user ID followed by the username (URL encoded).
+# IDs begin at 1 (Matlab compatible) and are contiguous.
+# Lines are sorted by user ID.
+#
+
+ZOO=${ZOO-~/zoodir}
+FIND_H=${FIND_H--H}
+
+id=1
+
+<out.corpus sed -r -e 's,([^ ]+) ([^ ]+) [+-],\1\
+\2,' |
+sort -u |
+while read name
+do
+  echo $id $name
+  id=$(($id + 1))
+done >out.userids
+
+# {
+#      ls -f $ZOO |
+#      sed -e '/^user\./!d;s,user\.,,'
+
+#     find $FIND_H $ZOO  \( -name friends -o -name foes -o -name freaks -o -name fans \) \
+#           -print0 |
+# 	xargs -0 cat 
+# } |

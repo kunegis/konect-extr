@@ -1,0 +1,55 @@
+#! /bin/sh
+#
+# Execute an Octave script.  This is unused at the moment. 
+#
+# 	$1	Name of the Octave program
+#
+# FILES
+#	error.log	Errors from all runs of this script are logged
+#			in this file  
+#
+
+SCRIPT="$1"
+
+[ "$PREFIX" ] && PREFIX=.$PREFIX
+LOGNAME=$USER."$(basename $SCRIPT .m)"
+
+# Error log
+exec 6>>error.log
+
+# This is a list of variable we want to be used in the log filename to
+# make it unique.
+[ "$type"    ]     	&& LOGNAME=$LOGNAME.$type
+[ "$name"   ]      	&& LOGNAME=$LOGNAME.$name
+[ "$network" ]		&& LOGNAME=$LOGNAME.$network
+[ "$decomposition" ]	&& LOGNAME=$LOGNAME.$decomposition
+
+export LOG="${TMPDIR-/tmp}/$(basename $0).$LOGNAME$PREFIX.log"
+echo >&2 "   $LOG"
+
+#
+# -q	Quiet
+# -f	Don't read initialization files
+#
+# We'd like to usee --no-window-system but it isn't supported by Octave 3.0 
+#
+#cd "$(dirname $SCRIPT)"
+DIR_SCRIPT="$(dirname $SCRIPT)"
+if echo "$DIR_SCRIPT" | grep -vq '^/' ; then
+	DIR_SCRIPT="$PWD/$DIR_SCRIPT"
+fi
+
+OCTAVE_PATH="$OCTAVE_PATH:$MATLABPATH"
+OCTAVE_PATH="$DIR_SCRIPT:$OCTAVE_PATH"
+export OCTAVE_PATH
+exec 3>$LOG 
+ISPLAY= GNUTERM=dumb octave -qf "$SCRIPT" >&3 2>&1  ||
+{
+	echo >&2 "*** error in $LOG"
+	echo >&6 "*** error in $LOG"
+	exit 1
+}
+
+echo >&3 '=== FINISHED ==='
+
+exit 0

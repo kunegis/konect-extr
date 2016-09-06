@@ -1,0 +1,16 @@
+#! /bin/sh
+#
+# Convert a weighted graph to an unweighted graph.
+#
+# The graph must have timestamps, and be in OUT or REL format. 
+#
+# INPUT and OUTPUT are used. 
+#
+
+
+sed -re '
+1s,weighted,unweighted,
+1s,signed,unweighted,
+1s,positive,unweighted,
+s,^([0-9]+\s+[0-9]+\s+)[0-9.e-]+(\s+[0-9]+)$$,\11\2,
+'

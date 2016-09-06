@@ -1,0 +1,16 @@
+name: Facebook (INFOCOM)
+code: FSG
+url: http://odysseas.calit2.uci.edu/doku.php/public:online_social_networks#facebook_social_graph
+category: Social
+fullname: Facebook social graph
+description: User–user friendship
+long-description: This network describes friendship relations between users of the social network Facebook. It was collected in April of 2009 through data scraping from Facebook.
+extr: facebook-sg
+cite: konect:facebook-sg
+entity-names: user
+relationship-names: friendship 
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_facebooksg: <http://konect.uni-koblenz.de/networks/facebook-sg/User/> .
+n3-type-m: sioc:UserAccount
+n3-edgedata-1: $m foaf:knows $n .
+n3-edgedata-2: $n foaf:knows $m .

@@ -1,0 +1,12 @@
+category: Authorship
+code: AC
+name: arXiv cond-mat
+description: Author–paper authorship
+entity-names: author,paper
+extr: opsahl
+url: http://toreopsahl.com/datasets/#newman2001
+long-description: This bipartite network contains authorship links between authors and publications in the arXiv condensed matter section (cond-mat) from 1995 to 1999. An edge represents an authorship connecting an author and a paper.
+relationship-names: authorship
+cite: konect:newman01
+time: 788914800-946681199
+timeiso: 1995-01-01/1999-12-31

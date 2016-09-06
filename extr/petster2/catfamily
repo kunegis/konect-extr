@@ -1,0 +1,34 @@
+#! /usr/bin/perl
+#
+# INPUT 
+#	dat-petster/out.petster_orig-catdog-family
+#	petster-data/catster/cats/
+#
+# OUTPUT 
+#	dat-petster/out.petster_orig-cat-family
+#
+
+use strict;
+use warnings;
+
+open IN,  "<dat-petster/out.petster_orig-catdog-family" or die "$!";
+open OUT, ">dat-petster/out.petster_orig-cat-family"    or die "$!";
+
+while (<IN>) {
+    chomp;
+    if (! /^\s*([0-9]+)\s+([0-9]+)\s*$/) {
+	print OUT "$_\n";
+	next
+    }
+
+    my $u = $1;
+    my $v = $2;
+
+    if ( -e "petster-data/catster/cats/$u" &&
+	 -e "petster-data/catster/cats/$v") {
+	print OUT "$_\n";
+    }
+}
+
+close IN  or die "$!";
+close OUT or die "$!";

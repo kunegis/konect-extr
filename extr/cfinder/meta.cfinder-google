@@ -1,0 +1,11 @@
+category: Hyperlink
+code: GC
+name: Google.com internal
+description: Webpage–webpage hyperlinks
+url: http://cfinder.org/wiki/?n=Main.Data
+cite: konect:palla07 
+extr: cfinder
+long-description:  This is the hyperlink network from pages within Google's own sites, i.e., on google.com. 
+tags:  #loop
+entity-names: page
+relationship-names: hyperlink 

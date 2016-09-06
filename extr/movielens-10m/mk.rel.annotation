@@ -1,0 +1,87 @@
+#! /usr/bin/perl -w
+#
+# Make tag relation.
+#
+# INPUT
+# 	tags.dat
+#
+# OUTPUT
+#	ent.tag
+# 	rel.annotation		a.k.a. tag assignments
+#	
+
+use strict;
+
+#
+# Build tag index
+#
+open(TAGS_DAT, "<tags.dat") or die "Opening tags.dat:  $!";
+
+my $tag_id_next = 0;
+my %tag_ids = ();
+my @id_tags = ();
+
+my $annotation_count = 0;
+
+while (<TAGS_DAT>) 
+{
+    /([0-9]+)::([0-9]+)::([^:]*(:[^:]+)*)::([0-9]+)/ 
+	or die "Syntax error in tags.dat:  $_";
+
+    ++ $annotation_count; 
+
+    my $user_id = $1;
+    my $movie_id = $2;
+    my $tag = $3;
+    
+    if (! exists $tag_ids{$tag}) {
+	$tag_ids{$tag} = $tag_id_next;
+	$id_tags[$tag_id_next] = $tag;
+	++ $tag_id_next;
+    }
+}
+
+close(TAGS_DAT) or die "Closing tags.dat:  $!";
+
+
+#
+# ent.tag
+# 
+open(ENT_TAG, ">ent.tag") or die "Opening ent.tag:  $!";
+
+print ENT_TAG "%\n% $tag_id_next\n% ent dat.name\n";
+
+for (my $i = 0;  $i < $tag_id_next;  ++$i) 
+{
+    my $tag_id = 1 + $i; 
+    print ENT_TAG "$tag_id $id_tags[$i]\n"; 
+}
+
+close(ENT_TAG) or die "Closing ent.tag:  $!"; 
+
+#
+# rel.annotation
+#
+open(REL_ANNOTATION, ">rel.annotation") or die "Opening rel.annotation:  $!";
+open(TAGS_DAT, "<tags.dat") or die "Opening tags.dat:  $!"; 
+
+print REL_ANNOTATION "% ho unweighted\n% $annotation_count\n";
+print REL_ANNOTATION "% ent.user ent.movie ent.tag dat.date\n";
+
+while (<TAGS_DAT>) 
+{
+    /([0-9]+)::([0-9]+)::([^:]*(:[^:]+)*)::([0-9]+)/ 
+	or die "Syntax error in tags.dat:  $_";
+
+    my $user_id = $1;
+    my $movie_id = $2;
+    my $tag = $3;
+    my $date = $5;
+
+    my $tag_id = 1 + $tag_ids{$tag};
+    
+    print REL_ANNOTATION "$user_id $movie_id $tag_id $date\n";
+}
+
+close(REL_ANNOTATION) or die "Closing rel.annotation:  $!"; 
+close(TAGS_DAT) or die "Closing tags.dat:  $!"; 

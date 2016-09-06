@@ -1,0 +1,10 @@
+category: Infrastructure
+code: AF
+name: US airports
+description: Aiport–airport flights
+entity-names: airport
+extr: opsahl
+url: http://toreopsahl.com/datasets/#usairports
+long-description: This is the directed network of flights between US airports in 2010.  Each edge represents a connection from one airport to another, and the weight of an edge shows the number of flights on that connection in the given direction, in 2010. 
+relationship-names: flight
+cite: konect:opsahl11

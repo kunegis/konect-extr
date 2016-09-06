@@ -1,0 +1,10 @@
+category: Infrastructure
+code: RD
+name: Pennsylvania
+description: Intersection–Intersection roads
+url: http://snap.stanford.edu/data/roadNet-PA.html
+extr: snap
+long-description: This is the road network of Pennsylvania in the United States of America. The nodes of the network are the intersections between roads and road endpoints, and the edges are road segments between intersections and road endpoints. The network is undirected.
+cite: konect:snap
+entity-names: intersection/endpoint
+relationship-names: connection

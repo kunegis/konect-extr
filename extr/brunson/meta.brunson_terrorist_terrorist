@@ -1,0 +1,10 @@
+category: Affiliation
+code: Id
+name: Indonesian terrorism 
+description: Terrorist–organization affilation
+entity-names: terrorist,organization
+extr: brunson
+url: https://github.com/corybrunson/triadic
+long-description: This bipartite network contains information about indonesian terrorists and their affilation to terrorist organizations. Left nodes represent terrorists and right nodes represent terrorist organizations. An edge between a terrorist and an organization shows that the terrorist is affilated with the organization.
+relationship-names: affilation
+cite: konect:roberts

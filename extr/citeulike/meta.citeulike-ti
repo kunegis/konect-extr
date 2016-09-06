@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Cti
+name: CiteULike t-i
+description: Tag–publication assignment
+url: http://www.citeulike.org/faq/data.adp
+cite: konect:emamy07
+extr: citeulike
+fullname: CiteULike tag–publication
+long-description:  This is the bipartite network of tags and publications in CiteULike.  Each edge represents a tag assignment that connects a tag and a publication.  Since the same tag can be assigned to a single publication by multiple users, the network contains multiple edges. The edges are annotated with the creation time of the tag assignment. 
+tags: #regenerate
+entity-names:  tag, publication
+relationship-names:  assignment

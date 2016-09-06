@@ -1,0 +1,10 @@
+category: Misc
+code: Ml
+name: Les Misérables
+description: Character–character co-occurences
+entity-names: character
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#lesmis
+long-description: This undirected network contains co-occurances of characters in Victor Hugo's novel 'Les Misérables'. A node represents a character and an edge between two nodes shows that these two characters appeared in the same chapter of the the book. The weight of each link indicates how often such a co-appearance occured.
+relationship-names: co-occurence
+cite: konect:knuth1993

@@ -1,0 +1,10 @@
+category: Trophic
+code: FW
+name: Florida ecosystem wet
+description: Entity–entity exchanges
+entity-names: entity
+extr: foodweb
+url: http://vlado.fmf.uni-lj.si/pub/networks/data/bio/foodweb/foodweb.htm
+long-description: This network contains the carbon exchanges in the cypress wetlands of South Florida during the wet season. Nodes represent taxa and an an edge denotes that a taxon uses another taxon as food with a given trophic factor (feeding level). 
+relationship-names: exchange
+cite:konect:foodweb

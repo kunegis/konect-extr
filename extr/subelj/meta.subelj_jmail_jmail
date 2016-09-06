@@ -1,0 +1,10 @@
+category: Software
+code: DM
+name: JMAIL dependency
+description: Class–class dependencies
+entity-names: class
+extr: subelj
+url: http://lovro.lpt.fri.uni-lj.si/support.jsp
+long-description: This is the software class dependency network of the JMail 1.4.3 framework. The network is directed. Nodes represent classes. An edge between them indicates that the class represented by the left node depends on the class represented by the other node. 
+relationship-names: dependency
+cite: konect:dependency2

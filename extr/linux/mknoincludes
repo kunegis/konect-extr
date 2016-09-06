@@ -1,0 +1,11 @@
+#! /bin/sh
+
+<out.raw sed -re '/ --$/d;s,^\S+\s+,,' |
+sort -u |
+while read file
+do
+    # If file appears as source, keep it
+    if ! grep -q "^$file\$" filtered-files ; then
+	echo $file
+    fi
+done >noincludes

@@ -1,0 +1,4 @@
+#! /bin/sh
+
+<umbc-foafpub-2005-feb/triple_person.sql grep -F 'http://purl.org/vocab/relationship/friendOf' >out.foaf
+

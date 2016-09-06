@@ -1,0 +1,19 @@
+#! /bin/bash
+
+while read line
+do
+	case $line in
+		1)
+			echo "Victim"
+			;;
+		2)
+			echo "Suspect"
+			;;
+		3)
+			echo "Witness"
+			;;
+		4)
+			echo "Victim Suspect"	
+			;;
+	esac
+done

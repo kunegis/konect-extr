@@ -1,0 +1,27 @@
+#! /bin/sh
+#
+# Run Google Maps retrieval at a reasonable speed.
+#
+
+set -e 
+
+cat dat-petster/homes |
+./geoescape |
+while read -r name
+do
+#    name="$(echo "$line" | ./geoescape)"
+
+    # The program "getgeo" checks fro already-existing names, but
+    # checking this here is orders of magnitude faster than calling a
+    # Perl script thousands of times. 
+    if [ -e "geocache/$name" ] ; then
+	continue 
+    fi
+
+    ./getgeo "$name" || {
+	echo >&2 "*** Error"
+	echo >&2 "*** removing geocache/$name"
+	rm -f "geocache/$name"
+	exit 1
+    }
+done

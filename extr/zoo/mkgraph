@@ -1,0 +1,22 @@
+#! /bin/sh
+#
+# Visualize the graph 
+#
+# Deprecated by out.layout.png
+#
+
+TMPFILE=${TMP-/tmp}/"`basename $0`".tmp
+
+exec 3>$TMPFILE
+
+echo >&3 'graph G {' 
+echo >&3 'node [shape=plaintext, style=filled, label="", height=0, width=0, color="#000000"];'
+echo >&3 'edge [color="#000000"];'
+
+head -n 4000 out.matrix | >&3 sed -e '/^%/d;s,^\([^ ]*\) \([^ ]*\).*$,\1 -- \2;,'
+#head -n 400 out.userids | >&3 sed -e 's|^\([0-9]*\) \([^ ]*\)$|\1 [label="\2", shape=plaintext];|'
+
+echo >&3 '}'
+
+neato -Tps $TMPFILE -o graph.ps
+

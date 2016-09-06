@@ -1,0 +1,74 @@
+#! /bin/sh
+#
+# Execute a Matlab script.  This is a wrapper around Matlab that makes
+# it easier to run Matlab in batch mode and log the output of scripts. 
+#
+# PARAMETERS
+# 	$1	    	Basename of the Matlab program (without .m, but may contain directory) 
+# 	$jvm_enable	Enable the JVM; the JVM is disabled by default
+#	$verbose	When set, enable verbose mode (mainly for debugging)
+# 
+# Example:  to run m/map.m, use ./matlab m/map 
+#
+# Matlab scripts run using this method usually don't use command line
+# arguments. Instead, environment variables are passed.  
+#
+
+[ $verbose ] && exec 4>&2 || exec 4>/dev/null 
+
+MATLAB="matlab -nodesktop -nosplash"
+if [ -z "$jvm_enable" ] ; then
+  MATLAB="$MATLAB -nojvm"
+fi
+
+[ "$PREFIX" ] && PREFIX=.$PREFIX
+export PREFIX
+export MATLAB_NAME="`basename $1`"
+
+LOGNAME=$USER.$MATLAB_NAME
+# This is a list of variable we want to be used in the log filename to
+# make it unique.
+[ "$TYPE"    ]     	&& LOGNAME=$LOGNAME.$TYPE
+[ "$NAME"   ]      	&& LOGNAME=$LOGNAME.$NAME
+[ "$DECOMPOSITION" ]	&& LOGNAME=$LOGNAME.$DECOMPOSITION
+[ "$STATISTIC" ]	&& LOGNAME=$LOGNAME.$STATISTIC
+[ "$METHOD" ]		&& LOGNAME=$LOGNAME.$METHOD 
+[ "$NETWORK" ]		&& LOGNAME=$LOGNAME.$NETWORK
+[ "$KIND"   ]      	&& LOGNAME=$LOGNAME.$KIND
+[ "$CLASS"   ]      	&& LOGNAME=$LOGNAME.$CLASS
+
+export LOGNAME
+
+export TMP_BASE=${TMP-/tmp}/`basename $0`.$LOGNAME$PREFIX
+echo >&2 "   $TMP_BASE.log"
+echo >&4 TMP_BASE=»$TMP_BASE«
+
+DISPLAY=
+
+# $MATLAB_NAME and $PREFIX are used by load_diag(). 
+
+cd `dirname $1`
+
+# By default, glibc errors are written to the terminal directly.  This
+# will send them to stderr. 
+export LIBC_FATAL_STDERR_=1
+
+export LOGFILE=$TMP_BASE.log
+
+$MATLAB -r $MATLAB_NAME -logfile $LOGFILE \
+     >$TMP_BASE.out 2>&1 <<EOF  ||
+EOF
+{ echo "*** error in $TMP_BASE.log"; exit 1; }
+
+# We have to use <<EOF or else Matlab will read its standard input and hang.
+
+# Matlab does not exit(!=0) on error but prints »???«. 
+grep -E '(\?\?\?|^\*\*\* )' $TMP_BASE.log && 
+{
+  echo "*** error in $TMP_BASE.log"
+  exit 1
+}
+
+echo >>$TMP_BASE.log '=== FINISHED ==='
+
+exit 0

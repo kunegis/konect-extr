@@ -1,0 +1,47 @@
+
+% version 1.9
+
+@all:  out.actor-collaboration meta.actor-collaboration out.actor-movie meta.actor-movie;
+
+actor.dat:
+{
+	wget http://www3.nd.edu/~networks/resources/actor/actor.dat.gz -O actor.dat.gz
+	gunzip actor.dat.gz
+	touch actor.dat
+}
+
+>out.actor-collaboration:  mkcollaboration <actor.dat
+{
+	echo '% sym positive'
+	./mkcollaboration | 
+	../mkuniq1
+}
+
+>out.actor-movie:  mkmovie <actor.dat
+{
+	echo '% bip unweighted'
+	./mkmovie | 
+	../mkuniq |
+	sort -n | uniq
+}
+
+@clean:
+{
+    rm -f actor.dat *.gz out.* 
+}
+
+@deploy:
+	konect/dat/actor/out.actor-collaboration 
+	konect/dat/actor/meta.actor-collaboration 
+	konect/dat/actor/out.actor-movie 
+	konect/dat/actor/meta.actor-movie;
+
+konect/dat/actor/$NAME:  $NAME !konect
+{
+	cp -b "$NAME" "konect/dat/actor/$NAME"
+}
+
+konect:  {
+	echo >&2 'Link konect/'
+	exit 1
+}

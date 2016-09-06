@@ -1,0 +1,11 @@
+category: Authorship
+code:PR
+name: Producers
+description: Producer–work association
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2 
+extr: dbpedia
+long-description: This is the bipartite producer network of DBpedia. Nodes are producers (persons) and their works. The edges correspond to the &lt;http://dbpedia.org/ontology/producer&gt; relationships in DBpedia. 
+tags: #regenerate
+entity-names:  producer, work
+relationship-names:  association

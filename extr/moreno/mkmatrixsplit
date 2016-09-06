@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#split at $1 lines, extract the first $2 matrices. input from $3; only output matrices starting from matrix# ($4)+1. if $5 is given each line is numbered with the number of the matrix where it came from.
+mstart=0
+[ "$4" ] && let mstart=$4
+let count=$2-1
+MATRIX="$(sed -re 's/  +/ /g' $3 | ./mkmatrix -a)"
+for i in $(seq $mstart $count)
+do
+ let start=1+$i*$1
+ PART=$(echo "$MATRIX" | tail -n+$start | head -n$1 )
+ arg=""
+ [ "$5" ] && arg="$i"
+ echo "$PART" | ./mkmatrixtolines -a $arg
+done  | sort -n -k1 -k2
+

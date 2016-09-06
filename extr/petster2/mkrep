@@ -1,0 +1,18 @@
+#! /bin/sh
+#
+# Convert list of names into list of all names.  In the input, each name
+# may contain multiple names separated by comma or the word "and".  The
+# output separates these into individual lines. 
+#
+
+sed -re '
+s,\s+, ,g
+s, and ,\
+,g
+s/,/\
+/g' | sed -re '
+s,\s+, ,g
+s,^\s*,,
+s,\s*$,,
+/^$/d
+'

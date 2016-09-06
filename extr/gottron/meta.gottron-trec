@@ -1,0 +1,10 @@
+category: Text
+code: TR
+name: TREC (disks 4–5)
+description: Document–word frequency
+url: http://www.nist.gov/tac/data/data_desc.html#TREC
+cite: trec45
+extr: gottron
+long-description: This is the bipartite network of 556,000 text documents from the Text Retrieval Conference's (TREC) Disks 4 and 5, containing 1.1 million words. Each edge represents one document-word inclusion. 
+entity-names: document,word
+relationship-names: inclusion

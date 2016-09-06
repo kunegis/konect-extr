@@ -1,0 +1,11 @@
+category: Hyperlink
+code: SF
+name: Stanford
+entity-names: webpage
+description: Webpage–webpage hyperlinks
+url: http://snap.stanford.edu/data/web-Stanford.html
+extr: snap
+long-description: This is the directed network of hyperlinks between the web pages from the website of the Stanford University.
+cite: konect:snap
+timeiso: 2002
+relationship-names: hyperlink

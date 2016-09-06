@@ -1,0 +1,63 @@
+#! /usr/bin/perl -w
+#
+# Extract the Wiki election data. 
+#
+# OUTPUT 
+#	out/out.elec
+#
+# INPUT 
+#	out/wikiElec.ElecBs3.txt
+#
+
+use strict; 
+use Date::Parse;
+
+open(IN, "<out/wikiElec.ElecBs3.txt") or die; 
+open(OUT, ">out/tmp.elec") or die;
+
+#print OUT "% asym signed\n"; 
+
+my $object = -1; 
+
+while (<IN>)
+{
+    if (/^U\s+([0-9]+)/)
+    {
+	$object = $1; 
+	next; 
+    }
+
+    if (/^V\s+(0|1|-1)\s+([0-9]+)\s+([^	]*)/)
+    {
+	my $subject = $2; 
+	my $timetext= $3;
+	my $weight = $1; 
+	next if ($weight == 0); 
+
+	my $date = str2time($timetext); 
+
+	# Some dates are bogus 
+	if (!defined($date))
+	{
+	    print STDERR "*** Warning:  date >>$timetext<< skipped\n"; 
+	    next
+	}
+
+	# Some dates are too far in the future (e.g. in 2096) 
+	if ($date > 2e9)
+	{
+	    print STDERR "*** Warning:  date >>$timetext<< skipped because it's in the future\n"; 
+	    next
+	}
+
+	if ($subject == $object)
+	{
+	    print STDERR "*** warning:  loop ($subject, $object) detected [not skipped]\n"; 
+	}
+
+	print OUT "$subject\t$object\t$weight\t$date\n"; 
+    }
+}
+
+close(IN) or die; 
+close(OUT) or die; 

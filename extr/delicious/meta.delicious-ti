@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Dti
+name: Delicious ti
+description: Tag–URL assignment
+url: http://dai-labor.de/IRML/datasets
+cite: wetzker:delicious-cookbook
+extr: delicious
+fullname: Delicious tag–URL
+long-description: This network contains tag–URL relations from http://delicious.com/. Left nodes represent tags, right nodes represent URLs and an edge shows that a URL was tagged with a tag.
+tags:  #incomplete
+entity-names: tag,url
+relationship-names: tagging

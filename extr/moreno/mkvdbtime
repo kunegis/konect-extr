@@ -1,0 +1,24 @@
+#!/bin/bash
+
+while read line
+do
+ p=$(echo $line|cut -d' ' -f1-3)
+ v=$(echo $line|cut -d' ' -f4)
+ echo -n "$p "
+ 
+ base=915145200
+ week=604800
+ if [ "$v" -lt "5" ]; then
+ #three weeks apart each
+	let v=$v-1
+	let offset=$v*3*$week
+	let x=$base+$offset
+ else
+ #six weeks apart each
+	let offset=3*3*$week
+	let v=$v-4
+	let offset=$offset+6*$v*$week
+	let x=$base+$offset
+ fi
+ echo "$x"
+done

@@ -1,0 +1,23 @@
+#! /bin/sh
+#
+# Generate the movie list.
+#
+# INPUT
+#	ml-data/u.item
+#
+# OUTPUT
+#	ent.movie
+#
+
+{
+    echo '%'
+    tail -n1 ml-data/u.item | sed -re 's,\|.*,,;s,^,% ,'
+    echo '% ent dat.title'
+
+     <ml-data/u.item recode l1..u8 | sed -re '
+	  s,^([0-9]+)\|([^|]+)\|.*$,\1|\2,
+          s,",\\",g
+	  s,^([0-9]+)\|([^|]+),\1 "\2",
+    '
+    
+} >ent.movie

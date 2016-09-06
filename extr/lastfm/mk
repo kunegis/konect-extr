@@ -1,0 +1,23 @@
+#! /usr/bin/perl -w
+#
+# Convert date to time. 
+#
+
+use strict;
+
+use Date::Parse; 
+
+while (<>)
+{
+    chomp; 
+
+    /^([^\t]*)\t([^\t]*)\t([^\t]*)/ or die; 
+
+    my $user = $1; 
+    my $time_string = $2;
+    my $name = $3; 
+
+    my $time = str2time($time_string); 
+
+    print "$user $name 1 $time\n"; 
+}

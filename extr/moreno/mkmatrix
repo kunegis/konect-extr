@@ -1,0 +1,12 @@
+#! /bin/sh
+#
+# Skip all lines until except those containing only 0 and 1, or any
+# number if -a is given. 
+#
+
+end='1'
+op=''
+
+[ "$1" = "-a" ] && end='-9' && op='+'
+
+sed -n -re '/^([0'$end']'$op'|\s+)+$/p'

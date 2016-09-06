@@ -1,0 +1,10 @@
+#! /bin/sh
+#
+# Extract last eigenvalues calculated.
+#
+# INPUT:  /tmp/matlab.log
+# OUTPUT: /tmp/save_diag
+#
+
+tail -n50 /tmp/matlab.log | tac |
+sed -e '/^Iteration/Q' >/tmp/save_diag

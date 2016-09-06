@@ -1,0 +1,12 @@
+
+Name:  Dolphins
+code:  DO
+url:   http://www-personal.umich.edu/~mejn/netdata/
+category:   Animal
+description:  Dolphin–dolphin associations
+cite:  konect:dolphins
+long-description:  This is a directed social network of bottlenose dolphins.  The nodes are the bottlenose dolphins (genus <i>Tursiops</i>) of a bottlenose dolphin community living off Doubtful Sound, a fjord in New Zealand (spelled <i>fiord</i> in New Zealand).  An edge indicates a frequent association.  The dolphins were observed between 1994 and 2001. 
+entity-names:  dolphin
+relationship-names:  association
+extr:  dolphins
+timeiso:  1994/2001

@@ -1,0 +1,11 @@
+long-description: This is the bipartite edit network of the Basque Wikipedia. It contains users and pages from the Basque Wikipedia, connected by edit events. Each edge represents an edit. The dataset includes the timestamp of each edit.
+name: Wikipedia (eu)
+extr: edit
+description: User–article edit
+url: http://dumps.wikimedia.org/
+category: Authorship
+cite: download.wikimedia.org
+code: eu
+tags: #regenerate
+entity-names:  user, article
+relationship-names:  edit

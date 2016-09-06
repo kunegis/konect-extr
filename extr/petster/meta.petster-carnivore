@@ -1,0 +1,14 @@
+name: Catster/Dogster
+code: Scd
+category: Social
+description: User–user familylinks/friendships
+extr: petster
+fullname: Catster/Dogster Familylinks/Friendships
+long-description: This Network contains familylinks between cats and cats, cats and dogs, as well as dogs and dogs from the social websites catster.com and dogster.com. Also included are cat-cat and dog-dog friendships.
+tags: #loop
+entity-names: user
+relationship-names: familylinks/friendships 
+n3-prefix-m: konect_petster_carnivore: <http://konect.uni-koblenz.de/networks/petster-carnivore/Member/> .
+n3-type-m: foaf:Person
+n3-edgedata-1: $m foaf:knows $n .
+n3-edgedata-2: $n foaf:knows $m .

@@ -1,0 +1,10 @@
+category: Animal 
+code: MR
+name: Rhesus
+description: Monkey–monkey grooming
+entity-names: monkey
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#rhesus
+long-description: This directed network contains observed grooming episodes between free ranging rhesus macaques (<i>Macaca mulatta</i>) in Cayo Santiago during a two month period in 1963.  Cayo Santiago is an island off the coast of Puerto Rico, also known as Isla de los monos (Island of the monkeys).  A node represents a monkey and a directed edge A → B denotes that the rhesus macaque A groomed rhesus macaque B.  The integer edge weights indicate how often this behaviour was observed.
+relationship-names: grooming
+cite: konect:sade

@@ -1,0 +1,133 @@
+#! /usr/bin/perl -w
+#
+# Make IDs unique for unipartite datasets. 
+#
+# Filter a graph dataset, making IDs unique.
+#
+# INPUT format:         ID_A  ID_B   REST OF LINE
+# OUTPUT:  the same with continuous IDs
+# 
+# Input IDs may be any string not containing spaces.
+# Output IDs are continuous integers beginning at 1.
+#
+# Arguments: 
+# ./mkuniq1ent [--+entitiy-output-file:entitiy-input-file:column_with_entity_id:column_with_data]
+# This argument may be given more than once to create multiple entity files. 
+#       entitiy-output-file: The name of the file where the entity data is written to
+#       entitiy-input-file: The corresponding entity data is read from this file
+#       column_with_entity_id: The column number where the entity name is located in <entitiy-input-file>. The first column has the index 0.
+#       column_with_data: The column number where the data is located in <entity-input-file>. The first column hast the index 0. 
+#
+# Input entity data is delimited by the character set in the environment var 'deli' 
+# Input IDs may be any string not containing spaces.
+# Output IDs are continuous integers beginning at 1.
+#
+# Example: 
+# cat dat | ./mkuniq1ent --+ent.name:names.txt:0:1 --+ent.age:names.txt:0:2
+# besides generation of unique IDs this will generate the entity files ent.name and ent.age, with values read from names.txt.
+
+die "mkuniq1ent: NOT READY YET";
+
+use strict;
+
+
+my $next_id= 1;
+my %new_ids = ();
+my %old_ids = ();
+
+my @entlookup=();
+my @entfiles=();
+my $limit=0;
+my $deli=$ENV{'deli'};
+my @args=split(' ',join(' ',@ARGV)); #weird, but wont work without
+foreach my $entity (@args)
+{
+        my $lookup={};
+        my @x=split(':',$entity);
+        $x[0] =~ s/^\s+//;
+        open FILE , '<', $x[1] or die;
+        while (<FILE>)
+        {
+                chomp;
+                my @line=split($deli,$_);
+                $lookup->{$line[$x[2]]} = $line[$x[3]];
+        }
+        close(FILE);
+        push(@entlookup,$lookup);
+        my $f;
+        open $f , '>', $x[0] or die;
+        print $f "% \n";
+        push(@entfiles,$f);
+}
+
+
+
+sub entity_id
+{
+    my $id_old = shift; 
+
+    my $id_new = $new_ids{$id_old};
+    if (! exists $new_ids{$id_old}) {
+	$id_new = $next_id;
+	$new_ids{$id_old} = $id_new;
+	$old_ids{$id_new} = $id_old;
+
+	if ($write_entities)
+	{
+	    my $esc = $id_old;
+	    $esc =~ s,\\,\\\\,g; 
+	    $esc =~ s,",\\",g;
+	    print ENT "$id_new \"$esc\"\n"; 
+	}
+
+	++ $next_id;
+    }
+    my $id_new_string = "" . $id_new;
+
+    return $id_new_string; 
+}
+
+while (<STDIN>) {
+
+    chomp; 
+
+    if (/^%/)
+    {
+	print "$_\n";
+	next; 
+    }
+
+    /\s*(\S+)\s+(\S+)(\s+.*|)/
+	or die "*** error:  invalid input:  >>$_<<";
+    
+    my $id_user_old = "" . $1;
+    my $id_item_old = "" . $2;
+    my $rating = "" . $3;
+
+    my $id_user_new_string = entity_id($id_user_old); 
+
+    my $id_item_new_string = entity_id($id_item_old); 
+
+    print "$id_user_new_string $id_item_new_string$rating\n";
+    addent($id_user_old,$id_user_new)
+}
+
+foreach my $f (@entfiles)
+        {close($f);}
+# The output is written to STDOUT 
+#
+# Arguments: 
+# ./mkuniq1ent [--+entitiy-output-file:entitiy-input-file:column_with_entity_id:column_with_data]
+# This argument may be given more than once to create multiple entity files. 
+# 	entitiy-output-file: The name of the file where the entity data is written to
+#	entitiy-input-file: The corresponding entity data is read from this file
+#	column_with_entity_id: The column number where the entity name is located in <entitiy-input-file>. The first column has the index 0.
+#	column_with_data: The column number where the data is located in <entity-input-file>. The first column hast the index 0. 
+#
+# Input entity data is delimited by the character set in the environment var 'deli' 
+# Input IDs may be any string not containing spaces.
+# Output IDs are continuous integers beginning at 1.
+#
+# Example: 
+#	cat dat | ./mkuniq1ent --+ent.name:names.txt:0:1 --+ent.age:names.txt:0:2
+#	besides generation of unique IDs this will generate the entity files ent.name and ent.age, with values read from names.txt. 

@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# Filter for cleaning up the Hometown/Home files.
+# 
+# Read and write STDIN and STDOUT, normalizing content.  This does not
+# fix encoding errors;  encoding errors must be already fixed in the
+# input. 
+#
+
+sed -re '
+s,&nbsp;,\,,g
+s,\s+, ,g
+'
+

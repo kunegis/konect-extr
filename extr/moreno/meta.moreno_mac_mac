@@ -1,0 +1,10 @@
+category: Animal
+code: MQ
+name: Macaques
+description: Animal–animal dominances
+entity-names: macaque
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#mac
+long-description: This directed network contains dominance behaviour in a colony of 62 adult female Japanese macaques (<i>Macaca fuscata fuscata</i>).  A node represents a macaque and a directed edge A → B represents dominance of macaque A over macaque B.
+relationship-names: dominance
+cite: konect:takahata1991

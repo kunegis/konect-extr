@@ -1,0 +1,29 @@
+#! /usr/bin/perl -w
+#
+# Change timestamp to UNIX timestamp
+#
+
+use strict;
+use Date::Parse;
+
+binmode(STDOUT, ":utf8");
+
+print "% asym positive\n";
+
+while (<>) 
+{
+    if (/^%/)
+    {
+	print $_;
+	next; 
+    }
+
+    /\s*(\S+)\s+(\S+)\s+(.*)/ 
+	or die "*** error:  invalid input:  $_";
+    
+    my $id_user_one = "" . $1;
+    my $id_user_two = "" . $2;
+    my $timestamp = "" . $3;
+
+    print "$id_user_one $id_user_two 1 " . str2time($timestamp) . "\n";
+}

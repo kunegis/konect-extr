@@ -1,0 +1,9 @@
+#!/bin/bash
+
+find . -iname 'meta.*' | xargs grep '^time:' | cut -d':' -f1 | while read line
+do
+ cp "$line" backup_timedrop/
+ echo -n "Altering $line"
+ sed -i '/^[tT]ime:/d' "$line"
+ echo "   [DONE]"
+done

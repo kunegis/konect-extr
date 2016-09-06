@@ -1,0 +1,135 @@
+#! /usr/bin/perl -w
+#
+# Generate the user-item relation file. 
+#
+# ENVIRONMENT
+#	$VERSION	Data directory
+#
+# INPUT
+#	$VERSION/tas		Tag assignments
+#	$VERSION/bookmark	Bookmarks
+#
+# OUTPUT
+# 	out.bibsonomy-2ui	Output
+#
+
+use strict; 
+use Time::Local;
+
+my $VERSION = $ENV{"VERSION"}; 
+my $item_entval = "";
+open(BOOKMARK, "<$VERSION/bookmark");
+
+my %bookmarks = (); 
+
+while (<BOOKMARK>)
+{
+    /^([0-9]+)\s+([0-9a-z]+)\s+([^\s]+)/
+	or next; 
+
+    my $content_id = "" . $1;
+    my $url 	   = "" . $3;
+    $bookmarks{$content_id} = $url; 
+}
+
+close(BOOKMARK) or die "Closing $VERSION/bookmark:  $!"; 
+
+open(TAS, "<$VERSION/tas");
+
+open(UT,  ">out.bibsonomy-2ut"); 
+open(UI,  ">out.bibsonomy-2ui"); 
+open(TI,  ">out.bibsonomy-2ti"); 
+
+#open(UTU, ">ent.bibsonomy-2ut.user.name");
+open(UTT, ">ent.bibsonomy-2ut.tag.name");
+#open(UIU, ">ent.bibsonomy-2ui.user.name");
+open(UII, ">ent.bibsonomy-2ui.item.name");
+open(TIT, ">ent.bibsonomy-2ti.tag.name");
+open(TII, ">ent.bibsonomy-2ti.item.name");
+
+print UT "% bip positive\n";
+print UI "% bip positive\n";
+print TI "% bip positive\n";
+
+my %users = (); 
+my $users_next_id = 1; 
+
+my %tags = ();
+my $tags_next_id = 1; 
+
+my %items = (); 
+my $items_next_id = 1; 
+
+while (<TAS>)
+{
+    /^([0-9]+)\t(\S+)\t([0-9]+)\t([12])\t([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).*$/ 
+	|| die "Invalid TAS input line:  $_"; 
+
+    my $user = $1;
+    my $tag = $2; 
+    my $content_id = $3;
+    my $content_type = $4;
+
+    my $date = timelocal($10,$9,$8,$7,$6-1,$5);
+
+    # User 
+    if (! exists $users{$user})
+    {
+	$users{$user} = $users_next_id++;
+    }
+    my $user_id = $users{$user}; 
+
+    # Tag
+    if (! exists $tags{$tag})
+    {
+	$tags{$tag} = $tags_next_id++; 
+	print UTT "$tag\n";
+	print TIT "$tag\n";
+    }
+    my $tag_id = $tags{$tag}; 
+
+    # Item 
+    my $item_string;
+
+    if ($content_type == 1) # bookmark
+    {
+	$item_string = "bookmark_$bookmarks{$content_id}"; 
+	$item_entval = "bookmark:$content_id";
+    }
+    elsif ($content_type == 2) # bibtex
+    {
+	$item_string = "bibtex_$content_id";
+	$item_entval = "bibtex:$content_id";
+    }
+    else
+    {
+	die "Invalid content type:  $content_type"; 
+    }
+
+    my $item_id;
+    if (exists $items{$item_string})
+    {
+	$item_id = $items{$item_string};
+    }
+    else
+    {
+	$item_id = $items{$item_string} = $items_next_id; 
+	++ $items_next_id; 
+	print UII "$item_entval\n";
+	print TII "$item_entval\n";
+    }
+
+    print UT "$user_id $tag_id 1 $date\n";
+    print UI "$user_id $item_id 1 $date\n"; 
+    print TI "$tag_id $item_id 1 $date\n"; 
+}
+
+close(TAS) or die "Closing $VERSION/tas:  $!";
+
+close(UT)  or die "Closing out.bibsonomy-2ut:  $!"; 
+close(UI)  or die "Closing out.bibsonomy-2ui:  $!"; 
+close(TI)  or die "Closing out.bibsonomy-2ti:  $!"; 
+
+close(UTT);
+close(UII);
+close(TIT); close(TII);

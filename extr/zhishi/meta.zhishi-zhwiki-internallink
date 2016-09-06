@@ -1,0 +1,12 @@
+name: Wikipedia, chinese
+code: ZHi
+url: http://zhishi.me/
+category: Hyperlink
+fullname: Chinese Wikipedia internal links
+description: Article–article link
+long-description: This is the directed network of hyperlinks between the articles of Wikipedia in Chinese (http://zh.wikipedia.org/). 
+entity-names: article, article
+extr: zhishi
+cite: konect:zhishi
+tags: #loop
+relationship-names: hyperlinks 

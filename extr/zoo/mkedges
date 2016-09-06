@@ -1,0 +1,51 @@
+#! /usr/bin/perl -w
+#
+# Generate the LGL edge input file in .lgl format.
+#
+# Input:  out.matrix
+# Output: out.edges.lgl
+#
+# Rules for the output file:
+#   - Each edge must be present just once.  We only include edges (i, j)
+#     with i < j. 
+#   - Edge weights are ignored. 
+#
+
+use strict; 
+
+my $edge_pos = "0.0 1.0 0.0";
+my $edge_neg = "1.0 0.0 0.0"; 
+
+open(OUT_MATRIX, "<out.matrix") or die; 
+
+# Maps from ID to hash of bigger destinations to edge weight.  
+my %edges= ();
+
+while (<OUT_MATRIX>)
+{
+    /([0-9]+) ([0-9]+) (.*)/;
+
+    my $a = $1 < $2 ? $1 : $2;
+    my $b = $1 < $2 ? $2 : $1; 
+
+    $edges{$a} = {} unless $edges{$a};
+    $edges{$a}{$b} = $3;
+}
+
+close(OUT_MATRIX)      or die;
+
+
+open(OUT_EDGES, ">out.edges.lgl")         or die;
+open(OUT_EDGE_COLORS, ">out.edge.colors") or die;
+
+while ((my $a, my $bs) = each(%edges)) {
+    print OUT_EDGES "# " . $a . "\n";
+    while ((my $b, my $w) = each(%$bs)) {
+	print OUT_EDGES $b . "\n";
+	print OUT_EDGE_COLORS $a . " " . $b . " " .
+	    ($w > 0 ? $edge_pos : $edge_neg) . "\n";
+    }
+}
+
+close(OUT_EDGES)       or die;
+close(OUT_EDGE_COLORS) or die; 

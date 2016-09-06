@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# Generate config.hh (on stdout)
+#
+
+user_count="`tail -n 1 out.userids | sed -e 's, .*,,'`"
+
+
+echo \#ifndef CONFIG_HH
+echo \#define CONFIG_HH
+
+echo \#define USER_COUNT   $user_count
+
+echo '#endif /* ! CONFIG_HH */'

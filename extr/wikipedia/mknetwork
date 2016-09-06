@@ -1,0 +1,147 @@
+UNUSED -- use mkwiki
+
+#! /usr/bin/perl -w
+# 
+# Create a dataset.  If the given languages are equal, create the
+# intrawiki dataset.  If they are different, create the interwiki
+# dataset. 
+#
+# INVOCATION
+#	$1, $2:		The two languages
+#
+# INPUT 
+#	page_$LANG1.sql.filtered 
+#	page_$LANG2.sql.filtered 
+#	langlinks_$LANG1.sql.filtered
+#
+
+use strict;
+use warnings;
+
+use DB_File;
+use MIME::Base64;
+
+# The KONECT-ID of articles, by Wikipedia-Article-Number and
+# Wikipedia-Article-Name, respectively.  Keys are base64-encoded. 
+my %numbers=();
+my %names=();
+
+sub readNumbers {
+    my $index= 1;
+    my $filename= shift(@_);
+    open F_NAME_IN,"<$filename" or die "$!";
+    while (my $line= <F_NAME_IN>) {
+	if ($line =~ /^INSERT INTO/) {
+	    while ($line =~ /\((\d+),\d+,'([^']+)'[^)]*\)/g) {
+		$numbers{encode_base64($1,'')}= $index;
+		$index++;
+	    }
+	}
+    }
+    close F_NAME_IN or die "$!";
+}
+
+sub readNames {
+    my $index=1;
+    my $filename=shift(@_);
+    open F_NAME_IN,"<$filename" or die "$!";
+    while (my $line= <F_NAME_IN>) {
+	if ($line =~ /^INSERT INTO/) {
+	    while ($line =~ /\((\d+),\d+,'([^']+)'[^)]*\)/g) {
+		$names{encode_base64($2,'')}= $index;
+		$index++;
+	    }
+	}
+    }
+    close F_NAME_IN or die "$!";
+}
+
+sub readNamesAndNumbers{
+    my $index= 1;
+    my $filename= shift(@_);
+    open F_NAME_IN,"<$filename" or die "$!";
+    while (my $line= <F_NAME_IN>) {
+	if ($line =~ /^INSERT INTO/) {
+	    while ($line =~ /\((\d+),\d+,'([^']+)'[^)]*\)/g) {
+		$numbers{encode_base64($1,'')}=$index;
+		$names{encode_base64($2,'')}=$index;
+		$index++;
+	    }
+	}
+    }
+    close F_NAME_IN or die "$!";
+}
+
+my $argcount= $#ARGV;
+
+if ($argcount != 1) {
+    die "usage: ./mknetwork.pl lang1 lang2";
+}
+
+my $lang1= $ARGV[0];
+my $lang2= $ARGV[1];
+
+print "Creating hashtable\n";
+
+if ($lang1 eq $lang2) {
+    readNamesAndNumbers("page_$lang1.sql.filtered");
+    open F_OUT, ">out.wikipedia_link_$lang1" or die "$!";
+    open F_IN, "<pagelinks_$lang1.sql.filtered" or die "$!";
+    print F_OUT "% asym positive\n";
+} else {
+    readNumbers("page_$lang1.sql.filtered");
+    readNames("page_$lang2.sql.filtered");
+    open F_OUT,">out.wikipedia_link_$lang1"."_$lang2" or die "$!";
+    open F_IN,"<langlinks_$lang1.sql.filtered" or die "$!";
+    print F_OUT "% bip positive\n";
+}
+
+print "Streaming data\n";
+
+my $offset= 0;
+my $tail= "";
+my ($data, $n, $started);
+
+# Read file in parts, because some are too huge to keep in memory
+# completely 
+while (($n = read F_IN, $data, 100000000, $offset) != 0) {
+    unless ($started) {
+	$data=~s/.*?INSERT INTO `[^`]*` VALUES( ,)?//s;
+	$started=1;
+    }
+    $data=$data.$tail;
+    unless ($data=~/\)$/s) {
+	$data=~/(\([^\)]*)$/s;
+	$tail=$1;
+    } else {$tail="";}
+
+    if ($lang1 eq $lang2) {
+	while ($data =~ /\((\d+),\d+,'([^']*)'[^)]*\)/sg) {
+	    my $num_id = $numbers{encode_base64($1,'')};
+	    my $name_id= $names{encode_base64($2,'')};
+	    if (! defined $numbers{encode_base64($1,'')}) {
+		die "numbers $1 is NOT defined\n";
+	    }
+	    if (! defined $names{encode_base64($2,'')}) {
+		die "name '$2' with key ".encode_base64($2,'')." is invalid";
+	    }
+	    if (! defined $names{encode_base64($2,'')}) {
+		die encode_base64($2,'');
+	    }
+	    if (defined $numbers{encode_base64($1,'')} && defined $names{encode_base64($2,'')}) {
+		print F_OUT $numbers{encode_base64($1,'')}." ".$names{encode_base64($2,'')}."\n";
+	    }
+	}
+    } else {
+	while($data=~/\((\d+),'$lang2','([^']*)'\)/sg){
+	    my $num_id=$numbers{encode_base64($1,'')};
+	    my $name_id=$names{encode_base64($2,'')};
+	    if (defined $numbers{encode_base64($1,'')} &&  defined $names{encode_base64($2,'')}) {
+		print F_OUT "$num_id $name_id\n";
+	    }
+	}
+    }
+}
+
+close F_IN or die "$!";
+close F_OUT or die "$!";

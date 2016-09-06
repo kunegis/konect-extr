@@ -1,0 +1,19 @@
+% version 1.9
+
+@all:  out.contiguous-usa meta.contiguous-usa;
+
+out.contiguous-usa:  contiguous-usa.dat
+{
+	{ echo '% sym unweighted' ; echo '% ' ; <contiguous-usa.dat ../mkuniq1 ; } >out.contiguous-usa
+}
+
+contiguous-usa.dat:
+{
+	wget http://www-cs-faculty.stanford.edu/~uno/contiguous-usa.dat -O contiguous-usa.dat
+	touch contiguous-usa.dat
+}
+
+@clean:
+{
+	rm -f out.contiguous-usa contiguous-usa.dat
+}

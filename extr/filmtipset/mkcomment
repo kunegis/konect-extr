@@ -1,0 +1,32 @@
+#! /usr/bin/perl -w
+#
+# Create the comments file.
+#
+# INPUT
+#	filmtipset/comments.txt
+#
+# OUTPUT
+#	rel.comment	Comment relationships, with original non-continuous IDs
+#
+
+use strict; 
+use Date::Parse;
+
+open(COMMENTS, "<filmtipset/comments.txt") or die; 
+open(REL, ">rel.comment") or die;
+
+print REL "% bip positive\n"; 
+
+while (<COMMENTS>)
+{
+    my ($user, $object, $date) = 
+	/Member:([0-9]+). Object:([0-9]+). Date:(.*)/
+	or die "Syntax error:  $_"; 
+
+    my $time = str2time($date);
+
+    print REL "$user $object 1 $time\n"; 
+}
+
+close(COMMENTS) or die; 
+close(REL) or die; 

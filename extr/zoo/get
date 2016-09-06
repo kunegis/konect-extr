@@ -1,0 +1,126 @@
+#! /bin/sh
+#
+# Extract zoo corpus from slashdot
+#
+# Names skipped:  - containing a slash.
+#
+
+SITE=${SITE-http://slashdot.org/}
+ZOO=${ZOO-~/zoodir}
+USER_INIT=${USER_INIT-CmdrTaco}
+SLEEP=${SLEEP-11s} # don't do more than 1000 a day, according to FAQ.
+TMP_BASE=${TMP-/tmp}/`basename $0`
+
+exec 3>&1
+
+
+doo()
+{
+    "$@" || error $0
+}
+
+error() 
+{
+    echo >&2 '***' $1
+    exit 1
+}
+
+# read out environment from files.
+init_env()
+{
+    sleep_value="`cat sleep`"
+    [ "$sleep_value" ] && SLEEP="$sleep_value"
+    wget_args="`cat wget_args`"
+    export http_proxy="`./getproxy`"
+    agent="`./getagent`"
+
+    echo >&3 http_proxy=$http_proxy
+    echo >&3 agent=$agent
+    echo >&3 wget_args=$wget_args
+}
+
+
+# Get one page
+#
+# Parameters:
+#   $1 Shakrai                the username
+#   $2 friends                the relationship name, one of friends/fans/freaks/foes.
+#   $3 FILENAME               output file
+#
+# Output the user list, one per line.
+#
+get_one()
+{
+
+    echo >&3 Retrieving $2 of $1
+
+    while :;
+    do
+
+	init_env
+	wget $wget_args -U "$agent"  $WGET_OPTIONS  "$SITE~$1/$2/" -O $TMP_BASE.dump && {
+	fgrep -q '<link rel="alternate" title="Slashdot RSS" href="http://rss.slashdot.org/Slashdot/slashdot" type="application/rss+xml">' $TMP_BASE.dump && break
+	}
+	echo >&2 '*** wget error'
+        echo >&3 -n sleep $SLEEP...
+	sleep $SLEEP
+	echo >&3
+
+    done
+
+    <$TMP_BASE.dump >"$3" doo sed -e '
+/href="\/\/slashdot.org\/~[^/ ]*\/friends\/">friends<\/a>&nbsp;/!d
+
+s,^.*org\/~\([^/ ]*\)\/.*$,\1,
+
+# for user Da+w00t, the slashdot seems to return a friend with an empty name. 
+/^$/d
+' 
+
+    echo Found "`<"$3" wc -l`" $rel:
+    echo `cat "$3"`
+
+    echo >&3 -n sleep $SLEEP...
+    sleep $SLEEP
+    echo >&3
+}
+
+mkdir -p $ZOO
+[ -r $ZOO/list ] || echo $USER_INIT >>$ZOO/list
+
+while [ -s $ZOO/list ]
+do
+  name="`sed 1q <$ZOO/list`"
+
+  echo "name=$name"
+
+
+  DIR="$ZOO/user.$name"
+  DIRTMP="$ZOO/tmp"
+  rm -rf $DIRTMP
+
+  [ -d "$DIR" ] ||
+  expr >/dev/null "$name" : '.*%2F' || # ignore names with slashes
+  {
+      mkdir "$DIRTMP"
+  
+      for rel in friends foes fans freaks
+      do
+	get_one "$name" $rel "$DIRTMP/$rel"
+      done
+
+      cat "$DIRTMP"/f* |
+      while read line 
+      do
+	[ -d "$ZOO/user.$line" ] ||
+	echo "$line" >>$ZOO/list
+      done
+
+      mv "$DIRTMP" "$DIR"
+  }
+
+  sed 1d <$ZOO/list >$TMP_BASE.list
+  cp $TMP_BASE.list $ZOO/list
+done
+
+echo Finished with empty list.

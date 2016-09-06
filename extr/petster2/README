@@ -1,0 +1,7 @@
+
+== Sex ==
+
+In all code, sex is represented as an integer:  male = 1, female =
+2. (arbitrary choice).  (A sex of zero means unknown.  Happens only for
+dogs.) 
+

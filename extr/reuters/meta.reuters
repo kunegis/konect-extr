@@ -1,0 +1,11 @@
+category: Text
+code: RE
+name: Reuters
+description: Story–word frequency
+url: http://trec.nist.gov/data/reuters/reuters.html
+cite: konect:lewis04 
+extr: reuters
+long-description: This is the bipartite network of story–word inclusions in documents that appeared in Reuters news stories collected in the Reuters Corpus, Volume 1 (RCV1). Left nodes represent stories; right nodes represent words. An edge represents a story–word inclusion.
+entity-names: story,word
+relationship-names: inclusion
+

@@ -1,0 +1,44 @@
+#! /usr/bin/perl -w
+#
+# Extract the tag-item network from Twitter.
+#
+# INPUT:  Each line contains a tweet, beginning with the username that
+# wrote the tweet, whitespace, and then the tweet including @usernames.
+#
+# OUTPUT:  The relationship file containing bipartite edges between tags
+# and items.  
+#
+
+use strict; 
+
+use Date::Parse; 
+
+my $prefix_tag = "#"; 
+my $prefix_item = "http:"; 
+
+while (<STDIN>)
+{
+    /^(\S+)\t([^\t]+)\t(.*)$/ or 
+	die "Invalid input:  $_"; 
+
+    my $username_from = $1;
+    my $timeString = $2;
+    my $text = $3; 
+
+    my $time = str2time($timeString); 
+
+    my @tags = (); 
+
+    while ($text =~ /($prefix_tag\S+)/g)
+    {
+	push(@tags, $1); 
+    }
+
+    while ($text =~ /($prefix_item\S+)/g)
+    {
+	foreach my $tag (@tags)
+	{
+	    print "$tag $1 1 $time\n"; 
+	}
+    }
+}

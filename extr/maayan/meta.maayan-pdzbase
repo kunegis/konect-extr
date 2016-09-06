@@ -1,0 +1,12 @@
+
+name:  PDZBase
+code:  MP
+url:   http://research.mssm.edu/maayan/datasets/qualitative_networks.shtml
+category:  Metabolic 
+description:  Protein–protein interactions
+cite:  konect:pdzbase
+long-description:  This is a network of protein–protein interactions from PDZBase. 
+entity-names:  protein
+relationship-names:  interaction
+extr:  maayan
+tags:  #loop 

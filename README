@@ -1,0 +1,86 @@
+KONECT Extraction
+=================
+
+This collection of network extraction tools is part of the KONECT
+project: http://konect.uni-koblenz.de
+
+In each subdirectory of extr/ you can find code to extract one group of
+datasets, usually from one source, and generate a TSV file from it.
+
+If you are looking for the code for a specific network, you can find
+the name of the subirectory in the field "extr" of the metafile,
+which comes with the TSV files you can download from our network pages.
+
+Please note that not every network has the extraction code publically
+available.  This is only the code we can make available.  Also, many
+datasets have been extracted so long ago that we don't have the code
+anymore.  Also, some datasets have been contributed by people that
+didn't give us their code.  (If you contribute a dataset to KONECT, the
+best is to give us a self-contained directory that uses Stu to generate
+the dataset in the correct format.)
+
+Keep in mind that most code in here WAS EXECUTED JUST ONCE.  The code is
+of corresponding quality.  We provide the code for the purpose of full
+disclosure -- not in order to deliver a full-features extraction
+library. 
+
+Some directories here also contain code for analysing the datasets,
+which has been used in a few papers.  
+
+
+Usage
+=====
+
+To build the datasets, execute "make" or "stu" inside each subdirectory
+of extr/.  The code downloads the datasets from their online sources and
+converts them to the KONECT format. 
+
+
+Requirements
+============
+
+You may need to install the following additional software packages:
+    - Stu
+    - unzip
+    - aria2
+    - tofrodos (providing fromdos/todos)
+    - Perl 
+
+License
+=======
+
+The extraction code is distributed under the terms of the GNU General
+Public License, which you can find provided in the file COPYING.
+
+
+Stu
+===
+
+We're converting the directories to Stu.  
+
+Stu targets:
+
+default target:  generate all data.
+
+@deploy:  copy over to konect/.  These copy the relevant files into
+konect/dat/, but usually don't create the symlinks in uni/.
+
+
+Conversion
+==========
+
+Most code in the directories is broken, because it was last executed a
+long time ago, and many things have changed in the time.  In particular:
+
+- The URL from which KONECT gets the data is not available anymore
+- Scripts have been moved to sh/, but uses of it have not been updated
+- Extraction directories are now all under extr/, but code has not been
+  changed.
+- Some code is really old and was written long before I learned proper
+  practices for writing shell scripts, etc.
+
+Also, some directories use Stu and older ones Make.
+
+If you need help, please politely ask Jérôme Kunegis <gmail.com> and he
+may update the code to work.  (Up to websites that have disappeared.)
+

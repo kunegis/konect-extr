@@ -1,0 +1,116 @@
+#! /bin/sh
+#
+# Generate list of dependencies.
+#
+# INVOCATION
+#	$1	Name of source directory
+#
+
+SRC="$1"
+
+[ -d "$SRC" ] || {
+    echo >&2 "*** No source directory given"
+    exit 1
+}
+
+cd "$SRC"
+
+TMPFILE=${TMP:-/tmp}/mkall.$$
+
+find . -name "*.[ch]" | 
+while read file
+do
+    echo "$file --"
+
+    dirn="$(dirname "$file")"
+
+    {
+	<"$file" sed -re 's,^\s*#\s*include\s+"([^"]*\.[ch])".*,\1,;t;d'
+	<"$file" sed -re 's,^\s*#\s*include\s+<([^>]*\.[ch])>.*,\1,;t;d' 
+    } |
+    while read dep
+    do 
+	if [ "$dep" = linux/version.h ] ; then
+	    file_dep=""
+	elif echo "$dep" | grep -Eq '^(sys|netinet|elfutils)/' ; then
+	    file_dep=""
+	elif echo "$dep" | grep -Eq '^(endian|features|machine/endian).h$' ; then
+	    file_dep=""
+	elif [ -r "$dirn/$dep" ] ; then
+	    file_dep="$dirn/$dep"
+	elif [ -r "$dirn/include/$dep" ] ; then
+	    file_dep="$dirn/include/$dep"
+	elif [ -r "$dirn/core/include/$dep" ] ; then
+	    file_dep="$dirn/core/include/$dep"
+	elif [ -r "$dirn/../$dep" ] ; then
+	    file_dep="$dirn/../$dep"
+	elif [ -r "$dirn/../include/$dep" ] ; then
+	    file_dep="$dirn/../include/$dep"
+	elif [ -r "$dirn/../lib/$dep" ] ; then
+	    file_dep="$dirn/../lib/$dep"
+	elif [ -r "$dirn/../util/$dep" ] ; then
+	    file_dep="$dirn/../util/$dep"
+	elif [ -r "$dirn/../core/include/$dep" ] ; then
+	    file_dep="$dirn/../core/include/$dep"
+	elif [ -r "$dirn/../common-spar/include/$dep" ] ; then
+	    file_dep="$dirn/../common-spar/include/$dep"
+	elif [ -r "$dirn/../../$dep" ] ; then
+	    file_dep="$dirn/../../$dep"
+	elif [ -r "$dirn/../../include/$dep" ] ; then
+	    file_dep="$dirn/../../include/$dep"
+	elif [ -r "$dirn/../../lib/$dep" ] ; then
+	    file_dep="$dirn/../../lib/$dep"
+	elif [ -r "$dirn/../../../$dep" ] ; then
+	    file_dep="$dirn/../../../$dep"
+	elif [ -r "$dirn/../../../include/$dep" ] ; then
+	    file_dep="$dirn/../../../include/$dep"
+	elif [ -r "$dirn/../../../util/$dep" ] ; then
+	    file_dep="$dirn/../../../util/$dep"
+	elif [ -r "$dirn/../../../scsi/fnic/$dep" ] ; then
+	    file_dep="$dirn/../../../scsi/fnic/$dep"
+	elif [ -r "./include/$dep" ] ; then
+	    file_dep="./include/$dep"
+	elif [ -r "./$dep" ] ; then
+	    file_dep="./$dep"
+	elif [ -r "./tools/include/$dep" ] ; then
+	    file_dep="./tools/include/$dep"
+	elif [ -r "./tools/lib/$dep" ] ; then
+	    file_dep="./tools/lib/$dep"
+	elif [ -r "./drivers/vhost/$dep" ] ; then
+	    file_dep="./drivers/vhost/$dep"
+	else
+	    dep_base="$(basename $dep)"
+	    dep_san="$(echo $dep_base | sed -re 's,\.,_,g;s,-,_,g')"
+	    eval found=\$var_$dep_san
+	    if [ "$found" ] ; then
+		eval file_dep=\$val_$dep_san
+	    else 
+		filtered_dep="$(echo "./$dep" | ../filter)"
+		filtered_dep2="$(echo "$dirn/$dep" | ../filter)"
+		if grep -qE "^$filtered_dep\$" ../filtered-files ; then
+		    file_dep="./$dep"
+		elif grep -qE "^$filtered_dep2\$" ../filtered-files ; then
+		    file_dep="$dirn/$dep"
+		else
+		    find . -name "$dep_base" >$TMPFILE
+		    linecount="$(<"$TMPFILE" ../filter | sort -u | wc -l | cut -f 1 -d ' ')"
+		    if [ "$linecount" = 0 ] ; then
+			file_dep=""
+		    elif [ "$linecount" = 1 ] ; then
+			file_dep="$(head -1 "$TMPFILE")"
+		    else
+			echo >&2 "*** #include <\"$dep\"> not found in $file"
+			echo >&2 "    filtered_dep=«$filtered_dep»"
+			exit 1 
+		    fi
+		fi
+		eval var_$dep_san=1
+		eval val_$dep_san=\$file_dep
+	    fi
+	fi
+	    
+        if [ "$file_dep" ] ; then
+	    echo "$file" "$file_dep"
+        fi
+    done
+done 

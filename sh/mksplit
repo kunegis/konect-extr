@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $deli=$ENV{'data_deli'};
+my $skipf=$ENV{'skip_first'};
+my $locked=0;
+my $deli_out=' ';
+my $pattern=0;
+my $pattern4='(".*?"|\S+)'.$deli.'(".*?"|\S+)'.$deli.'(".*?"|\S+)'.$deli.'(".*?"|\S+)';
+my $pattern3='(".*?"|\S+)'.$deli.'(".*?"|\S+)'.$deli.'(".*?"|\S+)';
+my $pattern2='(".*?"|\S+)'.$deli.'(".*?"|\S+)';
+
+my $l=<STDIN>;
+my $txt='';
+if($l =~ /^$pattern4$/)
+{
+ $txt= "$1$deli_out$2$deli_out$3$deli_out$4\n";
+ $pattern=4;
+}elsif($l =~ /^$pattern3$/){
+ $pattern=3;
+ $txt="$1$deli_out$2$deli_out$3\n";
+}else{
+ $pattern=2;
+ $txt="$1$deli_out$2\n";
+}
+if(!$skipf)
+ {print $txt;}
+#$pattern=4;
+while(<STDIN>)
+{
+chomp;
+print STDERR "RAW:$_\n";
+if($pattern == 4)
+{
+/^$pattern4$/ or die;
+print "$1$deli_out$2$deli_out$3$deli_out$4\n";
+}elsif($pattern == 3){
+/^$pattern3$/ or die;
+print "$1$deli_out$2$deli_out$3\n";
+}else{
+/^$pattern2$/ or die;
+print "$1$deli_out$2\n";
+}
+}

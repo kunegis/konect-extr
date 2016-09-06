@@ -1,0 +1,16 @@
+#! /usr/bin/perl
+
+use Time::ParseDate;
+use Time::Local;
+use strict;
+
+while(<STDIN>)
+{
+    chomp;
+    my @l=split('	',$_);
+    my $t= parsedate($l[2],{'PREFER_PAST'=>1, 'FUZZY'=>1});
+    if (not defined $t) {
+	next;  
+    }
+    print $l[0]." ".$l[1]." ".$l[5]." ".$t."\n";
+}

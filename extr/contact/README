@@ -1,0 +1,95 @@
+(This if from Ben's email.)
+
+Hi Jerome,
+
+Please find the attached data set from one experiment. We have
+conducted serveral experiments.
+
+You can find the description of our data in the following two papers
+
+Impact of Human Mobility on Opportunistic Forwarding Algorithms
+Augustin Chaintreau, Pan Hui, Jon Crowcroft, Christophe Diot, Richard
+Gass, and James Scott
+IEEE Transactions on Mobile Computing, Volume 6, Issue 6 (June 2007)
+
+BUBBLE Rap: Social-based Forwarding in Delay Tolerant Networks
+Pan Hui, Jon Crowcroft and Eiko Yoneki
+In proceeding on the 9th ACM International Symposium on Mobile Ad Hoc
+Networking and Computing (MobiHoc), HongKong, May, 2008.
+
+I also working on social network and spaming protection. we can
+arrange further meetings if you are interested in discussion.
+
+cheers
+Ben
+
+
+
+
+
+"contacts.Exp3.dat"
+is a file which describes the contact that were recorded by all
+devices we distributed during this experiment.
+
+========================
+Examples taken from table.Exp3.dat (two first columns and first rows)
+========================
+1       8       121     121     1       0
+1       3       236     347     1       0
+1       4       236     347     1       0
+1       5       121     464     1       0
+1       8       585     585     2       464
+========================
+========================
+
+- The first column gives the ID of the device who recorded the sightings.
+- The second column gives the ID of the device who was seen
+(it may be an iMote, or another device recorded during the experiment).
+
+- The third and fourth column describe, respectively, the first and
+last time when the address of ID2 were recorded by ID1 for this
+contact.
+
+- The fifth and sixth column are here for reading convenience. The
+fifth enumerate contacts with same ID1 and ID2, as 1,2,... . The last
+column describes the time difference between the beginning of this
+contact and the end of the previous contact with same ID1 and ID2. It
+is by convention set to 0 if this is the first contact for this ID1
+and ID2.
+
+- Note, again, that these contacts may not be mutual between a pair of
+iMotes, because scanning period of different iMotes are not
+synchronized, and because the sightings might not be symmetric.
+
+configuration  
+
+Location: Conference IEEE Infocom in Grand Hyatt Miami
+
+Date: March 2005
+
+Duration:
+          Devices distributed on March 7th, 2005 between lunch time and 5pm.
+          Devices collected on March 10th, 2005 in the afternoon.
+
+Participants:
+50 students, attending the student workshop.
+
+Collected datas:
+- 2 iMotes were lost, and 7 did not deliver useful data, as a consequence
+of accidental hardware reset. Contacts with any of these were discarded
+from the traces of other iMotes to avoid any consequence on the
+experimental results.
+
+- The first six hours were discarded, as people were attending the
+same workshop
+during the first afternoon.
+
+- Details of ID number:
+        ID 1-41 are corresponding to iMotes (Class 1)
+        ID 42-274 corresponds to external devices (Class 2)
+
+hole   
+
+Of the fifty-four iMotes distributed, forty-one yielded
+useful data, eleven did not contain useful data because of various failures
+with the battery and packaging, and two were not returned.

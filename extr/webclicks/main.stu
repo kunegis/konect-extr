@@ -1,0 +1,41 @@
+
+% version 1.13
+
+@all: out.cnets-traffic meta.cnets-traffic;
+
+>out.cnets-traffic: !json convert
+{ 
+  echo '% asym positive'
+  cat json/*.json | 
+  ./convert |
+  ../mkuniq1 
+}
+
+>meta.cnets-traffic:
+{ 
+ echo 'category: Hyperlink
+code: CWT
+name: CNetS Web Traffic (Web Science 2014 Data Challenge)
+entity-names: webpage
+description: Webpage-webpage hyperlinks
+url: http://cnets.indiana.edu/groups/nan/webtraffic/websci14-data/
+extr: webclicks
+long-description: This is the directed network of a small  collection of HTTP requests for the month of November 2009
+cite:
+relationship-names: hyperlink
+timeiso: 11.2009
+'
+}
+
+web-clicks-nov-2009.tgz: 
+{
+	wget http://carl.cs.indiana.edu/data/websci2014/web-clicks-nov-2009.tgz -O web-clicks-nov-2009.tgz --no-use-server-timestamps
+}
+
+json:	web-clicks-nov-2009.tgz
+{
+	rm -Rf json
+	mkdir json
+	cd json
+	tar xvvfz ../web-clicks-nov-2009.tgz
+}

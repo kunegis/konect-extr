@@ -1,0 +1,20 @@
+#! /bin/sh
+#
+# Make the movie entity list.
+#
+# INPUT
+#	movies.dat
+#
+# OUTPUT
+#	ent.movie
+#
+
+COUNT=`wc -l movies.dat | cut -f 1 -d ' '`
+
+{
+    echo "%"
+    echo "% $COUNT"
+    echo "% ent dat.name"
+    
+    <movies.dat sed -re 's,::[^:]+$,,;s,",\\",g;s,::, ",g;s,$,",' 
+} >ent.movie

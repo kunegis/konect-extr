@@ -1,0 +1,9 @@
+name:  Prosper loans
+code:  PL
+category: Interaction
+description:  Person–person loans
+long-description:  This network represents loans between members of the peer-to-peer lending network at Prosper.com. The online marketplace allows borrowers to post listings requesting loans.  Lenders bid on these listings, which become loans if the amount requested is fully funded by the lenders. The network is directed from lender to borrower. Each edge also contains the time at which the loan originated, the amount requested, the loan status, the credit grade or rating of the borrower, the lender rate and the borrower rate. 
+entity-names:  person
+relationship-names:  loan
+extr:  prosper-loans
+url:  http://mlg.ucd.ie/datasets/prosper.html

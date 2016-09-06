@@ -1,0 +1,48 @@
+De:	Dirk Homscheid <dhomscheid@uni-koblenz.de>
+À: 	kunegis@uni-koblenz.de
+Sujet: 	Kommunikation Linux Kernel Mailing Liste
+Date: 	28/10/2014 22:35:54
+
+
+Hallo Jérôme,
+
+unter folgendem Link habe ich Dir die Liste der Kommunikation vom Linux 
+Kernel bereitgestellt.
+
+https://www.dropbox.com/s/h5nq7r2pqls4bjh/From-To-Datetime.zip?dl=0
+
+Aufbau der Datei:
+FromID;ToID;Datetime
+
+Wenn bei ToID eine -1 steht, dann ist dies eine Starternachricht. Dazu 
+kann ja kein expliziter Adressat ausgemacht werden.
+
+Zu berechnende Maße der Akteure wären In- und Outdegree, Prestige und 
+Eigenvektor-Zentralität.
+
+An der weiteren Codierung der Personen arbeite ich noch. Wahrscheinlich 
+schaffe ich das am Donnerstag.
+
+Viele Grüße,
+Dirk
+-------------------------------------
+De: 	Dirk Homscheid <dhomscheid@uni-koblenz.de>
+À: 	kunegis@uni-koblenz.de
+Sujet: 	Codierung Personen
+Date: 	30/10/2014 19:26:19
+
+
+Hallo Jérôme,
+
+im Anhang die Liste der Personencodierung (pid;codierung)
+
+0: keine Info
+1: Personen arbeiten für Firma
+3: Person ist Hobbyist (Freizeit-Entwickler)
+
+Mit der Liste erreichen wir eine Codierungs-Abdeckung von 95,60% für die 
+Nachrichten.
+
+Grüße Dirk
+
+Anhang:  pis-sponsored-Jerome.csv

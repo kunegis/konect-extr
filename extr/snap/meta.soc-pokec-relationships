@@ -1,0 +1,10 @@
+category: Social
+code: PL
+name: Pokec
+description: User–user friendship
+url: http://snap.stanford.edu/data/soc-pokec.html
+cite: konect:takac2012
+extr: snap
+entity-names: user
+relationship-names: friendship 
+long-description: This is the friendship network from the Slovak social network Pokec. Nodes are users of Pokec and directed edges represent friendships.

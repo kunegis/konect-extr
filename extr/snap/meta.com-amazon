@@ -1,0 +1,10 @@
+category: Misc
+code: CA
+name: Amazon (MDS)
+description: Product–product co-purchases
+url: http://snap.stanford.edu/data/com-Amazon.html
+cite: konect:leskovec2012
+extr: snap
+entity-names: product
+relationship-names: co-purchase 
+long-description: This is the co-purchase network of Amazon based on the "customers who bought this also bought" feature. Nodes are products and an undirected edge between two nodes shows that the corresponding products have been frequently bought together.

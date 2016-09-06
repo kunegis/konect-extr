@@ -1,0 +1,22 @@
+#! /bin/sh
+#
+# Generate the layout PNG using the ImageMaker program from LGL
+#
+# Environment:
+#    $LGL     root dir of LGL-1.1 
+# 
+# We need write access to $LGL. 
+#
+
+SIZE=${SIZE-3000}
+JAVA_ARGS="$JAVA_ARGS -Xmx1G"
+
+
+[ "$verbose" ] && exec 3>&1 || exec 3>/dev/null
+
+echo >&3 LGL=$LGL
+
+dir="`pwd`"
+cd $LGL/Java
+ln -sf $dir/out.edge.colors ./color_file
+CLASSPATH="$CLASSPATH:imageMaker.jar" java $JAVA_ARGS ImageMaker.GenerateImages $SIZE $SIZE $dir/out.edges.lgl $dir/out.layout

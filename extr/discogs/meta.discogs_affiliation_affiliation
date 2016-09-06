@@ -1,0 +1,10 @@
+category: Affiliation 
+code: Dl
+name: Discogs
+description: Artist–label affiliation
+entity-names: artist,label
+extr: discogs
+url: http://www.discogs.com/
+long-description: Discogs (short for "discographies") is a large online music database that provides information about audio records including information about artists, labels and release details. This bipartite network represents the affiliations between artists and labels. The left nodes represent artists and the right nodes represent labels. Each edge represents one release made by an artist with a label.
+relationship-names: affiliation
+tags: #regenerate

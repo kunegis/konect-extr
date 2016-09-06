@@ -1,0 +1,10 @@
+name: Stack Overflow
+code: SO
+description: User–post favorites
+category: Rating
+url: http://www.clearbits.net/torrents/1881-dec-2011
+extr: stackexchange
+entity-names: user, post
+relationship-names: favorite
+long-description:  This is the bipartite Stack Overflow favorite network. Stack Overflow is the main question and answer website of the Stack Exchange Network. The nodes represent users and posts. An undirected, unweighted edge denotes that a user has marked a post as a favorite.
+cite:  konect:stackexchange

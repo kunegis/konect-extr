@@ -1,0 +1,107 @@
+#! /usr/bin/perl -w
+#
+# Generate Matlab-readable files of the MovieLens-million dataset.  
+#
+# INPUT
+#	ml/{ratings,movies}.dat		The MovieLens data
+#
+# OUTPUT
+#	out.movielens-1m    Matlab readable rating corpus
+# 	out.genres     Matlab readable genres
+# 	out.movieids   Movie ID mappings
+#	out.genreids   Genre ID mappings
+#
+
+use strict;
+
+#
+# Ratings
+#
+open(GRADES_IN, "<ml/ratings.dat") or die "Cannot open ml/ratings.dat:  $!";
+open(GRADES, ">out.movielens-1m") or die "Cannot open out.movielens-1m:  $!"; 
+
+print GRADES "% bip weighted\n"; 
+
+my $next_user_id= 1;
+my %new_user_ids = ();
+my %old_user_ids = ();
+my $next_item_id= 1;
+my %new_item_ids = ();
+my %old_item_ids = ();
+
+while (<GRADES_IN>) 
+{
+    /([0-9]+)::([0-9]+)::([0-9]+)::([0-9]+)/ or next;
+    
+    my $id_user_old = 	"" . $1;
+    my $id_item_old = 	"" . $2;
+    my $rating = 	"" . $3;
+    my $timestamp = 	"" . $4; 
+
+    my $id_user_new = $new_user_ids{$id_user_old};
+    if (! exists $new_user_ids{$id_user_old}) {
+	$id_user_new = $next_user_id;
+	$new_user_ids{$id_user_old} = $id_user_new;
+	$old_user_ids{$id_user_new} = $id_user_old;
+	++ $next_user_id;
+    }
+    my $id_user_new_string = "" . $id_user_new;
+
+    my $id_item_new = $new_item_ids{$id_item_old};
+    if (! exists $new_item_ids{$id_item_old}) {
+	$id_item_new = $next_item_id;
+	$new_item_ids{$id_item_old} = $id_item_new;
+	$old_item_ids{$id_item_new} = $id_item_old;
+	++ $next_item_id;
+    }
+    my $id_item_new_string = "" . $id_item_new;
+
+    print GRADES "$id_user_new_string $id_item_new_string $rating $timestamp\n";
+}
+
+close(GRADES_IN) or die "Cannot close ml/ratings.dat:  $!";
+close(GRADES) or die "Cannot close out.movielens-1m:  $!"; 
+
+
+#
+# Movie-genre relationship type
+#
+open(MOVIES_IN, "<ml/movies.dat")  or die "Cannot open ml/movies.dat:  $!";
+open(GENRES, ">out.genres")  or die "Cannot open out.genres:  $!";
+open(MOVIE_IDS, ">out.movieids")  or die "Cannot open out.movieids:   $!";
+open(GENRE_IDS, ">out.genreids")  or die "$!";
+
+my $next_genre_id = 1;
+my %new_genre_ids = ();
+my %old_genre_ids = ();
+
+while (<MOVIES_IN>) {
+    /^([0-9]+)::(.*)::([^:]+)$/ or next;
+
+    my $item_id = $new_item_ids{"" . $1};
+    my $title = $2;
+    my $genres = $3;
+
+    next if not exists($new_item_ids{"" . $1});
+
+    print MOVIE_IDS "$item_id $title\n";
+
+    my @genre_array = split /\|/, $genres;
+    foreach my $genre(@genre_array) {
+	chomp $genre;
+	my $id_genre_new = $new_genre_ids{$genre};
+	if (! exists $new_genre_ids{$genre}) {
+	    $id_genre_new = $next_genre_id;
+	    $new_genre_ids{$genre} = $id_genre_new;
+	    $old_genre_ids{$id_genre_new} = $genre;
+	    print GENRE_IDS "$id_genre_new $genre\n";
+	    ++ $next_genre_id;
+	}
+	print GENRES "$item_id $id_genre_new\n";
+    }
+}
+
+close(MOVIES_IN)  or die "Cannot close ml/movies.dat:  $!";
+close(GENRES) or die "Cannot close out.genres:  $!";
+close(MOVIE_IDS)  or die "Cannot close out.movieids:  $!";
+close(GENRE_IDS)  or die "$!";

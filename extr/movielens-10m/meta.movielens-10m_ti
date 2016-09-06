@@ -1,0 +1,11 @@
+category: Folksonomy
+code: Mti
+name: MovieLens t-i
+description: Tag–movie assignment
+url: http://www.grouplens.org/node/73
+cite: www.grouplens.org/node/73
+extr: movielens-10m
+fullname: MovieLens tag–movie
+long-description: This bipartite network consists of 100,000 tags applied to 10,000 movies from http://movielens.umn.edu/. Left nodes are tags and right nodes are movies. An edge shows that a tag was applied to a movie.
+entity-names:  tag, movie
+relationship-names:  tag assignment

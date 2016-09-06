@@ -1,0 +1,33 @@
+#! /usr/bin/perl -w
+#
+# Create the friends file. 
+#
+# INPUT
+#	filmtipset/friends.txt
+#
+# OUTPUT
+#	rel.friend
+#
+
+use strict; 
+
+open(FRIENDS, "<filmtipset/friends.txt") or die;
+open(REL, ">rel.friend") or die; 
+
+# print REL "% asym unweighted\n"; 
+
+while (<FRIENDS>)
+{
+    my ($user, $friendsText) = /([0-9]+)=(.*)/ 
+	or die "Syntax error:  $_"; 
+
+    my @friends = split ",", $friendsText;
+
+    foreach my $friend (@friends)
+    {
+	print REL "$user $friend\n";
+    }
+}
+
+close(FRIENDS) or die; 
+close(REL) or die; 

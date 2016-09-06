@@ -1,0 +1,10 @@
+category: Rating
+code: SX
+name: Sexual escorts
+description: Buyer–escort ratings
+entity-names: buyer,escort
+url: http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1001109#s2 
+extr: escorts
+long-description: This is the bipartite network of sex buyers and their escorts. Nodes are buyers and escorts. An edge denotes sexual intercourse between a male sex-buyer and a female escort. Edges are weighted with the rating of the escort given by the buyer. Three ratings are possible: bad (−1), neutral (0), good (+1).
+relationship-names: rating
+cite: konect:Rocha2010

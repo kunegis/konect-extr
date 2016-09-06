@@ -1,0 +1,318 @@
+#
+# Small network datasets from Linton C. Freeman's homepage. 
+# 
+# http://moreno.ss.uci.edu/data.html
+#
+
+% version 1.15
+
+@all:  
+	out.moreno_propro_propro out.moreno_jazz_jazz
+	out.moreno_lesmis_lesmis out.moreno_names_names out.moreno_mac_mac
+	out.moreno_oz_oz 
+	out.moreno_blogs_blogs out.moreno_highschool_highschool
+	out.moreno_innovation_innovation out.moreno_hens_hens
+	out.moreno_kangaroo_kangaroo out.moreno_sheep_sheep
+	out.moreno_beach_beach out.moreno_bison_bison out.moreno_train_train
+	out.moreno_crime_crime ent.moreno_crime_crime.person.sex
+	ent.moreno_crime_crime.person.name out.moreno_rhesus_rhesus
+	out.moreno_cattle_cattle out.moreno_taro_taro out.moreno_zebra_zebra
+	out.moreno_health_health out.moreno_seventh_seventh
+	rel.moreno_crime_crime.person.role
+	out.moreno_sampson_sampson
+	out.moreno_vdb_vdb
+; 
+
+>out.moreno_vdb_vdb: 
+	vdb.dat mkmatrixsplit mkvdbmap mkvdbtime ../mkrel
+{
+	./mkmatrixsplit 32 7 vdb.dat 0 1 | 
+	./mkvdbmap | 
+	./mkvdbtime |
+	../mkrel 'asym' 'multisigned' 
+}
+
+>seventh_gender.dat:  mkgender
+{
+	./mkgender 
+}
+
+ent.moreno_seventh_seventh.student.gender: out.moreno_seventh_seventh;
+
+>out.moreno_seventh_seventh: 
+	seventh.dat seventh_gender.dat
+	mkmatrixsplit ../mkrel
+{
+	./mkmatrixsplit 29 3 seventh.dat | 
+	uniq -c | 
+	sed -re 's/^\s*([0-9]+)\s+([0-9]+)\s+([0-9]+).*$/\2 \3 \1/' | 
+	../mkrel --+ent=ent.moreno_seventh_seventh.student.gender:seventh_gender.dat:0:1 'asym' 'posweighted' 
+}
+
+>out.moreno_health_health: <comm50.dat ../mkrel
+{
+	sed -n -re '/DATA:/,$p' | 
+	tail -n+2 | 
+	sed -re 's/^\s+//;s/\.00$//' | 
+	../mkrel 'asym' 'posweighted' 
+}
+
+>out.moreno_zebra_zebra: 
+	<zebra.dat 
+	mkmatrix mkmatrixtolines ../mkrmdup ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrmdup | 
+	cut -d' ' -f1-2 | 
+	../mkrel 'sym' 'unweighted' 
+}
+
+>out.moreno_taro_taro: 
+	<taro.dat
+	mkmatrix mkmatrixtolines ../mkrel
+{
+	./mkmatrix | 
+	./mkmatrixtolines | 
+	../mkrel 'asym' 'unweighted' 
+}
+
+>out.moreno_cattle_cattle: 
+	<cattle.dat
+	mkmatrix mkmatrixtolines ../mkrmdup ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrmdup | 
+	../mkrel 'asym' 'posweighted' 
+}
+
+>out.moreno_rhesus_rhesus: 
+	<rhesus.dat
+	mkmatrix mkmatrixtolines ../mkrmdup ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrmdup | 
+	../mkrel 'asym' 'posweighted' 
+}
+
+>tmp.moreno_crime_names:  <sex.dat
+{
+	sed -n -re '/ROW LABELS/,$p' | 
+	sed -n '/^COLUMN/,$!p' | 
+	tail -n+2 
+}
+
+>tmp.moreno_crime_sex: <sex.dat
+{
+	sed -n -re '/ROW LABELS/,$p' | 
+	sed -n -re '/^COLUMN/,$p' | 
+	sed -n -re '/^DATA/,$p' | 
+	tail -n+2 | sed -re 's/^ +([01])/\1/' 
+}
+
+>rel.moreno_crime_crime.person.role:  
+	<crime.dat
+	mkmatrix mkmatrixtolines mkcrimemap
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	cut -d' ' -f3 | 
+	./mkcrimemap 
+}
+
+## ent.moreno_crime_crime.person.name:  out.moreno_crime_crime;
+## ent.moreno_crime_crime.person.sex:   out.moreno_crime_crime;
+
+>out.moreno_crime_crime
+ent.moreno_crime_crime.person.name
+ent.moreno_crime_crime.person.sex: 
+	<crime.dat tmp.moreno_crime_names tmp.moreno_crime_sex
+	mkmatrix mkmatrixtolines ../mkrel 
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	cut -d ' ' -f1-2 | 
+	../mkrel --no-uniq --+ent=ent.moreno_crime_crime.person.name:tmp.moreno_crime_names:-1:0:0 --+ent=ent.moreno_crime_crime.person.sex:tmp.moreno_crime_sex:-1:0:0 'bip' 'unweighted' 
+}
+
+>sheeps.tmp: <sheep_ages.dat mksheeps
+{
+	./mksheeps
+}
+
+>out.moreno_train_train: <train.dat ../mkrel
+{
+	sed -n -re '/DATA:/,$p' | 
+	tail -n+2 | 
+	sed -re 's/^ //' | 
+	head -n-1 | 
+	../mkrel 'sym' 'posweighted' 
+}
+
+>out.moreno_bison_bison: 
+	<bison.dat
+	mkmatrix mkmatrixtolines ../mkrmdup ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrmdup | 
+	../mkrel 'asym' 'posweighted' 
+}
+
+ent.moreno_sheep_sheep.sheep.age: out.moreno_sheep_sheep;
+
+>out.moreno_sheep_sheep: 
+	<sheep.dat sheeps.tmp
+	mkmatrix mkmatrixtolines ../mkrel
+{
+	sed -re 's/  +/ /g' | 
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrel --+ent=ent.moreno_sheep_sheep.sheep.age:sheeps.tmp:0:1 'asym' 'posweighted' 
+}
+
+>out.moreno_hens_hens: 
+	<hens.dat
+	mkmatrix mkmatrixtolines ../mkrel
+{
+	./mkmatrix | 
+	./mkmatrixtolines | 
+	../mkrel 'asym' 'unweighted' 
+}
+
+>out.moreno_kangaroo_kangaroo: 
+	<kangaroo.dat
+	mkmatrix mkmatrixtolines ../mkrmdup ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrmdup | 
+	../mkrel 'sym' 'posweighted' 
+}
+
+>out.moreno_beach_beach: 
+	beach.dat
+	mkmatrixsplit ../mkrmdup ../mkrel
+{
+	./mkmatrixsplit 43 1 beach.dat | 
+	../mkrmdup | 
+	../mkrel 'sym' 'posweighted' 
+}
+
+>out.moreno_innovation_innovation: 
+	ckm.dat
+	mkmatrixsplit ../mkrel
+{
+	./mkmatrixsplit 246 3 ckm.dat | 
+	../mkrel --enforce-edgeweights 'asym' 'unweighted' | 
+	sed -re 's, 1$,,' 
+}
+
+>out.moreno_propro_propro: <pro_pro.dat ../mkrel
+{
+	sed -n -re '/^[0-9]+\s+[0-9]+/p' | 
+	../mkrel 'sym' 'unweighted' 
+}
+
+>out.moreno_jazz_jazz: 
+	<jazz.dat
+	mkmatrix mkmatrixsplit ../mkrel
+{
+	./mkmatrix | 
+	./mkmatrixtolines | 
+	../mkrel 'sym' 'unweighted' 
+}
+
+>out.moreno_lesmis_lesmis: 
+	<lesmis.dat
+	mkmatrix mkmatrixtolines ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrel 'sym' 'posweighted' 
+}
+
+>out.moreno_names_names: <names.dat ../mkrel
+{
+	sed '0,/^DATA:/d;s/,/ /g' | 
+	../mkrel 'sym' 'positive' 
+}
+ 
+>out.moreno_mac_mac: 
+	<mac.dat
+	mkmatrix mkmatrixtolines ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrel 'asym' 'posweighted' 
+}
+
+>out.moreno_oz_oz: 
+	<oz.dat
+	mkmatrix mkmatrixtolines ../mkrel
+{
+	./mkmatrix -a | 
+	./mkmatrixtolines -a | 
+	../mkrel 'asym' 'posweighted' 
+}
+
+>blogs.tmp: mkblogmapping #blogs.dat
+{
+	./mkblogmapping
+}
+
+>blogs.out:  <blogs.dat
+{
+	sed -re 's,^\s*([0-9]+)\s*([0-9]+)\s*[1-9]\s*$,\1	\2,;t;d'
+}
+
+>out.moreno_blogs_blogs: <blogs.out blogs.tmp ../mkrel
+{
+	<blogs.out ../mkrel --+ent=ent.moreno_blogs_blogs.blog.orientation:blogs.tmp:0:1 'asym' 'unweighted'
+}
+
+>out.moreno_highschool_highschool: highschl.dat mkmatrixsplit ../mkrel
+{
+	./mkmatrixsplit 73 2 highschl.dat | 
+	sort -n | 
+	uniq -c | 
+	sed -re 's/^\s*([0-9]+)\s+([0-9]+)\s+([0-9]+).*$/\2 \3 \1/' | 
+	../mkrel 'asym' 'posweighted' 
+}
+
+>out.moreno_sampson_sampson: 
+	<out.sampson.out ../mkrel
+{
+	../mkrel asym signed
+}
+
+>out.sampson.in:  mksampson sampson.dat mkmatrixtolines mksampsonuniq 
+{
+	./mksampson 
+}
+
+out.sampson.out:
+	out.sampson.in sampson_do.m 
+{
+	octave -qf sampson_do.m 
+}
+
+sheep_ages.dat:
+{
+	wget http://moreno.ss.uci.edu/sheep_ages.dat -O sheep_ages.dat
+	fromdos sheep_ages.dat
+}
+
+# The downloaded files 
+$name.dat:
+{
+	wget http://moreno.ss.uci.edu/"$(echo "$name.dat" | sed -re 's/_/-/g')" -O "$name.dat"
+	fromdos "$name.dat"
+}
+
+@clean:
+{
+	rm -f out.* *.dat blogs.tmp sheeps.tmp tmp.* ent.*
+}

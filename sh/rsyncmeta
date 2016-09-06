@@ -1,0 +1,15 @@
+#!/bin/bash
+META="$(find . -name 'meta.*' | grep -v '.svn')"
+export DAT=$RDAT
+for MPATH in $META
+do
+ FOLDER="$(echo $MPATH | cut -d'/' -f2 )"
+ FILE="$(echo $MPATH | cut -d'/' -f3 )"
+ echo "sync: $FILE from $MPATH to $DAT/$FOLDER/$FILE" >&2
+ rsync "$MPATH" "$DAT/$FOLDER/$FILE"
+ if [ "$?" != "0" ]; then
+  echo "Error calling rsync. Halt.">&2
+  exit 1
+ fi
+done
+echo "Done.">&2

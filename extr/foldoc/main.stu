@@ -1,0 +1,31 @@
+
+@all:  meta.foldoc out.foldoc ent.foldoc;
+
+meta.foldoc;
+
+>out.foldoc:  <foldoc.net
+{
+	echo '% asym positive'
+	sed -re '/^\s*[0-9]+\s+[0-9]+\s+[0-9]+\s*$/!d'
+}
+
+ent.foldoc:  foldoc.net
+{
+	<foldoc.net >ent.foldoc sed -re '/"/!d;s,^[^"]*",,;s,".*$,,'
+}
+
+foldoc.net:  foldoc.zip
+{
+	unzip foldoc.zip
+	touch foldoc.net
+}
+
+foldoc.zip:
+{
+	wget http://vlado.fmf.uni-lj.si/pub/networks/data/dic/foldoc/foldoc.zip -O foldoc.zip
+	touch foldoc.zip
+}
+
+@clean {
+	rm -f out.foldoc foldoc.net foldoc.zip ent.foldoc
+}

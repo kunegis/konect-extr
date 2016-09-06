@@ -1,0 +1,14 @@
+category: Social
+code: TF
+name: Twitter (MPI)
+description: User–user following
+entity-names: user,user
+extr: twitter_mpi
+url: http://twitter.mpi-sws.org/
+long-description: This asymmetric network contains Twitter follow data based on a snapshot taken in 2009. A node represents a user. A directed edge indicates that a user follows another user. 
+relationship-names: follow
+cite: konect:icwsm10
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_twitter_mpi_user: <http://konect.uni-koblenz.de/networks/twitter_mpi/User/> .
+n3-type-m: sioc:UserAccount
+n3-edgedata-1: $m sioc:follows $n .

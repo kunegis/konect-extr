@@ -1,0 +1,60 @@
+#! /usr/bin/perl
+#
+# Convert textual date to fractional year.  Empty lines are returned as
+# zero.  
+#
+
+use strict;
+use warnings;
+
+while (<>) {
+    chomp; 
+
+    if ($_ eq "") {
+	print "0\n";
+	next; 
+    }
+
+    if (not /^(\S+) ([0-9]+)(|..)(,|) ([0-9]+)$/) {
+	print STDERR "*** Invalid input:  «$_»\n"; 
+	exit 1;
+    }
+
+    my $month_text = $1;
+    my $day = $2;
+    my $year = $5; 
+    
+    my $month;
+    my $month_days;
+    
+    if    ($month_text eq "January"  )  { $month =  1;  $month_days = 31;  }
+    elsif ($month_text eq "February" )  { $month =  2;  $month_days = 28;  }
+    elsif ($month_text eq "March"    )  { $month =  3;  $month_days = 31;  }
+    elsif ($month_text eq "April"    )  { $month =  4;  $month_days = 30;  }
+    elsif ($month_text eq "May"      )  { $month =  5;  $month_days = 31;  }
+    elsif ($month_text eq "June"     )  { $month =  6;  $month_days = 30;  }
+    elsif ($month_text eq "July"     )  { $month =  7;  $month_days = 31;  }
+    elsif ($month_text eq "August"   )  { $month =  8;  $month_days = 31;  } 
+    elsif ($month_text eq "September")  { $month =  9;  $month_days = 30;  }
+    elsif ($month_text eq "October"  )  { $month = 10;  $month_days = 31;  }
+    elsif ($month_text eq "November" )  { $month = 11;  $month_days = 30;  }
+    elsif ($month_text eq "December" )  { $month = 12;  $month_days = 31;  }
+    else {
+	print STDERR "*** Invald month «$month_text»\n"; 
+	exit 1;
+    }
+
+    if ($month == 2) {
+	# All years that we care about are leap years when divisible by four 
+	if ($year % 4 == 0) {
+	    $month_days = 29;
+	}
+    }
+
+    my $month_fraction = ($month - 1) / 12.0; 
+    my $day_fraction = ($day - 1) / $month_days / 12;
+
+    my $fractional_year = $year + $month_fraction + $day_fraction; 
+
+    print "$fractional_year\n"; 
+}

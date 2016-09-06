@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+LINE:while(<STDIN>)
+{
+chomp;
+my @l=split(' ',$_);
+if (scalar(@l)!=3)
+ {next LINE;}
+if ($l[2] == "0")
+ {next LINE;}
+print $_."\n";
+}

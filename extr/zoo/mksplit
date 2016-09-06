@@ -1,0 +1,34 @@
+#! /usr/bin/perl -w
+# 
+# Split the edge set into test and training set
+#
+# Input:  out.matrix
+# Output:  out.test, out.training
+#
+# All files are in spconvert() format. 
+#
+
+use strict;
+
+# Proportion of data for the test set
+my $test_size = .05;
+
+srand 2365263584;
+
+open(OUT_MATRIX, "<out.matrix") or die "Can't open out.matrix:  $!";
+
+open(OUT_TEST, ">out.test") or die "Can't open out.test:  $!";
+open(OUT_TRAINING, ">out.training") or die "Can't open out.training:  $!";
+
+while (<OUT_MATRIX>) {
+    if (rand() < $test_size) {
+	print OUT_TEST $_;
+    } else {
+	print OUT_TRAINING $_;
+    }
+}
+
+close(OUT_TEST) or die "Can't close out.test:  $!";
+close(OUT_TRAINING) or die "Can't close out.training:  $!";
+
+close(OUT_MATRIX) or die "Can't close out.matrix:  $!"; 

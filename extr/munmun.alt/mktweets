@@ -1,0 +1,37 @@
+#! /usr/bin/perl -w
+#
+# Extract the user-user or user-tag graph from the Twitter dataset. 
+#
+# ARGUMENTS
+#	$1	# or @, depending on whether @users or #tags are to be
+#		extracted   
+#
+# INPUT:  Each line contains a tweet, beginning with the username that
+# wrote the tweet, whitespace, and then the tweet including @usernames.
+#
+# OUTPUT:  The relationship file containing edges from a user that
+# tweeted to a user that was mentionned using @alpha_notation or
+# #hash_notation.   
+#
+
+use strict;
+
+use Date::Parse; 
+
+my $sign = $ARGV[0]; 
+while (<STDIN>)
+{
+    /^(\S+)\t([^\t]+)\t(.*)$/ or 
+	die "Invalid input:  $_"; 
+
+    my $username_from = $1;
+    my $timeString = $2;
+    my $text = $3; 
+
+    my $time = str2time($timeString); 
+
+    while ($text =~ /(${sign}\S+)/g)
+    {
+	print "$username_from $1 1 $time\n"; 
+    }
+}

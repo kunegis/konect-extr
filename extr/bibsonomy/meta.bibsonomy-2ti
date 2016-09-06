@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Bti
+name: BibSonomy t-i
+description: Tag–publication assignment
+url: http://www.kde.cs.uni-kassel.de/bibsonomy/dumps
+cite: konect:bibsonomy
+extr: bibsonomy
+fullname: BibSonomy tag–publication
+long-description:  This is the bipartite tag–publication network from BibSonomy.  The network allows multiple edge, i.e., publications can be tagged multiple times with the same tag.  The network is complete as it is taken from the official BibSonomy dump.
+tags: #regenerate
+entity-names: tag, publication
+relationship-names: assignment

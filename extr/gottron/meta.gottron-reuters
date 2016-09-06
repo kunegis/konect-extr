@@ -1,0 +1,10 @@
+category: Text
+code: R2
+name: Reuters-21578
+description: Article–word inclusion
+url: http://www.daviddlewis.com/resources/testcollections/reuters21578/
+cite: konect:reuters1
+extr: gottron
+long-description: This is the bipartite network of article–word inclusions in documents that appeared on Reuters newswire in 1987. Left nodes represent articles and right nodes represent words. An edge represents an article–word inclusion.
+entity-names:  article, word
+relationship-names:  inclusion

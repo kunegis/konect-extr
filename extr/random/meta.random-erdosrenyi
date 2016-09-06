@@ -1,0 +1,10 @@
+name:             Erdős–Rényi random graph
+code:             Rer
+url:              todo
+category:         Random
+fullname:         Erdős–Rényi random graph
+description:      Node–node random
+long-description: Erdős–Rényi random graph
+entity-names:     node,node
+extr:   	  random
+cite:             todo

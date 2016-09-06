@@ -1,0 +1,12 @@
+
+name:  Actor collaborations
+code:  CL
+url:   http://www3.nd.edu/~networks/resources.htm
+category:  Misc
+description:  Actor–actor collaborations
+cite:  konect:ba
+long-description:  These are actor connected by an edge if they both appeared in the same movie.  Each edge is one collaboration, and thus multiple edges are possible.
+entity-names:  actor
+relationship-names:  collaboration
+extr:  actor
+timeiso:  1999

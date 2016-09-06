@@ -1,0 +1,34 @@
+#! /bin/sh
+#
+# Make a dataset symmetric and unweighted. Remove all duplicate edges.
+# The input dataset should not have edge weights or multiple edges. 
+#
+# STDIN
+#	in OUT format, with possibly multiple edges. Should not have
+#	timestamps or weights.  
+#
+# STDOUT
+#	the same with any duplicate edges removed (in particular, edges
+#	in opposite direction) 
+#
+
+holdback=
+
+while :;
+do
+    IFS= read -r line
+    if expr "$line" : '^\s*%' >/dev/null
+    then
+		echo "$line"
+    else
+		holdback="$line"
+		break
+    fi
+done
+
+{ echo "$holdback" ; cat ; } |
+awk '$1 > $2 {print $2 "\t" $1} ; $1 <= $2 {print $1 "\t" $2}' |
+sort -n | uniq
+
+ 
+

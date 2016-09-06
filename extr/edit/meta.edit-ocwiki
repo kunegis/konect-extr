@@ -1,0 +1,11 @@
+long-description: This is the bipartite edit network of the Occitan Wikipedia. It contains users and pages from the Occitan Wikipedia, connected by edit events. Each edge represents an edit. The dataset includes the timestamp of each edit.
+name: Wikipedia (oc)
+extr: edit
+description: User–article edit
+url: http://dumps.wikimedia.org/
+category: Authorship
+cite: download.wikimedia.org
+code: oc
+tags: #regenerate
+entity-names:  user, article
+relationship-names:  edit

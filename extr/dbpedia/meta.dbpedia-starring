@@ -1,0 +1,11 @@
+category: Feature
+code: ST
+name: Movies
+description: Movie–actor starring
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2 
+extr: dbpedia
+long-description: This is the bipartite network of movies and the actors that have played in them, from the DBpedia project. The nodes in the network are movies and actors. An edge connects a movie will an actor that has played in it. The dataset corresponds to the &lt;http://dbpedia.org/ontology/starring&gt; relation in DBpedia.
+tags: #regenerate
+entity-names:  movie, actor
+relationship-names:  starring

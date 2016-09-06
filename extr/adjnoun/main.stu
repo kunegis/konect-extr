@@ -1,0 +1,55 @@
+
+@all: 
+	out.adjnoun_adjacency_adjacency 
+	ent.adjnoun_adjacency_adjacency.word.name 
+	meta.adjnoun_adjacency;
+
+adjnoun.zip:
+{
+	wget 'www-personal.umich.edu/~mejn/netdata/adjnoun.zip' -O adjnoun.zip
+	touch adjnoun.zip
+}
+
+adjnoun.gml: adjnoun.zip
+{
+	unzip adjnoun.zip
+	touch adjnoun.gml
+}
+
+>out.adjnoun_adjacency_adjacency: 
+	adjnoun.gml tmp.ent.adjnoun <tmp.out
+{
+	../mkrel --+ent=ent.adjnoun_adjacency_adjacency.word.name:tmp.ent.adjnoun:0:1 "sym" "unweighted" 
+}
+
+ent.adjnoun_adjacency_adjacency.word.name: out.adjnoun_adjacency_adjacency;
+
+tmp.ent.adjnoun: tmp.out;
+
+>tmp.out:  <adjnoun.gml
+{
+	 ./gmlextract tmp.ent.adjnoun
+}
+
+@clean:
+{
+	rm -f ent.*
+	rm -f out.*
+	rm -f adjnoun.*
+	rm -f tmp.*
+}
+
+@deploy:  
+	konect/dat/adjnoun/out.adjnoun_adjacency_adjacency 
+	konect/dat/adjnoun/ent.adjnoun_adjacency_adjacency.word.name 
+	konect/dat/adjnoun/meta.adjnoun_adjacency;
+
+konect/dat/adjnoun/$NAME:  ! konect $NAME
+{
+	cp -b "$NAME" "konect/dat/adjnoun/$NAME"
+}
+
+konect {
+	echo >&2 'Link konect/'
+	exit 1
+}

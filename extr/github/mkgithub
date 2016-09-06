@@ -1,0 +1,5 @@
+#!/bin/bash
+REPOS=`mktemp github.XXXXXXXXX`
+trap "rm $REPOS" EXIT
+sed -n -r -e 's/^([0-9]+):(\S+),([0-9]+-[0-9]+-[0-9]+)(,[0-9]+)?/\1,\2,\3\4/p' > $REPOS <download/repos.txt
+tr ':' ' ' | ../mkrel --ent-delimiter=, --+ent=ent.github.repository.name:$REPOS:0:1:1 --+ent=ent.github.repository.creationTime:$REPOS:0:2:1 'bip' 'unweighted'

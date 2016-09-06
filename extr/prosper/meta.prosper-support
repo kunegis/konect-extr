@@ -1,0 +1,10 @@
+category: Affiliation
+code: PS
+name: Prosper.com
+description: Member–group support links
+url: http://www.prosper.com/tools/DataExport.aspx
+cite: prosper
+extr: prosper
+long-description: This is the bipartite network of Prosper.com users and the groups they support. 
+entity-names: member, group
+relationship-names:  support

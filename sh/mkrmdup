@@ -1,0 +1,13 @@
+#! /bin/sed -rf
+#
+# Remove loops, i.e., edges of the form (i,i).
+#
+# Note:  loops are sensible in some networks, for instance in email
+# networks.  In other networks however, they are an artifact of data
+# extraction and should be removed. 
+#
+# This script does not detect loops of the form (i,j) and (j,i). 
+#
+
+/^\s*(\S+)\s+\1(\s|$)/d
+

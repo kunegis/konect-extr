@@ -1,0 +1,19 @@
+#! /bin/sh
+#
+# Execute a Matlab program.
+#
+# $1:  filename of the Matlab program.
+#
+
+MATLAB="matlab -nojvm -nodesktop -nosplash"
+[ "$TMP_BASE" ] || export TMP_BASE=${TMP-/tmp}/`basename $0`  #.`basename $1`
+DISPLAY=
+
+export CmdrTaco="`cat out.CmdrTaco`"
+
+$MATLAB -r $1 -logfile $TMP_BASE.log >$TMP_BASE.out 2>$TMP_BASE.err <<EOF  &&
+EOF
+<$TMP_BASE.tmp ./resolve-userids 
+
+# We have to use <<EOF or else Matlab will read it's input and hang.
+

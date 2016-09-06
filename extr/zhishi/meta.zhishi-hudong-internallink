@@ -1,0 +1,13 @@
+name: Hudong internal
+code: HUi
+url: http://zhishi.me/
+category: Hyperlink
+fullname: Hudong internal links
+description: Article–article link
+long-description: This is the directed network of hyperlinks between the articles of the Chinese online encyclopedia Hudong (互动百科, http://www.hudong.com/). 
+entity-names: article, article
+extr: zhishi
+cite: konect:zhishi
+tags: #loop
+entity-names: article
+relationship-names: hyperlink

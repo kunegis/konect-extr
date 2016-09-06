@@ -1,0 +1,15 @@
+This is a dataset about which first party domain is tracked by which tracking service. 
+The data is derived from the CommonCrawl 2012 web crawl, available at 
+https://aws.amazon.com/datasets/common-crawl-corpus/.
+
+File out.trackthetrackers:
+First column:  domain ID
+Second column:  tracker ID
+
+File ent.trackthetrackers.domains:
+All domains, line number is the domain ID
+
+File ent.trackthetrackers.trackers:
+All trackers, line number is the tracker ID
+
+All IDs begin at one and do not have gaps.

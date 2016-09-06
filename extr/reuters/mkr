@@ -1,0 +1,24 @@
+#! /usr/bin/perl -w
+#
+
+use strict;
+
+
+my $lasti = "";
+
+while (<>)
+{
+    if (/.I (.*)/)
+    {
+	$lasti = $1;
+	next;
+    }
+    
+    next if /.W/;
+    
+    my @words = split;
+    foreach my $word (@words)
+    {
+	print "$lasti $word\n";
+    }
+}

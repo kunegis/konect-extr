@@ -1,0 +1,11 @@
+name: Web trackers
+code: WT
+url: https://ssc.io/trackingthetrackers/
+category: Hyperlink
+cite: konect:trackers
+long-description:  This is the bipartite network of internet domains and the trackers they contain, such as the Facebook button and Google Analytics.  Left nodes are domains and right nodes are trackers, identified also by their domain.  
+entity-names: domain, tracker
+relationship-names:  inclusion
+extr: trackers2
+timeiso:  2012
+tags:

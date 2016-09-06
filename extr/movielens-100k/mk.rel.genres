@@ -1,0 +1,39 @@
+#! /usr/bin/perl -w
+#
+# Generate the genre relation.
+#
+
+use strict; 
+
+open(U_ITEM, "<ml-data/u.item") or die "Opening ml-data/u.item:  $!";
+
+my $count = 0;
+my $movie_count = 0;
+my $genre_count = 0;
+
+my $res = ""; 
+
+while (<U_ITEM>)
+{
+    s,^([0-9]+)\|[^|]*\|[^|]*\|[^|]*\|[^|]*\|(.*)$,$1 $2,;
+    my $id = $1;
+    my @genres = split /\|/, $2;
+    
+    for (my $i = 1; $i < @genres;  ++$i) {
+	if ($genres[$i] == 1) {
+	    ++ $count; 
+	    $res .= "$id $i\n";
+	    if ($id > $movie_count)  {$movie_count = $id; }
+	    if ($i > $genre_count)   {$genre_count = $i; }
+	}
+    }
+}
+
+open(REL_GENRES, ">rel.genres") or die "Opening rel.genres:  $!";
+
+print REL_GENRES "% bip unweighted\n% $count $movie_count $genre_count\n% ent.movie ent.genre\n";
+print REL_GENRES $res;
+
+close(U_ITEM) or die "Closing ml-data/u.item:  $!";
+close(REL_GENRES) or die "Closing rel.genres:  $!";
+

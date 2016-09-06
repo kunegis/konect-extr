@@ -1,0 +1,12 @@
+#! /bin/bash
+
+for i in {1..758}
+do
+	echo "$i" "left-leaning"
+done
+
+for i in {759..1490}
+do
+	echo "$i" "right-leaning"
+done
+

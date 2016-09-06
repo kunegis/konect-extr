@@ -1,0 +1,12 @@
+
+name:  Human protein (Figeys)
+code:  MF
+url:   http://research.mssm.edu/maayan/datasets/qualitative_networks.shtml
+category:  Metabolic 
+description:  Protein–protein interactions
+cite:  konect:figeys
+long-description:  This is a network of interactions between proteins in Humans (<i>Homo sapiens</i>), from the first large-scale study of protein–protein interactions in Human cells using a mass spectrometry-based approach.
+entity-names:  protein
+relationship-names:  interaction
+extr:  maayan
+

@@ -1,0 +1,11 @@
+category: Coauthorship
+code: AP
+name: arXiv astro-ph
+description: Author–author collaborations
+url: http://snap.stanford.edu/data/ca-AstroPh.html
+cite: konect:leskovec107 
+extr: snap
+long-description: This is the collaboration graph of authors of scientific papers from the arXiv's Astrophysics (astro-ph) section. An edge between two authors represents a common publication. 
+entity-names: author
+relationship-names: collaboration
+tags:  #join

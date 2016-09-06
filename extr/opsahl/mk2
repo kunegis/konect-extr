@@ -1,0 +1,3 @@
+#!/bin/bash
+awk -F' ' '{printf("%s %s 1 ",$3,$4); system(sprintf("date +%%s -d \"%s %s\"",substr($1,2),substr($2,1,length($2)-1)));}' "$1"
+

@@ -1,0 +1,10 @@
+category: Lexical
+code: YD
+name: Yahoo advertisers
+description: Word–word adjacency
+url: http://amici.dsi.unifi.it/lasagne/?page_id=227
+extr: lasagne
+long-description: These are adjacency data from phrases bidded for in Yahoo advertisements. Nodes in the network are words, and a directed edge denotes that two words occurred one after the other in a phrase. The network contains loops.
+tags: #loop
+entity-names: word
+relationship-names: adjacency 

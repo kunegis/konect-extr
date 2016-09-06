@@ -1,0 +1,36 @@
+@all: out.wikiconflict meta.wikiconflict; 
+
+>out.wikiconflict: <All.csv mkout 
+{
+	./mkout | ../mkrel sym multisigned | ../mkrmdup  
+}
+
+All.csv: konect/own/wikisignedgraph.tar.gz
+{
+	tar xvvf konect/own/wikisignedgraph.tar.gz
+	touch All.csv
+}
+
+konect/own/wikisignedgraph.tar.gz:  !konect;
+
+@clean:
+{
+	rm -f *.csv
+	rm -f *.tar.gz
+	rm -f out.*
+}
+
+@deploy: 
+	konect/dat/wikiconflict/out.wikiconflict 
+	konect/dat/wikiconflict/meta.wikiconflict;
+
+konect/dat/wikiconflict/$name:  $name !konect
+{
+	cp -b "$name" "konect/dat/wikiconflict/"
+}
+
+konect:  {
+	echo >&2 '*** Create the directory konect/ to point to the konect/ repository'
+	exit 1
+}
+

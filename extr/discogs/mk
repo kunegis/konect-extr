@@ -1,0 +1,148 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use FileHandle;
+use Data::Dumper;
+use MIME::Base64;
+use XML::Twig;
+use POSIX qw(strftime);
+use POSIX qw(mktime);
+use Encode;
+#open files
+
+open OUTAL,'|../mkrel "bip" "positive" >out.discogs_all_affiliation' or die $!;
+open OUTAG,'|../mkrel "bip" "positive">out.discogs_all_genre' or die $!;
+#open OUTLG,'>', "outi.discogs_label-genre_label-genre" or die $!;
+open OUTAS,'|../mkrel "bip" "positive">out.discogs_all_style' or die $!;
+open OUTLS,'|../mkrel "bip" "positive">out.discogs_all_lstyle' or die $!;
+open OUTLG,'|../mkrel "bip" "positive">out.discogs_all_lgenre' or die $!;
+
+open ENTL,'>', "ent.discogs_all_all.label.name" or die $!;
+open ENTA,'>',"ent.discogs_all_all.artist.name" or die $!;
+open ENTG,'>',"ent.discogs_all_all.genre.name" or die $!;
+open ENTS,'>',"ent.discogs_all_all.style.name" or die $!;
+binmode( OUTLG, ':utf8' );
+binmode( OUTLS, ':utf8' );
+binmode( OUTAL, ':utf8' );
+binmode( OUTAG, ':utf8' );
+binmode( OUTAS, ':utf8' );
+binmode( ENTL, ':utf8' );
+binmode( ENTA, ':utf8' );
+binmode( ENTG, ':utf8' );
+binmode( ENTS, ':utf8' );
+my $labels={};
+my $labelid=1;
+my $artists={};
+my $artistid=1;
+my $genres={};
+my $genreid=1;
+my $styles={};
+my $styleid=1;
+
+XML::Twig->new(
+twig_roots => {
+   'release' => sub { my($tw,$ift) = @_;
+    my $release = $ift->atts->{'id'};
+    my $x=$ift->simplify(forcearray => 1);
+    my $catno;
+	my $released=$x->{released}->[0];
+	my $label=(keys %{$x->{labels}->[0]->{label}})[0];
+	if (defined $label)
+	{
+	
+	 if(defined $x->{labels}->[0]->{label}->{$label}->{catno})
+	 {
+	 $catno=$label;#$x->{labels}->[0]->{label}->{$label}->[0];
+         if (not defined ($labels->{$catno}))
+                {
+		print ENTL $label."\n";
+	 	$labels->{$catno}=$labelid;
+		$labelid++;
+		}
+ 	 }else{
+		print STDERR "***mk: WARNING: label is missing catno. Label:".$label."\n";
+		print STDERR Dumper($x->{labels}->[0]->{label}->{$label});
+		next;
+	 }
+	}else{next;}
+	foreach my $artist ( @{$x->{artists}->[0]->{artist}} )
+	{
+		if (not defined ($artists->{$artist->{id}->[0]}))
+          	{
+		print ENTA $artist->{name}->[0]."\n";
+		$artists->{$artist->{id}->[0]}=$artistid;
+          	$artistid++;}
+		 if (defined $label) 
+		 {
+			print OUTAL $artists->{$artist->{id}->[0]}." ".$labels->{$catno}."\n";
+		 }
+	}
+	foreach my $artist ( @{$x->{extraartists}->[0]->{artist}} )
+	{
+                if (not defined ($artists->{$artist->{id}->[0]}))
+                {
+                print ENTA $artist->{name}->[0]."\n";
+		$artists->{$artist->{id}->[0]}=$artistid;
+                $artistid++;}
+		print OUTAL $artists->{$artist->{id}->[0]}." ".$labels->{$catno}."\n";
+	}
+        foreach my $genre ( @{$x->{genres}->[0]->{genre}} )
+        {
+                if (not defined ($genres->{$genre}))
+                {
+                print ENTG $genre."\n";
+                $genres->{$genre}=$genreid;
+                $genreid++;}
+		print OUTLG $labels->{$catno}." ".$genres->{$genre}."\n";
+		foreach my $artist ( @{$x->{artists}->[0]->{artist}} )
+	        {
+			print OUTAG $artists->{$artist->{id}->[0]}." ".$genres->{$genre}."\n";
+		}
+		foreach my $artist ( @{$x->{extraartists}->[0]->{artist}} )
+		{
+			print OUTAG $artists->{$artist->{id}->[0]}." ".$genres->{$genre}."\n";
+		}
+	}
+
+        foreach my $style ( @{$x->{styles}->[0]->{style}} )
+        {
+		if (not defined ($styles->{$style}))
+                {
+                print ENTS $style."\n";
+                $styles->{$style}=$styleid;
+                $styleid++;}
+		print OUTLS $labels->{$catno}." ".$styles->{$style}."\n";
+        	foreach my $artist ( @{$x->{artists}->[0]->{artist}} )
+                {
+                        print OUTAS $artists->{$artist->{id}->[0]}." ".$styles->{$style}."\n";
+                }
+                foreach my $artist ( @{$x->{extraartists}->[0]->{artist}} )
+                {
+                        print OUTAS $artists->{$artist->{id}->[0]}." ".$styles->{$style}."\n";
+                }
+	}
+	$tw->purge;
+  }
+})->parse(\*STDIN);
+close(OUTAG);
+close(OUTAS);
+close(OUTAL);
+close(OUTLG);
+close(OUTLS);
+close(ENTA);
+close(ENTL);
+close(ENTS);
+close(ENTG);
+
+sub gettime{
+ return "";
+ my $s=$_[0];
+ my ($y,$m,$d)=split '-',$s;
+ return mktime(0,0,0,$d,$m-1,$y-1900);
+}
+
+sub myencode{
+my ($s)=@_;
+return encode_base64(encode("UTF-8", $s),'');
+}

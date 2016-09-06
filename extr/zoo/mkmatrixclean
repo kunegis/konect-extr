@@ -1,0 +1,66 @@
+#! /bin/sh
+#
+# Remove edges to/from Profanity+Blacklist in the matrix
+#
+# INPUT:  out.matrix
+# OUTPUT: out.matrix.clean  (same format, but edges incident to Profanity+Blacklist removed)
+# OUTPUT: out.trolls        (One troll user ID per line, the foes of Profanity+Blacklist)
+#
+# TODO also use user No+More+Trolls
+#
+
+names="No+More+Trolls"
+#Profanity+Blacklist 
+XMINRATINGS=50
+
+TMP_BASE=${TMP-/tmp}/`basename $0`
+
+[ "$verbose" ] && exec 3>&1 || exec 3>/dev/null
+
+cp out.matrix $TMP_BASE.matrix # remove gradually from this file
+echo >$TMP_BASE.trolls # add gradually from this file
+
+for name in $names
+do
+  userid="`sed <out.userids -e '/ '"$name"'$/!d;s,^\([0-9]*\).*$,\1,'`"
+
+  echo >&3 name=$name, userid=$userid
+
+  sed -i $TMP_BASE.matrix  -re '
+/^'$userid' /d
+/^[0-9]+ '$userid' /d
+'
+
+  <out.matrix sed -re '
+/^'$userid' [0-9]+ -1$/!d
+s,^'$userid' ([0-9]+) -1$,\1,g
+' >>$TMP_BASE.trolls
+done
+
+
+cp $TMP_BASE.matrix out.matrix.clean
+
+# We only use those users as trolls that have some links left in the matrix. 
+echo >out.trolls
+lonetrolls=
+all=
+famoustrolls=
+for userid in `cat $TMP_BASE.trolls`
+do
+#  echo >&3 $userid...
+  all="$all $userid"
+  count=`grep ' '$userid' ' -c out.matrix.clean`
+#  echo >&3 count=$count
+  if [ $count -ge $MINRATINGS ]
+  then
+      echo $userid >>out.trolls 
+      famoustrolls="$famoustrolls $userid"
+  else
+      lonetrolls="$lonetrolls $userid"
+  fi
+done 
+
+#echo >&3 lonetrolls=$lonetrolls
+#echo >&3 all=$all
+echo >&3 famoustrolls=$famoustrolls
+

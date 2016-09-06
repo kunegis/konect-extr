@@ -1,0 +1,12 @@
+name:  Digg votes
+code:  DV
+url:  http://www.isi.edu/~lerman/downloads/digg2009.html
+category:  Rating
+description:  User–story vote
+cite:  konect:digg
+long-description:  These are votes on stories by users of Digg.  The network is bipartite, and nodes represent users and stories, and each edge represents one vote.  The data covers the period of a month in 2009.  The dataset contains multiple edges, when a single user has apparently given multiple votes to a single item. 
+entity-names:  user, story
+relationship-names:  vote
+extr:  digg
+timeiso:  2009
+tags:  #incomplete 

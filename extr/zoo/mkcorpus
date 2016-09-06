@@ -1,0 +1,29 @@
+#! /bin/sh
+#
+# Generate full corpus with one link per line.
+# Format of each line: USER_A USER_B WEIGHT
+# Lines are ordered by USER_A first, then by USER_B. 
+#
+# INPUT:  zoodir/
+# OUTPUT: out.corpus
+#
+
+ZOO=${ZOO-~/zoodir}
+
+exec 3>out.corpus
+
+cd $ZOO
+
+ls -f |
+sed -e '/^user\./!d;s,user\.,,' |
+while read name
+do
+  [ "$name" ] || { echo >&2 '*** Empty user name ' ; exit 1; }
+  <"$ZOO/user.$name/friends" sed -e 's,^,'"$name"' ,;s,$, +,'
+  <"$ZOO/user.$name/foes"    sed -e 's,^,'"$name"' ,;s,$, -,'
+  <"$ZOO/user.$name/fans"    sed -e 's,$, '"$name"' +,'
+  <"$ZOO/user.$name/freaks"  sed -e 's,$, '"$name"' -,'
+done |
+sort -u >&3
+
+

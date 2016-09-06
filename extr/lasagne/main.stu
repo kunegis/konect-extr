@@ -1,0 +1,76 @@
+#
+# This project uses Stu instead of Make.  Get Stu at
+#
+# https://github.com/kunegis/stu
+#
+# UPDATE:  The datasets are not available anymore. 
+# 
+
+% version 1.15
+
+@out:  
+	meta.lasagne-yahoo meta.lasagne-frenchbook meta.lasagne-spanishbook
+	out.lasagne-yahoo out.lasagne-frenchbook out.lasagne-spanishbook
+;
+
+
+>out.lasagne-yahoo:  <ydata-ysm-advertiser-phrase-graph-v1_0.nde
+{
+	echo '% asym unweighted' 
+	sed -e '1d' | ../mkuniq1 
+}
+
+>out.lasagne-frenchbook:  <frenchBookInter_st.nde
+{
+	echo '% asym unweighted' 
+	sed -e '1d' | ../mkuniq1
+}
+
+>out.lasagne-spanishbook:  <spanishBookInter_st.nde
+{
+	echo '% asym positive' 
+	sed -e '1d' | ../mkuniq1
+}
+
+ydata-ysm-advertiser-phrase-graph-v1_0.nde:  ydata-ysm-advertiser.zip
+{
+	rm -f ydata-ysm-advertiser-phrase-graph-v1_0.nde
+	unzip ydata-ysm-advertiser.zip
+	touch ydata-ysm-advertiser-phrase-graph-v1_0.nde
+}
+
+ydata-ysm-advertiser.zip: 
+{
+	wget http://amici.dsi.unifi.it/graphs_dataset/nde/language-words_adjacency/ydata-ysm-advertiser.zip -O ydata-ysm-advertiser.zip
+	touch ydata-ysm-advertiser.zip
+}
+
+frenchBookInter_st.nde:  frenchBookInter_st.zip
+{
+	rm -f frenchBookInter_st.nde
+	unzip frenchBookInter_st.zip
+	touch frenchBookInter_st.nde
+}
+
+
+frenchBookInter_st.zip: 
+{
+	wget http://amici.dsi.unifi.it/graphs_dataset/nde/language-words_adjacency/frenchBookInter_st.zip -O frenchBookInter_st.zip
+	touch frenchBookInter_st.zip
+}
+
+spanishBookInter_st.nde:  spanishBookInter_st.zip
+{
+	rm -f spanishBookInter_st.nde
+	unzip spanishBookInter_st.zip
+	touch spanishBookInter_st.nde
+}
+
+
+spanishBookInter_st.zip: 
+{
+	wget http://amici.dsi.unifi.it/graphs_dataset/nde/language-words_adjacency/spanishBookInter_st.zip -O spanishBookInter_st.zip
+}
+
+@clean { rm -f out.* *.nde *.zip }
+

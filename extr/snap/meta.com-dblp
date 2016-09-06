@@ -1,0 +1,10 @@
+category: Coauthorship
+code: CD
+name: DBLP co-authorship
+description: User–user co-authorships
+url: http://snap.stanford.edu/data/com-DBLP.html
+cite: konect:leskovec2012
+extr: snap
+entity-names: author
+relationship-names: co-authorship 
+long-description: This is the co-authorship network of the DBLP computer science bibliography. Nodes are authors and an undirected edge between two nodes exists if the corresponding authors have published at least one paper together.

@@ -1,0 +1,20 @@
+
+#
+# To be executed from within analysis/. 
+#
+
+@all-petster:  
+
+	
+
+	@network.petster-hamster-household
+	@network.petster-hamster-friend
+	@network.petster-cat-household
+	@network.petster-cat-friend
+	@network.petster-dog-household
+	@network.petster-dog-friend
+;
+
+%include main.stu
+
+

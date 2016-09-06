@@ -1,0 +1,90 @@
+#! /usr/bin/perl -w
+#
+# Make IDs unique for unipartite datasets. 
+#
+# Filter a graph dataset, making IDs unique.
+#
+# INPUT format:         ID_A  ID_B   REST OF LINE
+# OUTPUT:  the same with continuous IDs
+# 
+# Input IDs may be any string not containing spaces.
+# Output IDs are continuous integers beginning at 1.
+#
+# IDs can be separated by either a single space or tabulator. If both
+# are given, tabulator is used. Lines starting with % are left
+# unchanged. Lines starting with '#' are ignored.   
+#
+# PARAMETERS
+#	$1 	(optional) entity filename 
+#
+
+use strict;
+use warnings FATAL => 'all';
+
+binmode(STDOUT, ":utf8");
+
+my $write_entities = 0; 
+
+if ($#ARGV >= 0)
+{
+    $write_entities = 1; 
+    my $ent = $ARGV[0]; 
+    open(ENT, ">", $ent) or die $!; 
+
+    print ENT "%\n%\n% ent ent.string.name\n"; 
+}
+
+my $next_id= 1;
+my %new_ids = ();
+my %old_ids = (); # Why does this exist if it's only ever written to?
+
+sub entity_id
+{
+    my $id_old = shift; 
+    my $id_new = $new_ids{$id_old};
+    if (! exists $new_ids{$id_old}) {
+	$id_new = $next_id;
+	$new_ids{$id_old} = $id_new;
+	$old_ids{$id_new} = $id_old;
+
+	if ($write_entities)
+	{
+	    my $esc = $id_old;
+	    $esc =~ s,\\,\\\\,g; 
+	    $esc =~ s,",\\",g;
+	    print ENT "$id_new \"$esc\"\n"; 
+	}
+
+	++ $next_id;
+    }
+    my $id_new_string = "" . $id_new;
+
+    return $id_new_string; 
+}
+
+while (<STDIN>) {
+
+    chomp; 
+
+    if (/^%/)
+    {
+	print "$_\n";
+	next;
+    }
+
+    if(/^\#/) { next; }
+
+    /^\s*(\S+)\s+(\S+)\s*(.*)$/ or die "*** error:  invalid input:  >>$_<<";
+    my $id_user_old= $1;
+    my $id_item_old= $2;
+    my $rol= $3; 
+
+    my $id_user_new_string = entity_id($id_user_old); 
+    my $id_item_new_string = entity_id($id_item_old); 
+    print "$id_user_new_string $id_item_new_string $rol\n";
+}
+
+if ($write_entities)
+{
+    close(ENT) or die $!; 
+}

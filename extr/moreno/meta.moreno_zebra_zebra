@@ -1,0 +1,10 @@
+category: Animal
+code: MZ
+name: Zebra
+description: Zebra–zebra interactions
+entity-names: zebra
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#zebra
+long-description: This undirected network contains interactions between 28 Grévy's zebras (<i>Equus grevyi</i>) in Kenya. A node represents a zebra and an edge between two zebras shows that there was an interaction between them during the study.
+relationship-names: interaction
+cite: konect:sundaresan

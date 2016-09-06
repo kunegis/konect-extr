@@ -1,0 +1,34 @@
+DEPRECATED 
+
+#! /bin/sh
+#
+# STDIN
+#	Sorted list
+#
+
+ofrom=N
+oto=N
+
+while read -r line
+do
+	nfrom="$(echo "$line" | cut -d' ' -f1)"
+	nto="$(echo "$line" | cut -d' ' -f2)"
+	val="$(echo "$line" | cut -d' ' -f3)"
+
+	echo >&2 "triple= $nfrom $nto $val"
+
+	if [ "$nfrom" != "$ofrom" ] || [ "$nto" != "$oto" ] ; then
+		[ "$ofrom" != "N" ] && { 
+			echo "$ofrom $oto $sum"
+		}
+		ofrom="$nfrom"
+		oto="$nto"
+		sum="$val"
+	else
+		sum="$(( $sum + $val ))"
+
+##		if [ "$flag" != "0" ] ; then
+##			[ "$flag" != "$val" ] && flag=0
+##		fi
+	fi
+done

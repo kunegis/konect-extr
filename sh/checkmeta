@@ -1,0 +1,34 @@
+#!/bin/bash
+#Usage: ./checkmeta [-e] [FILES]
+#If no files are given checkmeta scans the current directory and all subdirectories for meta.* files.
+#This script currently checks only for duplicate codes and wrong attribute value separators (currently only =) instead of :.
+# -e: Only print errors
+
+function error
+{
+	file="$1"
+	shift
+	echo "Error in file $f: $@" >&2
+}
+
+function notify
+{
+	[ "$verbose" ] && echo "$@"
+}
+
+verbose=yes
+[ "$1" == "-e" ] && { verbose=""; shift; }
+FILES=$@
+[ "$FILES" ] || { notify "No files given; scanning for meta.* files ..."; FILES=$(find . -type f -name 'meta.*' | grep -v '.svn/'); }
+CODES=
+CODESANDFILES=
+
+for f in $FILES
+do
+	notify "Checking $f ..."
+	[ $(egrep '^[^:=]*=' $f) ] && error "$f" 'Attribute names must be followed by colon (:), not an equal sign (=)!'
+	CODE=$(grep 'code' $f | sed -n -re 's/^\s*code\s*:\s*([a-zA-Z0-9\@]+)\s*$/\1/p')
+	[ "$CODE" ] || { error "$f" 'No code given!'; continue; }
+	[ "$(echo $CODESANDFILES | egrep '(^| )'$CODE':' )" ] && { error "$f" "Uses same code ($CODE) as file $(echo $CODESANDFILES | egrep -o '(^| )'$CODE':[^ ]+' | cut -d':' -f2- )"; continue;  } 
+	CODESANDFILES="$CODESANDFILES $CODE:$f"
+done

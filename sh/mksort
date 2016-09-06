@@ -1,0 +1,44 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $dir=$ENV{'TMPDIR'};
+my %hash=();
+my @nums=();
+
+while(<STDIN>)
+{
+chomp;
+my $line=$_;
+/(\d+\s+\d+)\s+\d+\s+(\d+)/ or die 'Invalid input line\n';
+my $time=$2;
+my $nodes=$1;
+if (not exists $hash{$time}){
+	open $hash{$time},">",$dir."/tmp.mksort_$time" or die "failed to create tmp.mksort_$time in $dir\n";
+}
+ print {$hash{$time}} $nodes."\n";
+}
+for my $key (keys %hash)
+{
+ close $hash{$key};
+ open $hash{$key},"<",$dir."/tmp.mksort_$key";
+ push @nums,$key; 
+}
+my @s_nums=();
+@s_nums= sort { $a <=> $b } @nums;
+@nums=();
+
+foreach my $e (@s_nums)
+{
+my $h = $hash{$e};
+ while(<$h>)
+{
+  chomp;
+  print "$_ 1 $e\n";
+}
+ close $hash{$e};
+ unlink($dir."/tmp.mksort_".$e);
+
+}
+

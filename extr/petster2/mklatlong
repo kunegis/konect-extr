@@ -1,0 +1,34 @@
+#! /bin/sh
+#
+# Convert from a "home" location string to a lat/long line.
+#
+
+./geoescape |
+while read -r name
+do
+    if [ -z "$name" ]
+    then
+	echo NaN NaN
+	continue
+    fi
+
+    filename="geocache/$name"
+
+    if [ -d "$filename" ]
+    then
+	echo >&2 "*** Is a directory:  '$filename'"
+	exit 1
+    fi
+
+    if [ -e "$filename" ]
+    then
+	if grep -qF '<status>OK</status>' "$filename" 
+	then
+	    echo "$(<"$filename" sed -re 's,^\s*<lat>(.*)</lat>\s*$,\1,;tx;d;b;:x;q') $(<"$filename" sed -re 's,^\s*<lng>(.*)</lng>\s*$,\1,;tx;d;b;:x;q')"
+	else
+	    echo NaN NaN
+	fi
+    else
+	echo NaN NaN
+    fi
+done

@@ -1,0 +1,72 @@
+#! /usr/bin/perl -w
+#
+# Generate the coauthorship network from the DBLP XML.
+#
+# INPUT
+#	dblp.xml
+#
+# STDOUT
+#	out.dblp_coauthor
+#
+
+use strict; 
+
+use Encode; 
+use HTML::Entities;
+use Time::Local;
+
+open(IN, "<dblp.xml") or die;
+
+print "% sym positive\n";
+
+my $key  = "";
+
+my @authors = (); 
+
+my $year = "";
+
+while (<IN>)
+{
+    if (/<(article|inproceedings|proceedings|book|incollection|phdthesis|masterthesis|www) .*key=\"([^\"]*)\"/)
+    {
+	$key= $2;
+	@authors = (); 
+    }
+
+    elsif (/<year>([0-9]+)<\/year>/)
+    {
+	$year = $1;
+    }
+
+    elsif (/<author>(.+)<\/author>/)
+    {
+	my $author = $1;
+	push(@authors, $author); 
+    }
+
+    elsif (/<\/(article|inproceedings|proceedings|book|incollection|phdthesis|masterthesis|www)>/)
+    {
+	my $n = scalar @authors; 
+	foreach my $i (@authors)
+	{
+	    foreach my $j (@authors)
+	    {
+		next if $i eq $j;
+		my $i_e = $i;
+		my $j_e = $j;
+		$i_e =~ s/ /_/g;
+		$j_e =~ s/ /_/g;
+		$i_e = encode("utf-8", decode_entities($i_e)); 
+		$j_e = encode("utf-8", decode_entities($j_e)); 
+		# This ignores leap years
+		# TODO use a Perl function to make the conversion
+		# -> done
+		my $timestamp = timelocal(1,1,1,1,0,$year);
+		#= ($year - 1970) * (365 * 24 * 60 * 60); 
+  	        print "$i_e $j_e 1 $timestamp\n"; 
+	    }
+	}
+    }
+}
+
+close(IN) or die;

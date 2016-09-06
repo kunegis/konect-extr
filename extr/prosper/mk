@@ -1,0 +1,86 @@
+#! /usr/bin/perl -w
+#
+# Create the pre-extraction files.
+#
+# INPUT
+#	members.dat
+#
+# OUTPUT
+#	reli.{endorsement,friend,support,watch}
+#
+
+use strict; 
+
+use Date::Parse;
+
+open(MEMBERS, "<members.dat") or die; 
+
+open(ENDORSEMENT, ">reli.endorsement") or die;
+open(FRIEND, ">reli.friend") or die;
+open(SUPPORT, ">reli.support") or die;
+open(WATCH, ">reli.watch") or die; 
+
+print ENDORSEMENT "% asym unweighted\n";
+print FRIEND "% asym unweighted\n"; 
+print SUPPORT "% bip unweighted\n"; 
+print WATCH "% bip unweighted\n"; 
+
+while (<MEMBERS>)
+{
+    /[<]Key[>](.+)[<]\/Key[>]/ or die;  
+    my $member = $1; 
+
+    if (/[<]Endorsements[>](.+)[<]\/Endorsements[>]/)
+    {
+	my $endorsements_text = $1; 
+	while ($endorsements_text =~ m/&#60;Endorsement&#62;(.*?)&#60;\/Endorsement&#62;/g)
+	{
+	    my $endorsement_text = $1; 
+
+	    /&#60;MemberKey&#62;([0-9A-Z]+)&#60;\/MemberKey&#62;.*&#60;CreationDate&#62;([0-9:.T-]+)&#60;\/CreationDate&#62;/
+		or die; 
+
+	    my $member_other = $1;
+	    my $time_text = $2; 
+	    
+	    my $time = str2time($time_text); 
+
+	    print ENDORSEMENT "$member $member_other 1 $time\n"; 
+	}
+    }
+
+    if (/[<]FriendMemberKeys[>](.+)[<]\/FriendMemberKeys[>]/)
+    {
+	my @friends = split ",", $1;
+	foreach my $friend (@friends)
+	{
+	    print FRIEND "$member $friend\n"; 
+	}
+    }
+
+    if (/[<]SupportedGroupKeys[>](.+)[<]\/SupportedGroupKeys[>]/)
+    {
+	my @groups = split ",", $1;
+	foreach my $group (@groups)
+	{
+	    print SUPPORT "$member $group\n"; 
+	}
+    }
+
+    if (/[<]WatchListingKeys[>](.+)[<]\/WatchListingKeys[>]/)
+    {
+	my @watchs = split ",", $1;
+	foreach my $watch (@watchs)
+	{
+	    print WATCH "$member $watch\n"; 
+	}
+    }
+
+}
+
+close(MEMBERS) or die;
+
+close(ENDORSEMENT) or die;
+close(FRIEND) or die;
+close(SUPPORT) or die; 
+close(WATCH) or die; 

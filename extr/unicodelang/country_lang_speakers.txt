@@ -1,0 +1,1266 @@
+Afghanistan;AF;28.10;Persian;fa;50.00
+Pashto;ps;43.00
+Hazaragi;haz;5.90
+Uzbek;uz;4.70
+Turkmen;tk;1.70
+Parsi-Dari;prd;1.20
+Baluchi;bal;0.70
+Uyghur;ug;0.00
+Kazakh;kk;0.00
+Åland Islands;AX;100.00;Swedish;sv;99.00
+Albania;AL;96.80;Albanian;sq;100.00
+Greek;el;1.90
+Macedonian;mk;0.50
+Algeria;DZ;72.60;Algerian Arabic;arq;83.00
+Arabic;ar;74.00
+French;fr;20.00
+Kabyle;kab;7.80
+English;en;7.00
+American Samoa;AS;97.00;Samoan;sm;99.00
+English;en;97.00
+Andorra;AD;100.00;Catalan;ca;51.00
+Spanish;es;43.00
+French;fr;6.80
+Angola;AO;70.40;Portuguese;pt;67.00
+Umbundu;umb;29.00
+Kimbundu;kmb;25.00
+Lingala;ln;0.70
+Anguilla;AI;95.00;English;en;95.00
+Antigua & Barbuda;AG;99.00;English;en;86.00
+Portuguese;pt;1.80
+Argentina;AR;97.90;Spanish;es;100.00
+English;en;7.00
+Welsh;cy;0.10
+Guarani;gn;0.00
+Armenia;AM;99.60;Armenian;hy;98.00
+Kurdish;ku;3.30
+Azerbaijani;az;0.00
+Aruba;AW;96.80;Dutch;nl;97.00
+Papiamento;pap;61.00
+English;en;2.70
+Ascension Island;AC;99.00;English;en;99.00
+Australia;AU;99.00;English;en;96.00
+Traditional Chinese;zh;2.10
+Italian;it;1.90
+Warlpiri;wbp;0.00
+Austria;AT;98.00;German;de;97.00
+Bavarian;bar;95.00
+English;en;73.00
+Croatian;hr;1.20
+Slovenian;sl;0.40
+Hungarian;hu;0.30
+Azerbaijan;AZ;99.80;Azerbaijani;az;89.00
+Azerbaijani;az;9.90
+Talysh;tly;9.80
+Kurdish;ku;0.20
+Muslim Tat;ttt;0.20
+Tsakhur;tkr;0.20
+Bahamas;BS;95.60;English;en;100.00
+Bahrain;BH;94.60;Arabic;ar;87.00
+Malayalam;ml;3.30
+Bangladesh;BD;57.70;Bengali;bn;98.00
+English;en;18.00
+Rangpuri;rkt;6.50
+Sylheti;syl;5.00
+Chakma;ccp;0.20
+Burmese;my;0.20
+Garo;grt;0.10
+Manipuri;mni;0.00
+Barbados;BB;99.70;English;en;100.00
+Belarus;BY;99.60;Belarusian;be;100.00
+Russian;ru;12.00
+Belgium;BE;99.00;English;en;59.00
+Dutch;nl;55.00
+French;fr;38.00
+West Flemish;vls;10.00
+Walloon;wa;5.80
+German;de;1.40
+Belize;BZ;76.90;English;en;100.00
+Spanish;es;28.00
+Benin;BJ;42.40;French;fr;35.00
+Fon;fon;25.00
+Yoruba;yo;6.70
+Bermuda;BM;98.00;English;en;92.00
+Bhutan;BT;52.80;Dzongkha;dz;47.00
+Nepali;ne;17.00
+Tshangla;tsj;15.00
+English;en;11.00
+Lepcha;lep;3.90
+Bolivia;BO;91.20;Spanish;es;61.00
+Quechua;qu;32.00
+Aymara;ay;20.00
+Guarani;gn;0.40
+Araona;aro;0.00
+Bosnia & Herzegovina;BA;98.00;Bosnian;bs;99.00
+English;en;45.00
+Croatian;hr;12.00
+Serbian;sr;10.00
+Botswana;BW;85.10;English;en;81.00
+Tswana;tn;62.00
+Afrikaans;af;0.30
+Brazil;BR;90.40;Portuguese;pt;91.00
+English;en;8.00
+German;de;0.80
+Italian;it;0.30
+Japanese;ja;0.20
+Korean;ko;0.00
+Kaingang;kgp;0.00
+Guajajára;gub;0.00
+Nheengatu;yrl;0.00
+Xavánte;xav;0.00
+British Indian Ocean Territory;IO;99.00;English;en;100.00
+British Virgin Islands;VG;97.80;English;en;98.00
+Brunei;BN;95.40;Malay;ms;93.00
+Traditional Chinese;zh;11.00
+Malay;ms;5.00
+English;en;1.90
+Bulgaria;BG;98.40;Bulgarian;bg;100.00
+English;en;25.00
+Turkish;tr;11.00
+Burkina Faso;BF;28.70;Mossi;mos;40.00
+Dyula;dyu;32.00
+French;fr;22.00
+Burundi;BI;67.20;Rundi;rn;63.00
+French;fr;59.00
+Swahili;sw;0.10
+Cambodia;KH;73.90;Khmer;km;89.00
+Western Cham;cja;1.60
+Kuy;kdt;0.10
+Cameroon;CM;71.30;French;fr;68.00
+English;en;38.00
+Bulu;bum;4.60
+Fulah;ff;3.60
+Ewondo;ewo;3.10
+Yemba;ybb;1.60
+Ngiemboon;nnh;1.40
+Ghomala;bbj;1.40
+Kom;bkm;1.30
+Bamun;bax;1.20
+Basaa;bas;1.20
+Medumba;byv;1.10
+Mundang;mua;1.00
+Mafa;maf;0.70
+Bafut;bfd;0.60
+Kako;kkj;0.50
+Duala;dua;0.50
+Metaʼ;mgo;0.50
+Arabic;ar;0.40
+Ngomba;jgo;0.30
+Bafia;ksf;0.30
+Hausa;ha;0.10
+Aghem;agq;0.10
+Kwasio;nmg;0.00
+Yangben;yav;0.00
+Canada;CA;99.00;English;en;86.00
+French;fr;22.00
+Italian;it;2.00
+German;de;1.90
+Plautdietsch;pdt;0.20
+Plains Cree;crk;0.10
+Cree;cr;0.10
+Yiddish;yi;0.00
+Inuktitut;iu;0.00
+Inuktitut (Unified Canadian Aboriginal Syllabics);iu;
+Montagnais;moe;0.00
+Southern East Cree;crj;0.00
+Atikamekw;atj;0.00
+Northern East Cree;crl;0.00
+Swampy Cree;csw;0.00
+Moose Cree;crm;0.00
+Inuinnaqtun;ikt;0.00
+Mohawk;moh;0.00
+Dogrib;dgr;0.00
+Slave;den;0.00
+North Slavey;scs;0.00
+Naskapi;nsk;0.00
+Chipewyan;chp;0.00
+Gwichʼin;gwi;0.00
+Canary Islands;IC;97.70;Spanish;es;98.00
+Cape Verde;CV;84.90;Kabuverdianu;kea;91.00
+Portuguese;pt;76.00
+Caribbean Netherlands;BQ;96.50;Papiamento;pap;81.00
+Dutch;nl;8.00
+Cayman Islands;KY;98.90;English;en;98.00
+Central African Republic;CF;56.60;Sango;sg;49.00
+French;fr;49.0
+Lingala;ln;0.20
+Ceuta & Melilla;EA;97.70;Spanish;es;98.00
+Chad;TD;35.40;French;fr;26.00
+Arabic;ar;17.00
+Chile;CL;98.60;Spanish;es;98.00
+English;en;9.50
+Mapuche;arn;1.50
+China;CN;95.10;Simplified Chinese;zh;90.00
+Wu Chinese;wuu;6.00
+Xiang Chinese;hsn;2.90
+Hakka Chinese;hak;2.30
+Min Nan Chinese;nan;1.90
+Gan Chinese;gan;1.70
+Sichuan Yi;ii;0.60
+Uyghur;ug;0.60
+Zhuang;za;0.30
+Mongolian;mn;0.30
+Tibetan;bo;0.20
+Korean;ko;0.20
+Kazakh;kk;0.10
+Lisu;lis;0.00
+Kyrgyz;ky;0.00
+Naxi;nxq;0.00
+Tai Nüa;tdd;0.00
+Western Lawa;lcp;0.00
+English;en;0.00
+Russian;ru;0.00
+Vietnamese;vi;0.00
+Uzbek;uz;0.00
+Literary Chinese;lzh;0.00
+Christmas Island;CX;99.00;English;en;92.00
+Clipperton Island;CP;99.00;Unknown Language;und;100.00
+Cocos (Keeling) Islands;CC;99.00;Malay;ms;83.00
+English;en;17.00
+Colombia;CO;93.60;Spanish;es;93.00
+Wayuu;guc;0.30
+Comoros;KM;75.50;Arabic;ar;66.00
+French;fr;56.00
+Ngazidja Comorian;zdj;37.00
+Congo - Brazzaville;CG;83.80;French;fr;84.00
+Lingala;ln;2.40
+Congo - Kinshasa;CD;66.80;Swahili;sw;50.00
+Luba-Lulua;lua;9.60
+Congo Swahili;swc;9.00
+French;fr;3.80
+Lingala;ln;3.10
+Luba-Katanga;lu;2.30
+Kongo;kg;1.50
+Mongo;lol;0.60
+Kinyarwanda;rw;0.40
+Cook Islands;CK;95.00;English;en;95.00
+Costa Rica;CR;96.30;Spanish;es;95.00
+Côte d’Ivoire;CI;56.90;French;fr;49.00
+Baoulé;bci;11.00
+Cebaara Senoufo;sef;4.30
+Dan;dnj;4.00
+Koro;kfo;0.20
+Koro Wachi;bqv;0.20
+Croatia;HR;98.90;Croatian;hr;99.00
+English;en;49.00
+Italian;it;1.60
+Cuba;CU;99.80;Spanish;es;100.00
+Curaçao;CW;96.50;Papiamento;pap;81.00
+Dutch;nl;8.00
+Spanish;es;3.90
+Cyprus;CY;98.70;Greek;el;75.00
+English;en;73.00
+Turkish;tr;23.00
+Armenian;hy;0.20
+Arabic;ar;0.10
+Czech Republic;CZ;99.00;Czech;cs;98.00
+English;en;27.00
+Polish;pl;0.50
+Denmark;DK;99.00;Danish;da;93.00
+English;en;86.00
+German;de;0.40
+Kalaallisut;kl;0.10
+Jutish;jut;0.00
+Diego Garcia;DG;99.00;English;en;99.00
+Djibouti;DJ;67.90;Afar;aa;42.00
+Somali;so;41.00
+Arabic;ar;7.30
+French;fr;2.10
+Dominica;DM;94.00;English;en;94.00
+Dominican Republic;DO;90.10;Spanish;es;78.00
+English;en;0.10
+Ecuador;EC;91.60;Spanish;es;96.00
+Quechua;qu;17.00
+Chimborazo Highland Quichua;qug;5.70
+Egypt;EG;73.90;Arabic;ar;94.00
+Egyptian Arabic;arz;64.00
+English;en;35.00
+Greek;el;0.10
+El Salvador;SV;84.50;Spanish;es;89.00
+Equatorial Guinea;GQ;94.20;Spanish;es;87.00
+Fang;fan;51.00
+French;fr;8.80
+Bube;bvb;7.90
+Eritrea;ER;68.90;Tigrinya;ti;60.00
+English;en;59.00
+Tigre;tig;18.00
+Arabic;ar;4.90
+Saho;ssy;3.60
+Blin;byn;1.30
+Estonia;EE;99.80;Estonian;et;71.00
+Russian;ru;30.00
+Võro;vro;5.70
+Ethiopia;ET;39.00;English;en;43.00
+Amharic;am;33.00
+Oromo;om;32.00
+Tigrinya;ti;6.00
+Sidamo;sid;3.50
+Wolaytta;wal;1.80
+Afar;aa;1.40
+Falkland Islands;FK;99.00;English;en;99.00
+Faroe Islands;FO;99.00;Faroese;fo;95.00
+Fiji;FJ;93.70;English;en;94.00
+Hindi;hi;44.00
+Fiji Hindi (Devanagari);hif;41.00
+Fijian;fj;39.00
+Rotuman;rtm;0.30
+Finland;FI;100.00;Finnish;fi;94.00
+English;en;70.00
+Swedish;sv;5.70
+Russian;ru;0.80
+Estonian;et;0.10
+Kalo Finnish Romani;rmf;0.10
+Northern Sami;se;0.00
+Skolt Sami;sms;0.00
+France;FR;99.00;French;fr;99.00
+English;en;39.00
+Occitan;oc;3.00
+Italian;it;1.70
+Portuguese;pt;1.30
+Picard;pcd;1.10
+Swiss German;gsw;0.90
+Breton;br;0.80
+Corsican;co;0.60
+Catalan;ca;0.20
+Dutch;nl;0.10
+Arpitan;frp;0.10
+Interlingua;ia;0.00
+French Guiana;GF;83.00;French;fr;77.00
+Guianese Creole French;gcr;26.00
+Traditional Chinese;zh;2.50
+French Polynesia;PF;98.00;French;fr;61.00
+Tahitian;ty;31.00
+Traditional Chinese;zh;7.80
+French Southern Territories;TF;99.00;French;fr;100.00
+Gabon;GA;89.00;French;fr;63.00
+Punu;puu;9.00
+Gambia;GM;51.10;English;en;40.00
+Mandingo;man;29.00
+Georgia;GE;99.70;Georgian;ka;86.00
+Mingrelian;xmf;11.00
+Russian;ru;9.00
+Armenian;hy;7.00
+Ossetic;os;2.20
+Abkhazian;ab;2.20
+Kurdish;ku;0.90
+Germany;DE;99.00;German;de;91.00
+English;en;64.00
+French;fr;18.00
+Low German;nds;12.00
+Dutch;nl;9.00
+Italian;it;7.00
+Main-Franconian;vmf;6.00
+Russian;ru;6.0
+Spanish;es;6.0
+Turkish;tr;2.50
+Danish;da;2.00
+Croatian;hr;0.80
+Kurdish;ku;0.70
+Greek;el;0.40
+Colognian;ksh;0.30
+Polish;pl;0.30
+Upper Sorbian;hsb;0.00
+Northern Frisian;frr;0.00
+Lower Sorbian;dsb;0.00
+Eastern Frisian;frs;0.00
+Saterland Frisian;stq;0.00
+Palatine German;pfl;0.00
+Ghana;GH;71.50;Akan;ak;39.00
+English;en;21.00
+Ewe;ee;11.00
+Abron;abr;5.00
+Frafra;gur;3.50
+Adangme;ada;3.00
+Ga;gaa;2.80
+Nzima;nzi;1.00
+Hausa;ha;0.90
+Safaliba;saf;0.00
+Gibraltar;GI;80.00;English;en;80.00
+Greece;GR;97.30;Greek;el;99.00
+English;en;51.00
+Pontic (Greek);pnt;3.70
+Macedonian;mk;1.60
+Turkish;tr;1.20
+Bulgarian;bg;0.30
+Albanian;sq;0.10
+Tsakonian;tsd;0.00
+Greenland;GL;100.00;Kalaallisut;kl;84.00
+Danish;da;14.00
+Grenada;GD;96.00;English;en;96.00
+Guadeloupe;GP;90.00;French;fr;90.00
+Guam;GU;99.00;English;en;91.00
+Chamorro;ch;22.00
+Guatemala;GT;75.90;Spanish;es;93.00
+Kʼicheʼ;quc;7.00
+Guernsey;GG;100.00;English;en;100.00
+Guinea;GN;41.00;French;fr;29.00
+Fulah;ff;26.00
+Mandingo (N’Ko);man;23.00
+Susu;sus;11.00
+NʼKo;nqo;5.00
+Kpelle;kpe;3.80
+Guinea-Bissau;GW;55.30;Portuguese;pt;100.00
+Guyana;GY;91.80;English;en;100.00
+Haiti;HT;48.70;Haitian;ht;81.00
+French;fr;4.70
+Heard & McDonald Islands;HM;99.00;Unknown Language;und;100.00
+Honduras;HN;85.10;Spanish;es;78.00
+English;en;0.40
+Hong Kong SAR China;HK;93.50;Traditional Chinese;zh;95.00
+English;en;51.00
+Simplified Chinese;zh;5.00
+Hungary;HU;99.00;Hungarian;hu;100.00
+English;en;20.00
+German;de;2.50
+Romanian;ro;1.00
+Croatian;hr;0.30
+Slovak;sk;0.10
+Slovenian;sl;0.00
+Iceland;IS;99.00;Icelandic;is;100.00
+Danish;da;0.70
+India;IN;62.80;Hindi;hi;41.00
+English;en;19.00
+Bengali;bn;8.10
+Telugu;te;7.20
+Marathi;mr;7.00
+Tamil;ta;5.90
+Urdu;ur;5.00
+Gujarati;gu;4.50
+Kannada;kn;3.70
+Oriya;or;3.20
+Malayalam;ml;
+Punjabi;pa;2.80
+Bhojpuri;bho;2.30
+Awadhi;awa;1.90
+Assamese;as;1.30
+Marwari;mwr;1.20
+Magahi;mag;1.20
+Haryanvi;bgc;1.20
+Chhattisgarhi;hne;1.10
+Deccan;dcc;1.00
+Nepali;ne;0.60
+Kanauji;bjj;0.60
+Santali;sat;0.60
+Mewati;wtm;0.50
+Rangpuri;rkt;0.40
+Kashmiri;ks;0.40
+Konkani;kok;0.40
+Goan Konkani;gom;0.30
+Shekhawati;swv;0.30
+Lambadi;lmn;0.30
+Garhwali;gbm;0.30
+Sindhi;sd;0.30
+Gondi (Telugu);gon;0.20
+Kumaoni;kfy;0.20
+Kurukh;kru;0.20
+Waddar;wbq;0.20
+Kangri;xnr;0.20
+Wagdi;wbr;0.20
+Bodo;brx;0.10
+Nimadi;noe;0.10
+Bhili;bhb;0.10
+Manipuri;mni;0.10
+Rajasthani;raj;0.10
+Ho;hoc;0.10
+Mewari;mtr;0.10
+Mundari (Bengali);unr;0.10
+Bhilali;bhi;0.10
+Hadothi;hoj;0.10
+Khasi;kha;0.10
+Kachchi;kfr;0.10
+Garo;grt;0.10
+Munda (Bengali);unx;0.00
+Bagheli;bfy;0.00
+Sirmauri;srx;0.00
+Saurashtra;saz;0.00
+Chakma;ccp;0.00
+Sindhi (Devanagari);sd;0.00
+Ao Naga;njo;0.00
+Riang [India];ria;0.00
+Tibetan;bo;0.00
+Bishnupriya;bpy;0.00
+Balti;bft;0.00
+Braj;bra;0.00
+Lepcha;lep;0.00
+Limbu (Devanagari);lif;0.00
+Lahnda;lah;0.00
+Sanskrit;sa;0.00
+Khamti;kht;0.00
+Divehi;dv;0.00
+Dzongkha;dz;0.00
+Indonesia;ID;92.80;Indonesian;id;64.00
+Javanese;jv;34.00
+Sundanese;su;12.00
+Madurese;mad;6.30
+Malay;ms;4.60
+Minangkabau;min;3.00
+Betawi;bew;2.10
+Balinese;ban;1.80
+Buginese;bug;1.60
+Banjar;bjn;1.50
+Achinese;ace;1.40
+Sasak;sas;1.00
+Traditional Chinese;zh;0.90
+Makasar;mak;0.70
+Lampung Api;ljp;0.70
+Rejang;rej;0.50
+Gorontalo;gor;0.40
+Ngaju;nij;0.40
+Komering;kge;0.30
+Uab Meto;aoz;0.30
+Kerinci;kvr;0.10
+Tolaki;lbw;0.10
+Gayo;gay;0.10
+Tae';rob;0.10
+Sangir;sxn;0.10
+Selayar;sly;0.10
+Mentawai;mwv;0.00
+Iran;IR;85.00;Persian;fa;75.00
+South Azerbaijani;azb;24.00
+Azerbaijani;az;24.0
+Mazanderani;mzn;5.00
+Gilaki;glk;4.60
+Central Kurdish;ckb;3.90
+Turkmen;tk;2.80
+Northern Luri;lrc;2.10
+Baluchi;bal;2.00
+Arabic;ar;2.0
+Domari;rmt;1.90
+Bakhtiari;bqi;1.40
+Southern Luri;luz;1.20
+Laki;lki;0.80
+Parsi-Dari;prd;0.50
+Armenian;hy;0.20
+Pashto;ps;0.20
+Georgian;ka;0.10
+Zoroastrian Dari;gbz;0.00
+Kazakh;kk;0.00
+Iraq;IQ;78.50;Arabic;ar;68.00
+English;en;35.00
+Central Kurdish;ckb;20.00
+Persian;fa;0.90
+Syriac;syr;0.50
+Ireland;IE;99.00;English;en;98.00
+Irish;ga;11.00
+Isle of Man;IM;99.00;English;en;100.00
+Manx;gv;1.90
+Israel;IL;97.10;Hebrew;he;100.00
+English;en;85.00
+Arabic;ar;20.00
+Russian;ru;11.00
+Romanian;ro;3.70
+Yiddish;yi;3.00
+Polish;pl;1.50
+Ladino;lad;1.30
+Hungarian;hu;1.00
+Amharic;am;0.60
+Tigrinya;ti;0.10
+Malayalam;ml;0.10
+Italy;IT;99.00;Italian;it;95.00
+English;en;34.00
+French;fr;6.30
+Sardinian;sc;1.70
+German;de;1.60
+Venetian;vec;1.30
+Neapolitan;nap;1.00
+Ligurian;lij;0.90
+Sicilian;scn;0.80
+Slovenian;sl;0.20
+Sardinian;sdc;0.20
+Friulian;fur;0.10
+Emilian;egl;0.00
+Greek;el;0.00
+Lombard;lmo;0.00
+Piedmontese;pms;0.00
+Croatian;hr;0.00
+Romagnol;rgn;0.00
+Jamaica;JM;87.00;English;en;98.00
+Jamaican Creole English;jam;95.00
+Japan;JP;99.00;Japanese;ja;95.00
+Central Okinawan;ryu;0.80
+Korean;ko;0.50
+Jersey;JE;99.00;English;en;95.00
+Jordan;JO;95.90;Arabic;ar;100.00
+English;en;45.00
+Kazakhstan;KZ;99.70;Russian;ru;72.00
+Kazakh;kk;64.00
+English;en;15.00
+German;de;6.40
+Uyghur;ug;2.00
+Kenya;KE;87.40;Swahili;sw;66.00
+English;en;19.00
+Kikuyu;ki;17.00
+Luyia;luy;11.00
+Luo;luo;9.80
+Kalenjin;kln;7.60
+Gusii;guz;4.90
+Meru;mer;4.00
+Masai;mas;1.60
+Embu;ebu;1.50
+Somali;so;1.30
+Taita;dav;0.80
+Teso;teo;0.70
+Pökoot;pko;0.70
+Oromo;om;0.50
+Samburu;saq;0.50
+Arabic;ar;0.00
+Punjabi;pa;0.00
+Gujarati;gu;0.00
+Kiribati;KI;90.00;English;en;100.00
+Gilbertese;gil;60.00
+Kosovo;XK;91.90;Albanian;sq;92.00
+Gheg Albanian;aln;74.00
+Serbian;sr;5.00
+Kuwait;KW;93.90;Arabic;ar;100.00
+Kyrgyzstan;KG;99.20;Kyrgyz;ky;48.00
+Russian;ru;36.00
+Laos;LA;72.70;Lao;lo;69.00
+Khmu;kjg;5.80
+Kuy;kdt;1.00
+Latvia;LV;99.80;Latvian;lv;61.00
+Russian;ru;38.00
+Latgalian;ltg;8.90
+Lebanon;LB;89.60;Arabic;ar;86.00
+English;en;40.00
+Armenian;hy;5.20
+Kurdish;ku;1.60
+French;fr;0.40
+Lesotho;LS;89.60;Southern Sotho;st;98.00
+English;en;27.00
+Zulu;zu;14.00
+Swati;ss;2.40
+Xhosa;xh;1.00
+Liberia;LR;60.80;English;en;83.00
+Kpelle;kpe;14.00
+Vai (Vai);vai;2.60
+Mende;men;0.50
+Vai;vai;0.00
+Libya;LY;89.50;Arabic;ar;74.00
+Liechtenstein;LI;100.00;German;de;100.00
+Swiss German;gsw;85.00
+Walser;wae;3.50
+Lithuania;LT;99.70;Lithuanian;lt;86.00
+English;en;38.00
+Russian;ru;8.00
+Samogitian;sgs;0.00
+Luxembourg;LU;100.00;French;fr;87.00
+Luxembourgish;lb;67.00
+German;de;63.00
+Macau SAR China;MO;95.60;Traditional Chinese;zh;98.00
+Simplified Chinese;zh;5.00
+Portuguese;pt;5.0
+English;en;2.30
+Macedonia;MK;97.40;Macedonian;mk;67.00
+Albanian;sq;25.00
+Turkish;tr;3.50
+Madagascar;MG;64.50;Malagasy;mg;90.00
+French;fr;69.00
+English;en;18.00
+Malawi;MW;74.80;Nyanja;ny;63.00
+Tumbuka;tum;8.40
+Nyasa Tonga;tog;1.00
+Zulu;zu;0.30
+Malaysia;MY;93.10;Malay;ms;75.00
+English;en;21.00
+Traditional Chinese;zh;17.00
+Tamil;ta;4.20
+Iban;iba;2.50
+Negeri Sembilan Malay;zmi;1.20
+Javanese;jv;1.20
+Central Dusun;dtp;0.60
+Malayalam;ml;0.20
+Buginese;bug;0.10
+Banjar;bjn;0.00
+Maldives;MV;98.40;Divehi;dv;94.00
+Mali;ML;33.40;French;fr;46.00
+Maasina Fulfulde;ffm;7.70
+Soninke;snk;5.90
+Kita Maninkakan;mwk;5.00
+Koyraboro Senni;ses;3.40
+Tamashek;tmh;2.10
+Bambara (N’Ko);bm;2.00
+Koyra Chiini;khq;1.70
+Tomo Kan Dogon;dtm;1.10
+Xaasongaxango;kao;1.00
+Arabic;ar;0.90
+Bomu;bmq;0.90
+Jenaama Bozo;bze;0.80
+Malta;MT;92.40;Maltese;mt;100.00
+English;en;88.00
+Marshall Islands;MH;93.70;English;en;93.00
+Marshallese;mh;73.00
+Martinique;MQ;98.00;French;fr;98.00
+Mauritania;MR;58.60;Arabic;ar;85.00
+French;fr;17.00
+Fulah;ff;5.70
+Wolof;wo;0.30
+Mauritius;MU;88.80;Morisyen;mfe;90.00
+English;en;72.00
+Bhojpuri;bho;27.00
+Urdu;ur;5.20
+French;fr;3.00
+Tamil;ta;2.50
+Mayotte;YT;92.00;Comorian;swb;88.00
+French;fr;57.00
+Bushi;buc;23.00
+Swahili;sw;1.40
+Mexico;MX;93.50;Spanish;es;83.00
+English;en;13.00
+Yucateco;yua;0.70
+Eastern Huasteca Nahuatl;nhe;0.40
+Western Huasteca Nahuatl;nhw;0.40
+Central Mazahua;maz;0.30
+Central Huasteca Nahuatl;nch;0.20
+Seri;sei;0.00
+Micronesia;FM;89.00;English;en;57.00
+Chuukese;chk;30.00
+Pohnpeian;pon;23.00
+Kosraean;kos;7.60
+Yapese;yap;6.20
+Ulithian;uli;2.80
+Moldova;MD;99.00;Romanian;ro;63.00
+Ukrainian;uk;14.00
+Bulgarian;bg;9.40
+Gagauz;gag;3.30
+Russian;ru;3.00
+Monaco;MC;99.00;French;fr;99.00
+Mongolia;MN;97.40;Mongolian;mn;93.00
+Kazakh;kk;7.20
+Simplified Chinese;zh;1.40
+Russian;ru;0.10
+Uyghur;ug;0.00
+Montenegro;ME;98.50;Serbian;sr;100.00
+Albanian;sq;7.90
+Serbian;sr;5.00
+Montserrat;MS;97.00;English;en;67.00
+Morocco;MA;67.10;Moroccan Arabic;ary;87.00
+Arabic;ar;62.00
+Standard Moroccan Tamazight;zgh;22.00
+French;fr;20.00
+English;en;14.00
+Central Atlas Tamazight;tzm;9.80
+Tachelhit (Tifinagh);shi;8.70
+Riffian (Tifinagh);rif;4.90
+Spanish;es;0.10
+Mozambique;MZ;56.10;Portuguese;pt;27.00
+Makhuwa;vmw;13.00
+Ndau;ndc;9.90
+Tsonga;ts;7.90
+Lomwe;ngl;6.80
+Sena;seh;4.60
+Makhuwa-Meetto;mgh;4.50
+Ronga;rng;3.40
+Nyanja;ny;2.60
+Yao;yao;2.40
+Swahili;sw;0.00
+Zulu;zu;0.00
+Myanmar (Burma);MM;92.70;Burmese;my;64.00
+Shan;shn;6.40
+Kachin;kac;1.70
+Mon;mnw;1.50
+Khamti;kht;0.00
+Namibia;NA;88.80;Afrikaans;af;75.00
+Kuanyama;kj;35.00
+Ndonga;ng;21.00
+Nama;naq;9.20
+Herero;hz;9.10
+English;en;7.00
+German;de;1.00
+Tswana;tn;0.30
+Nauru;NR;99.00;English;en;99.00
+Nauru;na;73.00
+Nepal;NP;57.40;Nepali;ne;44.00
+Maithili;mai;11.00
+Bhojpuri;bho;6.80
+Newari;new;3.30
+Jumli;jml;3.20
+English;en;3.0
+Eastern Tamang;taj;3.00
+Awadhi;awa;2.20
+Dangaura Tharu;thl;2.00
+Bantawa;bap;1.50
+Western Tamang;tdg;1.30
+Rana Tharu;thr;1.20
+Eastern Magar;mgp;1.10
+Limbu (Devanagari);lif;
+Kochila Tharu;thq;1.00
+Western Magar;mrd;0.80
+Bagheli;bfy;0.50
+Sherpa;xsr;0.50
+Rajbanshi;rjs;0.40
+Southwestern Tamang;tsf;0.40
+Hindi;hi;0.40
+Eastern Gurung;ggn;
+Western Gurung;gvr;0.30
+Kathoriya Tharu;tkt;0.20
+Thulung;tdh;0.10
+Bengali;bn;0.10
+Mundari (Devanagari);unr;0.00
+Lepcha;lep;0.00
+Netherlands;NL;99.00;Dutch;nl;100.00
+English;en;90.00
+Limburgish;li;5.50
+Western Frisian;fy;4.30
+Gronings;gos;3.60
+Indonesian;id;1.80
+Zeelandic;zea;1.40
+Turkish;tr;1.20
+Low German;nds;0.80
+New Caledonia;NC;96.20;French;fr;96.00
+New Zealand;NZ;99.00;English;en;98.00
+Maori;mi;2.50
+Nicaragua;NI;78.00;Spanish;es;78.00
+Niger;NE;28.70;Hausa;ha;41.00
+French;fr;29.00
+Zarma;dje;17.00
+Central-Eastern Niger Fulfulde;fuq;7.00
+Tamashek;tmh;6.00
+Arabic;ar;0.20
+Tasawaq;twq;0.00
+Nigeria;NG;61.30;English;en;53.00
+Nigerian Pidgin;pcm;21.00
+Yoruba;yo;13.00
+Igbo;ig;13.0
+hausa;ha;13.0
+Nigerian Fulfulde;fuv;6.70
+Tiv;tiv;1.60
+Ibibio;ibb;1.40
+Hausa;ha;1.00
+Bini;bin;0.70
+Jju;kaj;0.20
+Tyap;kcg;0.10
+Arabic;ar;0.10
+Atsam;cch;0.00
+Amo;amo;0.00
+Niue;NU;95.00;Niuean;niu;95.00
+English;en;95.0
+Norfolk Island;NF;99.00;English;en;76.00
+North Korea;KP;100.00;Korean;ko;88.00
+Northern Mariana Islands;MP;97.00;English;en;97.00
+Chamorro;ch;18.00
+Norway;NO;100.00;Norwegian Bokmål;nb;100.00
+Norwegian Nynorsk;nn;25.00
+Northern Sami;se;3.30
+Oman;OM;86.90;Arabic;ar;81.00
+Baluchi;bal;4.90
+Persian;fa;0.90
+Pakistan;PK;54.90;Urdu;ur;95.00
+Punjabi;pa;70.00
+English;en;50.00
+Lahnda;lah;40.00
+Pashto;ps;15.00
+Sindhi;sd;12.00
+Saraiki;skr;9.10
+Baluchi;bal;3.70
+Brahui;brh;1.30
+Northern Hindko;hno;1.20
+Persian;fa;0.70
+Southern Hindko;hnd;0.40
+Tajik;tg;0.30
+Gujari;gju;0.20
+Balti;bft;0.20
+Parkari Koli;kvx;0.20
+Khowar;khw;0.20
+Indus Kohistani;mvy;0.10
+Wadiyara Koli;kxp;0.10
+Kachi Koli;gjk;0.10
+Kashmiri;ks;0.10
+Bateri;btv;0.00
+Palau;PW;92.00;Palauan;pau;74.00
+English;en;8.90
+Palestinian Territories;PS;95.30;Arabic;ar;100.00
+Panama;PA;94.10;Spanish;es;69.00
+English;en;14.00
+Traditional Chinese;zh;0.20
+Papua New Guinea;PG;62.40;Tok Pisin;tpi;71.00
+English;en;50.00
+Hiri Motu;ho;2.10
+Paraguay;PY;93.90;Guarani;gn;80.00
+Spanish;es;3.20
+German;de;2.90
+Peru;PE;89.60;Spanish;es;73.00
+Quechua;qu;15.00
+Aymara;ay;1.60
+Philippines;PH;95.40;English;en;64.00
+Filipino;fil;60.00
+Spanish;es;31.00
+Cebuano;ceb;24.00
+Iloko;ilo;9.60
+Hiligaynon;hil;8.40
+Bikol;bik;3.00
+Waray;war;2.90
+Pampanga;pam;2.30
+Pangasinan;pag;1.40
+Maguindanaon;mdh;1.20
+Tausug;tsg;1.10
+Traditional Chinese;zh;0.70
+Capiznon;cps;0.70
+Kinaray-a;krj;0.40
+Rinconada Bikol;bto;0.30
+Hanunoo;hnn;0.00
+Tagbanwa;tbw;0.00
+Buhid;bku;0.00
+Pitcairn Islands;PN;99.00;English;en;96.00
+Poland;PL;99.70;Polish;pl;96.00
+English;en;33.00
+Silesian;szl;1.30
+Belarusian;be;0.60
+Ukrainian;uk;0.40
+Kashubian;csb;0.10
+German;de;0.10
+Lower Silesian;sli;0.00
+Lithuanian;lt;0.00
+Portugal;PT;95.40;Portuguese;pt;96.00
+English;en;27.00
+Galician;gl;0.10
+Puerto Rico;PR;90.30;Spanish;es;87.00
+English;en;49.00
+Qatar;QA;96.30;Arabic;ar;89.00
+Persian;fa;11.00
+Malayalam;ml;0.30
+Réunion;RE;88.00;French;fr;89.00
+Réunion Creole French;rcf;71.00
+Tamil;ta;15.00
+Romania;RO;97.70;Romanian;ro;90.00
+English;en;31.00
+Hungarian;hu;6.60
+German;de;0.20
+Turkish;tr;0.10
+Serbian;sr;0.10
+Bulgarian;bg;0.00
+Greek;el;0.00
+Polish;pl;0.00
+Russia;RU;99.70;Russian;ru;94.00
+Tatar;tt;1.40
+Chuvash;cv;1.30
+Bashkir;ba;1.30
+Armenian;hy;0.80
+Chechen;ce;0.70
+Avaric;av;0.40
+Udmurt;udm;0.40
+Mari;chm;0.40
+Sakha;sah;0.30
+Ossetic;os;0.30
+Erzya;myv;0.30
+Kabardian;kbd;0.30
+Dargwa;dar;0.30
+Buriat;bua;0.20
+Moksha;mdf;0.20
+Kumyk;kum;0.20
+Lezghian;lez;0.20
+Komi;kv;0.20
+Karachay-Balkar;krc;0.20
+Tuvinian;tyv;0.10
+Azerbaijani;az;0.10
+Adyghe;ady;0.10
+Karelian;krl;0.10
+Lak;lbe;0.10
+Komi-Permyak;koi;0.00
+Western Mari;mrj;0.00
+Southern Altai;alt;0.00
+Finnish;fi;0.00
+Serbian;sr;0.00
+Veps;vep;0.00
+Mongolian;mn;0.00
+Ingrian;izh;0.00
+Votic;vot;0.00
+Rwanda;RW;71.10;Kinyarwanda;rw;77.00
+English;en;15.00
+French;fr;0.00
+Samoa;WS;98.80;Samoan;sm;100.00
+English;en;2.20
+San Marino;SM;96.00;Italian;it;89.00
+Esperanto;eo;0.90
+São Tomé & Príncipe;ST;69.50;Portuguese;pt;85.00
+Saudi Arabia;SA;87.20;Arabic;ar;100.00
+Senegal;SN;49.70;Wolof;wo;70.00
+French;fr;39.00
+Fulah;ff;21.00
+Serer;srr;11.00
+Jola-Fonyi;dyo;2.60
+Serbia;RS;98.00;Serbian;sr;99.00
+Albanian;sq;19.00
+Hungarian;hu;4.80
+Romanian;ro;2.10
+Croatian;hr;0.90
+Slovak;sk;0.80
+Ukrainian;uk;0.00
+Seychelles;SC;91.80;Seselwa Creole French;crs;98.00
+French;fr;60.00
+English;en;38.00
+Sierra Leone;SL;43.30;Krio;kri;95.00
+English;en;35.00
+Mende;men;27.00
+Timne;tem;26.00
+Singapore;SG;95.90;English;en;93.00
+Simplified Chinese;zh;77.00
+Malay;ms;14.00
+Tamil;ta;2.10
+Malayalam;ml;0.20
+Punjabi;pa;0.20
+Sint Maarten;SX;99.00;English;en;68.00
+Spanish;es;12.00
+Virgin Islands Creole English;vic;7.80
+Dutch;nl;4.00
+Slovakia;SK;99.60;Slovak;sk;90.00
+English;en;26.00
+Hungarian;hu;11.00
+Ukrainian;uk;1.90
+Polish;pl;0.90
+German;de;0.30
+Slovenia;SI;99.70;Slovenian;sl;87.00
+English;en;59.00
+Hungarian;hu;0.50
+Italian;it;0.20
+Solomon Islands;SB;84.10;English;en;100.00
+Roviana;rug;1.60
+Somalia;SO;37.80;Somali;so;78.00
+Arabic;ar;34.00
+Swahili;sw;2.00
+Oromo;om;0.40
+South Africa;ZA;93.00;English;en;31.00
+Zulu;zu;24.00
+Xhosa;xh;18.00
+Afrikaans;af;13.00
+Northern Sotho;nso;9.40
+Tswana;tn;8.20
+Southern Sotho;st;7.90
+Tsonga;ts;4.40
+Swati;ss;2.70
+Venda;ve;2.30
+Hindi;hi;2.00
+South Ndebele;nr;1.60
+Swahili;sw;0.00
+South Georgia & South Sandwich Islands;GS;99.00;Unknown Language;und;100.00
+South Korea;KR;97.90;Korean;ko;100.00
+South Sudan;SS;27.00;English;en;27.00
+Arabic;ar;27.0
+Spain;ES;97.70;Spanish;es;99.00
+English;en;24.00
+Catalan;ca;17.00
+Galician;gl;7.00
+Basque;eu;2.00
+Asturian;ast;1.30
+Extremaduran;ext;0.50
+Sri Lanka;LK;91.20;Sinhala;si;68.00
+Tamil;ta;15.00
+English;en;10.00
+St. Barthélemy;BL;99.00;French;fr;94.00
+St. Helena;SH;97.00;English;en;69.00
+St. Kitts & Nevis;KN;97.80;English;en;98.00
+St. Lucia;LC;90.10;English;en;90.00
+St. Martin;MF;99.00;French;fr;100.00
+St. Pierre & Miquelon;PM;99.00;French;fr;89.00
+English;en;3.30
+St. Vincent & Grenadines;VC;96.00;English;en;96.00
+Sudan;SD;71.90;English;en;61.00
+Arabic;ar;61.0
+Nuer;nus;1.80
+Hausa;ha;1.40
+Suriname;SR;94.70;Dutch;nl;90.00
+Sranan Tongo;srn;68.00
+Traditional Chinese;zh;1.20
+Svalbard & Jan Mayen;SJ;100.00;Norwegian Bokmål;nb;80.00
+Russian;ru;64.00
+Swaziland;SZ;87.80;English;en;80.00
+Swati;ss;58.00
+Zulu;zu;6.80
+Tsonga;ts;1.70
+Sweden;SE;99.00;Swedish;sv;95.00
+English;en;86.00
+Finnish;fi;2.20
+Tornedalen Finnish;fit;0.60
+Northern Sami;se;0.30
+Tavringer Romani;rmu;0.10
+Yiddish;yi;0.00
+Lule Sami;smj;0.00
+Southern Sami;sma;0.00
+Interlingua;ia;0.0
+Switzerland;CH;99.00;German;de;73.00
+English;en;61.00
+French;fr;21.00
+Swiss German;gsw;12.00
+Italian;it;4.30
+Lombard;lmo;4.10
+Romansh;rm;0.50
+Sinte Romani;rmo;0.30
+Walser;wae;0.10
+Syria;SY;84.10;Arabic;ar;80.00
+Kurdish;ku;8.00
+French;fr;5.90
+Armenian;hy;1.80
+Syriac;syr;0.10
+Taiwan;TW;96.10;Traditional Chinese;zh;95.00
+Taroko;trv;0.00
+Tajikistan;TJ;99.70;Tajik;tg;100.00
+Russian;ru;12.00
+Persian;fa;0.80
+Arabic;ar;0.00
+Tanzania;TZ;67.80;Swahili;sw;90.00
+English;en;69.00
+Sukuma;suk;8.70
+Nyamwezi;nym;3.30
+Makonde;kde;2.40
+Shambala;ksb;1.70
+Masai;mas;1.50
+Mbunga;mgy;1.40
+Asu;asa;1.20
+Langi;lag;0.90
+Vunjo;vun;0.80
+Rwa;rwk;0.20
+Sangu;sbp;0.20
+Thailand;TH;93.50;Thai;th;80.00
+English;en;27.00
+Northeastern Thai;tts;24.00
+Northern Thai;nod;9.60
+Southern Thai;sou;8.00
+Pattani Malay;mfa;5.00
+Traditional Chinese;zh;1.80
+Northern Khmer;kxm;1.70
+Kuy;kdt;0.50
+Mon;mnw;0.20
+Shan;shn;0.10
+Eastern Lawa;lwl;0.00
+Timor-Leste;TL;58.30;Tetum;tet;59.00
+Togo;TG;60.40;French;fr;61.00
+Ewe;ee;17.00
+Tokelau;TK;94.00;Tokelau;tkl;100.00
+Tonga;TO;99.00;Tongan;to;95.00
+English;en;28.00
+Trinidad & Tobago;TT;98.80;English;en;88.00
+Spanish;es;0.30
+Tristan da Cunha;TA;99.00;English;en;99.00
+Tunisia;TN;79.10;Arabic;ar;90.00
+Tunisian Arabic;aeb;90.0
+French;fr;74.00
+Turkey;TR;94.10;Turkish;tr;93.00
+English;en;17.00
+Kurdish;ku;5.50
+Zaza;zza;1.40
+Kabardian;kbd;0.80
+Azerbaijani;az;0.70
+Arabic;ar;0.60
+Balkan Gagauz Turkish;bgx;0.50
+Bulgarian;bg;0.40
+Adyghe;ady;0.40
+Kirmanjki;kiu;0.20
+Georgian;ka;0.10
+Armenian;hy;0.10
+Serbian;sr;0.00
+Albanian;sq;0.00
+Greek;el;0.00
+Turoyo;tru;0.00
+Uzbek;uz;0.00
+Kyrgyz;ky;0.00
+Kazakh;kk;0.00
+Turkmenistan;TM;99.60;Turkmen;tk;70.00
+Russian;ru;12.00
+Uzbek;uz;9.00
+Kurdish;ku;0.40
+Turks & Caicos Islands;TC;98.00;English;en;98.00
+Tuvalu;TV;95.00;Tuvalu;tvl;92.00
+English;en;9.90
+U.S. Outlying Islands;UM;99.00;English;en;100.00
+U.S. Virgin Islands;VI;95.00;English;en;75.00
+Uganda;UG;73.20;Swahili;sw;75.00
+Ganda;lg;13.00
+Nyankole;nyn;6.30
+Chiga;cgg;5.40
+Soga;xog;5.30
+Teso;teo;3.90
+English;en;3.90
+Lango;laj;3.80
+Acoli;ach;3.70
+Masaaba;myx;2.90
+Kinyarwanda;rw;2.10
+Tooro;ttj;1.90
+Hindi;hi;0.00
+Ukraine;UA;99.70;Ukrainian;uk;65.00
+Russian;ru;46.00
+Polish;pl;2.40
+Yiddish;yi;1.30
+Rusyn;rue;1.20
+Belarusian;be;0.80
+Romanian;ro;0.50
+Bulgarian;bg;0.50
+Turkish;tr;0.40
+Hungarian;hu;0.40
+Greek;el;0.00
+United Arab Emirates;AE;90.00;Arabic;ar;78.00
+Malayalam;ml;7.00
+Pashto;ps;2.90
+Baluchi;bal;2.30
+Persian;fa;1.90
+United Kingdom;GB;99.00;English;en;99.00
+Scots;sco;2.70
+Punjabi;pa;0.80
+Welsh;cy;0.80
+Bengali;bn;0.70
+Traditional Chinese;zh;0.50
+Sylheti;syl;0.50
+Italian;it;0.30
+Greek;el;0.30
+Kashmiri;ks;0.20
+Scottish Gaelic;gd;0.10
+Yiddish;yi;0.00
+Malayalam;ml;0.00
+Irish;ga;0.00
+French;fr;0.00
+Cornish;kw;0.00
+United States;US;99.00;English;en;96.00
+Spanish;es;9.60
+Traditional Chinese;zh;0.70
+French;fr;0.60
+German;de;0.50
+Filipino;fil;0.40
+Vietnamese;vi;0.30
+Italian;it;0.30
+Korean;ko;0.30
+Russian;ru;0.20
+Navajo;nv;0.00
+Yiddish;yi;0.00
+Pennsylvania German;pdc;0.00
+Hawaiian;haw;0.00
+Cajun French;frc;0.00
+Cherokee;chr;0.00
+Central Yupik;esu;0.00
+Dakota;dak;0.00
+Choctaw;cho;0.00
+Lakota;lkt;0.00
+Inupiaq;ik;0.00
+Creek;mus;0.00
+Unknown Region;ZZ;0.00;
+Uruguay;UY;98.10;Spanish;es;88.00
+Uzbekistan;UZ;99.40;Uzbek;uz;85.00
+Uzbek;uz;15.00
+Russian;ru;14.00
+Kara-Kalpak;kaa;1.60
+Turkish;tr;0.80
+Vanuatu;VU;83.20;Bislama;bi;90.00
+English;en;83.00
+French;fr;50.00
+Vatican City;VA;100.00;Latin;la;98.00
+Italian;it;98.0
+Venezuela;VE;95.50;Spanish;es;82.00
+Vietnam;VN;93.40;Vietnamese;vi;86.00
+Traditional Chinese;zh;1.00
+Eastern Cham;cjm;0.10
+Wallis & Futuna;WF;50.00;Wallisian;wls;61.00
+French;fr;49.00
+East Futuna;fud;31.00
+Western Sahara;EH;50.00;Arabic;ar;100.00
+Yemen;YE;65.30;Arabic;ar;74.00
+English;en;9.00
+Zambia;ZM;61.40;Bemba;bem;31.00
+English;en;16.00
+Nyanja;ny;15.00
+Lozi;loz;6.00
+Zimbabwe;ZW;83.60;Shona;sn;81.00
+English;en;42.00
+North Ndebele;nd;12.00
+Manyika;mxc;6.50
+Ndau;ndc;6.10
+Kalanga;kck;5.30
+Nyanja;ny;1.90
+Venda;ve;0.60
+Tswana;tn;0.20

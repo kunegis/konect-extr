@@ -1,0 +1,11 @@
+category: Citation
+code: PHc
+name: arXiv hep-ph
+description: Publication–publication citations
+url: http://snap.stanford.edu/data/cit-HepPh.html
+cite: konect:leskovec107 
+extr: snap
+long-description: This is the network of publications in the arXiv's High Energy Physics – Phenomenology (hep-ph) section. The directed links that connect the publications are citations. Some publications cite themselves, and therefore the network contains loops. 
+tags: #loop
+entity-names: publication
+relationship-names: citation 

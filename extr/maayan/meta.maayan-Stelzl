@@ -1,0 +1,12 @@
+
+name:  Human protein (Stelzl)
+code:  MS
+url:   http://research.mssm.edu/maayan/datasets/qualitative_networks.shtml
+category:  Metabolic 
+description:  Protein–protein interactions
+cite:  konect:stelzl
+long-description:  This network represens interacting pairs of protein in Humans (<i>Homo sapiens</i>). 
+entity-names:  protein
+relationship-names:  interaction
+extr:  maayan
+tags:  #loop

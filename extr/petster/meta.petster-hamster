@@ -1,0 +1,13 @@
+name: Hamsterster full
+code: Sh
+category: Social
+description: User–user friendship/familylinks
+extr: petster
+long-description: This Network contains friendships and familylinks between users of the website hamsterster.com.
+entity-names: user
+relationship-names: friendship
+
+n3-prefix-m: konect_petster_hamster: <http://konect.uni-koblenz.de/networks/petster-hamster/Member/> .
+n3-type-m: foaf:Person
+n3-edgedata-1: $m foaf:knows $n .
+n3-edgedata-2: $n foaf:knows $m .

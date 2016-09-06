@@ -1,0 +1,21 @@
+#! /usr/bin/perl -w
+
+use strict; 
+
+use Date::Parse;
+
+my $corpus = $ARGV[0]; 
+
+open(TXT, "<$corpus.txt") or die; 
+
+while (<TXT>)
+{
+    /([0-9]+)\s+([0-9]+)\s+([0-9]{4}-[0-9][0-9]-[0-9][0-9])/
+	or die "Syntax error:  $!"; 
+
+    my $timestamp = str2time($3); 
+    print "$1 $2 1 $timestamp\n"; 
+}
+
+close(TXT) or die;
+

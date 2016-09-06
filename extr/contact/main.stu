@@ -1,0 +1,16 @@
+% version 1.9
+
+@all:  out.contact meta.contact;
+
+# FILENAME := contacts.Exp3.dat
+
+>out.contact:   <contacts.Exp3.dat mkdat
+{
+	./mkdat 
+}
+
+@clean
+{
+	rm -rf *~ out.*
+}
+

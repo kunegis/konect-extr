@@ -1,0 +1,10 @@
+category: Lexical
+code: WN
+name: WordNet (mixed)
+description: Entity–entity relationships
+url: http://wordnet.princeton.edu/
+cite: konect:fellbaum98
+extr: wordnet
+long-description: This is the lexical network of the English language from the WordNet project. Nodes are words, word senses and synsets (synonym sets), connected by various inclusion relations. The network itself is thus not unipartite, but has three node types and two link types. However, only the "flattened" network is considered here, in which node types are ignored.
+entity-names: word/word sense/synset
+relationship-names: relation 

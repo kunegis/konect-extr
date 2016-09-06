@@ -1,0 +1,84 @@
+#! /usr/bin/perl -w
+# 
+# Create an intrawiki dataset.  
+#
+# PARAMETERS 
+#	$LANG0	The language to use 
+#
+# INPUT FILES 
+#	out/page_$LANG0.sql
+#	out/pagelinks_$LANG0.sql
+#
+# OUTPUT FILES 
+#	out/id.wikipedia_link_$LANG0
+#
+
+use strict;
+use warnings;
+
+my $lang= $ENV{LANG0}; 
+
+#
+# Read names 
+#
+
+print "Reading name mapping\n";
+
+# Mapping of Article-Name to Wikipedia-ID 
+my %wids= ();
+
+open IN_PAGE, "<out/page_$lang.sql" or die "$!";
+
+while (my $line= <IN_PAGE>) 
+{
+    next unless $line =~ /^INSERT INTO/;
+
+    while ($line =~ /\((\d+),(\d+),'((?:[^']|\\')+)'/g) 
+    {
+	my $wid=       $1; 
+	my $namespace= $2;
+	my $aname=     $3; 
+
+	next unless $namespace == 0;
+
+	$wids{$aname}= $wid;
+    }
+}
+
+close IN_PAGE or die "$!";
+
+#
+# Read links
+#
+
+print "Process links\n";
+
+open OUT, ">out/id.wikipedia_link_$lang" or die "$!";
+open IN, "<out/pagelinks_$lang.sql" or die "$!";
+
+while (my $line= <IN>) 
+{
+    next unless $line =~ /^INSERT INTO/;
+
+    while ($line =~ /\((\d+),(\d+),'((?:[^']|\\')+)',(\d+)\)/g) 
+    {
+	my $wid_from=    $1;
+	my $namespace_a= $2;
+	my $aname_to=    $3;
+	my $namespace_b= $4;
+	
+	next unless $namespace_a == 0 && $namespace_b == 0;
+
+	# Ignore links to pages that do not exist, i.e., red links
+	unless (defined $wids{$aname_to}) {
+	    next;
+	}
+
+	my $wid_to= $wids{$aname_to};
+
+	print OUT "$wid_from\t$wid_to\n";
+    }
+}
+
+close IN or die "$!";
+close OUT or die "$!";

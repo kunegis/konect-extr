@@ -1,0 +1,18 @@
+#! /bin/sh
+#
+# Print statistics about the extraction progress.
+# The output as also appended to $ZOO/analysis, which is read by ./mkprogress.
+#
+
+ZOO=${ZOO-~/zoodir}
+FIND_H=${FIND_H--H}
+
+user_count="`find $FIND_H $ZOO -name 'user.*'  | wc -l`"
+user_queue_size="`<$ZOO/list sort -u | wc -l`"
+
+echo `date +%s` User count:  $user_count /  $user_queue_size \
+" " Link count:  "`find $FIND_H $ZOO \( -name friends -o -name foes -o -name freaks -o -name fans \) -print0 | xargs -0 cat | wc -l`" \
+" " Users 6h:  "`find $FIND_H $ZOO -name 'user.*' -a -mmin -360 | wc -l`" \
+" " Progress estimation:   ".$(( 1000000 * $user_count / ($user_queue_size + $user_count) ))" |
+tee -a $ZOO/analysis
+

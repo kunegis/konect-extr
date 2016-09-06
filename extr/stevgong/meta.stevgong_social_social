@@ -1,0 +1,11 @@
+category: Social
+code: IM
+name: Google+ (IMC12)
+fullname: Google+ social-links (IMC12)
+description: User–user interaction 
+entity-names: user,user
+extr: stevgong
+url: http://www.cs.berkeley.edu/~stevgong/gplus.html
+long-description: This directed network contains a snapshot of the Google+ social structure. Nodes represent users. An edge shows social interaction between users.  
+relationship-names: social-link
+cite: konect:stevgong

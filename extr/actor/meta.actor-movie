@@ -1,0 +1,12 @@
+
+name:  Actor movies
+code:  AM
+url:   http://www3.nd.edu/~networks/resources.htm
+category:  Affiliation
+description:  Movie–actor appearances
+cite:  konect:ba
+long-description:  This is a bipartite network of movies and the actors that have played in them. 
+entity-names:  movie, actor
+relationship-names:  appearance
+extr:  actor
+timeiso:  1999

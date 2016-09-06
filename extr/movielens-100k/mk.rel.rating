@@ -1,0 +1,25 @@
+#! /bin/sh
+#
+# Generate the rating list.
+#
+# INPUT
+#	ml-data/u.data
+#
+# OUTPUT
+#	rel.rating
+#
+
+COUNT="`wc -l ml-data/u.data | cut -f1 -d ' '`"
+USER_COUNT="` head -n2 ent.user | tail -n1 | sed -e 's,^% ,,'`"
+MOVIE_COUNT="` head -n2 ent.movie | tail -n1 | sed -e 's,^% ,,'`"
+
+{
+    echo '% bip weighted'
+    echo "% $COUNT $USER_COUNT $MOVIE_COUNT"
+    echo '% ent.user ent.movie weight.rating dat.date'
+
+    sed <ml-data/u.data -re '
+	s,^([0-9]+)	([0-9]+)	([1-5])	([0-9]+),\1 \2 \3 \4,
+    '
+} >rel.rating
+

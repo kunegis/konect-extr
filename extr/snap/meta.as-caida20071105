@@ -1,0 +1,11 @@
+category: Computer
+code: IN
+name: CAIDA
+description: AS–AS communications
+url: http://snap.stanford.edu/data/as-caida.html
+cite: konect:leskovec107
+extr: snap
+long-description: This is the undirected network of autonomous systems of the Internet connected with each other from the CAIDA project, collected in 2007. Nodes are autonomous systems (AS), and edges denote communication. 
+tags: #missingorientation
+entity-names: autonomous system
+relationship-names: communication

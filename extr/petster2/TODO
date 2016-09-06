@@ -1,0 +1,52 @@
+
+== Not important for the paper == 
+
+* generate homophily plots for:  birth date, join date, join age and
+  weight (cats only).
+** makes sense only when a large assortativity has already been observed. 
+
+* Joint distribution of cats+dogs counts per household (how should this be plotted) 
+
+* Quickly check for information about deceased pets.  Note that many pets are deceased without this being indicated. 
+** hamster:  age contains "heaven"
+** key words:  we'll miss you, heaven, RIP, R.I.P., in loving memory,
+   (DATE - DATE), im memoriam, in memorium [sic] 
+** key word in name:  "the late"
+
+* hamster:  most common foods
+
+* Check whether cats and dogs have more properties which are not
+  extracted at the moment.  (Add code to entcat and entdog) 
+** #likes
+** #views
+** #corralled
+** pet-peeves
+** favorite toy
+** favorite nap spot
+** favorite food
+** skills
+** dwells (indoors / outdoors)
+** lives remaining
+** nicknames
+** favorite walk
+
+* country:  there are still some wrongly-parsed strings which are not actually countries in dat-petster/country.*
+
+* check which geolocations contain multiple results.  what to do with them?
+** do nothing; the first result is the one we use already 
+
+* birthday (not birth date) distribution for all pets 
+* joinday distribution for all pets 
+
+* latlong plots:  generate a plot showing only the USA. 
+* latlong plots:  overlay all pets, in a way to show which areas to
+  predominantly cats or dogs. 
+
+* network level comparison plots (overlay for both networks and all
+  three species)  
+** distance distributions
+
+* Also perform regression for only pet properties and only friendship
+  network properties.  
+
+* additional features:  #likes, #views, #corralled. 

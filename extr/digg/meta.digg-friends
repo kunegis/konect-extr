@@ -1,0 +1,13 @@
+
+name:  Digg friends
+code:  DF
+url:  http://www.isi.edu/~lerman/downloads/digg2009.html
+category:  Social
+description:  User–user friendship
+cite:  konect:digg
+long-description:  This is the directed friendship graph of Digg, collected in 2009. 
+entity-names:  user 
+relationship-names:  vote
+extr:  digg
+timeiso:  2009
+tags:  #incomplete 

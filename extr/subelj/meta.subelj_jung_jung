@@ -1,0 +1,10 @@
+category: Software
+code: DS
+name: JUNG dependency
+description: Class–class dependencies
+entity-names: class
+extr: subelj
+url: http://lovro.lpt.fri.uni-lj.si/support.jsp
+long-description: This is the software class dependency network of the JUNG 2.0.1 framework, namespace edu.uci.ics.jung. The network is directed. Nodes represent classes. An edge between them indicates that the class represented by the left node depends on the class represented by the other node. 
+relationship-names: dependency
+cite: konect:dependency2

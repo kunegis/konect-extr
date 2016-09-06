@@ -1,0 +1,11 @@
+category: Software
+code: Do
+name: JDK dependency
+fullname: JDK dependency(org)
+description: Class–class dependencies
+entity-names: class
+extr: subelj
+url: http://lovro.lpt.fri.uni-lj.si/support.jsp
+long-description: This is the software class dependency network of the JDK 1.6.0.7 framework, namespace org. The network is directed. Nodes represent classes. An edge between them indicates that the class represented by the left node depends on the class represented by the other node. 
+relationship-names: dependency
+cite: dependency2

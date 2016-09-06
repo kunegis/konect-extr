@@ -1,0 +1,156 @@
+
+%version 1.0
+
+# $OWN: /data/kunegis/konect/own;
+
+@all: 
+ent.brunson_corporate-leadership_corporate-leadership.person.name
+ent.brunson_corporate-leadership_corporate-leadership.company.name
+out.brunson_corporate-leadership_corporate-leadership
+out.brunson_southern-women_southern-women
+out.brunson_revolution_revolution
+ent.brunson_revolution_revolution.people.name
+ent.brunson_revolution_revolution.organisation.name
+out.brunson_club-membership_club-membership
+out.brunson_south-africa_south-africa
+ent.brunson_south-africa_south-africa.person.name
+ent.brunson_south-africa_south-africa.company.name out.brunson_LR_LR
+ent.brunson_LR_LR.person.name ent.brunson_LR_LR.company.name
+out.brunson_NMT1_NMT1 out.brunson_terrorist_terrorist
+ent.brunson_NMT1_NMT1.terrorist.name
+ent.brunson_terrorist_terrorist.terrorist.name
+ent.brunson_terrorist_terrorist.organization.name; 
+
+terrorist.txt: NMT2.txt
+{
+        cp NMT2.txt terrorist.txt
+}
+
+
+terrorist1.txt: NMT1.txt.noquotes
+{
+ join -1 2 -2 2 NMT1.txt.noquotes NMT1.txt.noquotes | awk '$2!=$3' | awk '{if(!(x[$1$2$3] || x[$1$3$2])) print $2" "$3; x[$1$2$3]=1;}' >terrorist1.txt
+}
+
+club-membership.txt: G.txt
+{
+	cp G.txt club-membership.txt
+}
+
+corporate-leadership.txt: BB.txt
+{
+ 	cp BB.txt corporate-leadership.txt
+}
+
+southern-women.txt: DDGG2.txt
+{
+	cp DDGG2.txt southern-women.txt
+}
+
+south-africa.txt: H.txt
+{
+	cp H.txt south-africa.txt
+}
+
+revolution.txt: F.txt
+{
+	cp F.txt revolution.txt
+}
+
+@clean:
+{
+	rm -f ent.*
+	rm -f tmp.ent.*
+	rm -f out.*
+	rm -f *.txt
+	rm -f *.txt.noquotes
+}
+
+brunson.zip: 
+{
+	cp /data/kunegis/konect/own/brunson.zip .
+}
+
+$ANY.txt: brunson.zip
+{
+	unzip -u brunson.zip
+	fromdos *.txt
+	sed -i -re 's/'\''/❜/g' NMT2.txt
+}
+
+$ANY.txt.noquotes: $ANY.txt
+{
+	<$ANY.txt ./mknospaces | sed -re 's/"//g'  >$ANY.txt.noquotes
+}
+
+tmp.ent.brunson_${NET}_1: out.brunson_${NET}_$NET
+{}
+
+
+tmp.ent.brunson_${NET}_2: out.brunson_${NET}_${NET}
+{}
+
+
+out.brunson_${NET}_$NETDUP: ${NET}.txt.noquotes
+{
+	<${NET}.txt.noquotes ../mkrel --+ent=tmp.ent.brunson_${NET}_1:${NET}.txt.noquotes:0:0:0 --+ent=tmp.ent.brunson_${NET}_2:${NET}.txt.noquotes:1:1:1 'bip' 'unweighted' > out.brunson_${NET}_$NETDUP
+}
+
+#rename using rules like: ent.brunson_corporate-leadership_corporate-leadership.person.name: tmp.ent.brunson_corporate-leadership_1 and run sed to replace
+
+ent.brunson_corporate-leadership_corporate-leadership.person.name: tmp.ent.brunson_corporate-leadership_1
+{
+	./mkformat tmp.ent.brunson_corporate-leadership_1 >ent.brunson_corporate-leadership_corporate-leadership.person.name
+}
+
+ent.brunson_corporate-leadership_corporate-leadership.company.name: tmp.ent.brunson_corporate-leadership_2
+{
+        ./mkformat tmp.ent.brunson_corporate-leadership_2 >ent.brunson_corporate-leadership_corporate-leadership.company.name
+}
+
+ent.brunson_revolution_revolution.people.name: tmp.ent.brunson_revolution_1
+{
+	./mkformat tmp.ent.brunson_revolution_1 ent.brunson_revolution_revolution.people.name >ent.brunson_revolution_revolution.people.name
+}
+
+ent.brunson_revolution_revolution.organisation.name: tmp.ent.brunson_revolution_2
+{
+	./mkformat tmp.ent.brunson_revolution_2 >ent.brunson_revolution_revolution.organisation.name
+}
+
+ent.brunson_club-membershipIS_club-membershipIS.company.name:tmp.ent.brunson_club-membershipIS_2
+{
+	./mkformat tmp.ent.brunson_club-membershipIS_2 >ent.brunson_club-membershipIS_club-membershipIS.company.name
+}
+
+ent.brunson_south-africa_south-africa.company.name: tmp.ent.brunson_south-africa_2
+{
+	./mkformat tmp.ent.brunson_south-africa_2 >ent.brunson_south-africa_south-africa.company.name
+}
+
+ent.brunson_south-africa_south-africa.person.name: tmp.ent.brunson_south-africa_1
+{
+	./mkformat tmp.ent.brunson_south-africa_1 >ent.brunson_south-africa_south-africa.person.name
+}
+
+ent.brunson_LR_LR.person.name: tmp.ent.brunson_LR_1
+{
+	./mkformat tmp.ent.brunson_LR_1 >ent.brunson_LR_LR.person.name
+}
+
+ent.brunson_LR_LR.company.name: tmp.ent.brunson_LR_2
+{
+	./mkformat tmp.ent.brunson_LR_2 >ent.brunson_LR_LR.company.name
+}
+
+ent.brunson_terrorist_terrorist.organization.name: terrorist.map
+{
+	./mkterror2 
+} 
+
+#fallback:
+ent.brunson_${NET}_$NET2.terrorist.$ATTR: tmp.ent.brunson_${NET}_1
+{
+	./mkformat tmp.ent.brunson_${NET}_1 >ent.brunson_${NET}_$NET2].terrorist.$ATTR
+}
+

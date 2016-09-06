@@ -1,0 +1,27 @@
+#! /bin/sh
+#
+# Generate the graph layout, centered at CmdrTaco. 
+#
+# Environment:
+#    $LGL     root dir of LGL-1.1 
+#
+
+TMPDIR=${TMP-/tmp}/`basename $0`.tmp
+CmdrTaco="`cat out.CmdrTaco`"
+ITERATIONS=${ITERATIONS-955} 
+
+[ "$verbose" ] && exec 3>&1 || exec 3>/dev/null
+
+[ "$fast" ] && ITERATIONS=100
+
+echo >&3 ITERATIONS=$ITERATIONS
+echo >&3 LGL=$LGL
+
+# lglayout will put its output in the current dir in hardcoded filenames.
+rm -rf $TMPDIR
+mkdir -p $TMPDIR
+dir="`pwd`"
+pushd $TMPDIR
+$LGL/bin/lglayout2D "$dir"/out.edges.lgl -z $CmdrTaco -t 2 -i $ITERATIONS
+popd
+mv $TMPDIR/lgl.out out.layout

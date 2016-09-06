@@ -1,0 +1,32 @@
+#
+# The Advogato trust network, with three levels of trust, represented as
+# 0.6, 0.8 and 1.0. 
+#
+# The network has loops, i.e. some users trust themselves.
+#
+
+@all:    [FILES];
+
+graph.dot:  {
+	wget http://www.advogato.org/person/graph.dot -O graph.dot
+	touch graph.dot
+}
+
+
+out.advogato:  graph.dot  mkout
+{
+	./mkout 
+}
+
+@clean:
+{
+	rm -f graph.dot out.* ent.*
+}
+
+@deploy:  konect/dat/advogato/out.advogato konect/dat/advogato/meta.advogato;
+
+konect/dat/advogato/$NAME:  $NAME !konect
+{
+	cp -b "$NAME" "konect/dat/advogato/$NAME"
+}
+

@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Wut
+name: Twitter u-t
+description: User–hashtag usage
+url: http://www.public.asu.edu/~mdechoud/datasets.html
+cite: konect:choudhury10 
+extr: munmun
+fullname: Twitter user–hashtag
+long-description: This is a bipartite network consisting of Twitter users and tags they mentioned in their postings. Left nodes represent users and right nodes represent tags. An edge shows that a tag was used by a user in a tweet.
+tags: #incomplete
+entity-names:  user, hashtag
+relationship-names:  usage

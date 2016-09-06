@@ -1,0 +1,9 @@
+Netflix
+=======
+
+This package is for extracting the Netflix corpus from the downloaded
+data. 
+
+The Netflix dataset is not public anymore.  Therefore you have to
+acquire it yourself, and put (or symlink) its "download" directory
+here. 

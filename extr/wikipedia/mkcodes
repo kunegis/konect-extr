@@ -1,0 +1,17 @@
+#! /bin/sed -rnf 
+
+s,^<tr VALIGN="TOP">\s*$,,
+Tremove
+n;n;h;n;n;H;n;n;G
+# Pattern space now contains Name,639-2,639-1
+
+# 639-1 exists
+s,^\s*<td>\s*(\S.*\S)\s*</td>\s*<td><nobr>(.*)</NOBR></td>\s*<td>\s*(\S+)\s*</td>\s*,\3	\1,
+
+# 639-1 does not exist
+s,^\s*<td>\s*(\S.*\S)\s*</td>\s*<td><nobr>(.*)</NOBR></td>\s*<td>\s*</td>\s*,\2	\1,
+
+p
+b
+:remove
+d

@@ -1,0 +1,10 @@
+category: Infrastructure
+code: RO
+name: California
+description: Intersection–intersection roads
+url: http://snap.stanford.edu/data/roadNet-CA.html
+cite: konect:leskovec08
+extr: snap
+long-description: This is the road network of the State of California in the United States of America. The nodes of the network are the intersections between roads and road endpoints, and the edges are road segments between intersections and road endpoints. The network is undirected.
+entity-names: intersection/endpoint
+relationship-names: connection  

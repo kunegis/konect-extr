@@ -1,0 +1,334 @@
+#! /bin/bash
+#
+# Performs mkuniq*, mksymt and mkcount* on the input depending on arguments.
+# Expects these scripts in parent directory. 
+#
+# STDIN:  source 
+# STDOUT: output
+# 
+# INVOCATION
+#
+# 	$0 [OPTIONS] [--+ent=...]* <type> <weight> [extra header data]
+# 
+# Type is one of the following:
+#	bip
+#	sym
+#	asym
+#
+# Weight must be one of the following:
+#	unweighted
+#	positive
+#	signed
+#	weighted 
+#	dynamic
+#	posweighted
+#	multiweighted
+#
+# Note: mkrel does not perform any checks on edge weights so it is up to
+# you to check if the settings are right. 
+#
+# OPTIONS
+#
+# --no-uniq	Do not execute mkuniq* and/or mkuniqent* i.e. do not
+#		assign uniqe numbers to the nodes and do not extract any
+#		entity information. If this option is set mkrel will
+#		still create the ouput header data and execute mksym* to
+#		make the dataset symmetric if necessary.  
+# --use-math	Uses octave/matlab to create dynamic networks. $MATH has
+#		to be set in mkrel.conf  
+# --enforce-edgeweights	
+#		Currently supports unweighted and posweighted
+#		networks. Will enforce the given edge weight on the
+#		network by removing #multiple edges (if there are
+#		any). If this option is set mkrel throws a warning.  
+# -q, --quiet	Be quiet. Do not print warnings.  Only print errors. 
+# -qq, -q -q, --quiet --quiet	
+#		Don't print anything.	  	
+# --ent-delimiter=DELIM	
+#		Use DELIM instead of SPACE to split entity data. 
+#
+# Entity generation:
+#
+# --+ent=EXTRACT	
+#		Where EXTRACT must be chosen depending on the network's
+#		type. See mkuniqent for bipartite networks and
+#		mkuniqent1 for non-bipartite networks.  
+#		This option may appear multiple times. 
+#		For more options see the configuration file mkrel.conf 
+
+source "$(cd $(dirname $0);pwd -P)/mkrel.conf" 
+
+export -- ARGS="$(echo "$@" |sed 's/-qq/-q -q/g')"
+
+export QUIET=0
+export USEMATH=0
+export CFG_KEEPDYNSORTED=0
+export IGNORE_NONEXISTANT_EEDGEWEIGHTS=
+
+for option in $ARGS
+do
+	opt=$(echo "$option" | sed 's/^\([^=]*\).*$/\1/' )
+	val=$(echo "$option" | sed 's/^[^=]*=\?\(.*\)$/\1/' )
+	case $opt in
+		--quiet|-q)
+			let QUIET=$QUIET+1
+	esac
+done
+
+[ "$QUIET" -gt "$CFG_QUIET" ] && CFG_QUIET=$QUIET
+
+# Check settings
+if [ "$CFG_VERBOSE" == "$CFG_QUIET" ]; then
+	if [ "$CFG_VERBOSE" ]; then
+		CFG_QUIET=0
+		error "VERBOSE and QUIET cant be enabled both."
+	fi
+fi
+
+# Apply settings
+if [ $CFG_ULIMIT ]; then
+	if [ $CFG_ULIMIT -gt 0 ]; then
+		verbose -n -x "Setting max vmem to $CFG_ULIMIT"
+		ulimit -v $CFG_ULIMIT
+		doCheckError $?
+	fi
+fi
+
+if [ $CFG_NICE ]; then
+	if [ $CFG_NICE -gt 0 ]; then
+		verbose -n -x "Setting nice to $CFG_NICE"
+		renice -n $CFG_ULIMIT -p $$
+		doCheckError $? 
+	fi
+fi
+
+export RMFILES="$(mktemp --tmpdir=$TMPDIR)";
+trap "while read line; do [ $line ] && rm $line; done < $RMFILES && rm $RMFILES" EXIT;
+export TMPLIST=
+export TMPFILE=
+createTMPFile()
+{
+	verbose -x -n "creating temporary file";
+	NEWFILE="$(mktemp --tmpdir=$TMPDIR)";
+	doCheckError $? "Unable to create $NEWFILE";
+	[ "$1" != "0" ] && TMPLIST="$TMPLIST $NEWFILE";
+	[ "$1" != "0" ] && echo "$NEWFILE" >> $RMFILES
+	echo $NEWFILE; 
+}
+
+error() {
+	if [ "$CFG_QUIET" != "2" ]; then
+		echo -e "***ERROR(mkrel): $@" >&2
+	fi
+	exit 1
+}
+
+warning() {
+	[ $CFG_QUIET == 0 ] && echo -e "***WARNING(mkrel): $@" >&2
+}
+
+verbose() {
+	if [ "$CFG_VERBOSE" == "1" ]; then
+		CMD="echo -e"
+		while [ 1 ]
+		do
+			if [ "$1" == "-p" ]; then
+				CMD="printf"
+				shift
+			else
+				if [ "$1" == "-x" ]; then
+					echo -n "***INFO(mkrel): " >&2
+					shift
+				else
+					if [ "$1" == "-n" ]; then
+						CMD="$CMD -n"
+						shift
+					else
+						break;
+					fi
+				fi
+			fi
+		done
+		$CMD $@ >&2;
+	fi
+}
+
+doCheckError(){
+	local RED=$(tput setaf 1)
+	local GREEN=$(tput setaf 2)
+	local NORMAL=$(tput sgr0)
+	local col=$(tput cols)
+	if [ "$1" != "0" ]; then
+		shift
+		verbose '\t[FAIL]'
+		if [ "$@" ]; then
+			error -e "$@"
+		fi
+		exit 1
+	else
+		verbose '\t[ OK ]'
+	fi
+}
+
+checkInvalid() {
+	for value in "$1"; do
+		[[ $2 = $value ]] && return 0
+	done
+	return 1
+}
+
+multipleEdges() {
+	if [ "$2" == "positive" ] || [ "$2" == "multiweighted" ]; then
+ 		return "1";
+	fi
+}
+
+TMPFILE="$(createTMPFile)"
+NOUNIQ="0"
+GENUID=
+export data_deli=' '
+export ENFORCE_WEIGHTS=
+while [ "1" ]
+do
+	if [[ "$1" =~ ^\-\-.* ]]; then
+		case $(echo "$1" | cut -d'=' -f1) in
+			--use-math)
+				USEMATH=1
+				[ "$CFG_MATH" ] || error 'If --use-math is used the variable $CFG_MATH must be set (one can use $MATH in mkrel.conf)'
+				;;
+			--no-uniq)
+				NOUNIQ=1
+				;;
+			--keep-dynsorted)
+				CFG_KEEPDYNSORTED=1
+				;;
+			--+ent)
+				T=$(echo "$1" | cut -d'=' -f2)
+				ENTITIES="$ENTITIES $T"
+				;;
+			--all-file)
+				export outall=$(echo "$1" | cut -d'=' -f2)
+				;;
+			--ent-delimiter)
+				export CFG_DELI=$(echo "$1" | cut -d'=' -f2)
+				;;
+			--data-delimiter)
+				error '--data-delimiter is currently not supported'
+				;;
+			--enforce-edgeweights)
+				ENFORCE_WEIGHTS=1
+				;;
+			--enforce-ignorenonexistant)
+				IGNORE_NONEXISTANT_EEDGEWEIGHTS=true
+				;;
+			*)
+				error "Unknown argument: $1"
+				;;
+		esac
+		shift
+	else
+		break
+	fi
+done
+
+[ "$1" ] || error 'Missing network type (sym,bip,...)'
+[ "$2" ] || error 'Missing network weight (unweighted, posweighted, ...)'
+
+if checkInvalid 'posweighted unweighted positive signed weighted dynamic' "$2"; then error "Invalid weight! Got \"$2\""; fi
+if checkInvalid 'bip sym asym' "$1"; then error "Invalid network type! Got \"$2\""; fi
+
+verbose -x -n "Generating network"
+if [ "$1" == "bip" ]; then
+	verbose -n "(bipartite,"
+	if [ "$ENTITIES" ]; then
+		MYARGS=$ENTITIES
+		if [ "$GENUID" ]; then
+			MYARGS="$GENUID $MYARGS"
+		fi
+		verbose -n "with entites:mkuniqent)"
+		../mkuniqent "$MYARGS" > $TMPFILE
+	else
+		verbose -n "without entites:mkuniq)"
+		../mkuniq>$TMPFILE
+	fi
+	doCheckError $? "Execution of mkuniq[ent] failed."
+else
+	verbose -n "(unipartite,"
+	if [ "$1" == "sym" ]; then
+		verbose -n "symmetric,"
+		PSYM=mksymt
+
+		if [ "$NOUNIQ" == "0" ]; then
+		       if [ "$ENTITIES" ]; then
+				verbose -n "with entities:mkuniqent1,$PSYM)"
+	               		MYARGS=$ENTITIES
+                		../mkuniqent1 "$MYARGS" | ../$PSYM > $TMPFILE
+	        	else   
+				verbose -n "without entities:mkuniq1,$PSYM)"
+				../mkuniq1 | ../$PSYM >$TMPFILE
+			fi
+		else
+			verbose -n "NOUNIQ=1:$PSYM)"
+			../$PSYM >$TMPFILE
+		fi
+	else
+		verbose -n "asymmetric,"
+		if [ "$NOUNIQ" == "0" ]; then
+                       if [ "$ENTITIES" ]; then
+				verbose -n "with entities:mkuniqent1)"
+                       		MYARGS=$ENTITIES
+                        	../mkuniqent1 "$MYARGS" > $TMPFILE
+                        else
+				verbose -n "without entities:mkuniq1)"
+                        	../mkuniq1 >$TMPFILE
+                        fi
+		else
+			verbose -n "NOUNIQ=1:tee)"
+			tee >$TMPFILE
+		fi
+	fi
+fi
+
+doCheckError $? "An error occured."
+
+CIN=$TMPFILE
+if [ "$2" == "dynamic" ]; then
+	CIN="$(createTMPFile)"
+	COUT="$(createTMPFile $CFG_$KEEPDYNSORTED)"
+	verbose -x -n "making network dynamic.."
+	verbose -n " sorting..."
+	sort -n -k4 $TMPFILE > $COUT
+	COUTE=$(echo "$COUT" | sed -e 's/\//\\\//g;s/\./\\\./g')
+	verbose -n ' computing(using'
+	[ "$USEMATH" == "1" ] && { CFG_MATH=$(echo $CFG_MATH | sed -e "s/%f/\.\.\/mkdynamic\.m/g;s/%e/\.\.\/mkdynamic/g;s/%args/$COUTE/g") ; verbose -n " $CFG_MATH)..."; $CFG_MATH >$CIN ; } || { verbose -n " mkdynamic)..."; ../mkdynamic <$COUT >$CIN ; }
+	doCheckError $? "An error occured during execution of mydynamic."; 
+fi
+
+( [ "$2" == "signed" ] || [ "$2" == "unweighted" ] || [ "$2" == "posweighted" ] ) && [ "$ENFORCE_WEIGHTS" ] && {
+	CIN2="$(createTMPFile)"
+	warning "enforcing edge weights: $2";
+	awk '!x[$1 $2]++' "$CIN" >$CIN2;
+	doCheckError $? "An error occured during execution of awk.";
+	mv $CIN2 $CIN;
+} || { [ "$ENFORCE_WEIGHTS" ] && [ ! "$IGNORE_NONEXISTANT_EEDGEWEIGHTS" ] && error "--enforce-edgeweights does currently not support type $2">&2 ; };
+
+echo "% $1 $2"
+verbose -x -n "Generating header"
+if [ "$1" == "bip" ]; then
+	verbose -n "(bipartite:mkcount)"
+	<$CIN ../mkcount
+else
+	verbose -n "(unipartite:mkcount1)"
+	<$CIN ../mkcount1
+fi
+
+doCheckError $? "An error occured during execution of mkcount*."
+
+if [ "$#" == 3 ]; then
+ 	echo "$3"
+fi
+
+verbose -x -n "Piping result to STDOUT"
+cat $CIN
+doCheckError $? "Execution of cat $CIN failed."
+verbose -x "mkrel finished without errors."

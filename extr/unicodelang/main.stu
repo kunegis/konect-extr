@@ -1,0 +1,24 @@
+#
+# Which languages are spoken in which countries, extracted from Unicode. 
+#
+
+% version 2.4 
+
+@all:  
+	meta.unicodelang out.unicodelang 
+	ent.unicodelang.coutry.code ent.unicodelang.language.code;
+
+meta.unicodelang;
+
+out.unicodelang.raw:  country_lang_speakers.txt ./mk
+{
+	./mk 
+}
+
+ent.unicodelang.coutry.code:   out.unicodelang.raw; 
+ent.unicodelang.language.code: out.unicodelang.raw; 
+
+out.unicodelang:  out.unicodelang.raw mkcleanup
+{
+	./mkcleanup <out.unicodelang.raw >out.unicodelang
+}

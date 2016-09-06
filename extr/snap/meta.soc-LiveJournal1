@@ -1,0 +1,14 @@
+category: Social
+code: LJ
+name: LiveJournal
+description: User–user friendship
+url: http://snap.stanford.edu/data/soc-LiveJournal1.html
+cite: konect:leskovec08
+extr: snap
+entity-names: user
+relationship-names: friendship 
+long-description: This is the social network of LiveJournal. Nodes are users of LiveJournal, and directed edges represent friendships.
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_soc_LiveJournal1_user: <http://konect.uni-koblenz.de/networks/soc-LiveJournal1/User/> .
+n3-type-m: sioc:UserAccount
+n3-edgedata-1: $m foaf:knows $n .

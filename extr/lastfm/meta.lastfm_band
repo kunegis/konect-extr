@@ -1,0 +1,10 @@
+category: Interaction
+code: Lb
+name: Last.fm band
+description: User–band listening event
+url: http://www.dtic.upf.edu/~ocelma/MusicRecommendationDataset/lastfm-1K.html
+cite: lastfm
+extr: lastfm
+long-description: This bipartite network contains user–band listening events from the music website last.fm. An edge shows that a user listened to a song of a band.
+entity-names: user,band
+relationship-names: listening

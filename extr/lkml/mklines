@@ -1,0 +1,37 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+while (<>)
+{
+    my $opensq=0;
+    my $opendq=0;
+    my $nextesc=0;
+    my $openpt=0;
+    my $pt=0;
+    my $c;
+
+    my $printn=0;
+
+    chomp;
+
+  CHAR:foreach $c (split //,$_) {
+
+      if ($c eq "'" && $nextesc==0) {$opensq++; $opensq%=2;}
+      if ($c eq '"' && $nextesc==0) {$opendq++; $opendq%=2;}
+
+      if ( $nextesc==0 && $opensq==0 && $opendq==0 )
+      {
+	  if ($c eq '(') {$openpt++;$pt=1; if($openpt==1){$printn=1;}}
+	  if ($c eq ')') { if (--$openpt == 0) {$pt=1;$printn=1;}}
+      }
+
+      if ($c eq "'" || $c eq '"' ) {if( $nextesc == 1 ) {$pt=1; print "x";}}
+      if ($nextesc == 1) {$nextesc=0;}
+      if ($c eq '\\') {$nextesc=1;}
+      if ($pt == 0) {print "$c";}else{$pt=0;}
+
+      if ($printn == 1) {print "\n"; $printn=0;}
+  }
+}

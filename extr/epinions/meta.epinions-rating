@@ -1,0 +1,11 @@
+category: Rating
+code: ER
+name: Epinions
+description: User–product rating
+url: http://www.trustlet.org/wiki/Extended_Epinions_dataset
+cite: konect:massa05 
+extr: epinions
+fullname: Epinions product ratings
+long-description:  This is the bipartite rating network of Epinions, an online product rating site.  The nodes of the network are users and products, and each edge connects a user with a product and represents a rating. The weight of the edge is the rating value.
+entity-names: user,product
+relationship-names:  rating

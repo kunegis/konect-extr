@@ -1,0 +1,11 @@
+name:  Contiguous USA
+code:  CU
+url:  http://www-cs-faculty.stanford.edu/~uno/sgb.html
+category: Infrastructure
+description:  State–state borders
+cite: konect:sgb
+long-description:  These are the 48 contiguous states and the District of Columbia of the United States of America (the USA).  They include all states except the states of Alaska and Hawaii, which are not connected by land with the other states, and include the District of Columbia (DC).  An edge denotes that two states share a border.  The US states in the configuration given by this dataset exist since February 14, 1912, when Arizona was admitted as the 48th state, and is current as of 2014.  The states of Alaska and Hawaii were admitted as the 49th and 50th states in 1959, but are not contiguous with the other states, and are not reflected in this dataset. 
+entity-names:  state
+relationship-names:  border
+extr:  contiguous-usa
+timeiso:  1912

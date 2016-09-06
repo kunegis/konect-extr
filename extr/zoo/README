@@ -1,0 +1,50 @@
+
+This is the extraction and analysis code for the Slashdot Zoo. 
+
+== Crawling ==
+
+The zoo is extracted to $ZOO, which defaults to ~/zoodir.  This
+zoodir contains the extracted data with one dir per user ($ZOO/user.*),
+containing four files (friends, fans, foes, freaks).  Usernames are URL
+encoded. 
+
+Crawling is done by executing "./get".  This is a script which crawls
+continuously and which can be interupted and restarted when necessary. 
+
+Requirements:  perl, wget 
+
+=== Important files ===
+
+get -- the extraction proper
+analysis -- statistics
+progress -- progress chart
+mk* -- scripts to generate the corresponding out.* file
+
+
+== Analysis ==
+
+Analysis of the Slashdot Zoo is done using a Matlab, and the Large
+Graph Library LGL (version 1.1 works). 
+
+Files can be generated using the Makefile. 
+
+out.* -- files generated automatically
+out.corpus -- The whole corpus with one relation per line
+out.userids -- mapping between usernames and userids.  Userids begin at
+	1 and are continuous.
+out.matrix -- The whole corpus in Matlab readable format (one relation
+	per line, using userids and +1/-1 as relation).
+out.stat -- Statistics generated using Matlab
+out.pred -- Prediction statistics
+*.{ps,eps,png} -- figures generated automatically
+
+=== Requirements ===
+
+- GNU Make
+- Matlab:  You need "matlab" in the path
+- LGL-1.1:  Large Graph Layout, see file LGL
+
+=== Environment ===
+
+$verbose=1	output more
+$fast=1		be faster but less accurate

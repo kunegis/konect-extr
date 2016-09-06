@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+use Math::Round;
+use strict;
+use warnings;
+my $i=0;
+
+LINE:while(<STDIN>){
+chomp;
+s/"//g;
+s/ //g;
+next LINE if /[sS]heet.*/;
+next LINE if /^--.*/;
+my $joke=0;
+my @v=split(',');
+shift(@v);
+$i++;
+
+foreach my $val (@v)
+ {
+  $joke++;
+  if($val =~ /^99\.?[0]*/)
+    {next;}
+  print $i." ".$joke." ";
+  printf("%.2f", $val);
+  print "\n";
+ }
+}

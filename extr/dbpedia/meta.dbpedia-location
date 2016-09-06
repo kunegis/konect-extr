@@ -1,0 +1,11 @@
+category: Feature
+code: LO
+name: Location
+description: Entity–place location
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2 
+extr: dbpedia
+long-description: This is the bipartite network of entities in Wikipedia and their locations. The nodes of the network are entities and locations. Edges denote that an entity is associated with a location. Entity can have multiple locations, for instance cities associated with a company. The edges correspond to the &lt;http://dbpedia.org/ontology/location&gt; relationships in DBpedia. 
+tags: #regenerate
+entity-names:  entity, place
+relationship-names:  location

@@ -1,0 +1,10 @@
+name:             Rank-one random graph
+code:             Rro
+url:              todo
+category:         Random
+fullname:         Rank-one random graph
+description:      Node–node random
+long-description: Rank-one random graph
+entity-names:     node,node
+extr:   	  random
+cite:             todo

@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Dui
+name: Delicious ui
+description: User–URL assignment
+url: http://dai-labor.de/IRML/datasets
+cite: wetzker:delicious-cookbook
+extr: delicious
+fullname: Delicious user–URL
+long-description: This network contains user–URL relations from http://delicious.com/. Left nodes represent users, right nodes represent URLs and an edge shows that a user tagged a URL.
+tags:  #incomplete
+entity-names: user,URL
+relationship-names: tagging

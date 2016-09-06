@@ -1,0 +1,11 @@
+category: Authorship
+code:WR
+name: Writers
+description: Writer–work authorship
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2
+extr: dbpedia
+long-description: This is the bipartite writer network of DBpedia. Nodes are writers (persons) and their works. The edges correspond to the &lt;http://dbpedia.org/ontology/writer&gt; relationships in DBpedia. 
+tags: #regenerate
+entity-names:  writer, work
+relationship-names:  authorship

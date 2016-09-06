@@ -1,0 +1,45 @@
+#! /usr/bin/perl
+#
+# INPUT 
+#	petster-data/dogster/pals/
+#
+# OUTPUT 
+#	dat-petster/out.petster_orig-dog-friend
+#
+
+use strict;
+use warnings;
+
+opendir (IN,"petster-data/dogster/pals/") or die "$!";
+my @pals = sort readdir(IN);
+closedir IN or die "$!";
+
+open F_OUT, ">dat-petster/out.petster_orig-dog-friend" or die "$!";
+print F_OUT "% sym unweighted\n";
+
+foreach my $palsite(@pals){
+
+    next if ($palsite eq "." || $palsite eq ".."); 
+
+    my $path = "petster-data/dogster/pals/$palsite";
+    if ($palsite =~ /^pals_(\d+)\..*$/) {
+	my $dog = $1;
+	open F_IN, "<$path" or die "$!";
+
+	while (<F_IN>) {
+	    my $line = $_;
+
+	    while ($line =~ /<a href="\/dogs\/(\d+)" target="*_top"*>/gi) {
+		if (-e "petster-data/dogster/dogs/$1") {
+		    print F_OUT "$dog\t$1\n";
+		}
+	    }
+	}
+
+	close F_IN or die "$!";
+    } else {
+	print STDERR "*** Ignoring file '$path'\n"; 
+    }
+}
+
+close F_OUT or die "$!";

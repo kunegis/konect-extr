@@ -1,0 +1,131 @@
+#
+# WOSN Datasets
+# =============
+#
+# http://socialnetworks.mpi-sws.org/data-wosn2008.html
+#
+# Please use the following BibTeX entry if you would like to cite this dataset.
+#
+# @inproceedings{mislove-2008-flickr,
+#   author = {Alan Mislove and Hema Swetha Koppula and Krishna P. Gummadi
+#   and Peter Druschel and Bobby Bhattacharjee}, 
+#   title = {Growth of the Flickr Social Network}, 
+#   booktitle = {Proceedings of the 1st ACM SIGCOMM Workshop on Social
+#   Networks (WOSN'08)},  
+#   location = {Seattle, WA},
+#   month = {August},
+#   year = {2008}
+# }
+#
+# http://socialnetworks.mpi-sws.org/data-imc2007.html
+#
+# Please use the following BibTeX entry if you would like to cite this dataset.
+#
+# @inproceedings{mislove-2007-socialnetworks,
+#   author = {Alan Mislove and Massimiliano Marcon and Krishna P. Gummadi
+#     and Peter Druschel and Bobby Bhattacharjee}, 
+#   title = {{Measurement and Analysis of Online Social Networks}}, 
+#   booktitle = {Proceedings of the 5th ACM/Usenix Internet Measurement
+#     Conference (IMC'07)}, 
+#   address = {San Diego, CA},
+#   month = {October},
+#   year = {2007}
+# }
+#
+# This project can be built using Stu, a Make replacement.  Get it at:
+#
+# https://github.com/kunegis/stu/
+#
+# And type 'stu' within this directory to build everything. 
+#
+
+#
+# Note about the YouTube datasets:  "d" stands for "directed" and "u"
+# for "undirected".  The "u" variant is however not undirected, and both
+# datasets differ in size ("u" is about three times bigger than "d").
+# We treat all as directed. 
+#
+
+% version 2.4
+
+@all:  [DEP] @all.groupmemberships ; 
+
+>DEP:
+	DATASETS_UNDIRECTED DATASETS_LINKS DATASETS_LINKSD
+{
+	for I in $(cat DATASETS) ; do
+		echo @network."$I"
+	done
+	for I in $(cat DATASETS_UNDIRECTED) ; do
+		echo @network."$I"
+	done
+	for I in $(cat DATASETS_LINKS DATASETS_LINKSD) ; do
+		echo @network."$I"-links
+	done
+}
+
+DATASETS = {internet-growth flickr-growth youtube-d-growth wikipedia-growth}
+DATASETS_GROUPMEMBERSHIPS = {youtube flickr livejournal orkut}
+DATASETS_LINKS = {orkut flickr livejournal}
+DATASETS_LINKSD = {youtube}
+DATASETS_UNDIRECTED = {youtube-u-growth}
+
+@all.groupmemberships:  [DEP.groupmembership]; 
+
+>DEP.groupmembership:
+	DATASETS_GROUPMEMBERSHIPS
+{
+	for I in $(cat DATASETS_GROUPMEMBERSHIPS) ; do
+		echo @network."$I"-groupmemberships
+	done
+}
+
+@network.$network:  meta.$network out.$network; 
+
+$name.txt:  
+{
+	wget http://socialnetworks.mpi-sws.mpg.de/data/"$name".txt.gz -O "$name".txt.gz
+	gunzip "$name".txt.gz
+	touch "$name".txt
+}
+
+>out.$name: 
+	<$name.txt
+	$[DATASETS_UNDIRECTED] $[DATASETS]
+{
+	echo " $DATASETS_UNDIRECTED " | grep -qE " $name " && {
+		./mk "$name" | 
+		./rmloops |
+		../mkrel --enforce-edgeweights 'sym' 'unweighted' 
+		exit 0
+	}
+
+	echo " $DATASETS " | grep -qE " $name " && {
+		echo '% asym unweighted'
+		./mk "$name" | 
+		../mkuniq1 | 
+		../mkrmdup 
+		exit 0 
+	}
+}
+
+>out.youtube-links: <youtube-links.txt
+{
+	../mkrel --enforce-edgeweights 'asym' 'unweighted' 
+}
+
+>out.$name-links:  <$name-links.txt
+{
+	../mkrel --enforce-edgeweights 'sym' 'unweighted'
+}
+
+>out.$name-groupmemberships:  <$name-groupmemberships.txt
+{ 
+	echo '% bip unweighted'
+	../mkuniq
+}
+
+@clean: 
+{
+	rm -rf out.* *.txt
+}

@@ -1,0 +1,24 @@
+#
+# Chess results.
+#
+# https://www.kaggle.com/c/chess/data
+#
+
+% version 2.4
+
+@all:  meta.chess out.chess;
+
+meta.chess; 
+
+training_data.csv
+{
+	# Actually needs a login to download -- do it by hand 
+	wget https://www.kaggle.com/c/chess/download/training_data.csv -O training_data.csv
+	touch -c training_data.csv
+}
+
+>out.chess:  <training_data.csv  mkout
+{
+	echo '% asym multisigned'
+	./mkout | ../mkuniq1
+}

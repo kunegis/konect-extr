@@ -1,0 +1,15 @@
+
+UNUSED
+
+out.adjnoun:  adjnoun.gml
+	./mk <adjnoun.gml >$@
+
+
+adjnoun.gml:  adjnoun.zip
+	unzip adjnoun.zip
+	touch $@
+
+adjnoun.zip:
+	wget  http://www-personal.umich.edu/~mejn/netdata/adjnoun.zip -O $@
+
+clean: ; rm -rf *.gml *.zip *.txt

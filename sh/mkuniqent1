@@ -1,0 +1,241 @@
+#! /usr/bin/perl -w
+#
+#
+# Make IDs unique for bipartite dataset. 
+#
+# Filter a graph dataset, making IDs unique.
+#
+# INPUT format:         ID_A  ID_B   REST OF LINE
+# OUTPUT:  the same with continuous IDs
+# The output is written to STDOUT 
+#
+# Arguments: 
+# ./mkuniqent [--+entitiy-output-file:entitiy-input-file[:column_with_entity_id:column_with_data]]*
+# --This argument may be given more than once to create multiple entity files. 
+# 	entitiy-output-file: The name of the file where the entity data is written to
+#	entitiy-input-file: The corresponding entity data is read from this file. Can also be set to 'STDIN' to read from standard input. If this value is set to 'STDIN' it is assumed that the raw entity names as they appear in the input stream should be written to entitiy-output-file and column_with_entity_id and column_with_data will be ignored.
+#	column_with_entity_id: The column number where the entity name is located in <entitiy-input-file>. The first column has the index 0. -1 means that the line number is used as id. Can not be used in combination with reading from STDIN.
+#	column_with_data: The column number where the data is located in <entity-input-file>. The first column hast the index 0. To use column i and all that follow use 'i*'. Can not be used in combination with reading from STDIN.
+#	
+#
+# Input entity data is delimited by the character set in the environment var 'CFG_DELI'. See mkrel for information.
+# Input IDs may be any string not containing spaces.
+# Output IDs are continuous integers beginning at 1.
+#
+# Example: 
+#	<input ./mkuniqent --+ent.name:names.txt:0:1 --+ent.age:names.txt:0:2
+#	besides generation of unique IDs this will generate the entity files ent.name and ent.age, with values read from names.txt. 
+# See mkuniqent for an example using mkrel. The last parameter that defines which input column has to be used is missing because mkuniqent1 is designed to work with unipartite datasets.
+#
+# Note: This program loads all the entity information before processing the input hence its memory usage can be rather high.
+
+use strict;
+use Data::Dumper;
+use Text::ParseWords;
+binmode(STDOUT, ":utf8");
+my $msgwarn=1; #inform about missing entitiy ID
+
+my $next_user_id= 1;
+my %new_user_ids = ();
+
+my $genuid=0;
+my $genuidcolumn=-1;
+my @entlookup1=();
+my @entfiles1=();
+my @uidfiles1=();
+my $limit1=0;
+
+my $deli=$ENV{'CFG_DELI'};
+my $outallf=$ENV{'outall'};
+my $outall;
+my @args=split(' ',join(' ',@ARGV)); #weird, but wont work without
+
+if (scalar(@args)<1)
+{die "No arguments given";}
+
+foreach my $entity (@args)
+{
+	my $lookup={};
+	my @x=split(':',$entity);
+	$x[0] =~ s/^\s+//;
+	if ("$x[1]" ne "STDIN") {
+	 open FILE , '<', $x[1] or die "***Error: unable to open file ".$x[1]."\n";
+	 my $count=0;
+	 while (<FILE>)
+	 {
+		chomp;
+		my @u=parse_line($deli, 0,$_);
+		my @line=();
+		#bookcrossing encoding fix
+		foreach my $l (@u)
+		{
+                $l =~ s/"//g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xb6/ö/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xbc/ü/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xa9/é/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xa7/ç/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xa8/è/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\x6f/ã/g;
+		$l =~ s/\xc3\x83\xc2\xb6/ö/g;
+		$l =~ s/\xc3\x83\xc2\xb3\x0a/ó/g;
+		$l =~ s/\xc3\x83\xc2\xa7/ç/g;
+		$l =~ s/\xc3\x83\xc2\xbc/ü/g;
+		$l =~ s/\xc3\x83\xc2\xa9/é/g;
+		$l =~ s/\xc3\x83\xc2\xa8/è/g;
+		$l =~ s/\xc3\x83\xc2\x6f/ã/g;
+		$l =~ s/\xc3\x83\xc2\xa0/à/g;
+		$l =~ s/\xc3\x83\xc2\xa3/ã/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xba/ú/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\x3f/Ü/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2/á/g;
+		$l =~ s/Ã³/ó/g;
+                $l =~ s/Ã²/ò/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xaf/ï/g;
+		$l =~ s/\xc3\x83\xc2\xad/í/g;
+		$l =~ s/\xc3\x83\xc2\xa1/á/g;
+		$l =~ s/\xc3\x83\xc2\xb1/ñ/g;
+		$l =~ s/\xc3\xa9/é/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xb4/ô/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xba/ú/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xab/ë/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xa4/ä/g;
+		$l =~ s/\xc3\x83\xc2\xba/ú/g;
+		$l =~ s/\xc3\x83\xc2\xbd/ý/g;
+		$l =~ s/\xc3\x83\xc2\xaf/ï/g;
+		$l =~ s/\xc3\x83\xc2\xaa/ê/g;
+		$l =~ s/\x4f\xc3\x83\xc2\xab/Ō/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\xa1/á/g;
+		$l =~ s/\xc3\x83\x3f\xc3\x82\xc2\x6d/ß/g;	
+		push(@line,$l);
+		}
+		#my @line=split($deli,$_);
+		$count++;
+		my @entry=();
+		#my $uid=$count;
+		#if($genuidcolumn>-1) {$uid=$line[$genuidcolumn];}
+		if($x[3] =~ m/^[0-9]*\*/)
+                {
+		 my $y=$x[3];
+		 $y=~ s/\*//;
+		 my $sl=$y."..".(scalar(@line)-1);
+		 my @sl=eval "($sl)";
+		 @entry=[0,join($deli,@line[@sl])];
+                }else{
+		 @entry=[0,$line[$x[3]]];
+		}
+		if($x[2]!=-1){
+			if(not defined $line[$x[2]]) {print STDERR "***WARNING: invalid line in file ".$x[1].",count=".$count.",full line is '".join(' ',@line)."'\n"; next;}
+		}
+		if($x[2]>-1){
+		@{$lookup->{$line[$x[2]]}} = @entry;
+		}else{
+		@{$lookup->{$count}} = @entry;
+		}
+	 }
+	 close(FILE);
+	 push(@entlookup1,$lookup);
+	}else{
+	 push(@entlookup1,undef);
+	}
+	my $f;
+        open $f , '>', $x[0] or die;
+	push(@entfiles1,$f);
+} 
+
+while (<STDIN>) 
+{
+    if (/^%/)
+    {
+	next; 
+    }
+    if(not /\s*(\S+)\s+(\S+)\s+(.*)/)
+	{print STDERR "*** warning: ignored invalid input:  $_"; next;}
+    
+    my $id_user_old = "" . $1;
+    my $id_user2_old = "" . $2;
+    my $rating = "" . $3;
+
+    my $id_user_new = $new_user_ids{$id_user_old};
+    if (! exists $new_user_ids{$id_user_old}) {
+	$id_user_new = $next_user_id;
+	$new_user_ids{$id_user_old} = $id_user_new;
+	++ $next_user_id;
+    }
+    my $id_user_new_string = "" . $id_user_new;
+
+    my $id_user2_new = $new_user_ids{$id_user2_old};
+    if (! exists $new_user_ids{$id_user2_old}) {
+        $id_user2_new = $next_user_id;
+        $new_user_ids{$id_user2_old} = $id_user2_new;
+        ++ $next_user_id;
+    }
+
+    my $id_user2_new_string = "" . $id_user2_new;
+
+    print "$id_user_new_string $id_user2_new_string $rating\n";
+    addent($id_user_old,$id_user_new,$id_user2_old,$id_user2_new,$rating);
+
+}
+
+foreach my $f (@entfiles1)
+	{close($f);}
+
+sub lookup
+{
+my ($id,$h)=@_;
+
+if(defined($h->{$id}))
+{
+ if($h->{$id}->[0]->[0]==0)
+ {
+  $h->{$id}->[0]->[0]=1;
+  return $h->{$id}->[0]->[1]."\n";
+ }
+ return "";
+}
+if($msgwarn==1){
+print STDERR "*** warning: Uknown enity id. Further errors will be ignored. ID:".$id."\n";
+$msgwarn=0;
+}
+return "\n";
+}
+
+sub addent
+{  
+ my ($oldid1,$id1,$oldid2,$id2,$rol)=@_;
+
+ if(($id1<=$limit1) && ($id2<=$limit1))
+        {return;}
+ my $use1=1;
+ my $outl="";
+	my $count=0;
+if($id1>$limit1)
+{
+	foreach my $f (@entfiles1)
+	{
+	if (not defined $entlookup1[$count])
+	{
+	 print $f $oldid1."\n";
+	}else{
+	 print $f lookup($oldid1,$entlookup1[$count]);
+	}
+	 $count++;
+	}
+$limit1++;
+}
+$count=0;
+if($id2>$limit1)
+{
+       foreach my $f (@entfiles1)
+        {
+        if (not defined $entlookup1[$count])
+        {
+         print $f $oldid2."\n";
+        }else{
+         print $f lookup($oldid2,$entlookup1[$count]);
+        }
+         $count++;
+        }
+$limit1++;
+}
+}

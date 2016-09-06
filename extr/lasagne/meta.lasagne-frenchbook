@@ -1,0 +1,10 @@
+category: Lexical
+code: FB
+name: French book
+description: Word–word adjacency
+url: http://amici.dsi.unifi.it/lasagne/?page_id=227
+extr: lasagne
+long-description: These are adjacency edges from phrases of a French book. Nodes in the network are words, and a directed edge denotes that two words occurred one after the other in a phrase in the book. 
+tags: 
+entity-names: word
+relationship-names: adjacency 

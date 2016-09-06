@@ -1,0 +1,10 @@
+category: Feature
+code: DBT
+name: TV Tropes
+url: http://dbtropes.org/
+extr: dbtropes
+long-description: This is the bipartite network of TV Tropes (tvtropes.org), characterising artistic works by their tropes. Each edge connects a work (such as a movie, a novel, etc.) to one trope (stylistic convention or device).  The network was extracted by the DBTropes project (dbtropes.org). 
+tags: #regenerate
+entity-names: work,trope
+relationship-names: hasFeature
+description: Work–trope inclusion

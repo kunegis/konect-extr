@@ -1,0 +1,11 @@
+category: OnlineContact
+code: CO
+name: Wikipedia conflict
+description: User–user edit conflicts
+extr: wikiconflict
+long-description: The edges in this network represent positive and negative conflicts between users of the English Wikipedia, for example users involved in an edit-war. A node represents a user and an edge represents a conflict between two users, with the edge sign representing positive and negative interactions.  An example for a negative interaction would be when one user revert the edit of another user. 
+cite: konect:brandes09
+tags:  #zeroweight
+entity-names: user 
+relationship-names: edit conflict 
+url:  http://visone.info/wiki/index.php/Wikipedia_edit_networks_%28tutorial%29

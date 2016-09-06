@@ -1,0 +1,10 @@
+category: Affiliation
+code: LG
+name: LiveJournal
+description: User–group memberships
+url: http://socialnetworks.mpi-sws.org/data-imc2007.html
+cite: konect:mislove
+extr: wosn
+long-description: This is the bipartite network of LiveJournal users and their group memberships.
+entity-names: user,group
+relationship-names: membership

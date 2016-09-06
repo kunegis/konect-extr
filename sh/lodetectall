@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# Reads input from STDIN
+#
+# Format: "#comment\n"* "nodeA nodeB[ value [time]]\n"*  
+#
+# Detects loops of kind "nodeA nodeB\n[...]nodeB nodeA" and exits with
+# errorcode 0 if no loop exists else errorcode 1 is returned and a
+# message is written to STDERR. b
+# Make sure all input lines are terminated by \n (use fromdos if needed) 
+#
+# Important: No multiple edges between nodes are supported, this will
+# produce a false positive.  
+#
+
+read C1 C2 <<< $(tee >(tr '\t' ' ' |
+while read line
+do
+	if [[ "${line::1}" != "#"  &&  "${line::1}" != "%" ]]; then
+	read v1 v2 N N <<<$(IFS=" "; echo "$line")
+	if [ "$v1" -lt "$v2" ]; then
+		echo "$v2 $v1"
+	else
+		echo "$v1 $v2"
+	fi
+	else
+		echo "$line"
+	fi
+done | sort -n |tee >(uniq) >(uniq -d | nl -s 'Loop: ' | cut -c7- >&2) >/dev/null | wc -l
+) >(
+wc -l
+) >/dev/null
+)
+if [ $C1 -gt $C2 ]; then
+ echo '' >&2
+ echo "Network contains loops." >&2
+ exit 1
+fi 
+exit 0

@@ -1,0 +1,57 @@
+# The DBTropes dataset
+# ====================
+#
+# DBTropes.org is a Linked Data wrapper for the TVTropes.org community wiki. It
+# contains descriptions of numerous movies, books, and other items, and
+# associates these with tropes (writing devices and conventions). 
+#
+
+#
+# This project uses Stu instead of Make.  Get it at 
+#
+# https://github.com/kunegis/stu
+#
+
+% version 1.15
+
+@all:  out.dbtropes-feature meta.dbtropes-feature;
+
+@more:  dbtropes-seealso.txt;
+
+meta.dbtropes-feature;
+
+>out.dbtropes-feature: <dbtropes-feature.txt
+{
+	echo '% bip unweighted'
+	../mkuniq |
+	sort -u
+}
+
+dbtropes-seealso.txt:  dbtropes.nt mkseealso
+{
+	./mkseealso 
+}
+
+dbtropes-feature.txt:  dbtropes.nt mkfeature
+{
+	./mkfeature 
+}
+
+dbtropes.nt:  dbtropes.zip
+{
+	rm -f stat-* dbtropes-*.nt dbtropes.nt
+	unzip dbtropes.zip
+	touch stat-* dbtropes-*.nt
+	mv dbtropes-*.nt dbtropes.nt
+}
+
+dbtropes.zip:
+{
+	wget http://dbtropes.org/static/dbtropes.zip -O dbtropes.zip
+	touch dbtropes.zip
+}
+
+@clean:
+{
+	rm -rf out.* *.nt *.txt *.zip	
+}

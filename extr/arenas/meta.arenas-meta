@@ -1,0 +1,11 @@
+category: Metabolic
+code: PM
+name: Caenorhabditis elegans
+description: Metabolite–metabolite interactions
+url: http://deim.urv.cat/~aarenas/data/welcome.htm
+cite: konect:duch05 
+extr: arenas
+long-description: This is the metabolic network of the roundworm <i>Caenorhabditis elegans</i>.  Nodes are metabolites (e.g., proteins), and edges are interactions between them.  Since a metabolite can iteract with itself, the network contains loops.  The interactions are undirected.  There may be multiple interactions between any two metabolites.
+tags:  #loop
+entity-names: metabolite
+relationship-names: interaction

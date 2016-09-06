@@ -1,0 +1,76 @@
+#! /usr/bin/perl -w
+#
+# Generate a multirelational file from a semantic NT file.  Always ASYM. 
+#
+# INPUT
+#	STDIN	NT file
+#
+# OUTPUT
+#	STDOUT	Multi file
+#
+
+use strict;
+
+my $next_id_ent = 1;
+my %new_ids_ent = ();
+my %old_ids_ent = ();
+
+sub entity_id
+{
+    my $id_old_ent = shift; 
+
+    my $id_new_ent = $new_ids_ent{$id_old_ent};
+    if (! exists $new_ids_ent{$id_old_ent}) 
+    {
+	$id_new_ent = $next_id_ent;
+	$new_ids_ent{$id_old_ent} = $id_new_ent;
+	$old_ids_ent{$id_new_ent} = $id_old_ent;
+
+	++ $next_id_ent;
+    }
+    my $id_new_string = "" . $id_new_ent;
+
+    return $id_new_string; 
+}
+
+my $next_id_rel = 1;
+my %new_ids_rel = ();
+my %old_ids_rel = ();
+
+sub relation_id
+{
+    my $id_old_rel = shift; 
+
+    my $id_new_rel = $new_ids_rel{$id_old_rel};
+    if (! exists $new_ids_rel{$id_old_rel}) 
+    {
+	$id_new_rel = $next_id_rel;
+	$new_ids_rel{$id_old_rel} = $id_new_rel;
+	$old_ids_rel{$id_new_rel} = $id_old_rel;
+
+	++ $next_id_rel;
+    }
+    my $id_new_string = "" . $id_new_rel;
+
+    return $id_new_string; 
+}
+
+while (<STDIN>) 
+{
+    if (/^%/)
+    {
+	print "$_\n";
+	next; 
+    }
+
+    # Not all lines are of this form.  For instance, ignore string and
+    # int properties.  
+    /^\s*\<(\S+)\>\s+\<(\S+)\>\s+\<(\S+)\>\s+\.\s*$/
+	or next; 
+
+    my $from = entity_id($1);
+    my $to   = entity_id($3);
+    my $rel  = relation_id($2); 
+
+    print "$from\t$to\t$rel\n"; 
+}

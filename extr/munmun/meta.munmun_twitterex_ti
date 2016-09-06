@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Wti
+name: Twitter t-i
+description: Hashtag–URL co-occurrence
+url: http://www.public.asu.edu/~mdechoud/datasets.html
+cite: konect:choudhury10 
+extr: munmun
+fullname: Twitter hashtag–URL
+long-description: This is a bipartite network of tag–URL relations in Twitter. Left nodes represent tags and right nodes represent URLs. An edge shows that an URL was mentioned together with a given tag in a tweet. 
+tags: #incomplete
+entity-names:  hashtag, URL
+relationship-names:  co-occurrence

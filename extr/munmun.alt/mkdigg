@@ -1,0 +1,27 @@
+#! /usr/bin/perl -w
+#
+# Make the final digg file.
+#
+# All data goes though stdin and stdout.
+#
+
+use strict; 
+
+use Date::Parse;
+
+print "% asym positive\n"; 
+
+while (<>)
+{
+    chomp; 
+
+    /^[0-9]+ ([^ ]+) ([^ ]+) ([^ ]+)$/ or die; 
+
+    my $from = $2; 
+    my $to = $3; 
+    my $time_string = $1; 
+
+    my $time = str2time($time_string); 
+
+    print "$from $to 1 $time\n"; 
+}

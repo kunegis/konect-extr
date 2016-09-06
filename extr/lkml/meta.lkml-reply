@@ -1,0 +1,9 @@
+category:  Communication
+code: Lk
+name:  Linux kernel mailing list replies
+description:  Person–person replies
+entity-names:  person
+relationship-names:  reply
+extr:  lkml
+tags:  #loop
+long-description:  This is the communication network of the Linux kernel mailing list.  Nodes are persons (identified by their email addresses), and each directed edge represents a reply from a user to another.  

@@ -1,0 +1,86 @@
+#! /usr/bin/perl -w
+# 
+# Create an interwiki dataset.  
+#
+# PARAMETERS
+#	$LANG1, $LANG2	The two languages
+#
+# INPUT FILES 
+#	out/page_$LANG2.sql
+#	out/langlinks_$LANG1.sql
+#
+# OUTPUT FILES
+#	out/id.wikipedia_link_$LANG1_$LANG2
+#
+
+use strict;
+use warnings;
+
+my $lang1= $ENV{LANG1};
+my $lang2= $ENV{LANG2};
+
+($lang1 ne $lang2) or die;
+
+#
+# Read names for second language
+#
+
+print "Reading name mapping\n";
+
+# Mapping of Article-Name to Wikipedia-ID 
+my %wids= ();
+
+open IN_PAGE, "<out/page_$lang2.sql" or die "$!";
+
+while (my $line= <IN_PAGE>) 
+{
+    next unless $line =~ /^INSERT INTO/;
+
+    while ($line =~ /\((\d+),(\d+),'((?:[^']|\\')+)'/g) 
+    {
+	my $wid=       $1; 
+	my $namespace= $2;
+	my $aname=     $3; 
+
+	next unless $namespace == 0;
+
+	$wids{$aname}= $wid;
+    }
+}
+
+close IN_PAGE or die "$!";
+
+#
+# Read links
+#
+
+print "Process links\n";
+
+open OUT, ">out/id.wikipedia_link_${lang1}_${lang2}" or die "$!";
+open IN, "<out/langlinks_${lang1}.sql" or die "$!";
+
+while (my $line= <IN>) 
+{
+    next unless $line =~ /^INSERT INTO/;
+
+    while ($line =~ /\((\d+),'((?:[^']|\\')+)','((?:[^']|\\')+)'\)/g) 
+    {
+	my $wid_from=    $1;
+	my $lang_to=     $2;
+	my $aname_to=    $3;
+	
+	next unless $lang_to eq $lang2; 
+
+	# Ignore links to pages that do not exist, i.e., red links
+	unless (defined $wids{$aname_to}) {
+	    next;
+	}
+
+	my $wid_to= $wids{$aname_to};
+
+	print OUT "$wid_from\t$wid_to\n";
+    }
+}
+
+close IN or die "$!";
+close OUT or die "$!";

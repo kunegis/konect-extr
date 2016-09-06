@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+while(<STDIN>)
+{
+	chomp;
+	$string=$_;
+	my $inside=0;
+	foreach (split //, $string) {
+		if($_ eq '"') {$inside=!$inside;}
+		if($_ eq ' ' && $inside=="1") {
+			print ".";
+		}else{
+			print $_;
+		}
+	}
+	print "\n";
+}

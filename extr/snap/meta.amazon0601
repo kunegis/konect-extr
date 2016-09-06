@@ -1,0 +1,11 @@
+category: Misc
+code: Am
+name: Amazon (TWEB)
+description: Item–item recommendation
+url: http://snap.stanford.edu/data/amazon0601.html
+cite: konect:leskovec07
+extr: snap
+long-description:  This is the network of items on Amazon that have been mentioned by Amazon's "People who bought X also bought Y" function.  Nodes in the network are products, and a directed edge from A to B denotes that product A is frequently co-purchased with product B
+entity-names: product 
+relationship-names: co-purchase
+

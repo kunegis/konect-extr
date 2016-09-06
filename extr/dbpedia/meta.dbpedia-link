@@ -1,0 +1,11 @@
+category: Hyperlink
+code: DL
+name: Wikipedia, English
+description: Article–article links
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2
+extr: dbpedia
+long-description: The network is the hyperlink network of Wikipedia, as extracted in DBpedia. Nodes are pages in Wikipedia and edges correspond to hyperlinks (also known as wikilinks). The edges correspond to the &lt;http://dbpedia.org/ontology/wikiPageWikiLink&gt; relationships in DBpedia. 
+tags: #regenerate
+entity-names: article
+relationship-names: hyperlink

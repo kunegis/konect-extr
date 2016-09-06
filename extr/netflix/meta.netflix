@@ -1,0 +1,10 @@
+category: Rating
+code: NX
+name: Netflix
+description: User–movie ratings
+entity-names: user, movie
+relationship-names: rating
+url: http://www.netflixprize.com/community/viewtopic.php?pid=9857
+cite: konect:bennett07 
+extr: netflix
+long-description: This is the Netflix Prize dataset. The network is bipartite. Nodes are users of the movie website Netflix, and movies. Edges connect a user with a movie, and represent ratings.

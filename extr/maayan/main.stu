@@ -1,0 +1,41 @@
+
+#
+# Biological networks from Avi Ma'ayan, Mount Sinai Medical Center. 
+#
+# http://research.mssm.edu/maayan/datasets/qualitative_networks.shtml
+#
+# All networks are in the SIG format described here:
+#
+# http://research.mssm.edu/maayan/datasets/sig_format.shtml
+#
+
+@all:  <dep.all>;
+
+dep.all:  $<NAMES>
+{
+    for NAME in $NAMES
+    do
+	echo out.maayan-$NAME meta.maayan-$NAME 
+    done >dep.all
+}
+
+out.maayan-[NAME]:  [NAME].sig
+{
+    if test [NAME] = pdzbase -o [NAME] = vidal ; then
+	{
+	    echo '% sym unweighted'
+	    <[NAME].sig cut -f 1,6 -d ' ' | ../mkuniq1 | ../mksym
+	} >out.maayan-[NAME]
+    else
+	{
+	    echo '% asym unweighted'
+	    <[NAME].sig cut -f 1,6 -d ' ' | ../mkuniq1
+	} >out.maayan-[NAME]
+    fi
+}
+
+[NAME].sig:
+{
+    wget http://research.mssm.edu/maayan/datasets/[NAME].sig -O [NAME].sig
+    touch [NAME].sig
+}

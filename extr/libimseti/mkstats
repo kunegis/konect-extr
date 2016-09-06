@@ -1,0 +1,15 @@
+#! /bin/sh
+
+echo Users:  
+wc -l gender.dat
+
+echo Men:  
+grep -Fc M gender.dat
+
+echo Women:
+grep -Fc F gender.dat
+
+echo Unknown:
+grep -Fc U gender.dat
+
+exit 0

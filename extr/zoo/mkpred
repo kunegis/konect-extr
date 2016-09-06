@@ -1,0 +1,87 @@
+#! /bin/sh
+#
+# Generate plot of out.pred
+#
+# Environment:
+#    $INPUT:  use another file instead of out.pred
+#
+
+TMP_BASE=${TMP-/tmp}/`basename $0`
+INPUT=${INPUT-out.pred}
+
+[ "$verbose" ] && exec 3>&1 || exec 3>/dev/null
+
+#style="with linespoints lw 5"
+style="with lines lw 5"
+
+
+a_name=F
+# a_exp_red_name="A exp"
+a_sym_name="A"
+# a_sym_exp_name="A sym exp"
+# l_sym_name="L sym"
+ls_sym_name="Ls"
+# los_sym_name="Los sym"
+l_sym_snorm_name="Ls norm"
+
+rgb_1="#ff0000"
+rgb_2="#00ff00"
+rgb_3="#0000ff"
+rgb_4="#ffff00"
+rgb_5="#ff00ff"
+rgb_6="#00ffff"
+
+methods="a a_sym ls_sym l_sym_snorm"
+#methods="`<$INPUT sed -e '/^[a-z_0-9]/!d;s,[^a-z_0-9].*,,' | uniq`"
+
+echo >&3 methods=$methods
+
+for method in $methods
+do
+  >$TMP_BASE.$method sed <$INPUT -e '/^'$method'[^a-z_0-9]/!d;s,^[a-z_0-9]*,,;s,^[^0-9]*,,'
+done
+
+{
+    cat <<EOF
+
+set terminal postscript eps enhanced "NimbusSanL-Regu" fontfile "/usr/share/texmf/fonts/type1/urw/helvetic/uhvr8a.pfb" 20 color
+set output "$INPUT.eps"
+
+set key left bottom
+
+set xlabel "k (dimensionality reduction)"
+set ylabel "Accuracy"
+
+set yrange [.5:.7]
+set xrange [0:50]
+
+EOF
+
+    echo -n "plot "
+
+    first=true
+    index=1
+
+    for method in $methods
+    do
+      echo >&3 METHODS=»$methods«
+      echo >&3 METHOD=»$method«
+
+      [ "$first" ] || { echo -n ", " ; echo >&3 COMMA; }
+      first=
+#       expr "$methods" : "$method .*" >&3 ||
+#       { echo -n ", " ; echo >&3 COMMA ; }
+      eval name=\$${method}_name
+      echo >&3 INDEX=»$index«
+#      eval rgb=\$rgb_$index
+      [ -z "$name" ] && name="`echo "$method" | tr '_' ' '`"
+      color=$[$index + 2 + $index/4*2];
+      echo >&3 COLOR=»$color«
+      echo -n "  \"$TMP_BASE.$method\" using 1:2 title \"$name\" $style lt $color" 
+      index=$[$index + 1]
+    done
+
+    echo
+
+} | tee $TMP_BASE.out | gnuplot 
+

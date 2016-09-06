@@ -1,0 +1,24 @@
+#! /bin/sh
+#
+# Make the user entity list.
+#
+# INPUT
+#	{ratings,tags}.dat
+#
+# OUTPUT
+#	ent.user
+#
+
+TMP=${TMP:-/tmp}
+TMP_BASE=$TMP/`basename $0`.$$
+
+cat ratings.dat tags.dat | sed -re 's,::.*,,' | sort -un >$TMP_BASE.ent
+
+{ 
+    echo '%'
+    echo -n '% '
+    tail -n1 $TMP_BASE.ent 
+    echo '% ent'
+    cat $TMP_BASE.ent 
+    
+} >ent.user

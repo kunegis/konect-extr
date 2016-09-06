@@ -1,0 +1,8 @@
+category: Interaction
+code: LK
+name: Linux kernel mailing list threads
+description: Person–thread contributions
+entity-names: person,thread
+relationship-names: post
+extr: lkml
+long-description: This bipartite network contains contributions of persons to various threads of the Linux kernel mailing list. An edge represents a post; left nodes are persons and right nodes represent threads in the mailing list.  

@@ -1,0 +1,11 @@
+category: Authorship
+code: Pa
+name: DBLP
+description: Author–publication authorship
+url: http://dblp.uni-trier.de/xml/
+cite: konect:DBLP 
+extr: dblp
+long-description: This is the authorshop network of the DBLP computer science bibliography.  The network is bipartite; its nodes are authors and publications.  Each edge connects an author to one of his publications.
+tags: #regenerate
+entity-names: author,publication
+relationship-names: authorship 

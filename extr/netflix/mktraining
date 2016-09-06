@@ -1,0 +1,70 @@
+#! /usr/bin/perl -w
+# 
+# INPUT  
+#	out.training.raw 	Training data in Matlab format with holes in the user IDs
+#
+# OUTPUT
+#	out.training.bare	Training data without holes.
+#	out.header		Header
+#
+
+use strict;
+
+use List::Util qw[min max];
+use Date::Parse;
+
+open(TRAINING_RAW, "<out.training.raw") or die "Cannot open out.training.raw:  $!";
+open(TRAINING_BARE, ">out.training.bare") or die "Cannot open out.training.bare:  $!";
+
+my $next_id= 1;
+my %new_ids = ();
+my %old_ids = ();
+
+my $max_movie_id = 0; 
+my $rating_count = 0; 
+
+while (<TRAINING_RAW>) 
+{
+    /([0-9]+) ([0-9]+) ([1-5]) ([0-9]{4})([0-9]{2})([0-9]{2})/ or die "syntax error in input:  >>$_<<";
+
+    ++ $rating_count; 
+    
+    my $id_old = "" . $1;
+    my $movie_id = "" . $2;
+    my $rating = "" . $3;
+
+    my $year = "" . $4;
+    my $month = "" . $5;
+    my $day = "" . $6; 
+
+    my $date = str2time("$year-$month-$day"); 
+
+    $max_movie_id = max($max_movie_id, $movie_id); 
+    
+    my $id_new = $new_ids{$id_old};
+    
+    if (! exists $new_ids{$id_old}) {
+	$id_new = $next_id;
+	$new_ids{$id_old} = $id_new;
+	$old_ids{$id_new} = $id_old;
+	++ $next_id;
+    }
+
+    my $id_new_string = "" . $id_new;
+    
+    print TRAINING_BARE "$id_new_string $movie_id $rating $date\n";
+}
+
+close(TRAINING_BARE) or die "Cannot close out.training.bare:  $!";
+close(TRAINING_RAW) or die "Cannot close out.training.raw:  $!";
+
+open (HEADER, ">out.header") or die "Cannot open out.header:  $!";
+
+my $user_count = scalar keys %new_ids;
+
+print HEADER "% bip weighted\n"; 
+print HEADER "% $rating_count $user_count $max_movie_id\n"; 
+print HEADER "% ent.user ent.item byte.rating\n"; 
+
+close(HEADER) or die "Cannot close out.header:  $!"; 
+

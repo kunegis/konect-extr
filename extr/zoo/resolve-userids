@@ -1,0 +1,32 @@
+#! /usr/bin/perl -w
+#
+# In Matlab log, convert user IDs to usernames.
+#
+
+$zoo=$ENV{'ZOO'};
+if (!$zoo)   {
+    $zoo= $ENV{'HOME'} . "/zoodir/";
+}
+
+open(OUT_USERIDS, "<out.userids") or die;
+
+%usernames=(); # IDs to names. 
+
+while (<OUT_USERIDS>) {
+    /([0-9]+) (.*)/;
+    $userid=$1;
+    $username=$2;
+
+    $usernames{$userid} = $username;
+}
+
+close(OUT_USERIDS);
+
+while (<>) 
+{
+    if (!/^\#([0-9]*):(.*)$/) {
+	print $_ ; 
+	next ;
+    } 
+    print "   " . $usernames{$1} . $2 . "\n";
+}

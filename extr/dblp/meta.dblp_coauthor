@@ -1,0 +1,11 @@
+category: Coauthorship
+code: Pc
+name: DBLP
+description: Author–author collaborations
+url: http://dblp.uni-trier.de/xml/
+cite: konect:DBLP 
+extr: dblp
+long-description:  This is the collaboration graph of authors of scientific papers from DBLP computer science bibliography.  An edge between two authors represents a common publication. Edges are annotated with the date of the publication.  There may be multiple edges between two nodes, representing pairs of authors that have written multiple publications together.
+tags: #regenerate
+entity-names: author
+relationship-names: collaboration 

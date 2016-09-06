@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# Show the top predicates in a semantic network. 
+#
+# PARAMETERS
+#	$1	N3 filename
+#
+
+[ -z "$1" ] && {
+	echo "Invocation:  $0 FILENAME'"
+	exit 0
+}
+
+<$1 sed -re 's,^<[^ ]+> <([^ ]+)>.*$,\1,' | sort | uniq -c | sort -nr 

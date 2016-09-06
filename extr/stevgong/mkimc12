@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+while(<STDIN>)
+{
+chomp;
+my @l=split / /;
+my $time;
+if ($l[2] == "0")
+ {
+   $time="1309471200";
+ }elsif($l[2] == "1"){
+   $time="1312149600";
+ }elsif($l[2] == "2"){
+   $time="1314828000";
+ }else{
+  $time="1317420000";
+ }
+print $l[0]." ".$l[1]." 1 ".$time."\n";
+}

@@ -1,0 +1,94 @@
+#
+# The file inclusion graph of the Linux kernel.
+# 
+
+% version 1.9
+
+@all:  meta.linux out.linux @test;
+
+>VERSION { echo 3.16 }
+>SERIES  { echo v3.x }
+
+>out.linux:  <out.raw
+{
+	echo '% asym unweighted'
+	sed -re '/ --$/d' | 
+	../mkuniq1 | 
+	sort -n | uniq
+}
+
+>out.unfiltered:  [dep] $[VERSION] mkall  filtered-files
+{
+	./mkall linux-"$VERSION" 
+}
+
+>out.raw:  <out.unfiltered filter 
+{
+	./filter 
+}
+
+linux-$VERSION.tar.xz:  $[SERIES]
+{
+	wget https://www.kernel.org/pub/linux/kernel/"$SERIES"/linux-"$VERSION".tar.xz -O linux-"$VERSION".tar.xz
+	touch linux-"$VERSION".tar.xz
+}
+
+linux-$VERSION:  linux-$VERSION.tar.xz
+{
+	tar xfvvJ linux-"$VERSION".tar.xz
+	touch linux-"$VERSION"
+}
+
+>dep:  $[VERSION]
+{
+	echo linux-"$VERSION" 
+}
+
+@test:   noincludes
+{
+	if [ "$(wc -l noincludes | cut -f 1 -d ' ')" != 0 ] ; then
+		exit 1
+	fi
+	exit 0
+}
+
+# A list of files which do not have any include, and which do not exist
+# physically  
+noincludes:
+	out.raw $[VERSION] mknoincludes
+{
+	./mknoincludes
+}
+
+# All source files who appear multiple times.  This is to help decide
+# which are really the same file (but in different versions), and which
+# are actually files in different directory just having the same name by
+# coincidence. 
+>duplicates:  $[VERSION]
+{
+	find linux-"$VERSION" -name '*.[ch]' | sed -re 's,^(.*/)(.*\.[ch])$,\2,' | sort | uniq -d |
+	while read file 
+	do
+		echo "$file"
+		find linux-"$VERSION" -name "$file" | sed -re 's,^,	,'
+	done 
+}
+
+>filtered-files:    filter $[VERSION] GENERATED [dep]
+{
+	cd linux-"$VERSION" && find . -name '*.[ch]' | ../filter ; cat ../GENERATED 
+}
+
+>meta.linux:  <meta.linux.in $[VERSION]
+{
+	sed -re 's,\$\{VERSION\},'"$VERSION"',g'
+}
+
+# Template for the 'meta.linux' file, containing '${VERSION}' for the
+# version number. 
+meta.linux.in;
+
+@clean:
+{
+	rm -rf out.* linux-* dep noincludes duplicates filtered-files 
+}

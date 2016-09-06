@@ -1,0 +1,11 @@
+category: Computer
+code: AS
+name: Route views
+description: AS–AS connections
+url: http://snap.stanford.edu/data/as.html
+cite: konect:leskovec107 
+extr: snap
+long-description: This is the undirected network of autonomous systems of the Internet connected with each other. Nodes are autonomous systems (AS), and edges denote communitation. The network contains loops.
+tags:  #loop #missingorientation
+entity-names: autonomous system
+relationship-names: communication

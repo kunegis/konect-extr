@@ -1,0 +1,12 @@
+name:  Linux
+code:  LX
+url:  https://www.kernel.org/
+category:  Software
+description:  File–file inclusion
+long-description:  This is the network of Linux source code files, with directed edges denoting that they include each other.  The network is based on Linux version ${VERSION}.  The network is acyclic. 
+entity-names:  file
+relationship-names:  inclusion
+extr:  linux
+timeiso:  2014
+tags:  #regenerate #acyclic
+

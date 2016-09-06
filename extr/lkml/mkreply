@@ -1,0 +1,37 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+use POSIX;
+
+print "% asym positive\n";
+
+open IN, "<From-To-Datetime.txt" or die "$!"; 
+
+while (<IN>) {
+
+    chomp; 
+    
+    /^([0-9]+);(-1|[0-9]+);(.*)$/ or die "Invalid line"; 
+
+    my $from = $1;
+    my $to   = $2;
+    my $timetext = $3;
+
+    # Remove first posts; they are not replies
+    next if $to eq "-1";
+
+    my ($year, $mon, $mday, $hour, $min, $sec) = split /[\s.:-]/, $timetext;
+    my $time = mktime($sec, $min, $hour, $mday, $mon - 1, $year - 1900); 
+
+    if (! defined $time) {
+	print STDERR "timetext = «$timetext»\n";
+	print STDERR "time = «$time»\n";
+	die "time invalid in line «$_»";
+    }
+
+    print "$to\t$from\t1\t$time\n"; 
+}
+
+close IN or die "$!"; 

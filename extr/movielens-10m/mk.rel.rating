@@ -1,0 +1,25 @@
+#! /bin/sh
+#
+# Make rating relationships.
+#
+# INPUT
+#	ratings.dat
+#
+# OUTPUT
+#	rel.rating
+#
+
+COUNT=`wc -l ratings.dat | cut -f 1 -d ' '`
+COUNT_USER=`<ratings.dat sed -re 's,::.*,,' | uniq | wc -l`
+COUNT_ITEM=`<ratings.dat sed -re 's,[^:]*::,,;s,::.*,,' | sort -u | wc -l`
+
+{
+    
+    echo "% bip weighted"
+    echo "% $COUNT $COUNT_USER $COUNT_ITEM"
+    echo "% ent.user ent.movie weight.rating dat.date"
+
+    <ratings.dat sed -re 's,::, ,g'
+
+} >rel.rating
+

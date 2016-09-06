@@ -1,0 +1,14 @@
+category: Social
+code: TW
+name: Twitter (WWW)
+description: User–user following
+url: http://an.kaist.ac.kr/traces/WWW2010.html
+cite: konect:twitter1 
+extr: twitter
+long-description:  This is the follower network from Twitter, containing 1.4 billion directed follow edges between 41 million Twitter users.
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_twitter_user: <http://konect.uni-koblenz.de/networks/twitter/User/> .
+n3-type-m: sioc:UserAccount
+n3-edgedata-1: $m sioc:follows $n .
+entity-names: user
+relationship-names: following

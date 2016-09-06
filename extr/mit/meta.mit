@@ -1,0 +1,10 @@
+category: HumanContact
+code: RM
+name: Reality Mining
+description: Person–person contacts
+url: http://realitycommons.media.mit.edu/realitymining.html
+cite: konect:eagle06 
+extr: mit
+long-description: This undirected network contains human contact data among 100 students of the Massachusetts Institute of Technology (MIT), collected by the Reality Mining experiment performed in 2004 as part of the Reality Commons project. The data was collected over 9 months using 100 mobile phones. A node represents a person; an edge indicates that the corresponding nodes had physical contact.
+entity-names: person
+relationship-names: contact

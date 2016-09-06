@@ -1,0 +1,119 @@
+#!/usr/bin/perl
+#
+#first save every post reference together with the username
+#then generate the output data
+#a single node is created for every anonymous user
+
+
+use strict;
+use XML::Simple;
+use Data::Dumper;
+use MIME::Base64;
+
+
+
+
+my %postlist = ();
+my $uid=1;
+
+opendir DIR, "slashdot/";
+my @files = grep { $_ ne '.' && $_ ne '..' && $_ =~ /.*\.xml$/} readdir DIR;
+closedir DIR;
+
+foreach my $file(@files)
+{
+	builddb("slashdot/".$file);
+}
+foreach my $file(@files)
+{
+	processxml("slashdot/".$file);
+}
+
+
+sub builddb {
+#print "building db for ".$_[0]."\n";
+
+my $xml = new XML::Simple;
+my $content=$xml->XMLin("$_[0]");
+my $posts=$content->{posts}->{post};
+my $from;
+
+
+if($content->{user} eq "Anonymous Coward")
+{
+$postlist {$content->{id}} = "UA_".$uid;
+$uid++;
+}else{
+$postlist {$content->{id}} = $content->{user};
+}
+
+;
+
+foreach my $post ( keys %{$posts} )
+{
+
+#drop entries with missing date(10 times)
+if(sprintf("%s",$posts->{$post}->{date}) =~ m/^HASH/)
+ { next; }
+
+
+if (not ref($posts->{$post}->{user}))
+{
+ $from="UA_".$uid;
+ $uid++;
+}else{
+ $from=$posts->{$post}->{user}->{content};
+}
+
+if (not defined $postlist {$post})
+        {
+	#print $post."+".$from."\n";
+        $postlist {$post} = $from;
+        }else{
+	print "error in post id";
+	print "post exists in file:".$_[0];
+	print "\n post:".$post."\n";
+	exit 1;
+	#print "was defined:".$post."\n";
+	}
+
+}
+}
+
+
+sub processxml {
+#print "processing ".$_[0];
+
+my $xml = new XML::Simple;
+my $content=$xml->XMLin("$_[0]");
+#print Dumper($content);
+#die;
+
+my $posts=$content->{posts}->{post};
+my $from;
+my $to;
+
+
+foreach my $post ( keys %{$posts} )
+{
+
+if(sprintf("%s",$posts->{$post}->{date}) =~ m/^HASH/)
+ { next; }
+
+if (not defined $postlist {$posts->{$post}->{ref}})
+	{
+	$to=$postlist {$content->{id}};
+#	print "\n head: ".$post." to ".$to." \n";
+	}else{
+ $to=$postlist {$posts->{$post}->{ref}};
+	}
+
+ $from=$postlist {$post};
+
+print encode_base64($from,'');
+print ' '.encode_base64($to,'');
+print ' 1 '.$posts->{$post}->{date};
+print "\n";
+
+}
+}

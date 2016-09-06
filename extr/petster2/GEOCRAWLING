@@ -1,0 +1,15 @@
+
+* ... crawling GoogleMaps 
+** H helium    25 26 27 28 29
+** X estrella  25 26 27 28 29
+** X linux     25 26 27 28 29
+** X konect    25 26 27 -- 29    
+** U pad       25 -- 27 28 --
+** U VPN/web   25 -- 27 28 --
+
+Finished.
+
+(All dates are October 2014)
+
+It was only possible to crawl 2500 geolocations per day per IP.  (Google
+Maps Throttling)  

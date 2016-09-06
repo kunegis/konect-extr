@@ -1,0 +1,55 @@
+UNUSED
+
+#! /usr/bin/perl -w
+
+use strict;
+use warnings;
+
+my %map = (); 
+
+my $version = $ENV{VERSION};
+
+while (<>) {
+
+    chomp;
+
+    /^([^ ]+) ([^ ]+)$/ or die;
+
+    my $file=$1;
+    my $dep=$2;
+
+    if ($dep eq "--") {
+	print "$file $dep\n";
+	next;
+    }
+
+    my $dep_new; 
+
+    if (exists $map{$dep}) {
+	$dep_new = $map{$dep}; 
+    } else {
+
+	my @files = `find linux-$version -name \"\$(basename \"$dep\" )\" | ./filter | sort -u`;
+	my $count = scalar @files;
+
+#	print STDERR "---------\n"; 
+#	print STDERR "dep=«$dep»\n";
+#	print STDERR "files=«@files»\n";
+#	print STDERR "count=$count\n";
+
+	if ($count == 1) {
+	    $dep_new = $files[0];
+	    chomp $dep_new; 
+	    $dep_new =~ s/^linux-$version/./; 
+	} elsif ($count == 0) {
+	    $dep_new = ""; 
+	} else {
+	    $dep_new = $dep; 
+	}
+	$map{$dep} = $dep_new;
+    }
+
+    if ($dep_new ne "") {
+	print "$file $dep_new\n"; 
+    }
+}

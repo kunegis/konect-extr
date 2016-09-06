@@ -1,0 +1,12 @@
+category: HumanContact
+code: HY
+name: Hypertext 2009
+description: Visitor–visitor face-to-face contacts
+extr: sociopatterns
+url: http://www.sociopatterns.org/
+long-description: This is the network of face-to-face contacts of the attendees of the ACM Hypertext 2009 conference. The ACM Conference on Hypertext and Hypermedia 2009 (HT 2009, http://www.ht2009.org/) was held in Turin, Italy over three days from June 29 to July 1, 2009. In the network, a node represents a conference visitor, and an edge represents a face-to-face contact that was active for at least 20 seconds. Multiple edges denote multiple contacts. Each edge is annotated with the time at which the contact took place. 
+entity-names: visitor 
+relationship-names: contact
+cite: konect:sociopatterns
+time: 1246255200-1246471200
+timeiso: 2009-06-29/2009-07-01

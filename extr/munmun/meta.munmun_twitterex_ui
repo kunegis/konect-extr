@@ -1,0 +1,12 @@
+category: Folksonomy
+code: Wui
+name: Twitter u-i
+description: User–URL mention
+url: http://www.public.asu.edu/~mdechoud/datasets.html
+cite: konect:choudhury10 
+extr: munmun
+fullname: Twitter user–URL
+long-description: This is the bipartite network consisting of Twitter users and the URLs they mentioned in their postings. Left nodes represent users and right nodes represent URLs. An edge shows that an URL was mentioned by a user in a tweet.
+tags: #incomplete
+entity-names:  user, URL
+relationship-names:  mention

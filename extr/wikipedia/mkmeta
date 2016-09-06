@@ -1,0 +1,120 @@
+UNUSED - use ./mkmeta{inter,intra}wiki
+
+#! /usr/bin/perl -w
+#
+# Generate 
+#
+
+use warnings; 
+use strict; 
+
+%langs=(
+	"ar"=>["Arabic","0"],
+	"bn"=>["Bengali","1"],
+	"br"=>["Breton","2"],
+	"ca"=>["Catalan","3"],
+	"cy"=>["Welsh","4"],
+	"de"=>["German","5"],
+	"el"=>["Greek","6"],
+	"en"=>["English","7"],
+	"eo"=>["Esperanto","8"],
+	"es"=>["Spanish","9"],
+	"eu"=>["Basque","a"],
+	"fr"=>["French","b"],
+	"gl"=>["Galician","c"],
+	"ht"=>["Haitian","d"],
+	"it"=>["Italian","e"],
+	"ja"=>["Japanese","f"],
+	"lv"=>["Latvian","g"],
+	"nds"=>["Low Saxon","h"],
+	"nl"=>["Dutch","i"],
+	"oc"=>["Occitan","j"],
+	"pl"=>["Polish","k"],
+	"pt"=>["Portuguese","l"],
+	"ru"=>["Russian","m"],
+	"sk"=>["Slovak","n"],
+	"sr"=>["Serbian","o"],
+	"sv"=>["Swedish","p"],
+	"vi"=>["Vietnamese","q"],
+	"zh"=>["Chinese","r"]
+);
+
+%hardset=(
+	"ar"=>"0",
+	"bn"=>"1",
+	"br"=>"2",
+	"ca"=>"3",
+	"cy"=>"4",
+        "de"=>"5",
+        "el"=>"6",
+        "en"=>"7",
+        "eo"=>"8",
+        "es"=>"9",
+        "eu"=>"Basque",
+        "fr"=>"French",
+        "gl"=>"Galician",
+        "ht"=>"Haitian",
+        "it"=>"Italian",
+        "ja"=>"Japanese",
+        "lv"=>"Latvian",
+        "nds"=>"Low Saxon",
+        "nl"=>"Dutch",
+        "oc"=>"Occitan",
+        "pl"=>"Polish",
+        "pt"=>"Portuguese",
+        "ru"=>"Russian",
+        "sk"=>"Slovak",
+        "sr"=>"Serbian",
+        "sv"=>"Swedish",
+        "vi"=>"Vietnamese",
+        "zh"=>"Chinese"
+
+);
+
+my @files=();
+for $lang(keys %langs){
+	push(@files,"out.wikipedia_link_$lang");
+	for $lang2(keys %langs){
+		if($lang ne $lang2){
+			push(@files,"out.wikipedia_link_$lang"."_$lang2");
+		}
+	}
+}
+
+foreach my $file(sort @files){
+	if($file=~/^out\.(.*)/){
+
+		open META,">meta.$1";
+		if ($file=~/^out.wikipedia_link_(.*)_(.*)$/){
+			print "$file\n";
+
+			print META "name: Wikipedia links, ".lc($1)." to ".lc($2)."\n";
+            print META "fullname: Wikipedia links, ".lc($1)." to ".lc($2)."\n";
+						
+			print META "code: W$1$2\n";
+			$lang1=$1;
+			$lang2=$2;
+			print META "long-description: This network consists of wikilinks between the ".$langs{$1}[0]." Wikipedia and the ".$langs{$2}[0]." Wikipedia. Nodes in the network are individual articles and each directed edge is one wikilink. Only links in the main namespace are present.\n";
+
+		}elsif ($file=~/^out.wikipedia_link_(.*)$/){
+			print "$file\n";
+
+			print META "name: Wikipedia links, ".lc($1)."\n";
+			print META "code: W$1\n";
+			$lang1=$1;
+			$lang2=$1;
+
+			print META "fullname: Wikipedia links, ".lc($1)."\n";
+			print META "long-description: This network consists of wikilinks inside the ".$langs{$1}[0]." Wikipedia. Nodes in the network are individual articles and each directed edge is one wikilink. Only links in the main namespace are present.\n"
+		}else{die "error: $file\n";}
+		
+		print META "url: http://dumps.wikimedia.org/\n";
+		print META "category: Hyperlink\n";
+		print META "description: Article–article wikilink\n";
+		print META "extr: wikipedia\n";
+		print META "tags:  #loop, #regenerate\n"; 
+
+		close META or die;
+		
+	}
+}

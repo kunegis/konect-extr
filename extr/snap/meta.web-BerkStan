@@ -1,0 +1,10 @@
+category: Hyperlink
+code: BS
+name: Berkeley/Stanford
+description: Webpage–webpage hyperlinks
+url: http://snap.stanford.edu/data/web-BerkStan.html
+cite: konect:leskovec08
+extr: snap
+long-description:  This is the hyperlink network of the websites of the Universities in Berkley and Stanford. Nodes represent web pages, and directed edges represent hyperlinks.
+entity-names: webpage
+relationship-names: hyperlink

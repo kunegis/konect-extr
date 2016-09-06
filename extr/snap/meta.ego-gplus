@@ -1,0 +1,14 @@
+category: Social
+code: GP
+name: Google+
+description: User–user friendship
+entity-names: user,user
+url: http://snap.stanford.edu/data/egonets-Gplus.html
+extr: snap
+long-description: This directed network contains Google+ user–user links. A node represents a user, and a directed edge denotes that one user has the other user in his circles. 
+cite: konect:McAuley2012
+relationship-names: friendship
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_ego_gplus_user: <http://konect.uni-koblenz.de/networks/ego-gplus/User/> .
+n3-type-m: sioc:UserAccount
+n3-edgedata-1: $m foaf:knows $n .

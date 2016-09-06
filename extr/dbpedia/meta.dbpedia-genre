@@ -1,0 +1,11 @@
+category: Feature
+code: GE
+name: DBpedia genre
+description: Work–genre style
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2 
+extr: dbpedia
+long-description: This is the bipartite genre network from DBpedia. The nodes in the network are works and artists, as well as genres from music, film and other areas. Each edge connects a work or artist to a genre. The edges correspond to the &lt;http://dbpedia.org/ontology/genre&gt; relationships in DBpedia. 
+tags: #regenerate
+entity-names:  work, genre
+relationship-names:  style

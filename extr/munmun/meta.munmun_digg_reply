@@ -1,0 +1,22 @@
+category: Communication
+code: DG
+name: Digg
+description: User–user reply
+url: http://www.public.asu.edu/~mdechoud/datasets.html
+cite: konect:choudhury09 
+extr: munmun
+long-description: This is the reply network of the social news website Digg. Each node in the network is a user of the website, and each directed edge denotes that a user replied to another user.
+tags: #loop 
+entity-names:  user
+relationship-names: reply
+
+n3-prefix-m: konect_munmun_digg_user: <http://konect.uni-koblenz.de/networks/munmun_digg_reply/User/> .
+n3-type-m: sioc:UserAccount
+n3-prefix-l: konect_munmun_digg_edge: <http://konect.uni-koblenz.de/networks/munmun_digg_reply/Edge/> .
+n3-type-l: sioc:Post
+
+n3-edgedata-1: $l sioc:has_creator $m .
+n3-edgedata-2: $l sioc:addressed_to $n .
+n3-edgedata-3: $l dcterms:created $timestamp .
+
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .

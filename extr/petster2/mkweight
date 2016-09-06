@@ -1,0 +1,31 @@
+#! /usr/bin/perl
+#
+# Convert Catster weights to kilograms.  Use "NaN" for unknown weight.  
+#
+
+use strict;
+use warnings;
+
+while (<>) {
+
+    if (/^\s*$/) {
+	print "NaN\n";
+	next; 
+    }
+
+    # Some cats have a negative weight.  Consider these as having
+    # unknown weight. 
+
+    die unless /^\s*([0-9-]+)\s*lbs.\s*$/;
+
+    my $weight_lbs = $1;
+
+    if ($weight_lbs < 0) {
+	print "NaN\n";
+	next; 
+    }
+
+    my $weight_kg = $weight_lbs * 0.45359237;
+
+    print "$weight_kg\n"; 
+}

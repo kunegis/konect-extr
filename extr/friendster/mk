@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+LINE:while(<STDIN>){
+ chomp;
+ /^.*:\s*$/ and next LINE;
+ /private/ and next LINE;
+ /notfound/ and next LINE;
+ /^\s*([0-9]+)\s*:\s*(([0-9]+\s*,?\s*)+)/ or die "Invalid input line: $_\n";
+ my $user=$1;
+ my @friends = split(',',$2);
+ foreach(@friends){
+  print "$user $_\n"; 
+ }
+}

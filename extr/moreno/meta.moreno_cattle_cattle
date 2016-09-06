@@ -1,0 +1,10 @@
+category: Animal 
+code: MA
+name: Cattle
+description: Cattle–cattle dominances
+entity-names: cattle
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#cattle
+long-description: This directed network contains dominance behaviours observed between dairy cattles at the Iberia Livestock Experiment Station in Jenerette, Louisiana. A node represents a cattle and an edge represents dominance of the left cattle over the right cattle. The edge values indicate how often this dominance behaviour was observed.
+relationship-names: dominance
+cite: konect:schein

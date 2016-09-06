@@ -1,0 +1,10 @@
+category: Rating
+code: M1
+name: MovieLens 100k
+description: User–movie ratings
+url: http://www.grouplens.org/node/73
+cite: www.grouplens.org/node/73
+extr: movielens-100k
+long-description: This bipartite network consists of 100,000 user–movie ratings from http://movielens.umn.edu/. Left nodes are users and right nodes are movies. An edge between a user and a movie represents a rating of the movie by the user.
+entity-names: user, movie
+relationship-names: rating

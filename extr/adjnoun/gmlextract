@@ -1,0 +1,84 @@
+#!/usr/bin/perl
+#STDIN: .gml file content
+#ARGUMENTS: entfile1 [entfile1_header] 
+#STDOUT: out-file content
+#Entities are written to entfile1
+
+use Switch;
+
+if (@ARGV<1)
+	{die;}
+
+open ENT1,">",$ARGV[0] or die;
+
+if (@ARGV>1)
+	{print ENT1 "$ARGV[2]"."\n";}
+
+
+my $graph=0;
+my $node=0;
+my $nodeid=-1;
+my $nodelabel=-1;
+my $nodevalue=-1;
+my $edgesource=-1;
+my $edgetarget=-1;
+while(<STDIN>)
+{
+chomp;
+my $l=$_;
+$l=~ s/^\s+//;
+$l=~ s/\s+$//;
+
+
+if($graph)
+{
+	if($node)
+	{
+	if($l eq "]")
+		{
+		$nodelabel=~ s/"//g;
+		print ENT1 $nodeid." ".$nodelabel."\n";
+		$node=0;
+		$nodeid=-1;
+		$nodelabel=-1;
+		$nodevalue=-1;
+		}else{
+		 my @a=split(' ',$l);
+		 switch($a[0]){
+		  case "id"
+			{$nodeid=$a[1];}
+		  case "label"
+			{$nodelabel=$a[1];}
+		  case "value"
+			{$nodevalue=$a[1];}
+		  case "[" {}
+		  else  {die "Error";}
+		}
+		}
+	}elsif($edge==1){
+	  	if($l eq "]")
+                {
+		 $edge=0;
+		 print $edgesource." ".$edgetarget."\n";
+		 $edgesource=-1;
+		 $edgetarget=-1;
+		}else{
+		my @a=split(' ',$l);
+		switch($a[0]){
+		 case "[" {}
+		 case "source" {$edgesource=$a[1];} 
+		 case "target" {$edgetarget=$a[1];}
+		}
+		}
+
+	}else{
+	 $graph=0 if $l eq "]";
+	 $node=1 if $l eq "node";
+	 $edge=1 if $l eq "edge";
+	}
+}else{
+	$graph=1  if $l eq "graph";
+}
+
+}
+close(ENT1);

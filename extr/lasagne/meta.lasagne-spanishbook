@@ -1,0 +1,10 @@
+category: Lexical
+code: SB
+name: Spanish book
+description: Word–word adjacency
+url: http://amici.dsi.unifi.it/lasagne/?page_id=227
+extr: lasagne
+long-description: These are word adjacency relationships of a Spanish book. Nodes in the network are words and an edge denotes that two words occurred one after another in the book. It is not known which book was used. The network is directed, i.e., the edge (u,v) denotes that word u was followed by word v. Multiple edges are included, as each edge denotes a single occurence of a word adjacency. Since a word can occur twice in a row, the network contains loops. 
+tags: #loop
+entity-names: word
+relationship-names: adjacency 

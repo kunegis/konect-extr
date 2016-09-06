@@ -1,0 +1,37 @@
+#! /bin/sh
+#
+# Makes a dataset symmetric. Loops are not removed. Edge weights and
+# timestamps are allowed, and are preserved. mkuniq1 must be called
+# before.  
+#
+# STDIN
+#	In OUT format, with possibly multiple edges.  Supports
+#	timestamps and weights. 
+#
+# STDOUT
+#	The same with any duplicate edges removed (in particular, edges
+#	in opposite direction) 
+#
+
+
+awk '
+{
+	if($1 > $2) 
+	{
+		printf ("%s %s",$2,$1)
+	}; 
+	if($1 <= $2) 
+	{
+		printf ("%s %s",$1,$2)
+	}; 
+	if ($3!="") 
+	{
+		printf (" %s",$3)
+	}; 
+	if ($4!="") 
+	{
+		printf (" %s",$4)
+	}; 
+	print "";
+}
+' | sort -k1,1n -k2,2n | uniq

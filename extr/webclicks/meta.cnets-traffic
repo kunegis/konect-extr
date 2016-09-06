@@ -1,0 +1,12 @@
+category: Hyperlink
+code: CWT
+name: CNetS Web Traffic (Web Science 2014 Data Challenge)
+entity-names: webpage
+description: Webpage-webpage hyperlinks
+url: http://cnets.indiana.edu/groups/nan/webtraffic/websci14-data/
+extr: webclicks
+long-description: This is the directed network of a small  collection of HTTP requests for the month of November 2009
+cite:
+relationship-names: hyperlink
+timeiso: 11.2009
+

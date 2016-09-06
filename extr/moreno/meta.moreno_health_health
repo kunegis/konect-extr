@@ -1,0 +1,10 @@
+category: HumanSocial
+code: ME
+name: Adolescent health
+description: Student–student friendships
+entity-names: student
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#health
+long-description: This directed network was created from a survey that took place in 1994/1995. Each student was asked to list his 5 best female and his 5 male friends. A node represents a student and an edge between two students shows that the left student chose the right student as a friend. Higher edge weights indicate more interactions and a edge weight shows that there is no common activity at all.
+relationship-names: friendship
+cite: konect:moody

@@ -1,0 +1,37 @@
+#! /bin/sh
+#
+# Create outfile.
+#
+# PARAMETERS
+#	$1	name of dataset
+#
+# INPUT
+#	facebooks-$1.txt
+#
+# OUTPUT
+#	out.facebook-wosn-$1
+# 
+
+#
+# User IDs already seem to be continuous beginning at one, so we don't
+# use mkuniq1. 
+#
+
+#
+# About a third of a "links" relations have no timestamp.  We map these
+# to 0, i.e. these relations are modeled as having happened before other
+# relations. 
+#
+
+#{
+#    if [ $1 = wall ] ; then
+#      echo '% asym positive' 
+#    else
+#      echo '% sym unweighted' 
+#    fi
+    sed <facebook-$1.txt  -re '
+s,\\N$$,0,
+s,([0-9]+)$,1 \1,
+    ' 
+#} #>out.facebook-wosn-$1
+

@@ -1,0 +1,11 @@
+category: Affiliation
+code: TM
+name: Teams
+description: Athlete–team memberships
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2 
+extr: dbpedia
+long-description: The is the bipartite network of athletes and their teams, extracted from DBpedia. The nodes in the network are individual athletes and individual teams. An edge in the network connects an athlete with a team the athlete has played in. The dataset was extracted from DBpedia and corresponds to the &lt;http://dbpedia.org/ontology/team&gt; relationship type.
+tags: #regenerate
+entity-names:  athlete, team
+relationship-names:  membership

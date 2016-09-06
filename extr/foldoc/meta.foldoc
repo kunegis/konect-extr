@@ -1,0 +1,11 @@
+
+name:  FOLDOC
+code:  FO
+url:   http://vlado.fmf.uni-lj.si/pub/networks/data/dic/foldoc/foldoc.htm
+category:  Hyperlink
+cite:  konect:foldoc
+long-description:  These are cross references between entries in the Free On-line Dictionary of Computing (FOLDOC, www.foldoc.org).  Nodes are entries, and a directed edge from term A to term B denotes that the term B is usd in the definition of term A.  There are multiple edges, denoted multiple uses of the same term. 
+entity-names:  term
+relationship-names:  use
+extr:  foldoc
+timeiso:  2002

@@ -1,0 +1,15 @@
+category: Social
+code: BK 
+name: Brightkite
+description: User–user friendship
+entity-names: user,user
+url: http://snap.stanford.edu/data/loc-brightkite.html
+extr: snap
+long-description: This undirected network contains user–user friendship relations from Brightkite, a former location-based social network were user shared their locations. A node represents a user and an edge indicates that a friendship exists between the user represented by the left node and the user represented by the right node.
+cite: konect:cho2011
+relationship-names: friendship
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_loc_brightkite_edges_user: <http://konect.uni-koblenz.de/networks/loc-brightkite_edges/User/> .
+n3-type-m: sioc:UserAccount
+n3-edgedata-1: $m foaf:knows $n .
+n3-edgedata-2: $n foaf:knows $m .

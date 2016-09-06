@@ -1,0 +1,47 @@
+#
+# The DBLP dataset of scientific publications.
+#
+# out.dblp-cite:  citations between publications
+# out.dblp-author:  authorship links between authors and publications
+# out.dblp_coauthor:  co-authorship links between authors 
+#
+
+% version 1.4
+
+@all:  out.dblp-cite out.dblp-author out.dblp_coauthor ent.author; 
+
+@clean:
+{
+	rm -f out.* dblp.xml* dblp.dat
+}
+
+dblp.xml:
+{
+	wget http://dblp.uni-trier.de/xml/dblp.xml.gz -O dblp.xml.gz
+	gunzip dblp.xml.gz
+	touch dblp.xml
+}
+
+>dblp.dat:  <dblp.xml mkdblp
+{
+	./mkdblp 
+}
+
+>out.dblp-cite:  <dblp.dat 
+{
+	sed -re '/^cite /!d;s,^cite ,,' | 
+	../mkrel --enforce-edgeweights 'asym' 'unweighted'
+}
+
+>out.dblp-author:  <dblp.dat 
+{
+	sed -re '/^author /!d;s,^author ,,;s,(.* .*) ,\1_,;s,(.* .*) ,\1_,' | 
+	../mkrel --enforce-edgeweights 'bip' 'unweighted' 
+}
+
+>out.dblp_coauthor:  dblp.xml mkco ../mkuniq1
+{
+	./mkco | ../mkuniq1 ent.author 
+}
+
+ent.dblp_coauthor:  out.dblp_coauthor; 

@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e 
+
+echo >&2 "Number of geolocations:  $(ls -1U geocache | wc -l )"
+echo >&2 "OK:                      $(ls -1U geocache |sed -re 's,^,geocache/,' | xargs -d '\n' grep -E '<status>OK</status>' | wc -l)"
+echo >&2 "ZERO_RESULTS:            $(ls -1U geocache |sed -re 's,^,geocache/,' | xargs -d '\n' grep -E '<status>ZERO_RESULTS</status>' | wc -l)"
+
+ls -1U geocache | sed -re 's,^,geocache/,' | xargs -d '\n' grep -LE '<status>(OK|ZERO_RESULTS)</status>' 
+

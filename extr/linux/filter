@@ -1,0 +1,69 @@
+#! /bin/sh
+
+sed -re '
+
+# Double dot
+s,/[^/ ]+/\.\./,/,g
+s,/[^/ ]+/\.\./,/,g
+s,/[^/ ]+/\.\./,/,g
+s,/\.\./arm/,/,g
+s,/\.\./,/,g
+s,/\./,/,g
+
+# Remove combinations
+s,/mach-lantiq/falcon/,/,g
+s,/mach-lantiq/xway/,/,g
+s,/drivers/dma/bestcomm/,/,g
+s,/dlm/cluster/,/,g
+s,/clk/bcm/,/,g
+s,/soc/codecs/,/,g
+
+# Change combinations
+s,/([^ /]+)/\1,/\1,g
+s,/([^ /]+)/\1/,/\1/,g
+s,/arch-[^ /]+/[^/ ]+/,/,g
+s,/arch/[^/ ]+/,/,g
+s,/variant/[^/ ]+/,/,g
+s,/variants/[^/ ]+/,/,g
+s,/platforms/[^/ ]+/,/,g
+s,/asm/[^/ ]+/,/,g
+s,/staging/[^/ ]+/,/,g
+s,/boot/compressed/sizes.h,/include/linux/sizes.h,g
+s,/boot/libfdt.h,/include/linux/libfdt.h,g
+s,/boot/zlib.h,/include/linux/zlib.h,g
+
+# Remove single directories
+s,/um/,/,g
+s,/arch/,/,g
+s,/uapi/,/,g
+s,/asm/,/,g
+s,/asm-generic/,/,g
+s,/include/,/,g
+s,/uinclude/,/,g
+s,/linux/,/,g
+s,/plat-[^ /]+/,/,g
+s,/plat/,/,g
+s,/drivers/,/,g
+s,/dlmfs/,/,g
+s,/api/fs/,/,g
+s,/lib-[^ /]+/,/,g
+s,/mach/,/,g
+s,/mach-[^ /]+/,/,g
+s,/ath79/,/,g
+s,/variant/,/,g
+s,/cpu-[^ /]+/,/,g
+s,/shared/,/,g
+s,/net/,/,g
+s,/proc-[^ /]+/,/,g
+s,/unit-[^ /]+/,/,g
+s,/generated/,/,g
+s,/common-spar/,/,g
+s,/cxgb./,/,g
+s,/arm/,/,g
+s,/tools/lib/,/,g
+s,/tools/perf/,/,g
+
+# Change filenames 
+s,_d\.h,.h,g
+
+'

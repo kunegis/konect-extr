@@ -1,0 +1,57 @@
+#! /bin/sh
+#
+# Extract a unirelational dataset out of a semantic web file.
+#
+# INPUT 
+#	The semantic web file
+#
+# OUTPUT
+#	The unirelational dataset in unipartite network format
+#
+# PARAMETERS
+#	$1 	The relation to extract; empty to extract all relations
+#
+# ENVIRONMENT
+#	$FORMAT		(optional) "bip"/"sym"/"asym".  As in the first line of outfiles,
+#			defaults to "bip".
+#	$WEIGHTS	(optional) As in the first line of outfiles,
+#			defaults to POSITIVE
+#	$verbose	(optional) Enable verbose mode when non-empty
+#
+
+[ "$verbose" ] && exec 4>&2 || exec 4>/dev/null
+
+if [ -z "$FORMAT" ] ; then
+    FORMAT=bip
+fi
+
+if [ -z "$WEIGHTS" ] ; then
+    WEIGHTS=positive
+fi
+
+#echo "% $FORMAT $WEIGHTS"
+
+{
+    if [ "$1" ]
+    then
+
+	escaped="`echo $1 | sed -re 's,/,\\\\/,g'`"
+
+	echo >&4 ESCAPED=»$escaped«
+
+	sed -re  '/^\s*<\S+>\s+'"$escaped"'\s+<\S+>\s+\./!d;s/ '"$escaped"' / /;s,\.\s*$,,' 
+
+    else
+
+	sed -re 's,^\s*(<\S+>)\s+\S+\s+(<\S+>)\s+\.\s*,\1 \2,;t;d' 
+
+    fi
+} |
+{
+  #  if [ "$FORMAT" = bip ]
+   # then
+	../mkrel --enforce-ignorenonexistant --enforce-edgeweights "$FORMAT" "$WEIGHTS" #../mkuniq
+    #else
+	#../mkuniq1
+   # fi
+} 

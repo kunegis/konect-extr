@@ -1,0 +1,35 @@
+#
+# "Tracking the Trackers"
+#
+
+% version 1.9
+
+@all:  
+	meta.trackers out.trackers 
+#	pld-index.tsv
+; 
+
+$name.tsv:  $name.tsv.gz
+{
+	gzip -kdf $name.tsv.gz
+	touch -c "$name.tsv"
+}
+
+$name.tsv.gz:
+{
+	wget https://ssc.io/trackingthetrackers/"$name".tsv.gz -O "$name.tsv.gz"
+	touch -c "$name.tsv.gz"
+}
+
+>out.trackers:  <raw.trackers
+{
+	echo '% bip unweighted'
+	cat
+}
+
+raw.trackers: thirdparty-graph.tsv ../c/n.mkuniq
+{
+	../c/n.mkuniq thirdparty-graph.tsv raw.trackers
+}
+
+meta.trackers;

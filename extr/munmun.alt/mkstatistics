@@ -1,0 +1,22 @@
+#! /bin/sh
+
+set -e
+
+echo % Total Retweet Direct 
+
+COUNT="`wc -l <retweet.dat`"
+COUNT_RETWEET="`grep '^1' retweet.dat | wc -l`"
+COUNT_DIRECT="`grep '^0 1' retweet.dat | wc -l`"
+
+echo "[all] $COUNT $COUNT_RETWEET $COUNT_DIRECT"
+
+pattern=
+
+for i in at hash http smiley-pos smiley-neg word-pos word-neg punct-excl punct-quest
+do
+    COUNT="`grep '^. .'"$pattern"' 1' retweet.dat | wc -l`"
+    COUNT_RETWEET="`grep '^1 .'"$pattern"' 1' retweet.dat | wc -l`"
+    COUNT_DIRECT="`grep '^0 1'"$pattern"' 1' retweet.dat | wc -l`"
+    pattern="$pattern ."
+    echo "[$i] $COUNT $COUNT_RETWEET $COUNT_DIRECT" 
+done

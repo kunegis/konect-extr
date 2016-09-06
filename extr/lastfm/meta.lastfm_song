@@ -1,0 +1,10 @@
+category: Interaction
+code: Ls
+name: Last.fm song
+description: User–song listening event
+url: http://www.dtic.upf.edu/~ocelma/MusicRecommendationDataset/lastfm-1K.html
+cite: lastfm
+extr: lastfm
+long-description: This bipartite network represent the user–song listening habits of last.fm users. Left nodes are users and right nodes are songs. An edge connects users and songs they have listened to.
+entity-names: user,song
+relationship-names: listening

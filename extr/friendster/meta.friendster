@@ -1,0 +1,10 @@
+category: Social
+code: FR
+name: Friendster
+description: User–user friendships
+entity-names: user
+extr: friendster
+url: https://archive.org/details/friendster-dataset-201107
+long-description: This is the friendship network of the online social site Friendster. Nodes represent users and a directed edge indicates that the user on the left side has added the user on the right side to his friendship lists. The network is directed as adding a user to ones friendship list does not imply that the added user has marked the other user as a friend, too. As some of the friendships lists are private some information is missing in the network.  
+relationship-names: friendship
+tags: #incomplete

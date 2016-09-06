@@ -1,0 +1,5 @@
+#! /bin/sed -rf 
+
+/^\s*[^ ]+\s+<http:\/\/www.w3.org\/2006\/03\/wn\/wn20\/schema\/word>\s+[^ ]+\s+.$/!d
+s,^\s*([^ ]+)\s+<http:\/\/www.w3.org\/2006\/03\/wn\/wn20\/schema\/word>\s+([^ ]+)\s+.$,\2 \1,
+

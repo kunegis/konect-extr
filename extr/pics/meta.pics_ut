@@ -1,0 +1,11 @@
+category: Folksonomy
+code: Vut
+name: vi.sualize.us u-t
+description: User–tag assignment
+url: http://vi.sualize.us/
+cite: neubauer:visualize.us
+extr: pics
+fullname: vi.sualize.us user–tag
+long-description: This is the bipartite picture tagging network of vi.sualize.us. Left nodes represent users and right nodes represent tags. An edge connects a user and a tag he has used.
+entity-names:  user, tag
+relationship-names:  assignment

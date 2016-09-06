@@ -1,0 +1,11 @@
+category: Folksonomy
+code: Mui
+name: MovieLens u-i
+description: User–movie tag assignment
+url: http://www.grouplens.org/node/73
+cite: www.grouplens.org/node/73
+extr: movielens-10m
+fullname: MovieLens user–movie
+long-description: This bipartite network consists of 72,000 users who applied tags to 10,000 movies from http://movielens.umn.edu/. Left nodes represent users and right nodes represent movies. An edge connects a user with a movie he has assigned a tag to.
+entity-names:  user, movie
+relationship-names:  tag assignment

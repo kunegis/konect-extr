@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+while(<STDIN>)
+{
+chomp;
+my $line=$_;
+my @l=split(' ',$line);
+if ( $l[0] == $l[1] )
+ {next;}
+print $line."\n";
+}

@@ -1,0 +1,10 @@
+category: Affiliation
+code: BC
+name: Corporate Leadership
+description: Person–company leaderships
+entity-names: person,company
+extr: brunson
+url: https://github.com/corybrunson/triadic
+long-description: This bipartite network contains person–company leadership information between companies and 20 corporate directors. The data was collected in 1962. Left nodes represent persons and right nodes represent companies. An edge between a person and a company shows that the person had a leadership position in that company.
+relationship-names: leadership
+cite: konect:barnes

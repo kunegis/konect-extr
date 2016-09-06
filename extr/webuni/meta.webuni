@@ -1,0 +1,11 @@
+category: Text
+code: WU
+name: WebUni Magdeburg
+description: Thread–word frequency
+url: http://magdeburg.webuni.de/
+cite: preusse:webuni
+extr: webuni
+long-description:  This is the bipartite network of threads and the words they contain from the student's social website WebUni of the Otto-von-Guericke University Magdeburg in Germany.
+entity-names:  thread, word
+relationship-names:  use
+

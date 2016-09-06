@@ -1,0 +1,11 @@
+category: Affiliation
+code: OC
+name: Occupation
+description: Person–occupation association
+url: http://wiki.dbpedia.org/Downloads
+cite: konect:dbpedia2
+extr: dbpedia
+long-description: This is the bipartite occupation network of DBpedia. It contains persons and occupations as nodes, and an edge denotes that a person has an occupation. The edges correspond to the &lt;http://dbpedia.org/ontology/occupation&gt; relationships in DBpedia. 
+tags: #regenerate
+entity-names:  person, occupation
+relationship-names:  association

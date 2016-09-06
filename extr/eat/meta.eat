@@ -1,0 +1,11 @@
+category: Lexical
+code: EA
+name:  Edinburgh Associative Thesaurus
+description: Word–word association
+url: http://vlado.fmf.uni-lj.si/pub/networks/data/dic/eat/Eat.htm
+cite:  konect:eat
+extr: eat
+long-description:  This is the Edinburgh Associative Thesaurus.  Nodes are English words, and a directed link from A to B denotes that the word B was given as a response to the stimulus word A in user experiments.  Multiple links are allowed, and the multiplicity of an edge denotes the number of times a word has been given as a response to another word.  In some case, the given word itself was given as a response, leading to loops in the network. 
+tags:  #loop
+entity-names: word
+relationship-names: association 

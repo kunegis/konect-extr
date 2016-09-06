@@ -1,0 +1,11 @@
+#! /bin/bash
+
+for i in $(seq 1 12)
+do
+ echo "$i male"
+done
+
+for i in $(seq 13 29)
+do
+ echo "$i female"
+done

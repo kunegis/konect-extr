@@ -1,0 +1,11 @@
+name: Zhishi
+code: ZS
+url: http://zhishi.me/
+category: Hyperlink
+description: Article–article relationship
+long-description: This is the aggregated network of articles from the three Chinese online encyclopedias Baidu, Hudong and Wikipedia in Chinese, as released by the Zhishi project. The nodes in the networks are articles from the three encyclopedias, and links are both internal links in each encyclopedia, as well as external links from one encyclopedia to another. 
+entity-names: article
+extr: zhishi
+cite: konect:zhishi
+tags: #loop
+relationship-names: link 

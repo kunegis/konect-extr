@@ -1,0 +1,11 @@
+category: Folksonomy
+code: Vui
+name: vi.sualize.us u-i
+description: User–picture assignment
+url: http://vi.sualize.us/
+cite: neubauer:visualize.us
+extr: pics
+fullname: vi.sualize.us user–picture
+long-description: This is the bipartite picture tagging network of vi.sualize.us. Left nodes represent users and right nodes represents pictures. An edge connects a user with a picture he has tagged.
+entity-names:  user, picture
+relationship-names:  tag assignment

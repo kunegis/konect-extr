@@ -1,0 +1,11 @@
+category: Social
+code: AD
+name: Advogato
+description: User–user trust
+url: http://www.trustlet.org/wiki/Advogato_dataset
+cite: konect:massa09
+extr: advogato
+long-description: This is the trust network of Advogato. Advogato is an online community platform for developers of free software launched in 1999. Nodes are users of Advogato and the directed edges represent trust relationships.  A trust link is called a "certification" on Advogato, and three different levels of certifications are possible on Advogato, corresponding to three different edge weights:  certifications as apprentice (0.6), journeyer (0.8) and master (1.0). A user without any trust certificate is called an observer.  It is possible to trust oneself on Advogato, and therefore the network contains loops. 
+tags:  #loop
+entity-names: user
+relationship-names: trust 

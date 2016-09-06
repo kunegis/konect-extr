@@ -1,0 +1,10 @@
+category: Animal 
+code: Mc
+name: Sheep
+description: Sheep–Sheep dominances
+entity-names: sheep
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#sheep
+long-description: This directed network deescribes the dominance relationships between 28 female bighorn sheep (<i>Ovis canadensis</i>) observed on the National Bison Range in western Montana (USA) in 1984. A node represents a female bighorn sheep and an edge represents dominance of the left female bighorn sheep over the right female bighorn sheep. The edge weights indicate how often this dominance behaviour was observed. The sheep ages are provided in the entity file.  Sheeps that are listed as nine years old may have been older in reality.
+relationship-names: dominance
+cite: konect:hass

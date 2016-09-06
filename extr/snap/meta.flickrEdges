@@ -1,0 +1,10 @@
+category: Misc
+code: FI
+name: Flickr
+description: Image–image similarity
+url: http://snap.stanford.edu/data/web-flickr.html
+extr: snap
+long-description: This is the undirected network of Flickr images sharing common metadata such as tags, groups, locations etc. A node represents an image, and an edge indicates that two images share the same metadata. 
+cite: konect:McAuley2012
+entity-names: image
+relationship-names: similarity

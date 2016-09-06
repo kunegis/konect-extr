@@ -1,0 +1,48 @@
+#
+# This project uses Stu to as a build tool.  Get it at:
+#
+# https://github.com/kunegis/stu/
+#
+# The build now fails because the data is not available anymore. 
+#
+
+% version 2.4
+
+@all:
+	out.amazon-ratings
+	ent.amazon-ratings-member-names
+	ent.amazon-ratings-member-location
+;
+
+amazon-member-shortSummary.txt:
+{
+	wget http://liu.cs.uic.edu/download/data/amazon-member-shortSummary.txt
+}
+
+
+reviewsNew.txt: reviewsNew.rar
+{
+	unrar e reviewsNew.rar
+	touch -c reviewsNew.txt
+}
+
+reviewsNew.rar:
+{
+	wget "http://liu.cs.uic.edu/download/data/reviewsNew.rar"
+}
+
+ent.amazon-ratings-member-names
+ent.amazon-ratings-member-location
+out.amazon-ratings:
+	reviewsNew.txt amazon-member-shortSummary.txt
+{
+	<reviewsNew.txt ./mk |
+		../mkrel --+ent=ent.amazon-ratings-member-names:amazon-member-shortSummary.txt:0:1:0 --+ent=ent.amazon-ratings-member-location:amazon-member-shortSummary.txt:0:3:1 --ent-inputdelimiter='	' "bip" "multiweighted" >out.amazon-ratings 
+}
+
+@clean:
+{
+	rm -f *.rar
+	rm -f *.txt
+	rm -f out.*
+}

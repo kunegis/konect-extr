@@ -1,0 +1,11 @@
+category: Folksonomy
+code: Mut
+name: MovieLens u-t
+description: User–tag assignment
+url: http://www.grouplens.org/node/73
+cite: www.grouplens.org/node/73
+extr: movielens-10m
+fullname: MovieLens user–tag
+long-description: This bipartite network shows the tagging behaviour of 72,000 users of http://movielens.umn.edu/. Left nodes are users and right nodes are tags. An edge connects a user with a tag he applied to a movie.
+entity-names:  user, tag
+relationship-names:  assignment

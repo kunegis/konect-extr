@@ -1,0 +1,22 @@
+#! /usr/bin/perl -w
+#
+# Generate adjacency file from social network files. 
+#
+# Use STDIN/STDOUT.
+#
+
+use strict;
+
+while (<>)
+{
+    /^([0-9]+) [0-9]+ (.*)$/ or die; 
+
+    my $from = $1; 
+
+    my @tos = split(/ /, $2); 
+
+    foreach my $to (@tos)
+    {
+	print "$from $to\n"; 
+    }
+}

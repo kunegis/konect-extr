@@ -1,0 +1,18 @@
+#! /usr/bin/perl -w
+
+use strict;
+use warnings;
+
+while (<>) {
+
+    my @actors = split ' ';
+
+    my $count = scalar @actors;
+#    print STDERR "count = $count\n";
+
+    foreach my $u (@actors) {
+	foreach my $v (@actors) {
+	    print "$u\t$v\n" unless $u eq $v;
+	}
+    }
+}

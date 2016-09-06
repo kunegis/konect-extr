@@ -1,0 +1,16 @@
+#! /bin/sh
+
+echo '% asym signed'
+
+exec sed -re '
+
+# Keep only lines with edge info
+/->/!d
+
+# Convert to OUT format
+s,\s*"([^"]+)" -> "([^"]+)" \[weight=([^]]+)]\s*,\1	\2	\3,
+
+# Convert space to %20 in user names
+s, ,%20,g
+
+'

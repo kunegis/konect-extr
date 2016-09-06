@@ -1,0 +1,37 @@
+#! /usr/bin/perl -w
+
+use strict;
+use warnings FATAL => 'all';
+
+# Keys are IDs separated by tab
+my %weights;
+
+while (<>) {
+
+	if (/^\s*%/) {
+		print; 
+		next;
+	}
+
+	/^([0-9]+	[0-9]+)	([0-9.]+)$/ or die "Invalid line"; 
+
+	my $key = $1; 
+	my $weight = $2; 
+
+	if (exists $weights{$key}) {
+		my $weight_old = $weights{$key};
+		if ($weight > $weight_old) {
+			$weights{$key} = $weight; 
+		}
+	} else {
+		$weights{$key} = $weight; 
+	}
+}
+
+# reset the internal iterator so a prior each() doesn't affect the loop
+keys %weights; 
+
+while(my($key, $weight) = each %weights) {
+	
+	print "$key\t$weight\n"; 
+}

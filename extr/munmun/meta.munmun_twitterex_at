@@ -1,0 +1,11 @@
+category: OnlineContact
+code: Wa
+name: Twitter
+description: User–user mentions
+url: http://www.public.asu.edu/~mdechoud/datasets.html
+cite: konect:choudhury10
+extr: munmun
+long-description: This is the directed network of "@username" mentions on Twitter. Each node is a Twitter user, and each directed edge from user A to user B means that user A has mentioned user B in a tweet using the "@username" syntax. Multiple edges are allowed, and each edge is annotated with the timestamp of the tweet. Since it is possible to mention one's own username, this network contains loops. 
+tags: #loop
+entity-names:  user
+relationship-names:  mention

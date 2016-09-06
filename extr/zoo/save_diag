@@ -1,0 +1,22 @@
+#! /bin/sh
+#
+# Extract last eigenvalues calculated.
+#
+# INPUT:  /tmp/matlab.log
+# OUTPUT: /tmp/save_diag
+#
+
+[ "$verbose" ] && 
+{
+    echo =======
+    tail -n50 /tmp/matlab.log
+    echo =======
+} >/tmp/a
+
+TMP_BASE=${TMP_BASE-/tmp/matlab}
+
+tail -n200 $TMP_BASE.log | 
+tac | 
+sed -e '/^Iteration/Q;/^[ 	]*[0-9-]/!d' | 
+tac |
+cat >/tmp/save_diag

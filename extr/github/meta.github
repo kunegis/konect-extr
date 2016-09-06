@@ -1,0 +1,10 @@
+category: Authorship
+code: GH
+name: Github
+description: User–project membership
+url: https://github.com/blog/466-the-2009-github-contest
+cite: github
+extr: github
+long-description: This is the membership network of the software development hosting site GitHub. The network is bipartite and contains users and projects, with links denoting that a user is a member of a project.
+entity-names:  user, project
+relationship-names:  membership

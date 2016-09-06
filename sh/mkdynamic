@@ -1,0 +1,61 @@
+#! /usr/bin/perl	
+#
+# STDIN: full network with timestamps, sorted by timestamps
+# STDOUT: dynamic network
+#
+# Note: You MUST run "sort -n -k4" before if using unsorted output from mkuniq*
+
+use strict;
+use warnings;
+
+sub flushHash ();
+#sub error();
+my $currentTime=undef;
+my %hashtags=();
+
+{
+ while(<STDIN>)
+ {
+  chomp;
+  my $line=$_;
+  PROCLINE:{
+ 	chomp;
+ 	$line=~/^(\S+\s+\S+)\s+\d+\s+(\d+)$/ or error("\n***ERROR: mkdyn: Input mismatch: $_\n");
+ 	$currentTime=$2 if not defined $currentTime;
+ 	if($currentTime eq $2)
+ 	{	
+	  if (!exists $hashtags{$1})
+	   {
+		print "$1 +1 $2\n";
+	   }
+	  $hashtags{$1} = 0;
+	 }else{
+	  flushHash();
+	  $currentTime=$2;
+	  redo PROCLINE;
+	 }
+	}
+ }
+ flushHash();
+}
+
+sub flushHash()
+{
+ for my $key (keys %hashtags)
+   {
+        if($hashtags{$key})
+        {
+         print "$key -1 $currentTime\n";
+         delete $hashtags{$key};
+        }else{
+         $hashtags{$key} =1;
+	}
+   }
+
+}
+
+sub error
+{
+print STDERR @_;
+exit 1;
+}

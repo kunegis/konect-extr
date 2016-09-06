@@ -1,0 +1,77 @@
+#! /bin/sh
+#
+# Generate plot of out.pred
+#
+# INPUT:  out.pred
+# OUTPUT: out.pred.eps
+#
+# Environment:
+#    $INPUT:  use another file instead of out.pred
+#
+
+TMP_BASE=${TMP-/tmp}/`basename $0`
+INPUT=${INPUT-out.pred}
+
+[ "$verbose" ] && exec 3>&1 || exec 3>/dev/null
+
+#style="with linespoints lw 5"
+style="with lines lw 7"
+
+
+a_name="Dimensionality reduction"
+ao_name=Mean
+ao_inv_unit_name="Signed Laplacian kernel"
+
+methods="ao a ao_inv_unit"
+#methods="`<$INPUT sed -e '/^[a-z_0-9]/!d;s,[^a-z_0-9].*,,' | uniq`"
+
+echo >&3 methods=$methods
+
+{
+    cat <<EOF
+
+set terminal postscript eps enhanced "NimbusSanL-Regu" fontfile "/usr/share/texmf/fonts/type1/urw/helvetic/uhvr8a.pfb" 20 color
+set output "$INPUT.eps"
+
+set key right bottom
+
+set xlabel "k (dimensional reduction)"
+set ylabel "RMSE"
+
+#set xrange [0:50]
+set yrange [.85:1.00]
+
+EOF
+
+    echo -n "plot "
+
+    first=true
+    index=1
+
+    for method in $methods
+    do
+      echo >&3 METHODS=»$methods«
+      echo >&3 METHOD=»$method«
+
+      >$TMP_BASE.$method sed <$INPUT -e '/^'$method'[^a-z_0-9]/!d;s,^[a-z_0-9]*,,;s,^[^0-9]*,,'
+      [ "$verbose" ] &&
+      {
+	  echo >&3 BEGIN DATA $method
+	  cat >&3 $TMP_BASE.$method
+	  echo >&3 END DATA $method
+      }
+
+      [ "$first" ] || { echo -n ", " ; echo >&3 COMMA; }
+      first=
+      eval name=\$${method}_name
+      [ -z "$name" ] && name="`echo "$method" | tr '_' ' '`"
+      color=$[$index + 2 + $index/3*3];
+      echo -n "  \"$TMP_BASE.$method\" using 1:2 title \"$name\" $style lt $color" 
+      index=$[$index + 1]
+    done
+
+    echo
+
+} | tee $TMP_BASE.out | gnuplot 
+
+

@@ -1,0 +1,10 @@
+category: HumanContact
+code: MJ
+name: Jazz
+description: Band–band collaborations
+entity-names: band
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#jazz
+long-description: This undirected network contains relations between bands. A node represents a band and an edge between two bands indicates that they at least have one musician in common.
+relationship-names: hyperlink
+cite: konect:adamic2005 

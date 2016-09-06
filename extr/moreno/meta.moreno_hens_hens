@@ -1,0 +1,12 @@
+category: Animal 
+code: Mh
+name: Hens
+description: Hen–hen dominances
+entity-names: hen
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#hens
+long-description: This directed network contains the peck order of 32 White Leghorn hens observed in 1946. A node represents a hen and an edge represents dominance of the left hen over the right hen.
+relationship-names: dominance
+cite: konect:guhl
+tags:  #nonreciprocal #tournament
+

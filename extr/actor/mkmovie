@@ -1,0 +1,19 @@
+#! /usr/bin/perl -w
+
+use strict;
+use warnings;
+
+my $id_next = 1;
+
+while (<>) {
+
+    my $id = $id_next ++; 
+
+    my @actors = split ' ';
+
+    foreach (@actors) {
+	print "$id\t$_\n";
+    }
+}
+
+

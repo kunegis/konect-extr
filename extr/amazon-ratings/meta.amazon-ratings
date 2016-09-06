@@ -1,0 +1,11 @@
+category: Rating
+code: AR
+name: Amazon ratings
+description: User–product ratings
+entity-names: user,product
+extr: amazon-ratings
+url: http://liu.cs.uic.edu/download/data/
+long-description: This bipartite network contains product ratings from the Amazon online shopping website. The rating scale ranges from 1 to 5, where 5 denotes the most positive rating. Nodes represent users and products, and edges represent individual ratings. 
+relationship-names: rate
+cite: konect:lim2010, konect:jindal2008, konect:mukherjee2012
+tags: #incomplete

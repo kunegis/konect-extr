@@ -1,0 +1,11 @@
+category: Folksonomy
+code: Vti
+name: vi.sualize.us t-i
+description: Tag–picture assignment
+url: http://vi.sualize.us/
+cite: neubauer:visualize.us
+extr: pics
+fullname: vi.sualize.us tag–picture
+long-description: This is the bipartite picture tagging network of vi.sualize.us. Left nodes represent tags and right nodes represents pictures. An edge connects a picture with an assigned tag.
+entity-names:  tag, picture
+relationship-names:  assignment

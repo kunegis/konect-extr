@@ -1,0 +1,10 @@
+category: HumanContact
+code: HA
+name: Haggle
+description: Person–person contacts
+url: http://www.cl.cam.ac.uk/research/srg/netos/haggle/
+cite: konect:chaintreau07 
+extr: contact
+long-description: This undirected network represents contacts between people measured by carried wireless devices. A node represents a person; an edge between two persons shows that there was a contact between them.
+entity-names: person
+relationship-names: contact 

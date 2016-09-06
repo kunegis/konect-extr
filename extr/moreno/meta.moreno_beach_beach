@@ -1,0 +1,10 @@
+category: HumanContact
+code: MW
+name: Windsurfers
+description: Person-person contacts
+entity-names: person
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#beach
+long-description: This undirected network contains interpersonal contacts between windsurfers in southern California during the fall of 1986. A node represents a windsurfer and an edge between two windsurfers shows that there was a interpersonal contact.
+relationship-names: contact
+cite: konect:freeman1988,konect:freeman1989

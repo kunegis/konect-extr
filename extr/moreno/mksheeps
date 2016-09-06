@@ -1,0 +1,2 @@
+#!/bin/bash
+sed -n '/LABELS:/,$p' | { read; read labels; read; i=0; while read line; do let i=$i+1; echo -n "$(echo $labels | cut -d',' -f$i | sed -re 's/^0([0-9]+)$/\1/g') "; echo $line; done; }

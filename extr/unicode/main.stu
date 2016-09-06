@@ -1,0 +1,47 @@
+#
+# Data from the Unicode standard.
+#
+
+@all:  
+	ent.language.code ent.language.quote ent.language.numbering; 
+
+core.zip:
+{
+    set -e
+    wget http://www.unicode.org/Public/cldr/latest/core.zip -O core.zip 
+    touch core.zip
+}
+
+core:  core.zip
+{
+    set -e
+    rm -rf core
+    mkdir core
+    cd core
+    unzip ../core.zip
+}
+
+ent.language.code:  core
+{
+    ls -1U core/common/main | sed -re '/^[a-z]+\.xml$/!d;s,\.xml$,,' >ent.language.code
+}
+
+ent.language.quote:  ent.language.code core
+{
+    cat ent.language.code |
+    while read language ; do 
+	<core/common/main/"$language".xml sed -re '/<quotation/!d;s,^.*>(.+)<.*$,\1,;s,&quot;,",g' | tr -d '\n'
+	echo
+    done >ent.language.quote
+    [ "$(wc -l <ent.language.code)" = "$(wc -l <ent.language.quote)" ] || exit 1
+}
+
+ent.language.numbering:  ent.language.code core
+{
+    cat ent.language.code |
+    while read language ; do 
+	numbering="$(<core/common/main/"$language".xml sed -re '/<defaultNumberingSystem/!d;s,^.*>(.+)<.*$,\1,')"
+	echo "$numbering"
+    done >ent.language.numbering
+    [ "$(wc -l <ent.language.code)" = "$(wc -l <ent.language.numbering)" ] || exit 1
+}

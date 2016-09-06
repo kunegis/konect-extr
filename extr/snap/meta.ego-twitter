@@ -1,0 +1,15 @@
+category: Social
+code: TL
+name: Twitter lists
+description: User–user following
+entity-names: user,user
+url: http://snap.stanford.edu/data/egonets-Twitter.html
+extr: snap
+long-description: This directed networks contains Twitter user–user following information. A node represents a user. An edge indicates that the user represented by the left node follows the user represented by the right node.
+cite: konect:McAuley2012
+relationship-names: follow
+
+n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
+n3-prefix-m: konect_ego_twitter_user: <http://konect.uni-koblenz.de/networks/ego-twitter/User/> .
+n3-type-m: sioc:UserAccount
+n3-edgedata-1: $m sioc:follows $n .

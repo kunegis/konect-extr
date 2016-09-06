@@ -1,0 +1,11 @@
+category: Citation
+code: Pi
+name: DBLP
+description: Publication–publication citations
+url: http://dblp.uni-trier.de/xml/
+cite: konect:DBLP
+extr: dblp
+long-description: This is the citation network of DBLP, a database of scientific publications such as papers and books.  Each node in the network is a publication, and each edge represents a citation of a publication by another publication.  In other words, the directed edge (A → B) denotes that publication A cites publication B.  Publications are allowed to cite themselves, and therefore the network contains loops.
+tags: #loop #regenerate
+entity-names: publication
+relationship-names: citation

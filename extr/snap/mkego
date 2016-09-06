@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+while(<STDIN>)
+{
+ chomp;
+ my @l=split / /;
+ my $num=shift @l;
+ foreach my $num2 (@l)
+ {
+  print "$num $num2\n";
+ }
+}

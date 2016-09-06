@@ -1,0 +1,288 @@
+
+DEPRECATED -- use code from projects/lkml/.
+
+
+@all:  @all-data @analysis;
+@all-data:  @person-thread @reply;
+
+#
+# Person--thread network
+#
+
+@person-thread:
+	dat-lkml/out.lkml_person-thread_person-thread 
+	meta.lkml_person-thread_person-thread ;
+
+meta.lkml_person-thread_person-thread;
+
+
+dat-lkml/out.lkml_person-thread_person-thread: 
+	../own/lkml/linux-kernel.sql 
+	dat-lkml/mapping
+	mk mklines
+{
+    grep 'INSERT INTO `message`' ../own/lkml/linux-kernel.sql | \
+	./mklines | sed -n -re "s/^[0-9]+,'[^']*','([0-9]+-[0-9]+-[0-9]+)','[^']+','([0-9]+:[0-9]+:[0-9]+)','([^']+)','[0-9]+',([0-9]+),([0-9]+)/\3 \4 \5 \1 \2/p" | \
+	./mk | ../mkrel 'bip' 'positive' >dat-lkml/out.lkml_person-thread_person-thread
+}
+
+dat-lkml/mapping: 
+	../own/lkml/linux-kernel.sql	
+	mklines
+{
+    grep 'INSERT INTO `mapping`' ../own/lkml/linux-kernel.sql | \
+	./mklines | sed -n -re "s/^[0-9]+,([0-9]+),([0-9]+)/\1 \2/p" >dat-lkml/mapping
+}
+
+#
+# Reply network
+#
+
+@reply:
+	meta.lkml-reply 
+	dat-lkml/out.lkml-reply
+	dat-lkml/ent.lkml-reply-type
+	dat-lkml/ent.lkml-reply-domain
+;
+
+meta.lkml-reply; 
+
+dat-lkml/out.lkml-reply:
+	From-To-Datetime.txt
+	mkreply
+{
+    ./mkreply >dat-lkml/out.lkml-reply
+}
+
+# The file from Dirk Homscheid. 
+# First column:  author of post
+# Second column:  author of replied-to post (-1 when first post in thread)
+# Third column:  timestamp 
+From-To-Datetime.txt:
+	../own/lkml/From-To-Datetime.zip
+{
+    set -e
+    rm -f From-To-Datetime.txt
+    unzip ../own/lkml/From-To-Datetime.zip 
+    [ -r From-To-Datetime.txt ] 
+    touch From-To-Datetime.txt
+}
+
+# -1: undefined (0)
+# 1:  company mentioned in Linux Foundation report (1)
+# 2:  other company (2)
+# 3:  people with private email addresses (3, 4)
+# 4:  educational institution (5)
+# 5:  institutions and public authorities (6)
+dat-lkml/ent.lkml-reply-type:
+	../own/lkml/pid-sponsored-Jerome.csv
+{
+    {
+	sed <../own/lkml/pid-sponsored-Jerome.csv -re 's,$,,'
+	echo
+    } |
+    sed -re '1d;s,^[0-9]+;,,;s,4,3,;s,5,4,;s,6,5,;s,0,-1,' \
+	>dat-lkml/ent.lkml-reply-type
+}
+
+# The domain ID per user.  -1 when not known. 
+dat-lkml/ent.lkml-reply-domain:
+	../own/lkml/pid-providercode-Jerome.csv
+{
+    sed -re '1d;s,^[0-9]+;,,;s,#NV,-1,' \
+	<../own/lkml/pid-providercode-Jerome.csv \
+	>dat-lkml/ent.lkml-reply-domain
+}
+
+#
+# @analysis
+#
+
+@analysis:  @degree @pagerank @evolution @pie @ttest @tops @outin;
+
+@degree:    plot-lkml/degree.a.eps;
+@pagerank:  plot-lkml/pagerank.a.eps;
+
+dat-lkml/n:
+	dat-lkml/ent.lkml-reply-type
+{
+    wc -l >dat-lkml/n <dat-lkml/ent.lkml-reply-type
+}
+
+plot-lkml/degree.a.eps:
+	dat-lkml/ent.lkml-reply-type
+	dat-lkml/degree-1 dat-lkml/degree-2
+	dat-lkml/n
+	lkml_degree_plot.m lkml_colors.m 
+	$<MATLABPATH>
+{
+    ./matlab lkml_degree_plot.m 
+}
+
+dat-lkml/degree-1:
+	dat-lkml/out.lkml-reply
+	dat-lkml/n
+	lkml_degree_comp.m
+	$<MATLABPATH>
+{
+    ./matlab lkml_degree_comp.m 
+}
+
+dat-lkml/degree-2:  dat-lkml/degree-1; 
+
+plot-lkml/pagerank.a.eps:
+	dat-lkml/ent.lkml-reply-type
+	dat-lkml/feature.pagerank
+	dat-lkml/n
+	$<MATLABPATH> lkml_pagerank_plot.m lkml_colors.m
+{
+    ./matlab lkml_pagerank_plot.m 
+}
+
+dat-lkml/feature.pagerank:
+	dat-lkml/n
+	dat-lkml/out.lkml-reply
+	lkml_pagerank.m
+	$<MATLABPATH>
+{
+    ./matlab lkml_pagerank.m 
+}
+
+dat-lkml/feature.indegree:
+	$<MATLABPATH> lkml_indegree.m 
+	dat-lkml/out.lkml-reply
+	dat-lkml/n
+{
+    ./matlab lkml_indegree.m 
+}
+
+#
+# Matlab
+#
+
+MATLABPATH:
+{
+    echo -n "$MATLABPATH:$PWD/../../matlab" >MATLABPATH
+}
+
+#
+# Evolution
+#
+
+@evolution:  <dat-lkml/dep.evolution>;
+
+dat-lkml/dep.evolution:  $<STATISTICS>
+{
+    for statistic in $STATISTICS ; do
+	echo @evolution."$statistic" 
+    done >dat-lkml/dep.evolution
+}
+
+@evolution.[STATISTIC]:  plot-lkml/evolution.a.[STATISTIC].eps;
+
+plot-lkml/evolution.a.[STATISTIC].eps:
+	$<MATLABPATH> lkml_evolution.m lkml_labels.m lkml_colors.m lkml_labels_statistic.m 
+	<dat-lkml/dep.evolution.[STATISTIC]>
+	YEARS dat-lkml/GROUPS
+{
+    STATISTIC=[STATISTIC] YEARS="$(cat YEARS)" GROUPS="$(cat dat-lkml/GROUPS)" \
+	./matlab lkml_evolution.m 
+}
+
+dat-lkml/dep.evolution.[STATISTIC]:
+	YEARS dat-lkml/GROUPS
+{
+    for year in $(cat YEARS) ; do
+	for group in $(cat dat-lkml/GROUPS) ; do
+	    echo '@statistic'."$year"."$group".[STATISTIC]
+	done
+    done >dat-lkml/dep.evolution.[STATISTIC]
+}
+
+@statistic.[YEAR].[GROUP].[STATISTIC]:
+	dat-lkml/statistic.[YEAR].[GROUP].[STATISTIC]; 
+
+# List of group IDs
+dat-lkml/GROUPS:
+	dat-lkml/ent.lkml-reply-type
+{
+    <dat-lkml/ent.lkml-reply-type sed -re '/^-/d' | sort -n | uniq >dat-lkml/GROUPS
+}
+
+dat-lkml/statistic.[YEAR].[GROUP].[STATISTIC]:
+	$<MATLABPATH> lkml_statistic.m lkml_statistic_[STATISTIC].m 
+	dat-lkml/out.lkml-reply
+	dat-lkml/ent.lkml-reply-type
+{
+    YEAR=[YEAR] GROUP=[GROUP] STATISTIC=[STATISTIC] ./matlab lkml_statistic.m 
+}
+
+#
+# @pie:  distribution of people
+#
+
+@pie:  plot-lkml/pie.a.eps;
+
+plot-lkml/pie.a.eps:
+	$<MATLABPATH> lkml_pie.m lkml_labels.m lkml_colors.m
+	dat-lkml/ent.lkml-reply-type
+{
+    ./matlab lkml_pie.m 
+}
+
+#
+# @ttest:  Test whether the different groups have statistically
+# different values of the statistics.  
+#
+
+@ttest:  dat-lkml/ttest;
+
+dat-lkml/ttest:
+	$<MATLABPATH> lkml_ttest.m lkml_labels.m 
+	dat-lkml/out.lkml-reply
+	dat-lkml/ent.lkml-reply-type
+	dat-lkml/n
+	dat-lkml/feature.pagerank
+{
+    ./matlab lkml_ttest.m 
+}
+
+#
+# @tops - Find the top users by indegree and PageRank, per group 
+#
+
+@tops:  <dat-lkml/dep.tops>;
+
+dat-lkml/tops.[FEATURE].[GROUP]:
+	$<MATLABPATH> lkml_tops.m 
+	dat-lkml/feature.[FEATURE]
+	dat-lkml/ent.lkml-reply-type
+	dat-lkml/ent.lkml-reply-domain
+{
+    FEATURE=[FEATURE] GROUP=[GROUP] ./matlab lkml_tops.m 
+}
+
+dat-lkml/dep.tops:
+	dat-lkml/GROUPS
+{
+    for feature in indegree pagerank ; do
+	for group in $(cat dat-lkml/GROUPS) ; do
+	    echo "dat-lkml/tops.$feature.$group"
+	done
+    done >dat-lkml/dep.tops
+}
+
+#
+# @outin - Outdegree vs indegree
+#
+
+@outin:  plot-lkml/outin.a.eps;
+
+plot-lkml/outin.a.eps:
+	$<MATLABPATH> lkml_outin.m 
+	dat-lkml/out.lkml-reply
+	dat-lkml/n
+{
+    ./matlab lkml_outin.m 
+}
+

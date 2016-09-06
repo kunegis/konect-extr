@@ -1,0 +1,127 @@
+#! /usr/bin/perl -w
+
+use strict;
+use warnings FATAL => 'all';
+
+open(my $IN, "<country_lang_speakers.txt") or die "$!"; 
+
+open(my $OUT, ">out.unicodelang.raw") or die "$!";
+open(my $ENT_COUNTRY, ">ent.unicodelang.coutry.code") or die "$!"; 
+open(my $ENT_LANGUAGE, ">ent.unicodelang.language.code") or die "$!"; 
+
+print $OUT "% bip posweighted\n"; 
+
+# Weight values in the file are in percent -- convert them to proportion
+# values between zero and one. 
+
+my $country;
+my $id_country = 0;
+
+# IDs by code
+my %ids_languages = (); 
+
+while (<$IN>) {
+
+	chomp; 
+
+	if (/^(.*);ZZ;(.*)$/) {
+
+		# ZZ as a country code stands for "unknown territory" 
+		$country = "ZZ";
+		next; 
+
+	}
+
+	my $language;
+	my $weight_text; 
+
+	if (/^(.*);(.*);(.*);(.*);(.*);(.*)$/) {
+		$country = $2;  
+		++ $id_country; 
+		$language = $5;
+		$weight_text = $6;
+		print $ENT_COUNTRY "$country\n"; 
+	} elsif (/^(.*);(.*);(.*)$/) {
+		$language = $2;
+		$weight_text = $3;
+	} else {
+		die "Invalid line:  $_"; 
+	}
+
+	die "ZZ" if ($country eq "ZZ"); 
+
+	# This is twice in the dataset -- ignore the second entry with
+	# empty weight 
+	next if ($weight_text eq "" && $language eq "iu" && $country eq "CA");
+
+	# The India/Malayalam entry is missing a value; fill in the
+	# value from the Unicode website (3.2%). 
+	if ($weight_text eq "" && $language eq "ml" && $country eq "IN") {
+		$weight_text = "3.2"; 
+	}
+
+	# Same for Nepal/Limbu
+	if ($weight_text eq "" && $language eq "lif" && $country eq "NP") {
+		$weight_text = "1.1";
+	}
+
+	# Same for Nepal/Eastern Gurung
+	if ($weight_text eq "" && $language eq "ggn" && $country eq "NP") {
+		$weight_text = "0.42";
+	}
+
+	# The Uzbekistan/Uzbek entry is included twice, ignore the second
+	# (smaller) entry.  
+	if ($country eq "UZ" && $language eq "uz") {
+		my $line = <$IN>;
+		chomp $line; 
+		die "Uzbek" if ! $line eq "Uzbek;uz;15.00"; 
+	}
+
+	# The Azerbaijan/Azeri entry is included twice, ignore the second
+	# (smaller) entry.  
+	if ($country eq "AZ" && $language eq "az") {
+		my $line = <$IN>;
+		chomp $line; 
+		die "Uzbek" if ! $line eq "Azerbaijani;az;9.90"; 
+	}
+
+	# # Both Hong Kong and Macau have entries for both traditional and
+	# # simplified Chinese, using the same language code "zh".  In both
+	# # cases, the traditional entry is very high (>90%), and the
+	# # simplified entry very low (<10%).  Ignore the number for
+	# # simplified Chinese. 
+	# if (($country eq "HK" || $country eq "MO") && $language eq "zh") {
+	# 	next if (0 + $weight_text < 10);
+	# }
+
+	# # Same for Montenegro/Serbian
+	# if ($country eq "ME" && $language eq "sr") {
+	# 	next if (0 + $weight_text < 10);
+	# }
+	
+	# # Same for Brunei/Malay
+	# if ($country eq "BN" && $language eq "ms") {
+	# 	next if (0 + $weight_text < 10);
+	# }
+
+	# # Same for Nigeria/Hausa
+	# if ($country eq "NG" && $language eq "ha") {
+	# 	next if (0 + $weight_text < 2);
+	# }
+
+	my $id_language = $ids_languages{$language};
+	if (! exists $ids_languages{$language}) {
+		$id_language = 1 + keys %ids_languages;
+		$ids_languages{$language} = $id_language; 
+		print $ENT_LANGUAGE "$language\n"; 
+	}
+
+	my $weight = $weight_text / 100;
+
+	print $OUT "$id_country\t$id_language\t$weight\n"; 
+}
+
+close $OUT or die "$!"; 
+close $ENT_COUNTRY or die "$!";
+close $ENT_LANGUAGE or die "$!"; 

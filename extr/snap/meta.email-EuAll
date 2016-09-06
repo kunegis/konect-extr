@@ -1,0 +1,12 @@
+category: Communication
+code: EU
+name: EU institution
+description: User–user email
+url: http://snap.stanford.edu/data/email-EuAll.html
+cite: konect:leskovec107 
+extr: snap
+long-description: This is the email communication network of a large, undisclosed European institution. Nodes represent individual persons. Edges between two persons are directed and denote that at least one email has been sent from one person to the other. All edges are simple: Even if a person has sent multiple emails to another person, the two persons will be connected only by a single edge in that direction. Spam emails have been removed from the dataset.
+timeiso: 2003-01-01/2005-01-01
+tags: #loop #incomplete
+entity-names: user
+relationship-names: email 

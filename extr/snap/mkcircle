@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+while(<STDIN>)
+{
+chomp;
+my $f=$_;
+my $nid=(split(/\//, (split (/\./,$f))[0]))[-1];
+open FILE,'<',"".$f;
+while(<FILE>)
+{
+ chomp;
+ my @l=split ('	',$_);
+ @l=@l[1..$#l];
+ foreach my $v (@l)
+	{print $nid." ".$v."\n";}
+}
+
+close FILE;
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Count rel,obj1,obj2 for bipartite datasets. 
+# Does not require previous invokation of mkuniq
+#
+# INPUT format:         NUMID_A  NUMID_B   REST OF LINE
+# 
+
+awk 'BEGIN{ gsum=0; }{ myarray1[$1]++; myarray2[$2]++; gsum++;  } END {i=0; j=0; for ( key in myarray1 ) { i++; } for ( key in myarray2 ) { j++; } printf("%% %d %d %d\n",gsum,i,j); }'
+
+

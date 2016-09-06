@@ -1,0 +1,10 @@
+category: Feature 
+code: Dt
+name: Discogs artist–style
+description: Artist–style features
+entity-names: artist,style
+extr: discogs
+url: http://www.discogs.com/
+long-description: Discogs (short for "discographies") is a large online music database that provides information about audio records including information about artists, labels and release details. Each edge of this bipartite network connects an artist and a style. An edge indicates that the artist was involved in the production of a release of the style. Releases can have multiple styles.  The left nodes represent artists and the right nodes represent styles.
+relationship-names: style
+tags: #regenerate

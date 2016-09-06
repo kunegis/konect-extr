@@ -1,0 +1,33 @@
+#!/bin/bash
+
+while read line
+do
+ p=$(echo "$line"|cut -d' ' -f 1-2)
+ v=$(echo "$line"|cut -d' ' -f3 )
+ r=$(echo "$line"|cut -d' ' -f4)
+ broken=0
+ case $v in
+	1)
+		val="+3"
+	;;
+	2)
+		val="+2"
+	;;
+	3)
+		val="+1"
+	;;
+	4)
+		val="0"
+	;;
+#	0)
+#		val="0"
+#	;;
+	5)	
+		val="-1"
+	;;
+	*)
+		broken=1
+	;;
+ esac
+	[ "$broken" == "0" ] && echo "$p $val $r"
+done

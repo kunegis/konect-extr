@@ -1,0 +1,10 @@
+category: Infrastructure
+code: OF
+name: OpenFlights
+description: Airport–airport flights
+entity-names: airport
+extr: opsahl
+url: http://toreopsahl.com/datasets/#usairports
+long-description: This directed network contains flights between airports of the world. A directed edge represents a flight from one airport to another.  This dataset is extracted from Openflights.org data and corresponds to network 14c in the dataset list by Tore Opsahl.
+relationship-names: flight
+cite:  konect:opsahl2010b

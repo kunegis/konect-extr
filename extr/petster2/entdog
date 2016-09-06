@@ -1,0 +1,179 @@
+#! /usr/bin/perl
+#
+# Generate the Dog entity file (original IDs).
+#
+# INPUT 
+#	petster-data/dogster/dogs/*
+#
+# OUTPUT 
+#	dat-petster/ent.petster_orig-dog.*
+#
+
+use strict;
+use warnings;
+
+opendir(DIR, "petster-data/dogster/dogs/") or die "$!";
+my @filenames = sort readdir(DIR);
+closedir DIR or die "$!";
+
+open OUT_ORIGID,   ">dat-petster/ent.petster_orig-dog.origid"   or die "$!"; 
+open OUT_NAME,     ">dat-petster/ent.petster_orig-dog.name"     or die "$!"; 
+open OUT_HOME,     ">dat-petster/ent.petster_orig-dog.home"     or die "$!"; 
+open OUT_WEIGHT,   ">dat-petster/ent.petster_orig-dog.weight"   or die "$!"; 
+open OUT_SEX,      ">dat-petster/ent.petster_orig-dog.sex"      or die "$!"; 
+open OUT_RACE,     ">dat-petster/ent.petster_orig-dog.race"     or die "$!"; 
+open OUT_JOINED,   ">dat-petster/ent.petster_orig-dog.joined"   or die "$!"; 
+open OUT_BIRTHDAY, ">dat-petster/ent.petster_orig-dog.birthday" or die "$!";
+
+foreach my $filename(@filenames) {
+
+    next if $filename eq "." || $filename eq ".."; 
+
+    my $path = "petster-data/dogster/dogs/$filename";
+
+    if (not $filename =~ /^(\d+)$/) {
+	print STDERR "*** Invalid filename «$path»\n"; 
+	exit 1;
+    }
+    my $origid = $1; 
+
+    open IN, "<$path" or die "$!";
+
+    my $name;
+    my $home;
+    my $weight;
+    my $sex;
+    my $race;
+    my $species;
+    my $joined; 
+    my $birthday;
+
+    while (<IN>) {
+
+	chomp; 
+	my $line = $_;
+	
+	$line =~ s/&nbsp;//g;
+
+	if ($line =~ /<span class="label">Home:<\/span>\s*([^<]*[^< ])/i){
+	    $home = $1;
+	    $home =~ s/\\/\\\\/g;
+	    $home =~ s/"/\\"/g;
+	}
+
+	if ($line =~ /<span class="label">Weight:<\/span>\s*([^<]*[^< ])/i) {
+	    $weight = $1;
+	    $weight =~ s/\\/\\\\/g;
+	    $weight =~ s/"/\\"/g;
+	}
+
+	if ($line =~ /<td valign=top>([A-Z][a-z]+ [0-9]+.. [0-9][0-9][0-9][0-9])<\/td>/) {
+	    $joined = $1; 
+	}
+
+	if ($line =~ />Birthday:<\/span><br \/>([^<]+)</) {
+	    $birthday = $1;
+	}
+
+	if ($line =~ /<span class="label">Sex:<\/span>\s*([^<]*[^< ])/i){
+	    my $sex_text = $1;
+	    $sex_text =~ s/\\/\\\\/g;
+	    $sex_text =~ s/"/\\"/g;
+	    if    ($sex_text eq "Male"  )  { $sex = 1; }
+	    elsif ($sex_text eq "Female")  { $sex = 2; }
+	    else { 
+		print STDERR "*** Unknown sex in «$path»\n"; 
+		exit 1;
+	    }
+	}
+
+	if ($line =~ /<title>(Cat|Dog) profile for /) {
+
+	    if (not $line =~ /<title>(Cat|Dog) profile for (.*), a (female|male) ([^<]*)<\/title>/i) {
+		my $line_next = <IN>;
+		chomp $line_next;
+		$line = "$line$line_next"; 
+	    }
+
+	    if ($line =~ /<title>(Cat|Dog) profile for (.*), a (female|male) ([^<]*)<\/title>/i) {
+		$species = $1;
+		$name = $2;
+		my $sex_adjective = $3; # Not used; sex is parsed above
+		$race = $4;
+
+		$species =~ s/\\/\\\\/g;
+		$species =~ s/"/\\"/g;
+
+		$name =~ s/\\/\\\\/g;
+		$name =~ s/"/\\"/g;
+
+		if (! defined $race) {
+		    print STDERR "*** Couldn't parse race in line «$line»\n"; 
+		    exit 1;
+		}
+		$race =~ s/\\/\\\\/g;
+		$race =~ s/"/\\"/g;
+	    }
+	}
+    }
+
+    close IN or die "$!";
+
+    if (! defined $name) {
+	# Many dog profiles are cut-off (the HTML crawling code probably did not check for errors) 
+	# Therefore, accept missing names 
+	$name = ""; 
+
+#	print STDERR "### name missing in «$path»\n";
+#	exit 1;
+    }
+
+    if (! defined $home) {
+	$home = ""; 
+    }
+    
+    if (! defined $weight) {
+	$weight = ""; 
+    }
+
+    if (! defined $sex) {
+	$sex = 0; 
+    }
+
+    if (! defined $race) {
+	$race = ""; 
+    }
+
+    if (! defined $joined) {
+	$joined = ""; 
+    }
+
+    if (! defined $birthday) {
+	$birthday = "";
+    }
+
+    if (defined $species) {
+	if ($species ne "Dog") {
+	    print STDERR "### This is not a dog: «$path»\n"; 
+	    exit 1;
+	}
+    }
+
+    print OUT_ORIGID   "$origid\n"; 
+    print OUT_NAME     "$name\n"; 
+    print OUT_HOME     "$home\n"; 
+    print OUT_WEIGHT   "$weight\n"; 
+    print OUT_SEX      "$sex\n"; 
+    print OUT_RACE     "$race\n"; 
+    print OUT_JOINED   "$joined\n"; 
+    print OUT_BIRTHDAY "$birthday\n"; 
+}
+
+close OUT_ORIGID   or die "$!";
+close OUT_NAME     or die "$!";
+close OUT_HOME     or die "$!";
+close OUT_WEIGHT   or die "$!";
+close OUT_SEX      or die "$!";
+close OUT_RACE     or die "$!"; 
+close OUT_JOINED   or die "$!"; 
+close OUT_BIRTHDAY or die "$!"; 

@@ -1,0 +1,29 @@
+#! /usr/bin/perl -w
+
+use strict;
+
+while (<STDIN>)
+{
+    /^\S+\t[^\t]+\t(.*)$/ or 
+	die "Invalid input:  $_"; 
+
+    my $tweet = $1; 
+
+    my $f_retweet = ($tweet =~ /\b(rt|retweet|retweeting|♺|via)\s*(:|@)/i ? 1 : 0); 
+    my $f_direct = ($tweet =~ /^\s*@/ ? 1 : 0); 
+
+    my $f_at = ($tweet =~ /@/ ? 1 : 0); 
+    my $f_hash = ($tweet =~ /#/ ? 1 : 0); 
+    my $f_http = ($tweet =~ /http:\/\// ? 1 : 0); 
+
+    my $f_smiley_pos = ($tweet =~ /:-\)|:\)|;-\)/ ? 1 : 0); 
+    my $f_smiley_neg = ($tweet =~ /:-\(|:\(/ ? 1 : 0);
+
+    my $f_word_pos = ($tweet =~ /great|like|excellent|rock on/i ? 1 : 0);
+    my $f_word_neg = ($tweet =~ /fuck|suck|fail|eww/i ? 1 : 0); 
+
+    my $f_punct_excl = ($tweet =~ /!\s*$/ ? 1 : 0); 
+    my $f_punct_quest = ($tweet =~ /\?\s*$/ ? 1 : 0); 
+
+    print "$f_retweet $f_direct $f_at $f_hash $f_http $f_smiley_pos $f_smiley_neg $f_word_pos $f_word_neg $f_punct_excl $f_punct_quest $tweet\n"; 
+}

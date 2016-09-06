@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+
+
+while (<STDIN>)
+{
+	chomp($_);
+	if ($_ eq "*arcs")
+	{
+		last;
+	}
+}
+
+while (<STDIN>)
+{
+	chomp($_);
+	if ($_ eq "")
+	{
+		last;
+	}
+	my @line = split(" ",$_);
+
+	print $line[0]." ".$line[1]." ".$line[2]."\n";
+}

@@ -1,0 +1,13 @@
+name:  Reactome
+code:  RC
+url:  http://www.reactome.org/pages/download-data/
+category:  Metabolic
+description:  Protein–protein interactions
+cite:  konect:reactome
+long-description:  This is a network of protein–protein interactions in the species <i>Homo sapiens</i>, i.e., in Humans.  The data is curated by the Reactome project, an open online database of biological pathways. 
+entity-names: protein
+relationship-names:  interaction
+extr:  reactome
+timeiso:  2014
+tags:  #regenerate #loop
+

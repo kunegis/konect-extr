@@ -1,0 +1,63 @@
+#! /usr/bin/perl
+#
+# Wrapper for the Google Maps API which transforms a geographic name in
+# free syntax into a line describing the location.  The returned line
+# contains primarily the coordinates, but also a full name of the
+# location. 
+#
+# This script does not canonicalize names.  That must have been done
+# before.  
+#
+# INVOCATION 
+#	$0	$NAME
+#
+# OUTPUT
+#	The XML from Google 
+#
+
+use warnings;
+use strict; 
+binmode(STDIN,  ":utf8");
+binmode(STDOUT, ":utf8");
+
+use LWP::Simple;
+
+if (@ARGV != 1) {
+    die "*** Invalid number of arguments"
+}
+
+my $name = $ARGV[0];
+
+if ($name =~ /^\s*$/) {
+    die "*** Name must not be empty"; 
+}
+
+my $filename = "geocache/$name"; 
+
+if (-e "geocache/$name") {
+    # Already exists, do nothing 
+} else {
+
+    print STDERR "$name...\n";
+
+    my $url = "http://maps.googleapis.com/maps/api/geocode/xml?address=$name";
+
+    my $content = get $url;
+    die "Couldn't get «$url»" unless defined $content;
+
+    if ($content =~ m/LIMIT/) {
+	die "*** ERROR:  LIMIT"; 
+    }
+
+    open FILE, ">$filename" or die "$!"; 
+    print FILE $content;
+    close FILE or die "$!"; 
+
+    print STDERR "\tXML is in $filename\n";
+
+    # Max 2500 requests per day
+    sleep 1; 
+}
+
+
+

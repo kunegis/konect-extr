@@ -1,0 +1,10 @@
+category: Lexical
+code: WO
+name: WordNet 
+description: Word–word relationship
+url: http://wordnet.princeton.edu/
+cite: konect:fellbaum98
+extr: wordnet
+long-description: This is the lexical network of words from the WordNet dataset. Nodes in the network are English words, and links are relationships between them, such as synonymy, antonymy, meronymy, etc. All relationships present in the WordNet dataset are included. The resulting network is undirected. 
+entity-names: word
+relationship-names: relationship 

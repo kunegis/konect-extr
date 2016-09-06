@@ -1,0 +1,14 @@
+
+@all:
+	out.prosper-loans	
+	meta.prosper-loans
+;
+
+@clean {
+	rm -rf out.prosper-loans
+}
+
+out.prosper-loans:  ../own/prosper-loans/out.prosper-loans.in
+{
+	<../own/prosper-loans/out.prosper-loans.in >out.prosper-loans ../mkuniq1 
+}

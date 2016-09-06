@@ -1,0 +1,174 @@
+#! /usr/bin/perl
+#
+# Clean up names.  I.e., convert to lowercase, remove non-name elements
+# (like "R.I.P."), etc.  
+#
+
+use strict;
+use warnings; 
+
+while (<>) {
+    chomp;
+
+    my $line = $_; 
+
+    # 
+    # Fix encodings
+    #
+
+    # HTML encoding
+    $line =~ s/&quot;/"/g;
+    $line =~ s/&hearts;//g;
+
+    # 小丽 may be Xiǎolì, it may be Mary, I don't know; the individual
+    # characters stand for "little" and "beautiful"; probably just a
+    # nice Chinese pet name. 
+    # 小梅 may be Xiǎoméi, and the individual characters stand for
+    # "little" and "plum". 
+    $line =~ s/&amp;#23567;/小/g;
+    $line =~ s/&amp;#20029;/丽/g;
+    $line =~ s/&amp;#26757;/梅/g;
+
+    # Remove final HTML encoding
+    $line =~ s/&amp;/&/g;
+
+    # Non-ascii Characters
+    $line =~ s/&auml;/ä/g;
+    $line =~ s/&euml;/ë/g;
+    $line =~ s/&iuml;/ï/g;
+    $line =~ s/&ouml;/ö/g;
+    $line =~ s/&uuml;/ü/g;
+    $line =~ s/&aacute;/á/g;
+    $line =~ s/&eacute;/é/g;
+    $line =~ s/&iacute;/í/g;
+    $line =~ s/&oacute;/ó/g;
+    $line =~ s/&uacute;/ú/g;
+    $line =~ s/&acirc;/â/g;
+    $line =~ s/&agrave;/à/g;
+    $line =~ s/&egrave;/è/g;
+    $line =~ s/&ograve;/ò/g;
+    $line =~ s/&ugrave;/ù/g;
+    $line =~ s/&atilde;/ã/g;
+    $line =~ s/&ntilde;/ñ/g;
+    $line =~ s/&oslash;/ø/g;
+    $line =~ s/&aring;/å/g;
+    $line =~ s/&scaron;/š/g;
+    $line =~ s/&ccedil;/ç/g;
+    $line =~ s/&middot;/·/g;
+
+    # Backslashes
+    $line =~ s/\\"/"/g;
+
+    #
+    # Remove or simplify punctuation 
+    #
+    
+    # Lower case 
+    $line = lc $line;
+
+    # Brackets and braces to parentheses
+    $line =~ s/\[/(/g;
+    $line =~ s/\]/)/g;
+    $line =~ s/\{/(/g;
+    $line =~ s/\}/)/g;
+
+    # Remove misc punctuation
+    $line =~ s/"//g;
+    $line =~ s/!//g;
+    $line =~ s/\*//g;
+    $line =~ s/~//g;
+
+    # Remove smilies 
+    $line =~ s/:-\)//;
+    $line =~ s/:-\(//;
+    $line =~ s/:\)//;
+    $line =~ s/:\(//;
+
+    #
+    # Normalize phrases
+    #
+
+    # Convert symbols into words
+    $line =~ s/&/and/g;
+    $line =~ s/1st\b/first/g; 
+
+    # Normalize "Mr." and related titles. (We keep abbreviated versions
+    # because "Mrs." has no good spelled out version.)
+    $line =~ s/mr\.(\S)/mr. $1/g; # Missing space after "."
+    $line =~ s/ms\.(\S)/ms. $1/g; # Missing space after "."
+    $line =~ s/mister/mr./g;
+    $line =~ s/\bmr(\s)/mr. $1/g; # Missing "."
+    $line =~ s/\bms(\s)/ms. $1/g; # Missing "."
+    $line =~ s/\bmrs(\s)/mrs. $1/g; # Missing "."
+
+    # Always write out "captain"
+    $line =~ s/\bcapt\./captain/g;
+
+    #
+    # Remove non-name parts
+    # 
+
+    # Remove parenthesized phrases
+    $line =~ s/\([^)]*\)//g; 
+
+    # Remove non-name phrases (usually added to indicate that the pet is
+    # deceased) 
+    $line =~ s/\bin\s+loving\s+memory\s+of\b//g;
+    $line =~ s/\bin\s+loving\s+memory\b//g;
+    $line =~ s/\brip\b//g;
+    $line =~ s/r\.i\.p\.//g;
+    $line =~ s/r\.i\.p//g;
+    $line =~ s/\bin\s+memory\b//g;
+    $line =~ s/\bin\s+memoriam\b//g;
+    $line =~ s/\bin\s+memorium\b//g; # [sic]
+    $line =~ s/\bin\s+remembrance\b//g;
+    $line =~ s/\bhas\s+gone\s+to\s+heaven\b//g;
+    $line =~ s/\badopted\b//g;
+    $line =~ s/\brest\s+in\s+peace\s+buddy\b//g;
+    $line =~ s/\brest\s+in\s+peace\b//g;
+
+    # Remove "the rat", "the hamster", etc., usually used to indicate
+    # that the pet is of the wrong species for the social network. 
+    $line =~ s/\bthe\s+(rat|hamster)\s*$//g;
+
+    #
+    # Remove qualifiers (we may want to keep them later) 
+    #
+
+    # Remove jr. and sr. qualifiers
+    $line =~ s/\bjr\.//g;
+    $line =~ s/\bsr\.//g;
+    $line =~ s/(\S\s+)junior/$1/g;
+
+    # Remove numberings 
+    $line =~ s/#[0-9]+\s*$//g;
+    $line =~ s/\bthe first\b//g;
+    $line =~ s/\bthe second\b//g;
+    $line =~ s/:\s*ii\s*$//g;
+
+    # Remove "cgc", which means "canine good citizen"
+    $line =~ s/\b,\s*cgc\b//g;
+    $line =~ s/\bcgc\b//g;
+
+    #
+    # Remove leftover punctuation
+    #
+
+    # Uniform spacing
+    $line =~ s/^\s+//;
+    $line =~ s/\s+$//;
+    $line =~ s/\s+/ /g;
+
+    # Remove dashes
+    $line =~ s/-+\s*$//g;
+    $line =~ s/ - / /g;
+
+    # Remove dates
+    $line =~ s/[0-9\/-]{4,}//g;
+
+    #
+    # Print
+    #
+    print "$line\n"; 
+}
+

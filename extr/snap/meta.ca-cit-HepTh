@@ -1,0 +1,12 @@
+category: Coauthorship
+code: TH
+name: arXiv hep-th
+description: Author–author collaborations
+url: http://snap.stanford.edu/data/cit-HepTh.html
+cite: konect:leskovec107
+extr: snap
+long-description: This is the collaboration graph of authors of scientific papers from the arXiv's High Energy Physics – Theory (hep-th) section. An edge between two authors represents a common publication. Timestamps denote the date of a publication.
+entity-names: author
+relationship-names: collaboration
+tags:  #join
+ 

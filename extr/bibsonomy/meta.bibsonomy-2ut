@@ -1,0 +1,12 @@
+category: Folksonomy
+code: But
+name: BibSonomy u-t
+description: User–tag assignment
+url: http://www.kde.cs.uni-kassel.de/bibsonomy/dumps
+cite: konect:bibsonomy
+extr: bibsonomy
+fullname: BibSonomy user–tag
+long-description:  This is the bipartite user–tag network from BibSonomy. Each edge represents a tag assignment.  The network allows multiple edge as users may use a tag for multiple documents.  The network is complete as it is taken from the official BibSonomy dump.
+tags: #regenerate
+entity-names:  user, tag
+relationship-names:  assignment

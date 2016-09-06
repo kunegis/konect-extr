@@ -1,0 +1,74 @@
+DEPRECATED :::: this is the old extraction code based on an old version
+of the dataset available in OwnCloud. 
+
+#
+# Data provided by Sebastian Schelter for the "Tracking the Trackers" paper.
+#
+
+@all:      [FILES];
+@deploy:   [FILES-UNI];
+
+>FILES { 
+	echo meta.trackers-trackers
+	echo out.trackers-trackers
+	echo ent.trackers-trackers.domains 
+	echo ent.trackers-trackers.trackers
+}
+
+>FILES-DAT:  <FILES { sed -re 's,^,konect/dat/trackers/,' }
+>FILES-UNI:  <FILES { sed -re 's,^,konect/uni/,' }
+
+@clean {
+	rm -fr out
+	rm -f out.* ent.*
+}
+
+konect: {
+	# Needs to be symlinked by hand
+	exit 1
+}
+
+out: { mkdir -p out }
+
+konect/dat/trackers:  { mkdir -p konect/dat/trackers }
+
+konect/own/$FILE: !konect;
+
+meta.trackers-$NAME;
+
+out/out.trackthetrackers:
+	konect/own/trackers/konect.tar.gz !out
+{
+	cd out
+	tar xfvvz ../konect/own/trackers/konect.tar.gz
+	touch \
+		out.trackthetrackers \
+		out.trackthetrackers \
+		ent.trackthetrackers.domains \
+		ent.trackthetrackers.trackers
+}
+
+>out.trackers-trackers:  <out/out.trackthetrackers
+{
+	sed -re '1s,^.*$,% bip unweighted,'
+}
+
+ent.trackers-trackers.$NAME:  out/ent.trackthetrackers.$NAME
+{
+	cp out/ent.trackthetrackers."$NAME" ent.trackers-trackers."$NAME"
+}
+
+konect/dat/trackers/$FILE:  $FILE konect/dat/trackers {
+	cp "$FILE" "konect/dat/trackers/$FILE"
+}
+
+konect/uni/$PREFIX.trackers-$NAME:  konect/dat/trackers/$PREFIX.trackers-$NAME
+{
+	cd konect/uni/
+	ln -sf ../dat/trackers/$PREFIX.trackers-$NAME ./
+}
+
+konect/uni/meta.trackers-trackers:  meta.trackers-trackers
+{
+	cp meta.trackers-trackers konect/uni/meta.trackers-trackers
+}

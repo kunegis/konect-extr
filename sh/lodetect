@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $c=0;
+LINE:while(<STDIN>)
+{
+ $c++;
+ chomp;
+ my $l=$_;
+ if(substr($l,0,1) eq "%"){
+	next LINE;
+}
+  my @i=split (/\ /,$l);
+  if($i[0] == $i[1]){
+  	print STDERR "loop detected, line ".$c.": '".$l."'\n";
+  	exit 1;
+}
+}

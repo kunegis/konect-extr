@@ -1,0 +1,33 @@
+#! /usr/bin/perl -w
+#
+# Extract the <Member> lines, putting each <Member> element on a single line. 
+#
+
+use strict;
+
+my $in = 0; 
+
+while (<>)
+{
+    chomp; 
+
+    if (/[<]Member[>]/)
+    {
+	$in = 1; 
+    }
+    elsif ($in == 1)
+    {
+	print " "; 
+    }
+
+    if ($in == 1)
+    {
+	print; 
+    }
+
+    if (/[<]\/Member[>]/)
+    {
+	$in = 0;
+	print "\n"; 
+    }
+}

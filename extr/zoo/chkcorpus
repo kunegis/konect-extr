@@ -1,0 +1,10 @@
+#! /bin/sh
+#
+# Check consistency of out.corpus.
+# Check that all usernames only contain "simple" characters.
+#
+
+<out.corpus sed -e '
+/^[a-zA-Z0-9_+%.()*'\''!~-][a-zA-Z0-9_+%.()*'\''!~-]* [a-zA-Z0-9_+%.()*'\''!~-][a-zA-Z0-9_+%.()*'\''!~-]* [+-]$/!q 1
+d
+'

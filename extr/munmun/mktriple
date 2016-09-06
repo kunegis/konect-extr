@@ -1,0 +1,42 @@
+#! /usr/bin/perl -w
+#
+# Generate triples for the 'Twitsonomy' from the tweets.data file.
+#
+# STDIN		cleaned-up tweets
+# STDOUT	triples (USERNAME TAG URL)
+#
+
+use strict;
+
+use Date::Parse;
+
+# my $tmp = 'Nonna&#039;s #tag i';
+# while ($tmp =~ /(?<!&)(#\S+)/g)
+#     {
+# 	my $tag = $1; 
+# 	print "TAG $tag\n"; 
+#     }
+
+while (<STDIN>)
+{
+    /^(\S+)\t([^\t]+)\t(.*)$/ or 
+	die "Invalid input:  $_"; 
+
+    my $username_from = $1;
+    my $timeString = $2;
+    my $text = $3; 
+
+    my $time = str2time($timeString); 
+
+    my $text2 = $text; 
+
+    while ($text =~ /(?<!&)(#\w+)/g)
+    {
+	my $tag = $1; 
+	while ($text2 =~ m*(http:[^\s)]+)*g)
+	{
+	    my $url = $1;
+	    print "$time\t$username_from\t$tag\t$url\n"; 
+	}
+    }
+}

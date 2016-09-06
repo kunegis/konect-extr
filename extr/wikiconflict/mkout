@@ -1,0 +1,48 @@
+#! /usr/bin/perl -w
+# 
+# Convert All.csv to an out.* file. (via STDIN/STDOUT)
+#
+
+use strict;
+use Date::Parse; 
+
+my $next_id= 1;
+my %new_ids = ();
+my %old_ids = ();
+
+sub entity_id
+{
+    my $id_old = shift; 
+
+    my $id_new = $new_ids{$id_old};
+    if (! exists $new_ids{$id_old}) {
+	$id_new = $next_id;
+	$new_ids{$id_old} = $id_new;
+	$old_ids{$id_new} = $id_old;
+
+	++ $next_id;
+    }
+    my $id_new_string = "" . $id_new;
+
+    return $id_new_string; 
+}
+
+while (<STDIN>) 
+{
+    chomp;
+    /^([0-9]+\.[0-9]+\.[0-9]+_[0-9]+:[0-9]+:[0-9]+)	([^	]+)	([^	]+)	([0-9.-]+)$/
+	or die "*** error:  invalid input:  >>$_<<";
+    
+    my $id_user_old = "" . $2;
+    my $id_item_old = "" . $3;
+    my $weight = "" . $4;
+    my $datetext = $1;
+    $datetext =~ tr/._/-T/;
+    my $datenum = str2time($datetext); 
+
+    my $id_user_new_string = entity_id($id_user_old); 
+    my $id_item_new_string = entity_id($id_item_old); 
+
+    print "$id_user_new_string\t$id_item_new_string\t$weight\t$datenum\n";
+}
+

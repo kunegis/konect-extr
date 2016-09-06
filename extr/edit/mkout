@@ -1,0 +1,87 @@
+#! /usr/bin/perl -w
+#
+# Generate outfile. 
+#
+# PARAMETERS
+#	$1	name of wiki
+#
+# INPUT
+#	tmp/$1-latest-stub-meta-history.xml
+#
+# OUTPUT
+#	out/out.edit-$1
+#	out/ent.edit-$1-user
+#	out/ent.edit-$1-page
+#
+
+use strict; 
+
+use Date::Parse;
+
+# Current wiki
+my $wiki = $ARGV[0]; 
+
+open(XML, "<tmp/$wiki-latest-stub-meta-history.xml");
+open(OUT, ">out/out.edit-$wiki"); 
+open(ENT_PAGE, ">out/ent.edit-$wiki-page"); 
+open(ENT_USER, ">out/ent.edit-$wiki-user"); 
+
+print OUT "% bip positive\n"; 
+
+print ENT_PAGE "%\n%\n% ent dat.string.name\n"; 
+
+print ENT_USER "%\n%\n% ent dat.string.name\n"; 
+
+# Current page name and ID
+my $page = "";
+my $pageid = 0; 
+
+# Current timestamp
+my $timestamp;
+
+# Users
+my %users = (); 
+my $users_next_id = 1; 
+
+while (<XML>)
+{
+    if (/^\s+\<title\>(.+)\<\/title\>/) {
+	$page = $1; 
+	++ $pageid; 
+
+	my $page_esc = $page; 
+
+	$page_esc =~ s,\\,\\\\,g; 
+	$page_esc =~ s,",\\",g;
+
+	print ENT_PAGE "$pageid \"$page_esc\"\n"; 
+    }
+
+    if (/^\s+\<timestamp\>(.+)\<\/timestamp\>/) {
+	$timestamp = $1;
+	$timestamp = str2time($timestamp); 
+    }
+
+    if (/^\s+\<username\>(.+)\<\/username\>/) {
+	my $username = $1; 
+	if (! exists $users{$username}) {
+	    $users{$username} = $users_next_id; 
+
+	    my $username_esc = $username;
+	    $username_esc =~ s,\\,\\\\,g; 
+	    $username_esc =~ s,",\\",g;
+	    print ENT_USER "$users_next_id \"$username_esc\"\n"; 
+
+	    ++ $users_next_id;
+	}
+	my $userid = $users{$username}; 
+
+	print OUT "$userid $pageid 1 $timestamp\n"; 
+    }    
+}
+
+close(XML) or die; 
+close(OUT) or die; 
+close(ENT_PAGE) or die; 
+close(ENT_USER) or die; 
+

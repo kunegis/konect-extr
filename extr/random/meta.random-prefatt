@@ -1,0 +1,10 @@
+name:             Preferential attachment random graph
+code:             Rpa
+url:              todo
+category:         Random
+fullname:         Preferential attachment random graph
+description:      Node–node random 
+long-description: Preferential attachment random graph
+entity-names:     node,node
+extr:   	  random
+cite:             todo

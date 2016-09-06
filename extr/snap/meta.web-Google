@@ -1,0 +1,10 @@
+category: Hyperlink
+code: GO
+name: Google
+description: Webpage–webpage hyperlinks
+url: http://snap.stanford.edu/data/web-Google.html
+cite: konect:leskovec08 
+extr: snap
+long-description: This is a network of web pages connected by hyperlinks. The data was released in 2002 by Google as a part of the Google Programming Contest.
+entity-names: webpage
+relationship-names: hyperlink

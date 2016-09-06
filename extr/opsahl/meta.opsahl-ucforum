@@ -1,0 +1,10 @@
+category: Interaction
+code: UF
+name: UC Irvine forum
+description: User–forum posts
+entity-names: user,forum
+extr: opsahl
+url: http://toreopsahl.com/datasets/#online_forum_network
+long-description: This bipartite network contains user posts to forums. The users are students at the University of California, Irvine. An edge represents a forum message.  
+relationship-names: post
+cite: konect:opsahl10

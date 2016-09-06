@@ -1,0 +1,55 @@
+#! /usr/bin/perl -w
+#
+# Make IDs unique for bipartite dataset. 
+#
+# Filter a graph dataset, making IDs unique.
+#
+# INPUT format:         ID_A  ID_B   REST OF LINE
+# OUTPUT:  the same with continuous IDs
+# 
+# Input IDs may be any string not containing spaces.
+# Output IDs are continuous integers beginning at 1.
+#
+
+use strict;
+
+binmode(STDOUT, ":utf8");
+
+my $next_user_id= 1;
+my %new_user_ids = ();
+my $next_item_id= 1;
+my %new_item_ids = ();
+
+while (<>) 
+{
+    if (/^%/)
+    {
+	print $_;
+	next; 
+    }
+
+    /\s*(\S+)\s+(\S+)\s+(.*)/ 
+	or die "*** error:  invalid input:  $_";
+    
+    my $id_user_old = "" . $1;
+    my $id_item_old = "" . $2;
+    my $rating = "" . $3;
+
+    my $id_user_new = $new_user_ids{$id_user_old};
+    if (! exists $new_user_ids{$id_user_old}) {
+	$id_user_new = $next_user_id;
+	$new_user_ids{$id_user_old} = $id_user_new;
+	++ $next_user_id;
+    }
+    my $id_user_new_string = "" . $id_user_new;
+
+    my $id_item_new = $new_item_ids{$id_item_old};
+    if (! exists $new_item_ids{$id_item_old}) {
+	$id_item_new = $next_item_id;
+	$new_item_ids{$id_item_old} = $id_item_new;
+	++ $next_item_id;
+    }
+    my $id_item_new_string = "" . $id_item_new;
+
+    print "$id_user_new_string $id_item_new_string $rating\n";
+}

@@ -1,0 +1,185 @@
+#
+# Large networks from the Stanford Network Analysis Project (SNAP) by Jure
+# Leskovec. 
+#
+# http://snap.stanford.edu/
+#
+
+#
+# This project uses Stu instead of Make.  Get it at
+#
+# https://github.com/kunegis/stu
+#
+
+% version 1.15
+
+@all: 
+	@all.datasets @all.datasets-citation 
+	out/out.elec @all.egodatasets @all.symdatasets 
+; 
+
+# For these datasets, also extract the temporal co-citation graph. 
+DATASETS_CITATION = { cit-HepPh cit-HepTh }
+
+>DATASETS :  DATASETS_CITATION
+{
+	cat DATASETS_CITATION
+	echo \
+		soc-Slashdot0902 wiki-Vote email-EuAll amazon0601 wiki-Talk \
+		soc-sign-Slashdot081106 soc-sign-Slashdot090216 soc-sign-Slashdot090221 \
+		as-skitter \
+		soc-LiveJournal1 \
+		p2p-Gnutella31 \
+		web-NotreDame web-BerkStan web-Google web-Stanford \
+		as20000102 as-caida20071105 \
+		soc-pokec-relationships soc-Epinions1 \
+		com-livejournal com-dblp com-youtube com-amazon
+}
+
+#
+# Disabled because they apparently are not available anymore:
+#
+#   ca-AstroPh 
+#
+# There code is still in this stufile, so they can just be re-added to
+# DATASETS if necessary.  Maybe their source was just moved. 
+#
+
+EGODATASETS = { twitter facebook gplus }
+SYMDATASETS = { 
+	loc-gowalla_edges loc-brightkite_edges flickrEdges roadNet-CA roadNet-TX roadNet-PA 
+} 
+
+@all.datasets:  [dep.all.datasets];
+>dep.all.datasets:  DATASETS
+{
+	for name in $(cat DATASETS) ; do
+		echo out/out."$name" 
+	done
+}
+
+@all.symdatasets:  [dep.all.symdatasets];
+>dep.all.symdatasets:  SYMDATASETS
+{
+	for name in $(cat SYMDATASETS) ; do
+		echo out/out."$name"
+	done
+}
+
+@all.datasets-citation:  [dep.all.datasets-citation]; 
+>dep.all.datasets-citation:  DATASETS_CITATION
+{
+	for name in $(cat DATASETS_CITATION) ; do
+		echo out/out.ca-"$name" 
+	done
+}
+
+@all.egodatasets:  [dep.all.egodatasets];
+>dep.all.egodatasets: EGODATASETS {
+	for name in $(cat EGODATASETS) ; do
+		echo out/out.ego-"$name"
+	done
+}
+
+out/out.$name:  out/$name.txt SYMDATASETS mk ../mkrel
+{
+	if grep -qE '(^|[[:space:]])'"$name"'($|[[:space:]])' SYMDATASETS ; then
+
+		# This is a SYMDATASETS dataset
+		sed -e '/^#/d' out/"$name".txt | 
+		tr -s ' ' ' ' | 
+		../mkrel "sym" "unweighted" >out/out."$name"
+
+	else
+ 		./mk "$name"
+	fi
+}
+
+work/ego-$name:  work/$name.tar.gz
+{
+	tar xf work/"$name".tar.gz -C work -m
+	mv work/"$name" work/ego-"$name"
+}
+
+work/$name.tar.gz: ! work
+{
+	wget --no-use-server-timestamps -O work/"$name".tar.gz http://snap.stanford.edu/data/"$name".tar.gz 
+}
+
+out: {
+	mkdir -p out 
+}
+
+work: {
+	mkdir -p work 
+}
+
+out/com-livejournal.txt:  !out
+{
+	wget --no-use-server-timestamps http://snap.stanford.edu/data/bigdata/communities/com-lj.all.cmty.txt.gz \
+		-O out/com-livejournal.txt.gz
+	cd out 
+	gunzip -f com-livejournal.txt.gz 
+	touch com-livejournal.txt
+	fromdos com-livejournal.txt
+}
+
+out/com-$name.txt:  !out
+{
+	wget --no-use-server-timestamps http://snap.stanford.edu/data/bigdata/communities/com-"$name".ungraph.txt.gz \
+		-O out/com-"$name".ungraph.txt.gz
+	cd out
+	gunzip -f com-"$name".ungraph.txt.gz
+	touch com-"$name".ungraph.txt
+	mv com-"$name".ungraph.txt com-"$name".txt
+}
+
+out/$name.txt:  !out
+{
+	wget --no-use-server-timestamps http://snap.stanford.edu/data/"$name".txt.gz -O out/"$name".txt.gz
+	cd out
+	gunzip -f "$name".txt.gz 
+	touch -- "$name".txt
+	fromdos "$name".txt
+}
+
+# out/out.$name:  out/$name.txt mk
+# {
+# 	./mk "$name"
+# }
+
+# Special collaboration datasets derived from citation (cit-*) datasets
+# by bipartite projection. 
+>out/out.ca-$name:  
+	mkcit ../mkrel
+	out/$name.txt out/$name-dates.txt 
+{
+	./mkcit "$name" | 
+	../mkrel 'sym' 'positive' 
+}
+
+out/tmp.elec:  mkelec out/wikiElec.ElecBs3.txt
+{
+	./mkelec
+}
+
+>out/out.elec:  <out/tmp.elec
+{
+	../mkrel --enforce-edgeweights 'asym' 'signed' 
+}
+
+>out/out.ego-$name:  work/ego-$name !out
+{
+	{ 
+		find work/ego-"$name"/ -name '*.circles' | 
+		./mkcircle
+		find work/ego-"$name"/ -name '*.edges' | 
+		./mkego
+	} | 
+	sort -u | 
+	./mk2 "$name" 
+}
+
+@clean: {
+	rm -Rf out/ work/
+}
