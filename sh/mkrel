@@ -3,6 +3,8 @@
 # Performs mkuniq*, mksymt and mkcount* on the input depending on arguments.
 # Expects these scripts in parent directory. 
 #
+# This is way too complex and will be replaced by a simpler interface. 
+#
 # STDIN:  source 
 # STDOUT: output
 # 
@@ -246,10 +248,10 @@ if [ "$1" == "bip" ]; then
 			MYARGS="$GENUID $MYARGS"
 		fi
 		verbose -n "with entites:mkuniqent)"
-		../mkuniqent "$MYARGS" > $TMPFILE
+		../../sh/mkuniqent "$MYARGS" > $TMPFILE
 	else
 		verbose -n "without entites:mkuniq)"
-		../mkuniq>$TMPFILE
+		../../sh/mkuniq>$TMPFILE
 	fi
 	doCheckError $? "Execution of mkuniq[ent] failed."
 else
@@ -262,14 +264,14 @@ else
 		       if [ "$ENTITIES" ]; then
 				verbose -n "with entities:mkuniqent1,$PSYM)"
 	               		MYARGS=$ENTITIES
-                		../mkuniqent1 "$MYARGS" | ../$PSYM > $TMPFILE
+                		../../sh/mkuniqent1 "$MYARGS" | ../../sh/$PSYM > $TMPFILE
 	        	else   
 				verbose -n "without entities:mkuniq1,$PSYM)"
-				../mkuniq1 | ../$PSYM >$TMPFILE
+				../../sh/mkuniq1 | ../../sh/$PSYM >$TMPFILE
 			fi
 		else
 			verbose -n "NOUNIQ=1:$PSYM)"
-			../$PSYM >$TMPFILE
+			../../sh/$PSYM >$TMPFILE
 		fi
 	else
 		verbose -n "asymmetric,"
@@ -277,10 +279,10 @@ else
                        if [ "$ENTITIES" ]; then
 				verbose -n "with entities:mkuniqent1)"
                        		MYARGS=$ENTITIES
-                        	../mkuniqent1 "$MYARGS" > $TMPFILE
+                        	../../sh/mkuniqent1 "$MYARGS" > $TMPFILE
                         else
 				verbose -n "without entities:mkuniq1)"
-                        	../mkuniq1 >$TMPFILE
+                        	../../sh/mkuniq1 >$TMPFILE
                         fi
 		else
 			verbose -n "NOUNIQ=1:tee)"

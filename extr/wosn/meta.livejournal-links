@@ -8,3 +8,4 @@ extr: wosn
 long-description: This is the social network of LiveJournal users and their connections. The network is undirected.
 entity-names: user
 relationship-names: link  
+tags:  #loop

@@ -96,33 +96,33 @@ $name.txt:
 	echo " $DATASETS_UNDIRECTED " | grep -qE " $name " && {
 		./mk "$name" | 
 		./rmloops |
-		../mkrel --enforce-edgeweights 'sym' 'unweighted' 
+		../../sh/mkrel --enforce-edgeweights 'sym' 'unweighted' 
 		exit 0
 	}
 
 	echo " $DATASETS " | grep -qE " $name " && {
 		echo '% asym unweighted'
 		./mk "$name" | 
-		../mkuniq1 | 
-		../mkrmdup 
+		../../sh/mkuniq1 | 
+		../../sh/mkrmdup 
 		exit 0 
 	}
 }
 
 >out.youtube-links: <youtube-links.txt
 {
-	../mkrel --enforce-edgeweights 'asym' 'unweighted' 
+	../../sh/mkrel --enforce-edgeweights 'asym' 'unweighted' 
 }
 
 >out.$name-links:  <$name-links.txt
 {
-	../mkrel --enforce-edgeweights 'sym' 'unweighted'
+	../../sh/mkrel --enforce-edgeweights 'sym' 'unweighted'
 }
 
 >out.$name-groupmemberships:  <$name-groupmemberships.txt
 { 
 	echo '% bip unweighted'
-	../mkuniq
+	../../sh/mkuniq
 }
 
 @clean: 

@@ -1,4 +1,8 @@
-% version 1.9
+#
+# This dataset needs files in konect/own/.   Symlink own/ to this directory. 
+#
+
+% version 2.4
 
 @all:  
 	out.filmtipset_rating  meta.filmtipset_rating 
@@ -29,20 +33,19 @@ rel.friend:  filmtipset mkfriend
 
 >out.filmtipset_rating:  <rel.rating
 {
-	../mkuniq 
+	../../sh/mkuniq 
 }
 
-out.filmtipset_comment:  rel.comment ../c/d.mkuniq
+out.filmtipset_comment:  rel.comment ../../c/d.mkuniq
 {
-	../c/d.mkuniq rel.comment out.filmtipset_comment
+	../../c/d.mkuniq rel.comment out.filmtipset_comment
 }
 
 >out.filmtipset_friend:  <rel.friend
 {
 	echo '% sym unweighted' 
-	../mkuniq1 | ../mksym 
+	../../sh/mkuniq1 | ../../sh/mksym 
 }
-
 
 @clean: 
 {

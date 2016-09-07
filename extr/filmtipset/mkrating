@@ -1,4 +1,4 @@
-#! /usr/bin/perl -w
+#! /usr/bin/perl
 #
 # Create the ratings file. 
 #
@@ -9,31 +9,33 @@
 #	rel.rating	Ratings, with original, non-continuous IDs
 #
 
+use warnings;
 use strict;
+
 use Date::Parse;
 
-open(GRADES, "<filmtipset/grades.txt") or die; 
-open(REL, ">rel.rating") or die; 
+open(GRADES, "<filmtipset/grades.txt") or die $!; 
+open(REL, ">rel.rating") or die $!; 
 
-print REL "% bip weighted\n"; 
+print REL "% bip multiweighted\n"; 
 
 while (<GRADES>)
 {
-    my ($user, $ratingsText) = /([0-9]+)=(.*)/ 
-	or die "Syntax error:  $_"; 
+	my ($user, $ratingsText) = /([0-9]+)=(.*)/ 
+	    or die "Syntax error:  $_"; 
 
-    my @ratings = split ";", $ratingsText; 
+	my @ratings = split ";", $ratingsText; 
 
-    foreach my $rating (@ratings)
-    {
-	my ($item, $value, $date) = ($rating =~ /([0-9]+):([0-9]+):(.*)/)
-	    or die; 
+	foreach my $rating (@ratings)
+	{
+		my ($item, $value, $date) = ($rating =~ /([0-9]+):([0-9]+):(.*)/)
+		    or die; 
+		
+		my $time = str2time($date); 
 
-	my $time = str2time($date); 
-
-	print REL "$user $item $value $time\n"; 
-    }
+		print REL "$user\t$item\t$value\t$time\n"; 
+	}
 }
 
-close(GRADES) or die; 
-close(REL) or die; 
+close(GRADES) or die $!; 
+close(REL) or die $!; 
