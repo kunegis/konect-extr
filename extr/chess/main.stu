@@ -20,5 +20,5 @@ training_data.csv
 >out.chess:  <training_data.csv  mkout
 {
 	echo '% asym multisigned'
-	./mkout | ../mkuniq1
+	./mkout | ../../sh/mkuniq1
 }

@@ -4,31 +4,31 @@ use warnings;
 use strict;
 
 while (<>) {
-    if (! /^([0-9]+),([0-9]+),([0-9]+),(0|1|0.5)$/) {
-	next if ($. == 1); 
-	die "Invalid line:  $_"; 
-    }
+	if (! /^([0-9]+),([0-9]+),([0-9]+),(0|1|0.5)$/) {
+		next if ($. == 1); 
+		die "Invalid line:  $_"; 
+	}
 
-    my $month = $1;
-    my $white = $2;
-    my $black = $3;
-    my $score = $4;
+	my $month = $1;
+	my $white = $2;
+	my $black = $3;
+	my $score = $4;
 
-    my $weight =
-	$score eq "0"   ? "-1" :
-	$score eq "1"   ?  "1" :
-	$score eq "0.5" ?  "0" :
-	die "Invalid score"; 
+	my $weight =
+	    $score eq "0"   ? "-1" :
+	    $score eq "1"   ?  "1" :
+	    $score eq "0.5" ?  "0" :
+	    die "Invalid score"; 
 
-    # The timestamps are given as the month.  The dataset consists of
-    # twelve years, of which the first ten are in the training dataset,
-    # without specifying the exact year numbers.  The dataset was
-    # released in 2010, so we assume a start dat of 1998.  The
-    # calculation is imprecise, but that doesn't matter since the data
-    # is imprecise anyway. 
+	# The timestamps are given as the month.  The dataset consists of
+	# twelve years, of which the first ten are in the training dataset,
+	# without specifying the exact year numbers.  The dataset was
+	# released in 2010, so we assume a start dat of 1998.  The
+	# calculation is imprecise, but that doesn't matter since the data
+	# is imprecise anyway. 
     
-    my $year = 1998.0 + $month / 12.0;
-    my $time = ($year - 1970) * 365 * 24 * 60 * 60; 
+	my $year = 1998.0 + $month / 12.0;
+	my $time = ($year - 1970) * 365 * 24 * 60 * 60; 
     
-    print "$white\t$black\t$weight\t$time\n"; 
+	print "$white\t$black\t$weight\t$time\n"; 
 }

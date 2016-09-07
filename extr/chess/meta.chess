@@ -1,7 +1,7 @@
 category:  Interaction
 code:  CH
 name:  Chess
-desciption:  Player–player games
+description:  Player–player games
 url:  https://www.kaggle.com/c/chess/data
 extr:  chess
 long-description:  These are results of chess games.  Each node is a chess player, and a directed edge represents a game, with the white player having an outgoing edge and the black player having an ingoing edge.  The weight of the edge represents the outcode (+1 white won, 0 draw, -1 black won).

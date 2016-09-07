@@ -1,0 +1,29 @@
+% version 2.4
+
+@all:  meta.tntp-ChicagoRegional out.tntp-ChicagoRegional;
+
+meta.tntp-$name;
+
+>out.tntp-$name:  <${name}_net.txt
+{
+	echo '% sym unweighted'
+	sed -e '
+/^[0-9]\{1,\}[[:space:]]\{1,\}[0-9]/!d
+s|^\([0-9]\{1,\}\)[[:space:]]\{1,\}\([0-9]\{1,\}\)[^[:space:]].*$|\1	\2|
+        ' |
+	awk '{ if ($1 > $2) print $2,"\t",$1; else if ($1 == $2 ) ; else print $1,"\t",$2;}' |
+	sort -n -u |
+	../../sh/mkuniq1
+}
+
+${name}_net.zip
+{
+	wget http://www.bgu.ac.il/~bargera/tntp/chicago/regional/"$name"_net.zip -O "$name"_net.zip
+	touch -c "$name"_net.zip
+}
+
+${name}_net.txt:  ${name}_net.zip
+{
+	unzip -D -o "$name"_net.zip
+	touch -c "$name"_net.txt
+}
