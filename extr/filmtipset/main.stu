@@ -1,5 +1,5 @@
 #
-# This dataset needs files in konect/own/.   Symlink own/ to this directory. 
+# This dataset needs files in konect/own/.   Symlink own/ ../../
 #
 
 % version 2.4
@@ -10,9 +10,9 @@
 	out.filmtipset_friend  meta.filmtipset_friend
 ;
 
-filmtipset:   own/filmtipset.tar.bz2
+filmtipset:   ../../own/filmtipset.tar.bz2
 {
-	tar xfvvj own/filmtipset.tar.bz2
+	tar xfvvj ../../own/filmtipset.tar.bz2
 	touch -c filmtipset
 }
 

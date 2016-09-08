@@ -8,3 +8,4 @@ extr: filmtipset
 long-description: This is the bipartite rating graph of Filmtipset.se, a Swedish movie rating website. Nodes of the network are users and movie, and edges denote individual ratings by a user of a movie. The weight of an edge is the rating on a scale from 1 (bad movie) to 5 (good movie). 
 entity-names:  user, movie
 relationship-names:  rating
+tags:  #lowmultiplicity
