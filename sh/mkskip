@@ -1,16 +1,23 @@
-#!/usr/bin/perl
+#! /usr/bin/perl
 #
-# Skip comment lines in a file which start by a given character. Reads from stdin, writes to stdout.
-# Syntax: mkskip [char]
-# char defaults to '#'
+# Skip comment lines in a file which start by a given character. Reads
+# from STDIN, writes to STDOUT. 
+#
+# Invocation:  mkskip [char]
+#
+# 'char' defaults to '#'
 #
 
 use strict;
 use warnings;
-my $char="#";
-$char=$ARGV[0] if ($#ARGV == 0);
+
+my $char = "#";
+
+$char = $ARGV[0] if ($#ARGV == 0);
+
 die "mkskip: Wrong number of arguments!\n" if ($#ARGV >0);
+
 while(<STDIN>)
 {
- /^$char/ or print;
+	/^$char/ or print;
 }

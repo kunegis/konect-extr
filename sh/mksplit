@@ -1,4 +1,7 @@
-#!/usr/bin/perl
+#! /usr/bin/perl
+#
+# WHAT DOES THIS DO?
+#
 
 use strict;
 use warnings;
@@ -14,33 +17,37 @@ my $pattern2='(".*?"|\S+)'.$deli.'(".*?"|\S+)';
 
 my $l=<STDIN>;
 my $txt='';
+
 if($l =~ /^$pattern4$/)
 {
- $txt= "$1$deli_out$2$deli_out$3$deli_out$4\n";
- $pattern=4;
+	$txt= "$1$deli_out$2$deli_out$3$deli_out$4\n";
+	$pattern=4;
 }elsif($l =~ /^$pattern3$/){
- $pattern=3;
- $txt="$1$deli_out$2$deli_out$3\n";
+	$pattern=3;
+	$txt="$1$deli_out$2$deli_out$3\n";
 }else{
- $pattern=2;
- $txt="$1$deli_out$2\n";
+	$pattern=2;
+	$txt="$1$deli_out$2\n";
 }
+
 if(!$skipf)
- {print $txt;}
-#$pattern=4;
+{
+	print $txt;
+}
+
 while(<STDIN>)
 {
-chomp;
-print STDERR "RAW:$_\n";
-if($pattern == 4)
-{
-/^$pattern4$/ or die;
-print "$1$deli_out$2$deli_out$3$deli_out$4\n";
-}elsif($pattern == 3){
-/^$pattern3$/ or die;
-print "$1$deli_out$2$deli_out$3\n";
-}else{
-/^$pattern2$/ or die;
-print "$1$deli_out$2\n";
-}
+	chomp;
+	print STDERR "RAW:$_\n";
+	if($pattern == 4)
+	{
+		/^$pattern4$/ or die;
+		print "$1$deli_out$2$deli_out$3$deli_out$4\n";
+	}elsif($pattern == 3){
+		/^$pattern3$/ or die;
+		print "$1$deli_out$2$deli_out$3\n";
+	}else{
+		/^$pattern2$/ or die;
+		print "$1$deli_out$2\n";
+	}
 }

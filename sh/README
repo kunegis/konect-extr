@@ -1,0 +1,49 @@
+These are scripts used to generate datasets from given files.
+
+Most datasets come in text form, with one edge per line.  We usually run
+a Sed script over them to convert them into KONECT format, and then use
+the files in this directory for perform several transformations.  
+
+There are two ways to do this:  
+  - Use individual transformations
+  - Use the all-in-one solution
+
+In both cases, preprocessing scripts may be used. 
+
+Note:  many scripts in this directory are deprecated. 
+
+See each script for a detailed description of that script's function. 
+
+Scripts in this directory are written in the shell, in Perl 5, in Sed,
+and in AWK. 
+
+
+Preprocessing
+=============
+
+- mkskip:        Remove comment lines
+- mksem:         Extract data from a "Semantic Web" file
+
+
+Individual Transformations
+==========================
+
+Use individual scripts to perform individual tasks, such as removing
+duplicates and symmetrizing a dataset.  Commonly used scripts are,
+roughly in the order they should be used:
+
+- mksym:         Make symmetric and unweighted
+- mkrmdup:       Remove loops
+- mkunweighted:  Make unweighted
+- mkuniq1:       Give unique node IDs (for unipartite networks)
+- mkuniq:        Give unique node IDs (for bipartite networks)
+
+
+All-in-one Solution
+===================
+
+Use 'mkrel' to generate the dataset at once.  This has lots of options. 
+
+This method is semi-deprecated, but it is the only method that is able
+to generate entity files. 
+

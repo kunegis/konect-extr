@@ -1,4 +1,7 @@
-#!/bin/bash
+#! /bin/bash
+
+## THIS IS DEPRECATED !!
+
 #removes multiple edges
 
 awk '!x[$1$2]++' 
