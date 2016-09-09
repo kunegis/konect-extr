@@ -1,0 +1,21 @@
+% version 2.4
+
+@all:  meta.openflights out.openflights;
+
+meta.openflights;
+
+>out.openflights:  <routes.dat
+{
+	echo '% asym positive'
+	cut -d , -f 3,5 |
+	tr , ' ' |
+	../../sh/mkuniq1
+}
+
+routes.dat
+{
+	wget \
+https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat \
+		-O routes.dat
+	touch -c routes.dat
+}
