@@ -1,0 +1,219 @@
+These are the extraction todos for KONECT.
+
+== Simple ==
+* http://socialcomputing.asu.edu/pages/datasets
+* http://webdatacommons.org/hyperlinkgraph/ – This is the largest graph i've ever seen
+** makes only sense when we have the cloud
+** there are many smaller datasets in there
+** the largest dataset would take about 1 TiB pf RAM (in SG1 format)
+* slashdot-west:  estrella:/data/kunegis/konect/dat/slashdot-west/slashdot_signed-graph_html_after-phase-2.tar.gz
+** This is a newer Slashdot signed social network given to us by Robert West from Stanford.  Julia may be using it for her [[Julia Preusse/Diss|thesis]].
+* Wikipedia: wer antwortet wem auf allen Diskussionsseiten (this is a HUGE todo)
+** cf. Nils
+* Category tree from Wikipedia
+* from twitter:  "i love" and "i hate" signed bipartite network of users + things.
+* IMDB movie-actor network http://www.cise.ufl.edu/research/sparse/matrices/Pajek/IMDB.html
+** Or directly from IMDB
+* which country borders which country (same with subnational entities)
+* more DBpedia:  (associatedMusicalArtist+associatedBand), currentMember, artist, formerTeam (add it to current teams), language.
+* http://thedatahub.org/en/dataset/wikipedia-article-ratings
+* http://icwsm.cs.mcgill.ca/
+* http://www.wise2012.cs.ucy.ac.cy/challenge.html
+** This is a collection of "tweets" from the Chinese Twitter clone "Sina Weibo".
+* http://alchemy.cs.washington.edu/data/cora/ (a citation dataset)
+* http://www.cs.cornell.edu/home/llee/data/convote.html (via Julia)
+* WebUni:  users can rate the posts of other users.  Extract the user–user signed directed network of this. (ask [[Julia]] for the dataset)
+* http://www-personal.umich.edu/~mejn/netdata/
+* http://www.zubiaga.org/resources/socialbm0311/
+* http://www.hpi.uni-potsdam.de/fileadmin/hpi/FG_Naumann/projekte/repeatability/CORA/cora-all-id.xml
+* wordnet antonyms
+* political interactions from Brandes et al. http://www.inf.uni-konstanz.de/algo/research/conflict/#downloads
+* Bag of Words http://archive.ics.uci.edu/ml/datasets/Bag+of+Words
+* http://caw2.barcelonamedia.org/node/7
+* Condensed matter collaborations 2005 from http://www-personal.umich.edu/~mejn/netdata/
+* http://www.grouplens.org/node/425#attachments
+* http://www.datawrangling.com/some-datasets-available-on-the-web
+* http://www.cs.cornell.edu/People/pabo/movie-review-data/
+* Yahoo song review:    Finally, we present experiments over a set of Yahoo song reviews. Here, 14,596 songs are reviewed by a total of 120,397 reviewers. Each review has a score ranging from ‘1’ (the reviewer does not like the song) to ‘5’ (the reviewer liked the song). Further, each song is categorized into one of five genres: Rock, R&B, Pop, Rap, and Country. [Structured Metric Learning for High Dimensional Problems, Jason V. Davis & Inderjit S. Dhillon]
+* WikiLens
+* Wikipedia article×term bipartite graph for all languages
+* http://twitter.mpi-sws.org/
+* http://demeter.inf.ed.ac.uk/index.php?option=com_content&view=category&layout=blog&id=1&Itemid=2
+* http://thepiratebay.org/torrent/5722635/Facebook_directory_-_personal_details_for_100_million_users
+* everything from Munmun
+* OSN
+* http://demeter.inf.ed.ac.uk/index.php?option=com_content&view=category&layout=blog&id=1&Itemid=2 (aka twitter-petrović)
+** twitter user @user
+** twitter user-#tag
+** twitter user URL
+** twitter #tag-URL
+* http://www.uni-koblenz-landau.de/koblenz/fb4/AGStaab/Research/DataSets/trdatasets
+* http://www.uni-koblenz-landau.de/koblenz/fb4/AGStaab/Research/DataSets/PINTSExperimentsDataSets/index_html
+* all twitter datasets from file.isweb:/data/workinggroup/twitter-datasets/
+* flickr from Rabeeh
+** /data/www/klaasd/flickr/ auf file.isweb (mail Klaas)
+* sergej:  cosmiq.de (a.k.a. Lycos IQ)
+* Christian Bauckhage:  http://build.kiva.org/
+* Christian Bauckhage:  lending club
+* HuDiNe:  http://barabasilab.neu.edu/projects/hudine/resource/data/data.html
+* http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html
+* Damien:  new AS dataset appcluster directory, there is a file called adjacency.gz
+* http://synthese.wordpress.com/2010/11/02/mendeley-data-vs-netflix-data/
+* Web Store data: file:/data/isweb/uniontweets (Matthew Rowe)
+* http://infolab.tamu.edu/resources/dataset/
+* everything from ROBUST
+* SNAP Twitter dataset:  file.isweb:/data/workinggroup/twitter-datasets/twitter-snap/
+* the wikipedia hyperlink graph and category tree are available in an easy to parse format on download.wikimedia.org
+* http://dev.mendeley.com/datachallenge/
+* DBLP:  build the author-conference bipartite network with timestamps
+* multilingual dbpedia
+* what wikipedia user speaks what language (or commons user, etc.)
+* http://www.gnuband.org/2011/04/19/wikipedia_datasets_released/
+* http://www.graph-database.org/
+* http://diglib.stanford.edu:8091/~testbed/doc2/WebBase/
+* http://www.graph-archive.org/doku.php
+* http://webscope.sandbox.yahoo.com/
+* star rating in twitter datasets:  *1 … *9
+* Damien:  http://anonymity-in-bitcoin.blogspot.com/2011/09/code-datasets-and-spsn11.html
+* http://www.cliquecluster.org/data
+* kdd cup 2012 dataset
+* http://www.arnetminer.org/citation
+* http://graphlab.org/datasets.html
+* http://data.stackexchange.com/
+* DIMACS challenge
+* http://lemire.me/blog/archives/2012/03/27/publicly-available-large-data-sets-for-database-research/
+* http://www.reddit.com/r/redditdev/comments/dtg4j/want_to_help_reddit_build_a_recommender_a_public/
+* http://socialcomputing.asu.edu/pages/datasets
+* IMDB full semantic network:  movie, actor, director, etc.
+* http://esw.w3.org/topic/TaskForces/CommunityProjects/LinkingOpenData/DataSets
+* http://bioinfo.uib.es/~joemiro/marvel.html
+* http://kdd.ics.uci.edu/databases/movies/movies.html
+* http://challenge.semanticweb.org/ Billon Triple Challenge
+* http://labs.systemone.at/wikipedia3 47 million triples
+* http://www.dfki.uni-kl.de/~obradovic/download/blogspider.zip,
+** needs database
+* http://musicbrainz.org/doc/DatabaseDownload
+* GeoWordNet
+* YAGO
+* http://allurbuzz.appspot.com/  Buzz feed from Peter Dolan
+* corpora from WWW paper [336]
+* slashdot:  tags for stories, with negative tags beginning with »!«.
+* movielens tags (from the million dataset)
+* ask the MPI guys for the full Facebook datasets, after having analysed the small datasets
+* Orkut user-community network [Collaborative Filtering for Orkut Communities: Discovery of User Latent Behavior, Chen &al]
+* [486] The Dynamics of Web-based Social Networks: Membership, Relationships, and Change, Jennifer Golbeck; lots of adjacency lists.
+* [490] Mining Graph Evolution Rules, Michele Berlingerio, Francesco Bonchi, Björn Bringmann, and Aristides Gionis.
+* BibSonomy:  who follows whom
+* Pavel Braslavski:  MoiKrug social network:  Anton Volnuhin [anton@yandex-team.ru]
+* munmun large twitter dataset
+* [620] cyworld
+* http://openstudy.com/ (Steffen has contact)
+* http://manyeyes.alphaworks.ibm.com/manyeyes/datasets?tag=movie
+* http://reality.media.mit.edu/download.php
+* http://www-personal.umich.edu/~mejn/netdata/
+* linkedct.org
+* citeseerx dataset or http://www.hpi.uni-potsdam.de/naumann/projekte/repeatability/datasets/cora_dataset.html / http://citeseerx.ist.psu.edu/about/metadata / http://komarix.org/ac/ds (contains citeseer at the end)
+* http://cwiki.apache.org/MAHOUT/collections.html
+* http://theinfo.org/get/data
+* http://delicious.com/pskomoroch/dataset
+* http://ingrid.ldeo.columbia.edu/dochelp/topics/DATASETS/
+* http://cophir.isti.cnr.it/whatis.html
+* CDNow – Musik-Ratings
+* XING relations (crawlable?)
+* dailog@dai-labor.de:   scheel: !     ccirml    datensatz: handy-logs von 94 personen über 9 monate http://eprom.mit.edu/data/RealityMining_ReadMe.pdf
+* filmtrust (Jennifer Golbeck)
+* moleskiing.it
+* a message dataset (e.g. Twitter, email) with positive and negative emotions, i.e. sentiment analysis, opinion analysis.
+* http://www.ist-chorus.org/wiki/index.php/Category:Dataset
+* http://barabasilab.neu.edu/projects/hudine/resource/data/data.html
+* http://www.data-publica.com/data
+* http://www.quora.com/Where-can-I-get-large-datasets-open-to-the-public
+* http://mldata.org/
+* http://www.cc.gatech.edu/dimacs10/downloads.shtml
+* http://www.dis.uniroma1.it/~challenge9/
+* bitcoin dataset
+* money transfer dataset (skew symmetric network)
+* http://pajek.imfm.si/doku.php?id=data:urls:index
+* http://law.dsi.unimi.it/datasets.php
+** Datasets are only available in a custom binary format, and there is only a Java library to access it…
+* the Wikipedia interwiki networks (all bipartite combinations of two languages).  Is currently broken in extr/wikipedia/
+* http://googleresearch.blogspot.de/2012/05/from-words-to-concepts-and-back.html
+* http://law.dsi.unimi.it/datasets.php
+* The Erdős collaboration graph (does not seem to be available)
+* http://networkdata.ics.uci.edu/index.php
+* http://www.nas.ewi.tudelft.nl/index.php/research/127
+* http://amici.dsi.unifi.it/lasagne/?page_id=19
+** The "ydata" and "lasagne" is from there; the codes may have to be merged
+* http://wiki.gephi.org/index.php/Datasets
+* http://opr.princeton.edu/archive/P90/
+* http://w3.usf.edu/FreeAssociation/
+* http://crawdad.cs.dartmouth.edu/meta.php?name=mit/reality
+* http://wiki.gephi.org/index.php/Datasets (write a parsing script for gephi files)
+* http://www.cs.toronto.edu/~tsap/experiments/download/download.html
+* http://masonporter.blogspot.de/2011/02/facebook100-data-set.html
+* http://netsg.cs.sfu.ca/youtubedata/
+* http://downloads.cloudmade.com/
+* bitcoin (cf. Holger)
+* IBM with timestamps
+** ftp://robustwrite@ftphost.uni-koblenz.de/home/robustwrite
+* http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1001109#s2
+* http://babelnet.org/
+* http://www.cs.umd.edu/projects/linqs/projects/lbc/index.html :  cora citation network
+* http://kevinchai.net/datasets
+* sister-city network from DBpedia
+* http://www.kde.cs.uni-kassel.de/ws/dc13/offline/
+* http://arcane-coast-3553.herokuapp.com/overview
+* http://ebiquity.umbc.edu/resource/html/id/82/
+* http://www.infochimps.com/datasets/marvel-universe-social-graph
+* https://sites.google.com/site/cxnets/data
+* http://netwiki.amath.unc.edu/SharedData/SharedData
+* http://socialcomputing.asu.edu/pages/datasets
+* http://www.zubiaga.org/resources/socialbm0311 (3e8 Delicious tag assignments, via Arkaitz Zubiaga)
+* http://www.sogou.com/labs/dl/q.html
+* http://imat-relpred.yandex.ru/en/datasets
+* country adjacencies (also: historical country adjacencies)
+* Cities connected by twinning: https://en.wikipedia.org/wiki/Lists_of_twin_towns_and_sister_cities
+* regenerate the datasets with the tag #regenerate
+* http://kindred.stanford.edu/?utm_source=buffer&utm_campaign=Buffer&utm_content=buffer2a907&utm_medium=twitter#
+* http://www.caida.org/data/overview/
+* http://www.routeviews.org/
+* http://www.yeastnet.org/
+* http://math.nist.gov/~RPozo/complex_datasets.html
+* http://vlado.fmf.uni-lj.si/pub/networks/data/bio/Yeast/Yeast.htm
+* http://proj.ise.bgu.ac.il/sns/datasets.html
+* http://socialcomputing.asu.edu/
+* https://github.com/sidooms/MovieTweetings
+* http://www.whosampled.com/
+* https://developers.google.com/freebase/data
+* all billion triple challenges (BTC)
+* https://networkdata.ics.uci.edu/
+* http://www.lemurproject.org/clueweb09.php/
+* http://www.lemurproject.org/clueweb12.php/
+* The Linked Open  data cloud as a network
+* http://www.stats.ox.ac.uk/~snijders/siena/
+* http://www.boardsandgender.com/data.php
+* http://2015.recsyschallenge.com/challenge.html
+* find a football results network
+** only easy to extract
+** if possible, all Länderspiele from FIFA, with dates and scores
+* http://www-personal.umich.edu/~mejn/netdata/ (those that are big enough)
+* http://www.cbl.umces.edu/~ulan/ntwk/network.html
+* https://www.nceas.ucsb.edu/interactionweb/resources.html
+* https://knb.ecoinformatics.org/knb/metacat?action=read&qformat=nceas&sessionid=&docid=bowdish.272
+* http://datadryad.org/resource/doi:10.5061/dryad.c213h
+* http://www.casos.cs.cmu.edu/computational_tools/datasets/sets/foodweb/
+* http://yahoolabs.tumblr.com/post/137281912191/yahoo-releases-the-largest-ever-machine-learning
+* index translationum
+* which language wiktionary contains how many words of another language
+* a connectome dataset:  http://cmtk.org/viewer/datasets/
+* http://proj.ise.bgu.ac.il/sns/datasets.html
+* http://cnets.indiana.edu/groups/nan/webtraffic/websci14-data/
+* http://vlado.fmf.uni-lj.si/pub/networks/data/
+* more from http://www.bgu.ac.il/~bargera/tntp/
+
+== Needs complex extraction ==
+* http://openplanb.tumblr.com/
+* dbpedia
+** the whole file layout and URLs have changed.  Update the code.
+** influences and influenced by
+* new Petster datasets
