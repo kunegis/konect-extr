@@ -1,7 +1,7 @@
 # The DBTropes dataset
 # ====================
 #
-# DBTropes.org is a Linked Data wrapper for the TVTropes.org community wiki. It
+# DBTropes.org is a "Linked Data" wrapper for the TVTropes.org wiki. It
 # contains descriptions of numerous movies, books, and other items, and
 # associates these with tropes (writing devices and conventions). 
 #
@@ -12,7 +12,7 @@
 # https://github.com/kunegis/stu
 #
 
-% version 1.15
+% version 2.4
 
 @all:  out.dbtropes-feature meta.dbtropes-feature;
 
@@ -23,7 +23,7 @@ meta.dbtropes-feature;
 >out.dbtropes-feature: <dbtropes-feature.txt
 {
 	echo '% bip unweighted'
-	../mkuniq |
+	../../sh/mkuniq |
 	sort -u
 }
 
@@ -48,7 +48,7 @@ dbtropes.nt:  dbtropes.zip
 dbtropes.zip:
 {
 	wget http://dbtropes.org/static/dbtropes.zip -O dbtropes.zip
-	touch dbtropes.zip
+	touch -c dbtropes.zip
 }
 
 @clean:

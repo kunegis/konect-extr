@@ -2,10 +2,10 @@
 #
 # Extract features from dbtropes.nt file based on its structure. 
 #
-# INPUT 
+# INPUT FILES 
 #	dbtropes.nt
 #
-# OUTPUT
+# OUTPUT FILES 
 #	dbtropes-feature.txt
 #		May contain duplicates
 # 
@@ -13,9 +13,10 @@
 use strict;
 use warnings; 
 
-my $resource_uri="<http://dbtropes.org/resource/";
-my $has_feature_uri="<http://skipforward.net/skipforward/resource/seeder/skipinions/hasFeature>";
-my $type_uri="<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>";
+my $resource_uri = "<http://dbtropes.org/resource/";
+my $has_feature_uri = 
+    "<http://skipforward.net/skipforward/resource/seeder/skipinions/hasFeature>";
+my $type_uri = "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>";
 
 my $input_filename  = 'dbtropes.nt';
 my $output_filename = 'dbtropes-feature.txt';
@@ -29,9 +30,6 @@ my %has_feature_map;
 my %type_map;
 
 
-## # TODO remove count
-## my $count=0;
-
 # Open file for writing
 open(my $output_fh, '>', $output_filename) or die "Could not open file '$output_filename' $!";
 
@@ -42,7 +40,7 @@ while (my $line = <$input_fh>) {
 	chomp $line;
 
 	# Get subject 
-	my $subject=$line;
+	my $subject = $line;
  	$subject =~ s/^$resource_uri//;
  	$subject =~ s/>.*//;
 		
@@ -51,7 +49,7 @@ while (my $line = <$input_fh>) {
 	$object =~ s/.*$resource_uri//;
  	$object =~ s/>.*//;
 
-	if($line =~ /$has_feature_uri/) {
+	if ($line =~ /$has_feature_uri/) {
 		# Store into hashmap	
 		if (exists $has_feature_map{$object}) {
 			die "File contains multiple references on the same fature_iD: $object\n";
@@ -69,12 +67,12 @@ while (my $line = <$input_fh>) {
 	}
 	
 	# Get type mappings
-	if($line =~ /$type_uri/ && index($subject,'/int_') != -1){
+	if ($line =~ /$type_uri/ && index($subject,'/int_') != -1) {
 		# Write type to type_map
-		if (not exists $type_map{$subject}){
+		if (not exists $type_map{$subject}) {
 			$type_map{$subject} = $object;
 		}
-		if (exists $has_feature_map{$subject}){
+		if (exists $has_feature_map{$subject}) {
 			# Write mapping to file
 			print_line("$has_feature_map{$subject}\t$object");	
 			# Delete from features_map
@@ -88,10 +86,10 @@ close $output_fh or die "$!";
 
 # Check if all feature IDs have been mapped to their types
 my $feature_map_size = keys %has_feature_map;
-if ($feature_map_size>0){
+if ($feature_map_size > 0){
 	my @features_entries = keys %has_feature_map;
 	for my $features_entry (@features_entries) {
-	    die "type not defined for key: $features_entry\n";
+		die "type not defined for key: $features_entry\n";
 	}
 }
 
