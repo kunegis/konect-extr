@@ -3,8 +3,8 @@ code:  FX
 name:  Flixster
 description:  User–user frendships
 url:  http://socialcomputing.asu.edu/datasets/Flixster
-extr:  flixster
+extr:  socialcomputing
 long-description:  This is the social network of Flixster, a movie rating site on which people can meet others with a similar movie taste.  The network is undirected and unweighted. 
-cite:  konect:flixster
+cite:  konect:socialcomputing
 entity-names:  user,user
 relationship-names:  friendship

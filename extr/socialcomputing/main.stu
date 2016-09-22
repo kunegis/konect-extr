@@ -1,0 +1,70 @@
+% version 2.4
+
+@all:  @network.flixster @network.hyves @network.livemocha @network.douban;
+
+@network.$network:  meta.$network out.$network;
+
+meta.$network; 
+
+Flixster-dataset.zip: 
+{
+	wget \
+http://socialcomputing.asu.edu/uploads/1296675547/Flixster-dataset.zip \
+	-O Flixster-dataset.zip
+	touch -c Flixster-dataset.zip
+}
+
+Hyves-dataset.zip: 
+{
+	wget \
+http://socialcomputing.asu.edu/uploads/1296587714/Hyves-dataset.zip \
+	-O Hyves-dataset.zip
+	touch -c Hyves-dataset.zip
+}
+
+Livemocha-dataset.zip: 
+{
+	wget \
+http://socialcomputing.asu.edu/uploads/1296596250/Livemocha-dataset.zip \
+	-O Livemocha-dataset.zip
+	touch -c Livemocha-dataset.zip
+}
+
+Douban-dataset.zip: 
+{
+	wget \
+http://socialcomputing.asu.edu/uploads/1296602689/Douban-dataset.zip \
+	-O Douban-dataset.zip
+	touch -c Douban-dataset.zip
+}
+
+$Network-dataset/data/edges.csv
+$Network-dataset/data/nodes.csv
+:
+	$Network-dataset.zip
+{
+	unzip -D "$Network"-dataset.zip
+	touch -c -- "$Network"-dataset/data/edges.csv
+	touch -c -- "$Network"-dataset/data/nodes.csv
+}
+
+>out.$network:  
+	[dep.$network]
+##	<Flixster-dataset/data/edges.csv
+{
+	echo '% sym unweighted' 
+	<"$(cat dep."$network")" \
+	tr ',' "$(printf '\t')" |
+	sed -e '/^[[:space:]]*$/d' |
+	awk '{if ($1 < $2) {print $1, "	", $2} else if ($1 > $2) {print $2, "	", $1} else {print $1, "	", $2}}' |
+	sort -n |
+	uniq | 
+	../../sh/mkuniq1
+}
+
+>dep.$network:
+{
+	Network="$(echo "$network" | sed -e 's,^\(.\).*$,\1,' | tr a-z A-Z)$(echo "$network" | sed -e 's,^.\(.*\)$,\1,')"
+
+	echo "$Network"-dataset/data/edges.csv
+}

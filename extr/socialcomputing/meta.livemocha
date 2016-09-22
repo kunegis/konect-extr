@@ -1,0 +1,10 @@
+category:  Social
+code:  LM
+name:  Livemocha
+description:  User–user frendships
+url:  http://socialcomputing.asu.edu/datasets/Livemocha
+extr:  socialcomputing
+long-description:  This is the social network of Livemocha, an online language learning community.  The network is undirected and unweighted. 
+cite:  konect:socialcomputing
+entity-names:  user,user
+relationship-names:  friendship

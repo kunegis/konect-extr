@@ -1,0 +1,10 @@
+category:  Social
+code:  DB
+name:  Douban
+description:  User–user frendships
+url:  http://socialcomputing.asu.edu/datasets/Douban
+extr:  socialcomputing
+long-description:  This is the social network of douban, a Chinese online recommendation site.  The network is undirected and unweighted. 
+cite:  konect:socialcomputing
+entity-names:  user,user
+relationship-names:  friendship
