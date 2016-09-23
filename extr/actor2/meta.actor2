@@ -1,0 +1,10 @@
+name: IMDB
+code: IM
+url:  http://www.cise.ufl.edu/research/sparse/matrices/Pajek/IMDB.html
+category:  Affiliation
+description:  Movie–actor appearances
+long-description:  This is a bipartite movie-actor network extracted from IMDB.  Nodes are movies and actors, and an edge denotes that an actor played in a movie.  This is the type of network used to calculate "Bacon numbers".
+entity-names: movie, actor
+relationship-names:  appearance
+extr: actor2
+timeiso:  2006

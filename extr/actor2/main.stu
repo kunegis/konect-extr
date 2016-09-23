@@ -1,0 +1,24 @@
+# A large actor-movie graph from IMDB.
+
+% version 2.4
+
+@all: meta.actor2 out.actor2;
+
+meta.actor2;
+
+>out.actor2:
+	<IMDB/IMDB.mtx
+{
+	echo '% bip unweighted'
+	sed -e '/^%/d;/^[0-9]\{1,\} [0-9]\{1,\} [0-9]\{1,\}$/d' |
+	../../sh/mkuniq
+}
+
+IMDB/$name.mtx:  IMDB;
+
+IMDB:
+{
+	wget http://www.cise.ufl.edu/research/sparse/MM/Pajek/IMDB.tar.gz -O IMDB.tar.gz
+	tar xfvvz IMDB.tar.gz
+	touch -c IMDB IMDB/*.mtx
+}

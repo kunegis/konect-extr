@@ -1,16 +1,8 @@
 These are the extraction todos for KONECT.
 
 == Simple ==
-* http://webdatacommons.org/hyperlinkgraph/ – This is the largest graph i've ever seen
-** makes only sense when we have the cloud
-** there are many smaller datasets in there
-** the largest dataset would take about 1 TiB pf RAM (in SG1 format)
-* slashdot-west:  estrella:/data/kunegis/konect/dat/slashdot-west/slashdot_signed-graph_html_after-phase-2.tar.gz
-** This is a newer Slashdot signed social network given to us by Robert West from Stanford.  Julia may be using it for her [[Julia Preusse/Diss|thesis]].
 * Wikipedia: wer antwortet wem auf allen Diskussionsseiten (this is a HUGE todo)
 ** cf. Nils
-* Category tree from Wikipedia
-* from twitter:  "i love" and "i hate" signed bipartite network of users + things.
 * IMDB movie-actor network http://www.cise.ufl.edu/research/sparse/matrices/Pajek/IMDB.html
 ** Or directly from IMDB
 * which country borders which country (same with subnational entities)
@@ -216,3 +208,12 @@ These are the extraction todos for KONECT.
 ** the whole file layout and URLs have changed.  Update the code.
 ** influences and influenced by
 * new Petster datasets
+* http://webdatacommons.org/hyperlinkgraph/ – This is the largest graph i've ever seen
+** makes only sense when we have the cloud
+** there are many smaller datasets in there
+** the largest dataset would take about 1 TiB pf RAM (in SG1 format)
+* slashdot-west:  estrella:/data/kunegis/konect/dat/slashdot-west/slashdot_signed-graph_html_after-phase-2.tar.gz
+** This is a newer Slashdot signed social network given to us by Robert West from Stanford.  Julia may be using it for her [[Julia Preusse/Diss|thesis]].
+* from twitter:  "i love" and "i hate" signed bipartite network of users + things.
+** not possible anymore to get a complete twitter dataset
+* Category tree from Wikipedia
