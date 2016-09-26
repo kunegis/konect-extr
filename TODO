@@ -1,15 +1,8 @@
 These are the extraction todos for KONECT.
 
 == Simple ==
-* which country borders which country (same with subnational entities)
-* more DBpedia:  (associatedMusicalArtist+associatedBand), currentMember, artist, formerTeam (add it to current teams), language.
-* http://thedatahub.org/en/dataset/wikipedia-article-ratings
-* http://icwsm.cs.mcgill.ca/
-* http://www.wise2012.cs.ucy.ac.cy/challenge.html
-** This is a collection of "tweets" from the Chinese Twitter clone "Sina Weibo".
 * http://alchemy.cs.washington.edu/data/cora/ (a citation dataset)
 * http://www.cs.cornell.edu/home/llee/data/convote.html (via Julia)
-* WebUni:  users can rate the posts of other users.  Extract the user–user signed directed network of this. (ask [[Julia]] for the dataset)
 * http://www-personal.umich.edu/~mejn/netdata/
 * http://www.zubiaga.org/resources/socialbm0311/
 * http://www.hpi.uni-potsdam.de/fileadmin/hpi/FG_Naumann/projekte/repeatability/CORA/cora-all-id.xml
@@ -60,7 +53,6 @@ These are the extraction todos for KONECT.
 * http://diglib.stanford.edu:8091/~testbed/doc2/WebBase/
 * http://www.graph-archive.org/doku.php
 * http://webscope.sandbox.yahoo.com/
-* star rating in twitter datasets:  *1 … *9
 * Damien:  http://anonymity-in-bitcoin.blogspot.com/2011/09/code-datasets-and-spsn11.html
 * http://www.cliquecluster.org/data
 * kdd cup 2012 dataset
@@ -70,7 +62,6 @@ These are the extraction todos for KONECT.
 * DIMACS challenge
 * http://lemire.me/blog/archives/2012/03/27/publicly-available-large-data-sets-for-database-research/
 * http://www.reddit.com/r/redditdev/comments/dtg4j/want_to_help_reddit_build_a_recommender_a_public/
-* http://socialcomputing.asu.edu/pages/datasets
 * IMDB full semantic network:  movie, actor, director, etc.
 * http://esw.w3.org/topic/TaskForces/CommunityProjects/LinkingOpenData/DataSets
 * http://bioinfo.uib.es/~joemiro/marvel.html
@@ -107,10 +98,8 @@ These are the extraction todos for KONECT.
 * http://cophir.isti.cnr.it/whatis.html
 * CDNow – Musik-Ratings
 * XING relations (crawlable?)
-* dailog@dai-labor.de:   scheel: !     ccirml    datensatz: handy-logs von 94 personen über 9 monate http://eprom.mit.edu/data/RealityMining_ReadMe.pdf
 * filmtrust (Jennifer Golbeck)
 * moleskiing.it
-* a message dataset (e.g. Twitter, email) with positive and negative emotions, i.e. sentiment analysis, opinion analysis.
 * http://www.ist-chorus.org/wiki/index.php/Category:Dataset
 * http://barabasilab.neu.edu/projects/hudine/resource/data/data.html
 * http://www.data-publica.com/data
@@ -154,7 +143,6 @@ These are the extraction todos for KONECT.
 * http://www.infochimps.com/datasets/marvel-universe-social-graph
 * https://sites.google.com/site/cxnets/data
 * http://netwiki.amath.unc.edu/SharedData/SharedData
-* http://socialcomputing.asu.edu/pages/datasets
 * http://www.zubiaga.org/resources/socialbm0311 (3e8 Delicious tag assignments, via Arkaitz Zubiaga)
 * http://www.sogou.com/labs/dl/q.html
 * http://imat-relpred.yandex.ru/en/datasets
@@ -168,7 +156,6 @@ These are the extraction todos for KONECT.
 * http://math.nist.gov/~RPozo/complex_datasets.html
 * http://vlado.fmf.uni-lj.si/pub/networks/data/bio/Yeast/Yeast.htm
 * http://proj.ise.bgu.ac.il/sns/datasets.html
-* http://socialcomputing.asu.edu/
 * https://github.com/sidooms/MovieTweetings
 * http://www.whosampled.com/
 * https://developers.google.com/freebase/data
@@ -197,12 +184,16 @@ These are the extraction todos for KONECT.
 * http://cnets.indiana.edu/groups/nan/webtraffic/websci14-data/
 * http://vlado.fmf.uni-lj.si/pub/networks/data/
 * more from http://www.bgu.ac.il/~bargera/tntp/
+* http://www.correlatesofwar.org/data-sets/direct-contiguity/direct-contiguity-v3-1
+* which country borders which country (same with subnational entities)
+* http://icwsm.cs.mcgill.ca/
 
 == Needs complex extraction ==
 * http://openplanb.tumblr.com/
 * dbpedia
 ** the whole file layout and URLs have changed.  Update the code.
 ** influences and influenced by
+** more DBpedia:  (associatedMusicalArtist+associatedBand), currentMember, artist, formerTeam (add it to current teams), language.
 * new Petster datasets
 * http://webdatacommons.org/hyperlinkgraph/ – This is the largest graph i've ever seen
 ** makes only sense when we have the cloud
