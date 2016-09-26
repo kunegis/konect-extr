@@ -1,0 +1,142 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+my $file;
+open $file, $ARGV[0] or die $!;
+
+my %MONTHS = (
+	"Mai" => 5,
+	"May" => 5,
+	"Jan" => 1,
+	"Jän" => 1,
+	"Feb" => 2,
+	"Febr" => 2,
+	"Mar" => 3,
+	"Mär" => 3,
+	"Apr" => 4,
+	"Jun" => 6,
+	"Jul" => 7,
+	"Aug" => 8,
+	"Sep" => 9,
+	"Sept" => 9,
+	"Okt" => 10,
+	"Oct" => 10,
+	"Nov" => 11,
+	"Dez" => 12,
+	"Dec" => 12,
+	"Januar" => 1,
+	"Jänner" => 1,
+	"Februar" => 2,
+	"Marz" => 3,
+	"März" => 3,
+	"Maerz" => 3,
+	"Mrz" => 3,
+	"April" => 4,
+	"Juni" => 6,
+	"June" => 6,
+	"Juli" => 7,
+	"August" => 8,
+	"September" => 9,
+	"Oktober" => 10,
+	"November" => 11,
+	"Dezember" => 12,
+	"December" => 12
+);
+
+my $detect_id = 0;
+my $is_text = 0;
+my $thread_id = 0;
+my $indentation_last = 0;
+
+while (<$file>) {
+	s/^\s+//;
+	s/\s*$/\n/;
+
+	unless($is_text){
+		if (/^<\/?page>/) {
+			$detect_id = 1;
+			print
+	}
+
+	print if /^<title>/;
+
+	if (/^<id>/ and $detect_id) {
+		$detect_id = 0;
+		print
+	}
+
+	if (/^<text[^>]*>(.*)/) {
+		$is_text = 1;
+		print "<text>\n";
+		$_ = $1;
+	}
+
+	
+	}
+
+	if ($is_text) {
+
+		my $close_text=0;
+		if (/(.*)<\/text>$/) {
+			$close_text = 1;
+			$_ = "$1\n"
+		}
+
+		if (/^==.*==$/) {
+			s/^=+\s*|\s*=+$|\n//g;
+			$thread_id ++;
+			print "<thread><name>$_</name><id>$thread_id</id></thread>\n"	
+		}
+
+		my $is_comment = 0;
+		my $comment_indentation = 0;
+		my $comment_user = "";
+		my $comment_date = "";
+
+		if (/^(:+)/) {
+			$comment_indentation = length $1;
+			$is_comment = 1;
+		}
+
+		if (/^--/) {
+			$comment_indentation = $indentation_last;
+			$is_comment = 1;
+		}
+
+		$indentation_last = $comment_indentation;
+
+		if (/.*\d\d?:\d\d, (\d\d?)\. ([A-Z]\S+[a-z])\.? (\d\d\d?\d?)/) {
+			my $d = $1;
+			my $m = exists $MONTHS{$2} ? $MONTHS{$2} : 0;
+			my $y = $3;
+			$comment_date = "<date>$d.$m.$y</date>" if $m;
+			print "#error no such month: $2 -- $_\n" unless $m;
+		}
+
+		if (/.*{{[Uu]nsign(?:ed|iert)\|(?:Benutzer:)?([^\|\}]*)[\|\}]([^\}]*)/) {
+			#$is_comment=1;
+			#print "[unsigned:$1]  $2";
+		} elsif (/.*\[\[:?(?:w:)?(?:..:)?(?:[Bb]enutzer(?:in)?|[Uu]ser):([^\]\|:\/]*)(?:\]\]|\||\/)/) {
+			$is_comment=1;
+			my $signature = $1;
+			$signature =~ s/^\s|\s$//g;
+			$comment_user = "<user>$signature</user>" unless($signature =~ /\d\d?\d?\.\d\d?\d?\.\d\d?\d?\.\d\d?\d?/);
+		}
+
+		
+
+
+		if ($is_comment) {
+			print "<com><indent>$comment_indentation</indent>$comment_user$comment_date</com>\n"
+		}
+
+		if ($close_text) {
+			$is_text = 0;
+			print "</text>\n"
+		}
+	}
+}
+
+close $file or die $!;

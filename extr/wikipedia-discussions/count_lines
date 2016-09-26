@@ -1,0 +1,23 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+my $file;
+open $file, $ARGV[0] or die $!;
+
+my %occ;
+
+my $page;
+
+while (<$file>) {
+	s/\n$//;
+	$occ{$_} = 0 unless exists $occ{$_};
+	$occ{$_}++
+}
+
+for (keys %occ) {
+	print "$_ $occ{$_}\n"
+}
+
+close $file or die $!;

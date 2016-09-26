@@ -1,0 +1,58 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+my $file;
+open $file, $ARGV[1] or die $!;
+
+my %users;
+
+while (<$file>) {
+	/\s*(\d+)\s+(.+)/;
+	$users{$2} = $1;
+}
+
+close $file or die $!;
+
+open $file, $ARGV[0] or die $!;
+
+my @thread;
+my $page = 0;
+
+while (my $line=<$file>) {
+	if($line =~ /<com>/) {
+		push @thread, $line;
+		next;
+	}
+
+	$page = $1 if($line =~ /^<id>([0-9]+)<\/id>/);
+	
+	for (my $i = 1; $i<@thread ; $i++) {
+		my $str = $thread[$i];
+		$str =~ /<indent>(.*)<\/indent>/;
+		my $indent = 0+$1;
+		my $date = 0;
+		$date = $1 if $str =~ /<date>(.*)<\/date>/;
+		my $user = 0;
+		$user = $users{$1} if $str =~ /<user>(.*)<\/user>/;
+
+		my $break = 0;
+		
+		for (my $j = $i-1; $j>=0 and not $break ; $j--) {
+			my $jstr = $thread[$j];
+			$jstr =~ /<indent>(.*)<\/indent>/;
+			my $jindent = $1;
+			if ($jindent<$indent or $jindent == 0) {
+				my $juser = $users{$1} if $jstr =~ /<user>(.*)<\/user>/;
+				print "$user\t$juser\t$date\t$page\n" if $user and $juser;
+#print "$juser\t$user\t$date\t$page\n" if $user and $juser;
+				$break = 1;
+			}
+		}
+		
+	}
+	@thread=();
+}
+
+close $file or die $!;

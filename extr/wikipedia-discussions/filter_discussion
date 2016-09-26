@@ -1,0 +1,25 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+my $file;
+open $file, $ARGV[0] or die $!;
+
+my $is_discussion = 0;
+
+
+
+
+while ( $_ = <$file>) {
+#if (/<title>[^:]*Diskussion[^:]*:/) {
+	if (/<title>Diskussion:/) {
+		$is_discussion = 1;
+		print "<page>\n"
+	}
+	print if $is_discussion;
+	$is_discussion = 0 if /<\/page>/;
+
+}
+
+close $file or die $!;

@@ -1,0 +1,151 @@
+#
+# The discussion threads of the German Wikipedia.  
+#
+# AUTHOR
+#
+# The original version was written by Nils Geilen at the University of
+# Koblenz--Landau for his bachelor thesis.  Later modifications are by
+# Jérôme Kunegis.  
+#
+
+% version 2.4
+
+@all: 
+	data/out.wikipedia-discussions-de
+	meta.wikipedia-discussions-de
+	data/uud.csv 
+	data/table_thread_user_date.csv 
+	data/page_list.txt  
+	data/median_date80.txt 
+	data/median_date64.txt 
+	data/median_date80_uni.txt 
+	data/median_date64_uni.txt;
+
+data:  { mkdir data ; }
+
+data/table_thread_user_date.csv: data/table_page_user_date.csv;
+
+# Liste aller Posts (Page-Nutzer-Kanten) (page_id, user_id)
+data/table_page_user_date.csv: 
+	data/user_list.txt data/dewiki_struct_newid.xml mk_tables -p data
+{
+	./mk_tables
+	#touch data/table_page_user.csv; touch data/table_thread_user.csv; 
+}
+
+# Liste aller Diskussionsseiten samt IDs (id, name)
+data/page_list.txt: data/table_thread_page.csv;
+
+# Thread-Page-Kanten (thread_id, page_id)
+data/table_thread_page.csv: data/thread_list.txt;
+
+# Liste aller Threads samt IDs (id, name)
+data/thread_list.txt: data/dewiki_struct_newid.xml mk_thread_list -p data
+{
+	 ./mk_thread_list data/dewiki_struct_newid.xml 
+}
+
+# Liste aller Nuter, die sich an den Diskussionen beteiligt haben samt IDs  (id, name)
+data/user_list.txt: data/dewiki_struct_newid.xml -p data
+{
+	perl -ne 'print "$1\n" if /<user>(.+)<\/user>/' data/dewiki_struct_newid.xml | grep -v "^\s*$" | sort | uniq | cat -b > data/user_list.txt
+}
+
+
+# Median-Datum
+data/median_date80.txt: data/date_list.txt median_date -p data
+{
+	 ./median_date 0.8 data/date_list.txt > data/median_date80.txt
+}
+
+
+
+# Median-Datum
+data/median_date64.txt: data/date_list.txt median_date -p data
+{
+	 ./median_date 0.64 data/date_list.txt > data/median_date64.txt
+}
+
+
+
+# Median-Datum
+data/median_date80_uni.txt: data/answer_date_list.txt median_date -p data
+{
+	 ./median_date 0.8 data/answer_date_list.txt > data/median_date80_uni.txt
+}
+
+
+
+# Median-Datum
+data/median_date64_uni.txt: data/answer_date_list.txt median_date -p data
+{
+	 ./median_date 0.64 data/answer_date_list.txt > data/median_date64_uni.txt
+}
+
+data/answer_date_list.txt: data/uudp.csv -p data
+{
+	perl -ne 'print "$1\n" if /^[0-9]+\s+[0-9]+\s+([0-9]+)$/' data/uud.csv | sort -n > data/answer_date_list.txt
+}
+
+# Liste aller Daten
+data/date_list.txt: data/dewiki_struct_approx.xml -p data
+{
+	 perl -ne 'print "$1\n" if /<date>(.+)<\/date>/' data/dewiki_struct_approx.xml | sort -n > data/date_list.txt
+}
+
+
+data/uud.csv: data/uudp.csv -p data
+{
+	perl -ne '/^([0-9]+\s+[0-9]+\s+[0-9]+)\s/;print "$1\n"' data/uudp.csv > data/uud.csv
+}
+
+
+# Nutzer-Nutzer-Kanten, neue Page-IDs
+data/uudp.csv: 
+	data/user_list.txt 
+	data/dewiki_struct_newid.xml
+	mk_answer_table 
+	-p data 
+{
+         ./mk_answer_table data/dewiki_struct_newid.xml data/user_list.txt > data/uudp.csv
+}
+
+# Struktur der Diskussionsseiten, neue Page-IDs
+data/dewiki_struct_newid.xml: data/dewiki_struct_approx.xml new_page_id -p data {
+         ./new_page_id data/dewiki_struct_approx.xml > data/dewiki_struct_newid.xml
+}
+ 
+
+# Struktur der Diskussionsseiten, approximiertes Datum im Unix-Format
+data/dewiki_struct_approx.xml: data/dewiki_struct_unixtime.xml approx_date -p data {
+         ./approx_date data/dewiki_struct_unixtime.xml > data/dewiki_struct_approx.xml
+}
+         
+
+# Struktur der Diskussionsseiten, Datum im Unix-Format
+data/dewiki_struct_unixtime.xml: data/dewiki_struct.xml time_to_unix -p data {
+	 ./time_to_unix data/dewiki_struct.xml > data/dewiki_struct_unixtime.xml
+}
+
+# Struktur der Diskussionsseiten
+data/dewiki_struct.xml: data/dewiki_discussion.xml extract_meta -p data {
+	./extract_meta data/dewiki_discussion.xml > data/dewiki_struct.xml
+}
+
+# Diskusssionsseiten der Wikipedia
+data/dewiki_discussion.xml: data/dewiki_meta.xml filter_discussion -p data {
+	./filter_discussion data/dewiki_meta.xml > data/dewiki_discussion.xml
+}
+
+# Wikipedia samt Metadaten
+data/dewiki_meta.xml:  -p data {
+	wget -O - dumps.wikimedia.org/dewiki/latest/dewiki-latest-pages-meta-current.xml.bz2 | bzip2 -d > data/dewiki_meta.xml
+}
+
+>data/out.wikipedia-discussions-de:  <data/uud.csv 
+{
+	echo '% asym positive'
+	# Exchange the first and second column
+	sed -e 's|^\([0-9]\{1,\}\)[[:space:]]\{1,\}\([0-9]\{1,\}\)[[:space:]]\{1,\}\([0-9]\{1,\}\)$|\2	\1	\3|' |
+	../../sh/mkuniq1
+}

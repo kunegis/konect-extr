@@ -1,0 +1,49 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+my $file;
+open $file, "data/user_list.txt" or die $!;
+
+my %users;
+
+while ( <$file>) {
+	/\s*(\d+)\s+(.+)/;
+	$users{$2} = $1;
+}
+
+my $size = keys %users;
+#print "# users: $size\n";
+
+close $file or die $!;
+
+open $file, "data/dewiki_struct_newid.xml" or die $!;
+
+my $file_table_thread_user;
+open $file_table_thread_user, '>', "data/table_thread_user_date.csv" or die $!;
+
+my $file_table_page_user;
+open $file_table_page_user, '>',  "data/table_page_user_date.csv" or die $!;
+
+my $page;
+my $thread;
+
+while (<$file>) {
+	$page = $1 if /^<id>(.+)<\/id>/;
+	if(/<thread>/) {
+		/<id>(.+)<\/id>/;
+		$thread=$1;
+	}
+	if(/<user>(.+)<\/user>/ and exists $users{$1}) {
+		my $user = $users{$1};
+		/<date>(.*)<\/date>/;
+		my $date = $1;
+		print $file_table_page_user "$page\t$user\t$date\n";
+		print $file_table_thread_user "$thread\t$user\t$date\n";
+	}
+}
+
+close $file or die $!;
+close $file_table_page_user or die $!;
+close $file_table_thread_user or die $!;
