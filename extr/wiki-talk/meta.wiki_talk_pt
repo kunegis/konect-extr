@@ -1,0 +1,11 @@
+category: Communication
+code: Tpt
+name: Wikipedia talk, Portuguese
+description: User–user messages
+entity-names: user
+extr: wiki-talk
+url: https://zenodo.org/record/49561
+long-description: This is the communication network of the Portuguese Wikipedia. Nodes represent users of the Portuguese Wikipedia, and an edge from user A to user B denotes that user A wrote a message on the talk page of user B at a certain timestamp.
+relationship-names: message
+cite: konect:sun_2016_49561
+tags: #loop #regenerate
