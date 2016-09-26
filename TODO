@@ -1,10 +1,6 @@
 These are the extraction todos for KONECT.
 
 == Simple ==
-* Wikipedia: wer antwortet wem auf allen Diskussionsseiten (this is a HUGE todo)
-** cf. Nils
-* IMDB movie-actor network http://www.cise.ufl.edu/research/sparse/matrices/Pajek/IMDB.html
-** Or directly from IMDB
 * which country borders which country (same with subnational entities)
 * more DBpedia:  (associatedMusicalArtist+associatedBand), currentMember, artist, formerTeam (add it to current teams), language.
 * http://thedatahub.org/en/dataset/wikipedia-article-ratings
