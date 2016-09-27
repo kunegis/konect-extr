@@ -1,16 +1,11 @@
 These are the extraction todos for KONECT.
 
 == Simple ==
-* http://alchemy.cs.washington.edu/data/cora/ (a citation dataset)
-* http://www.cs.cornell.edu/home/llee/data/convote.html (via Julia)
-* http://www-personal.umich.edu/~mejn/netdata/
+* http://www.cs.cornell.edu/home/llee/data/convote.html 
 * http://www.zubiaga.org/resources/socialbm0311/
-* http://www.hpi.uni-potsdam.de/fileadmin/hpi/FG_Naumann/projekte/repeatability/CORA/cora-all-id.xml
-* wordnet antonyms
 * political interactions from Brandes et al. http://www.inf.uni-konstanz.de/algo/research/conflict/#downloads
 * Bag of Words http://archive.ics.uci.edu/ml/datasets/Bag+of+Words
 * http://caw2.barcelonamedia.org/node/7
-* Condensed matter collaborations 2005 from http://www-personal.umich.edu/~mejn/netdata/
 * http://www.grouplens.org/node/425#attachments
 * http://www.datawrangling.com/some-datasets-available-on-the-web
 * http://www.cs.cornell.edu/People/pabo/movie-review-data/
@@ -20,15 +15,6 @@ These are the extraction todos for KONECT.
 * http://twitter.mpi-sws.org/
 * http://demeter.inf.ed.ac.uk/index.php?option=com_content&view=category&layout=blog&id=1&Itemid=2
 * http://thepiratebay.org/torrent/5722635/Facebook_directory_-_personal_details_for_100_million_users
-* everything from Munmun
-* OSN
-* http://demeter.inf.ed.ac.uk/index.php?option=com_content&view=category&layout=blog&id=1&Itemid=2 (aka twitter-petrović)
-** twitter user @user
-** twitter user-#tag
-** twitter user URL
-** twitter #tag-URL
-* http://www.uni-koblenz-landau.de/koblenz/fb4/AGStaab/Research/DataSets/trdatasets
-* http://www.uni-koblenz-landau.de/koblenz/fb4/AGStaab/Research/DataSets/PINTSExperimentsDataSets/index_html
 * all twitter datasets from file.isweb:/data/workinggroup/twitter-datasets/
 * flickr from Rabeeh
 ** /data/www/klaasd/flickr/ auf file.isweb (mail Klaas)
@@ -88,7 +74,6 @@ These are the extraction todos for KONECT.
 * http://openstudy.com/ (Steffen has contact)
 * http://manyeyes.alphaworks.ibm.com/manyeyes/datasets?tag=movie
 * http://reality.media.mit.edu/download.php
-* http://www-personal.umich.edu/~mejn/netdata/
 * linkedct.org
 * citeseerx dataset or http://www.hpi.uni-potsdam.de/naumann/projekte/repeatability/datasets/cora_dataset.html / http://citeseerx.ist.psu.edu/about/metadata / http://komarix.org/ac/ds (contains citeseer at the end)
 * http://cwiki.apache.org/MAHOUT/collections.html
@@ -170,7 +155,6 @@ These are the extraction todos for KONECT.
 * find a football results network
 ** only easy to extract
 ** if possible, all Länderspiele from FIFA, with dates and scores
-* http://www-personal.umich.edu/~mejn/netdata/ (those that are big enough)
 * http://www.cbl.umces.edu/~ulan/ntwk/network.html
 * https://www.nceas.ucsb.edu/interactionweb/resources.html
 * https://knb.ecoinformatics.org/knb/metacat?action=read&qformat=nceas&sessionid=&docid=bowdish.272
@@ -204,3 +188,4 @@ These are the extraction todos for KONECT.
 * from twitter:  "i love" and "i hate" signed bipartite network of users + things.
 ** not possible anymore to get a complete twitter dataset
 * Category tree from Wikipedia
+* wordnet antonyms
