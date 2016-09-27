@@ -146,6 +146,5 @@ data/dewiki_meta.xml:  -p data {
 {
 	echo '% asym positive'
 	# Exchange the first and second column
-	sed -e 's|^\([0-9]\{1,\}\)[[:space:]]\{1,\}\([0-9]\{1,\}\)[[:space:]]\{1,\}\([0-9]\{1,\}\)$|\2	\1	\3|' |
 	../../sh/mkuniq1
 }
