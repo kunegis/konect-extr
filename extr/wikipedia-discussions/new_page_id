@@ -1,0 +1,37 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+use Time::Local;
+
+my $file;
+open $file, $ARGV[0] or die $!;
+
+my %pages;
+
+my $ID = 1;
+my $pid;
+
+while (<$file>) {
+	if(/^<title>(.*)<\/title>$/) {
+		my $title = $1;
+		$title = $1 if $title =~ /^(.*)\/Archiv/;#/^(.*)\/Archiv\/[0-9]+/;
+		if(exists $pages{$title}) {
+			$pid = $pages{$title};
+		} else {
+			$pid = $ID;
+			$ID++;
+			$pages{$title} = $pid;
+		}
+	}
+	if(/^<id>/) {
+		print "<id>$pid</id>";		
+	} else {
+		print
+	}	
+}
+
+close $file or die $!;
+
+

@@ -1,0 +1,29 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+use Time::Local;
+
+my $file;
+open $file, $ARGV[0] or die $!;
+
+
+while (<$file>) {
+	if(/(.*<date>)(.*)(<\/date>.*)/){
+		my $txt1 = $1;
+		my $txt2 = $3;
+		$2 =~ /(\d+).(\d+).(\d+)/;
+		my $month = $2 -1;
+		eval{
+		my $ut = timegm(0,0,0,$1,$month,$3);
+		print "$txt1$ut$txt2\n";
+
+		};
+		warn $@ if $@;
+	} else {
+		print
+	}	
+}
+
+close $file or die $!;

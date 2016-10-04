@@ -1,0 +1,26 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+use Time::Local;
+
+my $file;
+open $file, $ARGV[1] or die $!;
+
+my $split = $ARGV[0];
+
+1 while <$file>;
+my $size = int($split*$.);
+
+close $file or die $!;
+open $file, $ARGV[1] or die $!;
+
+while (<$file>) {
+	last unless --$size;
+}
+
+print;
+
+close $file or die $!;
+

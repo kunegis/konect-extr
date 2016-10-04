@@ -1,0 +1,54 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+use Time::Local;
+
+my $file;
+open $file, $ARGV[0] or die $!;
+
+my @thread;
+my $STOP = -100;
+#Gründung der Wikipedia
+my $EARLIEST = timegm(0,0,0,15,0,2001);
+#heute
+my $LATEST = timegm(0,0,0,12,1,2015);
+
+
+while (my $line=<$file>) {
+
+	if ($line =~ /<com>/) {
+		push @thread, $line;
+		next;
+	}
+	my $last_indent = 0;
+	my @dates;
+	
+	for (@thread) {
+		/<indent>(.*)<\/indent>/;
+		my $indent = 0+$1;
+		my $date = 0;
+		$date = $1 if /<date>(.*)<\/date>/;
+		my $user = 0;
+		$user = $1 if /<user>(.*)<\/user>/;
+		
+		$dates[$indent] = $date;
+		$dates[$indent+1] = $STOP;
+
+		
+		unless ($date) {
+			for my $d (@dates) {
+				last if $d and $d == $STOP;
+				$date = $d if $d;
+			}
+			my $ll = @dates;
+		}
+#	print if $user and $date and $date > $EARLIEST and $date < $LATEST;		
+		print "<com><indent>$indent</indent><user>$user</user><date>$date</date></com>\n" if $user and $date > $EARLIEST and $date < $LATEST;		
+	}
+	@thread=();
+	print $line	
+}
+
+close $file or die $!;
