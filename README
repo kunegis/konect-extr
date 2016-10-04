@@ -35,54 +35,75 @@ Usage
 =====
 
 To build the datasets, execute "make" or "stu" inside each subdirectory
-of extr/.  The code downloads the datasets from their online sources and
-converts them to the KONECT format. 
+of extr/, depending on whether a 'Makefile' or a 'main.stu' is present.
+The code downloads the datasets from their online sources and converts
+them to the KONECT format.
+
+Note that many directories have additional requirements.  Read the
+'Makefile' or 'main.stu' (or rarely, 'README') for more information. 
 
 
 Contribute
 ==========
 
 If you want to contribute your dataset to KONECT, you are welcome.  In
-ordrer of preference, we accept the following:
+order of preference, we accept the following:
 
 (1) A self-contained directory containing Stu code that downloads the
     dataset from a long-term stable location on the Web and transforms
     it to KONECT format.  Preferred programming languages are the shell
     and Perl 5.  Other programming languages are accepted if they are easy
     to execute (i.e., as scripts).  In particular, we won't be unhappy
-    about Python, Ruby, Perl 6, etc.  If your program needs to be compiled
-    (e.g., C, C++, Java), then please provide a self-contained directory
-    that executes the compilation *and* the extraction.  We don't accept
-    precompiles files (e.g., *.jar, ELF). 
+    about Python, Ruby, Perl 6, Bash, etc.  If your program needs to be
+    compiled (e.g., C, C++, Java), then please provide a self-contained
+    directory that executes the compilation and the extraction.  We
+    don't accept precompiles files (e.g., *.jar, ELF). 
 (2) A long-term stable URL of a dataset, in KONECT format.
 (3) A long-term stable URL of a dataset, in text format.
 (4) Giving us the dataset in KONECT format.
 (5) Giving us the dataset in a text format.
 
-If your dataset is in a binary format, convert it to text first. 
+If your dataset is in a binary format, please convert it to text first.  
+
+The simpler the better:  we prefer a one-edge-per-line text format to
+XML; we prefer XML to a binary format such as XLS. 
 
 
 Requirements
 ============
 
-You may need to install the following additional software packages:
+You may need to install the following additional software packages,
+depending on the dataset: 
 
     - Stu
     - Perl 
     - Some other tools; depending on the dataset
 
 
+Extraction Tools
+================
+
+The directories sh/ and c/ contain general-purpose functions for
+transforming data into the KONECT format.  They are used by various
+directories under extr/, and you may also use them to extract your own
+software.  
+
+
 License
 =======
 
-The extraction code is distributed under the terms of the GNU General
-Public License, which you can find provided in the file COPYING.
+The extraction code and library is distributed under the terms of the
+GNU General Public License version 3, which you can find provided in the
+file 'COPYING' in this directory. 
 
 
 Stu
 ===
 
-We're converting the directories to Stu.  
+We're converting the directories to Stu, a replacement for Make, also
+written at the University of Koblenz-Landau.  Stu can be installed from
+
+https://github.com/kunegis/stu/
 
 Stu targets:
 
@@ -95,13 +116,14 @@ konect/dat/, but usually don't create the symlinks in uni/.
 Code Quality
 ============
 
-Most code in the directories is broken, because it was last executed a
-long time ago, and many things have changed in the time.  If you want to
-execute any of this code, you'll most likely need to hack it.  
+Most code in the directories is broken, because it was last executed
+just once, and that was a long time ago in most cases.  Many things have
+changed in the time.  If you want to execute any of this code, you'll
+most likely need to hack it.  
 
 In particular:
 
-- The URL from which KONECT gets the data is not available anymore
+- The URL from which KONECT gets the data is not available anymore. 
 - Scripts have been moved to sh/, but uses of it have not been updated
 - Extraction directories are now all under extr/, but code has not been
   changed.
@@ -112,4 +134,4 @@ Also, some directories use Stu and older ones Make.
 
 If you need help, please politely ask Jérôme Kunegis <kunegis@gmail.com>
 and he may update the code to work.  (Up to websites that have
-disappeared.) 
+disappeared; Jérôme can't do anything about those ;) 
