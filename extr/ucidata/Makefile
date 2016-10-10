@@ -1,4 +1,6 @@
 
+:::: DEPRECATED - use main.stu
+
 all:  out.ucidata-zachary out.ucidata-gama
 
 out.ucidata-zachary:  ucidata-zachary.dat matlab conv.m

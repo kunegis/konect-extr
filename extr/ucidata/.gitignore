@@ -1,0 +1,5 @@
+MATLABPATH
+*.log
+*.dat
+konect-analysis
+out.*

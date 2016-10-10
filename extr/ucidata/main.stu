@@ -1,0 +1,55 @@
+#
+# This project uses Stu, which you can get at:
+#
+# https://github.com/kunegis/stu/
+#
+# Inside this directory, run the command 'stu' to build everything. 
+#
+
+% version 2.4
+
+@all:  out.ucidata-zachary  out.ucidata-gama
+      meta.ucidata-zachary meta.ucidata-gama ;
+
+out.ucidata-zachary:  
+	ucidata-zachary.dat 
+	-t matlab $[-t MATLABPATH] conv.m
+{
+	./matlab conv.m
+}
+
+>ucidata-zachary.dat:  <zachary.dat
+{
+	head -n 41 | tail -n 34 
+}
+
+>gama-pos.dat:  <gama.dat
+{
+	head -n 57 | tail -n 16 
+}
+
+>gama-neg.dat:  <gama.dat
+{
+	tail -n 16 
+}
+
+$name.dat:
+{
+	wget http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/"$name".dat -O "$name".dat
+	touch -c -- "$name".dat 
+}
+
+matlab = -o konect-analysis/ ;
+
+out.ucidata-gama:  
+	gama-pos.dat gama-neg.dat 
+	conv_gama.m -t matlab $[-t MATLABPATH]
+{
+	./matlab conv_gama.m
+}
+
+>MATLABPATH 
+{
+	printf "$PWD"
+}
+
