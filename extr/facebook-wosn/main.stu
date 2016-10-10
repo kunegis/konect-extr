@@ -1,0 +1,52 @@
+#
+# Partial Facebooks dataset from
+# http://socialnetworks.mpi-sws.org/data-wosn2009.html
+#
+
+#
+# To build, execute 'stu' within this directory.  Get Stu at
+#
+# https://github.com/kunegis/stu/
+#
+
+#
+# Please use the following BibTeX entry if you would like to cite this dataset. [480]
+#
+# @inproceedings{viswanath-2009-activity,
+#   author = {Bimal Viswanath and Alan Mislove and Meeyoung Cha and
+#       Krishna P. Gummadi}, 
+#   title = {On the Evolution of User Interaction in Facebook}, 
+#   booktitle = {Proceedings of the 2nd ACM SIGCOMM Workshop on Social
+#         Networks (WOSN'09)}, 
+#   location = {Barcelona, Spain},
+#   month = {August},
+#   year = {2009}
+# }
+#
+
+% version 2.4
+
+@all:  out.facebook-wosn-links  out.facebook-wosn-wall
+      meta.facebook-wosn-links meta.facebook-wosn-wall ; 
+
+facebook-$name.txt:  
+{
+	wget http://socialnetworks.mpi-sws.mpg.de/data/facebook-"$name".txt.gz -O facebook-"$name".txt.gz 
+	touch -c facebook-"$name".txt.gz
+	gunzip facebook-"$name".txt.gz
+}
+
+>out.facebook-wosn-wall:  facebook-wall.txt mk
+{
+	./mk wall | ../../sh/mkrel 'asym' 'positive' 
+}
+
+>out.facebook-wosn-links:  facebook-links.txt mk
+{
+	./mk links | ../../sh/mkrel --enforce-edgeweights 'sym' 'unweighted' 
+}
+
+@clean:
+{
+	rm -f out.* facebook-*.txt facebook-*.txt.gz
+}
