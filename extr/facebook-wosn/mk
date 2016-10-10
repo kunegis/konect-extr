@@ -5,12 +5,12 @@
 # PARAMETERS
 #	$1	name of dataset
 #
-# INPUT
+# INPUT FILES
 #	facebooks-$1.txt
 #
-# OUTPUT
-#	out.facebook-wosn-$1
-# 
+# STDOUT
+#	The out.* data
+#
 
 #
 # User IDs already seem to be continuous beginning at one, so we don't
@@ -23,15 +23,8 @@
 # relations. 
 #
 
-#{
-#    if [ $1 = wall ] ; then
-#      echo '% asym positive' 
-#    else
-#      echo '% sym unweighted' 
-#    fi
-    sed <facebook-$1.txt  -re '
+sed <facebook-"$1".txt  -E -e '
 s,\\N$$,0,
 s,([0-9]+)$,1 \1,
     ' 
-#} #>out.facebook-wosn-$1
 

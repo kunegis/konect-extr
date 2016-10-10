@@ -8,7 +8,7 @@ cite: viswanath09
 extr: facebook-wosn
 entity-names: user,user
 relationship-names: friendship
-long-description: This undirected network contains friendship data of facebook users. A node represents a user and an edge represents a friendship between two users.
+long-description: This undirected network contains friendship data of Facebook users.  A node represents a user and an edge represents a friendship between two users.  The dataset is obviously not complete and contains a very small subset of the total Facebook friendship graph. 
 n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
 n3-prefix-m: konect_facebook_wosn_links_user: <http://konect.uni-koblenz.de/networks/facebook-wosn-links/User/> .
 n3-type-m: sioc:UserAccount

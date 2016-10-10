@@ -251,7 +251,7 @@ if [ "$1" == "bip" ]; then
 		../../sh/mkuniqent "$MYARGS" > $TMPFILE
 	else
 		verbose -n "without entites:mkuniq)"
-		../../sh/mkuniq>$TMPFILE
+		../../sh/mkuniq >"$TMPFILE"
 	fi
 	doCheckError $? "Execution of mkuniq[ent] failed."
 else
@@ -302,7 +302,7 @@ if [ "$2" == "dynamic" ]; then
 	sort -n -k4 $TMPFILE > $COUT
 	COUTE=$(echo "$COUT" | sed -e 's/\//\\\//g;s/\./\\\./g')
 	verbose -n ' computing(using'
-	[ "$USEMATH" == "1" ] && { CFG_MATH=$(echo $CFG_MATH | sed -e "s/%f/\.\.\/mkdynamic\.m/g;s/%e/\.\.\/mkdynamic/g;s/%args/$COUTE/g") ; verbose -n " $CFG_MATH)..."; $CFG_MATH >$CIN ; } || { verbose -n " mkdynamic)..."; ../mkdynamic <$COUT >$CIN ; }
+	[ "$USEMATH" == "1" ] && { CFG_MATH=$(echo $CFG_MATH | sed -e "s/%f/\.\.\/mkdynamic\.m/g;s/%e/\.\.\/mkdynamic/g;s/%args/$COUTE/g") ; verbose -n " $CFG_MATH)..."; $CFG_MATH >$CIN ; } || { verbose -n " mkdynamic)..."; ../../sh/mkdynamic <$COUT >$CIN ; }
 	doCheckError $? "An error occured during execution of mydynamic."; 
 fi
 
@@ -318,10 +318,10 @@ echo "% $1 $2"
 verbose -x -n "Generating header"
 if [ "$1" == "bip" ]; then
 	verbose -n "(bipartite:mkcount)"
-	<$CIN ../mkcount
+	<$CIN ../../sh/mkcount
 else
 	verbose -n "(unipartite:mkcount1)"
-	<$CIN ../mkcount1
+	<$CIN ../../sh/mkcount1
 fi
 
 doCheckError $? "An error occured during execution of mkcount*."

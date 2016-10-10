@@ -1,3 +1,5 @@
+:::::: DEPRECATED - use main.stu
+
 #
 # Partial Facebooks dataset from
 # http://socialnetworks.mpi-sws.org/data-wosn2009.html
