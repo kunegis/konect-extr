@@ -2,17 +2,20 @@ KONECT Extraction
 =================
 
 This collection of network extraction tools is part of the KONECT
-project: 
+project, i.e., the Koblenz Network Collection, a network analysis
+project by Jérôme Kunegis and colleagues at the University of
+Koblenz-Landau: 
 
-http://konect.uni-koblenz.de
+http://konect.uni-koblenz.de/ 
 
-This is code for generating the network datasets used in KONECT. 
+This package contains code for generating the network datasets used in
+KONECT.
 
 In each subdirectory of extr/ you can find code to extract one group of
-datasets, usually from one source, and generate a TSV file from it.
-If you are looking for the code for a specific network, you can find
-the name of the subirectory in the field "extr" of the meta.* file,
-which comes with the TSV files you can download from our network pages.
+datasets, usually from one source, and generate a TSV file from it.  If
+you are looking for the code for a specific network, you can find the
+name of the subirectory in the field "extr" of the meta.* file, which
+comes with the TSV files you can download from our network pages.
 
 Please note that not every network has the extraction code publically
 available.  This is only the code we can make available.  Also, many
@@ -57,7 +60,7 @@ order of preference, we accept the following:
     about Python, Ruby, Perl 6, Bash, etc.  If your program needs to be
     compiled (e.g., C, C++, Java), then please provide a self-contained
     directory that executes the compilation and the extraction.  We
-    don't accept precompiles files (e.g., *.jar, ELF). 
+    don't accept precompiled files (e.g., *.jar, ELF). 
 (2) A long-term stable URL of a dataset, in KONECT format.
 (3) A long-term stable URL of a dataset, in text format.
 (4) Giving us the dataset in KONECT format.
@@ -75,8 +78,8 @@ Requirements
 You may need to install the following additional software packages,
 depending on the dataset: 
 
-    - Stu
-    - Perl 
+    - Stu:  https://github.com/kunegis/stu/
+    - Perl 5
     - Some other tools; depending on the dataset
 
 
@@ -86,7 +89,7 @@ Extraction Tools
 The directories sh/ and c/ contain general-purpose functions for
 transforming data into the KONECT format.  They are used by various
 directories under extr/, and you may also use them to extract your own
-software.  
+software.
 
 
 License
@@ -130,7 +133,7 @@ In particular:
 - Some code is really old and was written long before I learned proper
   practices for writing shell scripts, etc.
 
-Also, some directories use Stu and older ones Make.
+Also, some directories use Stu and older ones Make.  
 
 If you need help, please politely ask Jérôme Kunegis <kunegis@gmail.com>
 and he may update the code to work.  (Up to websites that have
