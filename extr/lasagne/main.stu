@@ -6,7 +6,7 @@
 # UPDATE:  The datasets are not available anymore. 
 # 
 
-% version 1.15
+% version 2.4
 
 @out:  
 	meta.lasagne-yahoo meta.lasagne-frenchbook meta.lasagne-spanishbook
