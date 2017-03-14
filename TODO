@@ -1,5 +1,15 @@
 These are the extraction todos for KONECT.
 
+== Current ==
+* Check DBLP:
+
+Hi Jerome,
+
+This is How Jing and I am interested in getting the network data of DBLP from your konect website. First of all, thank you all for doing such a great project and maintain all these datasets.  I was trying to download dblp_coauthor dataset and found that the zip file http://konect.uni-koblenz.de/downloads/tsv/dblp_coauthor.tar.bz2 is broken and cannot be extracted. Just wonder if you plan to fix it : ) 
+
+Thanks,
+How
+
 == Simple ==
 * http://www.cs.cornell.edu/home/llee/data/convote.html 
 * http://www.zubiaga.org/resources/socialbm0311/
