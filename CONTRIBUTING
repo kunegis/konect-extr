@@ -1,0 +1,29 @@
+Contribute
+==========
+
+If you want to contribute your dataset to KONECT, you are welcome.  In
+order of preference, we accept the following:
+
+(1) A self-contained directory containing Stu code that downloads the
+    dataset from a long-term stable location on the Web and transforms
+    it to KONECT format.  Preferred programming languages are the shell
+    and Perl 5.  Other programming languages are accepted if they are easy
+    to execute (i.e., as scripts).  In particular, we won't be unhappy
+    about Python, Ruby, Perl 6, Bash, etc.  If your program needs to be
+    compiled (e.g., C, C++, Java), then please provide a self-contained
+    directory that executes the compilation and the extraction.  We
+    don't accept precompiled files (e.g., *.jar, ELF). 
+(2) A long-term stable URL of a dataset, in KONECT format.
+(3) A long-term stable URL of a dataset, in text format.
+(4) Giving us the dataset in KONECT format.
+(5) Giving us the dataset in a text format.
+
+If your dataset is in a binary format, please convert it to text first.  
+
+The simpler the better:  we prefer a one-edge-per-line text format to
+XML; we prefer XML to a binary format such as XLS. 
+
+You get bonus points if you use Git directly and issue a pull request to
+our GitHub repository:
+
+https://github.com/kunegis/konect-extr
