@@ -1,9 +1,0 @@
-name: Catster/Dogster
-code: Sf
-category: Social
-description: User–user familylinks
-extr: petster
-fullname: Catster/Dogster Familylinks
-long-description: This Network contains familylinks between cats and cats, cats and dogs, as well as dogs and dogs from the social websites catster.com and dogster.com. 
-entity-names: user
-relationship-names: familylinks

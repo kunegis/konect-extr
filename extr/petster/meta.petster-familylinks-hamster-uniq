@@ -1,9 +1,0 @@
-name: Hamsterster familylinks uniq
-code: Shf
-category: Social
-description: User–user familylinks
-extr: petster
-long-description: This Network contains familylinks between users of the website hamsterster.com.
-entity-names: user
-relationship-names: familylinks
- 
