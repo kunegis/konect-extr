@@ -143,7 +143,7 @@ dat-petster/out.petster-$SPECIES-friend:
 	dat-petster/out.petster_orig-$SPECIES-family
 	dat-petster/ent.petster_orig-$SPECIES.origid
 {
-    ./matlab cont_species.m 
+	./matlab cont_species.m 
 }
 
 dat-petster/out.petster-catdog-friend:
@@ -152,7 +152,7 @@ dat-petster/out.petster-catdog-friend:
 	dat-petster/out.petster_orig-dog-friend
 	dat-petster/out.petster_orig-catdog-family
 {
-    ./matlab cont_catdog.m 
+	./matlab cont_catdog.m 
 }
 
 # Date entity files
