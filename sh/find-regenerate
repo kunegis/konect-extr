@@ -1,4 +1,5 @@
-#!/bin/bash
+#! /bin/bash
+
 #prints "NETWORKNAME FOLDER" of networks supporting #regenerate
 ./find-tag '#regenerate' | while read line
 do

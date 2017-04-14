@@ -1,8 +1,10 @@
-#!/bin/bash
-#Usage: ./checkmeta [-e] [FILES]
-#If no files are given checkmeta scans the current directory and all subdirectories for meta.* files.
-#This script currently checks only for duplicate codes and wrong attribute value separators (currently only =) instead of :.
-# -e: Only print errors
+#! /bin/bash
+# 
+# Usage: ./checkmeta [-e] [FILES]
+# If no files are given checkmeta scans the current directory and all subdirectories for meta.* files.
+# This script currently checks only for duplicate codes and wrong attribute value separators (currently only =) instead of :.
+#    -e: Only print errors
+#
 
 function error
 {

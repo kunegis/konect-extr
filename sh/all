@@ -1,9 +1,16 @@
-#!/bin/bash
-directories=$(find . -maxdepth 1 -type d)
-for i in $directories;do
-	if [ $i != "." ]; then
-		cd $i
-		nice make
+#! /bin/sh
+#
+# Build all directories.  This is out of date, because it only calls
+# Make.  Also, it is useless because building everything takes much too
+# long.  Also, it does not catch errors. 
+#
+
+directories="$(find . -maxdepth 1 -type d)"
+
+for i in $directories ; do
+	if [ "$i" != "." ] ; then
+		cd "$i"
+		make
 		cd ..
 	fi
 done
