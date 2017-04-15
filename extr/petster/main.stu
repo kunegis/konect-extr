@@ -37,7 +37,7 @@ octave = -o konect-analysis/;
 
 MATLABPATH:
 {
-	echo -n "$PWD/../../matlab:$PWD/konect-toolbox:$PWD/../../analysis/lib/matlab_bgl:$PWD/../../analysis/lib" >MATLABPATH
+	echo -n "$PWD/../../matlab:$PWD/konect-toolbox/m:$PWD/../../analysis/lib/matlab_bgl:$PWD/../../analysis/lib" >MATLABPATH
 }
 
 #
@@ -145,7 +145,7 @@ dat-petster/out.petster-$SPECIES-family:
 dat-petster/n.$SPECIES: dat-petster/out.petster-$SPECIES-friend;
 
 dat-petster/out.petster-$SPECIES-friend:
-	cont_species.m $[-t MATLABPATH] -t octave
+	$[-t MATLABPATH] -t octave cont_species.m 
 	dat-petster/out.petster_orig-$SPECIES-friend
 	dat-petster/out.petster_orig-$SPECIES-family
 	dat-petster/ent.petster_orig-$SPECIES.origid
@@ -154,12 +154,12 @@ dat-petster/out.petster-$SPECIES-friend:
 }
 
 dat-petster/out.petster-catdog-friend:
-	cont_catdog.m $[-t MATLABPATH]
+	$[-t MATLABPATH] -t octave cont_catdog.m 
 	dat-petster/out.petster_orig-cat-friend
 	dat-petster/out.petster_orig-dog-friend
 	dat-petster/out.petster_orig-catdog-family
 {
-	./matlab cont_catdog.m 
+	./octave cont_catdog.m 
 }
 
 # Date entity files
@@ -274,11 +274,11 @@ dat-petster/ent.petster-$SPECIES.$TYPE:  dat-petster/ent.petster_orig-$SPECIES.$
 @stat.$SPECIES:  dat-petster/stat.$SPECIES;
 
 dat-petster/stat.$SPECIES:
-	stat_species.m $[-t MATLABPATH]
+	$[-t MATLABPATH] -t octave stat_species.m 
 	dat-petster/out.petster-$SPECIES-friend 
 	dat-petster/out.petster-$SPECIES-family
 {
-	./matlab stat_species.m
+	./octave stat_species.m
 }
 
 #
@@ -288,8 +288,7 @@ dat-petster/stat.$SPECIES:
 @degree:  plot-petster/degree.a.eps;
 
 plot-petster/degree.a.eps:
-	petster_degree.m $[-t MATLABPATH]
-	petster_colors.m
+	$[-t MATLABPATH] -t octave petster_degree.m petster_colors.m
 	dat-petster/out.petster-hamster-friend
 	dat-petster/out.petster-hamster-household
 	dat-petster/out.petster-cat-friend
@@ -297,7 +296,7 @@ plot-petster/degree.a.eps:
 	dat-petster/out.petster-dog-friend
 	dat-petster/out.petster-dog-household
 {
-	./matlab petster_degree.m 
+	./octave petster_degree.m 
 }
 
 #
@@ -311,10 +310,10 @@ plot-petster/degree.a.eps:
 ;
 
 plot-petster/birthday.$SPECIES.a.eps:
-	petster_birthday.m $[-t MATLABPATH]
+	$[-t MATLABPATH] -t octave petster_birthday.m 
 	dat-petster/ent.petster-$SPECIES.birthday
 {
-	./matlab petster_birthday.m 
+	./octave petster_birthday.m 
 }
 
 #
@@ -328,11 +327,11 @@ plot-petster/birthday.$SPECIES.a.eps:
 ;
 
 plot-petster/pyramid.a.$SPECIES.eps:
-	$[-t MATLABPATH] petster_pyramid.m 
+	$[-t MATLABPATH] -t octave petster_pyramid.m 
 	dat-petster/ent.petster-$SPECIES.sex
 	dat-petster/ent.petster-$SPECIES.birthday
 {
-	./matlab petster_pyramid.m 
+	./octave petster_pyramid.m 
 }
 
 #
@@ -344,20 +343,20 @@ plot-petster/pyramid.a.$SPECIES.eps:
 @joined.$SPECIES:  plot-petster/joined.$SPECIES.a.eps;
 
 plot-petster/joined.$SPECIES.a.eps:
-	petster_joined.m $[-t MATLABPATH]
+	$[-t MATLABPATH] -t octave petster_joined.m 
 	dat-petster/ent.petster-$SPECIES.joined
 {
-	./matlab petster_joined.m 
+	./octave petster_joined.m 
 }
 
 plot-petster/joined.a.eps:
-	petster_joined_all.m $[-t MATLABPATH]
+	$[-t MATLABPATH] -t octave petster_joined_all.m 
 	petster_colors.m
 	dat-petster/ent.petster-cat.joined
 	dat-petster/ent.petster-dog.joined
 	dat-petster/ent.petster-hamster.joined
 {
-	./matlab petster_joined_all.m 
+	./octave petster_joined_all.m 
 }
 
 #
@@ -367,12 +366,12 @@ plot-petster/joined.a.eps:
 @sex:  plot-petster/sex.a.eps;
 
 plot-petster/sex.a.eps:
-	petster_sex.m $[-t MATLABPATH]
+	$[-t MATLABPATH] -t octave petster_sex.m 
 	dat-petster/ent.petster_orig-hamster.sex
 	dat-petster/ent.petster_orig-cat.sex
 	dat-petster/ent.petster_orig-dog.sex
 {
-	./matlab petster_sex.m 
+	./octave petster_sex.m 
 }
 
 #
@@ -483,17 +482,17 @@ dat-petster/race.all:
 @weight.$SPECIES:  plot-petster/weight.a.$SPECIES.eps;
 
 plot-petster/weight.a.cat.eps:
+	$[-t MATLABPATH] -t octave petster_weight_cat.m 
 	dat-petster/weight.cat
-	petster_weight_cat.m $[-t MATLABPATH]
 {
-	./matlab petster_weight_cat.m 
+	./octave petster_weight_cat.m 
 }
 
 plot-petster/weight.a.dog.eps:
+	$[-t MATLABPATH] -t octave petster_weight_dog.m 
 	dat-petster/weight.dog
-	petster_weight_dog.m $[-t MATLABPATH]
 {
-	./matlab petster_weight_dog.m 
+	./octave petster_weight_dog.m 
 }
 
 dat-petster/weight.cat:
@@ -523,7 +522,7 @@ dat-petster/weight.dog:
 
 # Household IDs of all pets.  The Pet IDs are those used in @cont. 
 dat-petster/household.$SPECIES:
-	petster_household.m $[-t MATLABPATH] -t octave
+	$[-t MATLABPATH] -t octave petster_household.m 
 	dat-petster/out.petster-$SPECIES-friend 
 	dat-petster/out.petster-$SPECIES-family
 	dat-petster/n.$SPECIES
@@ -542,11 +541,11 @@ dat-petster/h.$SPECIES:  dat-petster/household.$SPECIES;
 @stat_household.$SPECIES:  dat-petster/stat_household.$SPECIES;
 
 dat-petster/stat_household.$SPECIES:
-	petster_stat_household.m $[-t MATLABPATH]
+	$[-t MATLABPATH] -t octave petster_stat_household.m 
 	dat-petster/n.$SPECIES
 	dat-petster/h.$SPECIES
 {
-	./matlab petster_stat_household.m 
+	./octave petster_stat_household.m 
 }
 
 #
@@ -556,14 +555,13 @@ dat-petster/stat_household.$SPECIES:
 @pph:  plot-petster/pph.a.eps;
 
 plot-petster/pph.a.eps:
+	$[-t MATLABPATH] -t octave petster_pph.m petster_line_styles.m petster_colors.m 
 	dat-petster/household.hamster
 	dat-petster/household.cat
 	dat-petster/household.dog
 	dat-petster/household.catdog
-	petster_pph.m $[-t MATLABPATH]
-	petster_line_styles.m petster_colors.m 
 {
-	./matlab petster_pph.m 
+	./octave petster_pph.m 
 }
 
 #
@@ -575,10 +573,10 @@ plot-petster/pph.a.eps:
 @power_pph.$SPECIES:  dat-petster/power_pph.$SPECIES;
 
 dat-petster/power_pph.$SPECIES:
+	$[-t MATLABPATH] -t octave petster_power_pph.m 
 	dat-petster/household.$SPECIES
-	petster_power_pph.m $[-t MATLABPATH]
 {
-	./matlab petster_power_pph.m 
+	./octave petster_power_pph.m 
 }
 
 #
@@ -586,7 +584,7 @@ dat-petster/power_pph.$SPECIES:
 #
 
 dat-petster/out.petster-$SPECIES-household:
-	petster_out_household.m $[-t MATLABPATH] -t octave
+	$[-t MATLABPATH] -t octave petster_out_household.m 
 	dat-petster/household.$SPECIES
 	dat-petster/out.petster-$SPECIES-friend
 	dat-petster/h.$SPECIES
@@ -696,10 +694,10 @@ dat-petster/homes-counts:
 
 # Distribution plot
 plot-petster/latlong.a.$SPECIES.eps:
+	$[-t MATLABPATH] -t octave petster_latlong.m 
 	dat-petster/ent.petster-$SPECIES.latlong
-	$[-t MATLABPATH] petster_latlong.m 
 {
-	./matlab petster_latlong.m 
+	./octave petster_latlong.m 
 }
 
 #
@@ -740,12 +738,12 @@ plot-petster/latlong.a.$SPECIES.eps:
 	dat-petster/testset.dog.mat;
 
 dat-petster/testset.$SPECIES.mat:
-	$[-t MATLABPATH] petster_testset.m 
+	$[-t MATLABPATH] -t octave petster_testset.m 
 	dat-petster/household.$SPECIES
 	dat-petster/n.$SPECIES
 	dat-petster/h.$SPECIES
 {
-	./matlab petster_testset.m 
+	./octave petster_testset.m 
 }
 
 #
@@ -759,7 +757,7 @@ dat-petster/testset.$SPECIES.mat:
 
 
 dat-petster/feature.$SPECIES.mat:
-	$[-t MATLABPATH] petster_feature.m 
+	$[-t MATLABPATH] -t octave petster_feature.m 
 	dat-petster/testset.$SPECIES.mat
 	dat-petster/out.petster-$SPECIES-friend
 	dat-petster/n.$SPECIES
@@ -771,7 +769,7 @@ dat-petster/feature.$SPECIES.mat:
 	dat-petster/ent.petster-$SPECIES.joinage
 	[dat-petster/dep.feature.$SPECIES]
 {
-	./matlab petster_feature.m 
+	./octave petster_feature.m 
 }
 
 >dat-petster/dep.feature.$SPECIES:
@@ -796,18 +794,18 @@ dat-petster/feature.$SPECIES.mat:
 @joinage.$SPECIES:  plot-petster/joinage.a.$SPECIES.eps;
 
 plot-petster/joinage.a.$SPECIES.eps:
+	$[-t MATLABPATH] -t octave petster_joinage_plot.m
 	dat-petster/ent.petster-$SPECIES.joinage
-	$[-t MATLABPATH] petster_joinage_plot.m
 {
-	./matlab petster_joinage_plot.m 
+	./octave petster_joinage_plot.m 
 }
 
 dat-petster/ent.petster-$SPECIES.joinage:
+	$[-t MATLABPATH] -t octave petster_joinage.m
 	dat-petster/ent.petster-$SPECIES.birthday
 	dat-petster/ent.petster-$SPECIES.joined
-	$[-t MATLABPATH] petster_joinage.m
 {
-	./matlab petster_joinage.m 
+	./octave petster_joinage.m 
 }
 
 #
@@ -820,11 +818,11 @@ dat-petster/ent.petster-$SPECIES.joinage:
 @joinedcheck.$SPECIES:  dat-petster/joinedcheck.$SPECIES;
 
 dat-petster/joinedcheck.$SPECIES:
+	$[-t MATLABPATH] -t octave petster_joinedcheck.m 	
 	dat-petster/ent.petster-$SPECIES.joined
 	dat-petster/household.$SPECIES
-	$[-t MATLABPATH] petster_joinedcheck.m 	
 {
-	./matlab petster_joinedcheck.m 
+	./octave petster_joinedcheck.m 
 }
 
 #
@@ -836,13 +834,14 @@ dat-petster/joinedcheck.$SPECIES:
 @auc.$SPECIES:  dat-petster/auc.$SPECIES.mat;
 
 dat-petster/auc.$SPECIES.mat:
+	$[-t MATLABPATH] -t octave petster_auc.m 
 	dat-petster/feature.$SPECIES.mat
-	$[-t MATLABPATH] petster_auc.m 
 {
-	./matlab petster_auc.m 
+	./octave petster_auc.m 
 }
 
 tex-petster/auc.tex:
+	$[-t MATLABPATH] -t octave petster_auc_tex.m 
 	dat-petster/auc.hamster.mat
 	dat-petster/reg.hamster.mat
 	dat-petster/regauc.hamster.mat
@@ -852,31 +851,30 @@ tex-petster/auc.tex:
 	dat-petster/auc.dog.mat
 	dat-petster/reg.dog.mat
 	dat-petster/regauc.dog.mat
-	$[-t MATLABPATH] petster_auc_tex.m 
 {
-	./matlab petster_auc_tex.m 
+	./octave petster_auc_tex.m 
 }
 
 dat-petster/reg.$SPECIES.mat:
+	$[-t MATLABPATH] -t octave petster_reg.m
 	dat-petster/feature.$SPECIES.mat
-	$[-t MATLABPATH] petster_reg.m
 {
-	./matlab petster_reg.m 
+	./octave petster_reg.m 
 }
 
 dat-petster/regauc.$SPECIES.mat:
+	$[-t MATLABPATH] -t octave petster_regauc.m 
 	dat-petster/regfeature.$SPECIES.mat
-	$[-t MATLABPATH] petster_regauc.m 
 {
-	./matlab petster_regauc.m 
+	./octave petster_regauc.m 
 }
 
 dat-petster/regfeature.$SPECIES.mat:
+	$[-t MATLABPATH] -t octave petster_regfeature.m
 	dat-petster/reg.$SPECIES.mat
 	dat-petster/feature.$SPECIES.mat
-	$[-t MATLABPATH] petster_regfeature.m
 {
-	./matlab petster_regfeature.m 
+	./octave petster_regfeature.m 
 }
 
 #
@@ -886,6 +884,7 @@ dat-petster/regfeature.$SPECIES.mat:
 @cluscod:  plot-petster/cluscod.a.eps;
 
 plot-petster/cluscod.a.eps:
+	$[-t MATLABPATH] -t octave petster_cluscod.m 
 	dat-petster/out.petster-hamster-friend
 	dat-petster/out.petster-hamster-household
 	dat-petster/out.petster-cat-friend
@@ -898,9 +897,8 @@ plot-petster/cluscod.a.eps:
 	dat-petster/h.hamster
 	dat-petster/h.cat
 	dat-petster/h.dog
-	$[-t MATLABPATH] petster_cluscod.m 
 {
-	./matlab petster_cluscod.m 
+	./octave petster_cluscod.m 
 }
 
 #
@@ -910,6 +908,7 @@ plot-petster/cluscod.a.eps:
 @assortativity:  plot-petster/assortativity.a.eps;
 
 plot-petster/assortativity.a.eps:
+	$[-t MATLABPATH] -t octave petster_assortativity.m petster_assortativity_one.m 
 	dat-petster/out.petster-hamster-friend
 	dat-petster/out.petster-hamster-household
 	dat-petster/out.petster-cat-friend
@@ -922,9 +921,8 @@ plot-petster/assortativity.a.eps:
 	dat-petster/h.hamster
 	dat-petster/h.cat
 	dat-petster/h.dog
-	$[-t MATLABPATH] petster_assortativity.m petster_assortativity_one.m 
 {
-	./matlab petster_assortativity.m 
+	./octave petster_assortativity.m 
 }
 
 #
@@ -934,16 +932,16 @@ plot-petster/assortativity.a.eps:
 @homophily:  tex-petster/homophily.tex;
 
 tex-petster/homophily.tex:
-	$[-t MATLABPATH] petster_homophily.m petster_homophily_format.m 
+	$[-t MATLABPATH] -t octave petster_homophily.m petster_homophily_format.m 
 	dat-petster/homophily.hamster.mat
 	dat-petster/homophily.cat.mat
 	dat-petster/homophily.dog.mat
 {
-	./matlab petster_homophily.m 
+	./octave petster_homophily.m 
 }
 
 dat-petster/homophily.$SPECIES.mat:
-	$[-t MATLABPATH] petster_homophily_one.m
+	$[-t MATLABPATH] -t octave petster_homophily_one.m
 	dat-petster/n.$SPECIES
 	dat-petster/h.$SPECIES
 	dat-petster/out.petster-$SPECIES-friend 
@@ -954,7 +952,7 @@ dat-petster/homophily.$SPECIES.mat:
 	dat-petster/ent.petster-$SPECIES.race-id
 	[dat-petster/dep.homophily.$SPECIES]
 {
-	./matlab petster_homophily_one.m 
+	./octave petster_homophily_one.m 
 }
 
 >dat-petster/dep.homophily.$SPECIES:
@@ -984,33 +982,33 @@ dat-petster/homophily.$SPECIES.mat:
 ;
 
 dat-petster/decomposition.$SPECIES.mat:
-	$[-t MATLABPATH] petster_decomposition.m 
+	$[-t MATLABPATH] -t octave petster_decomposition.m 
 	dat-petster/out.petster-$SPECIES-friend
 	dat-petster/n.$SPECIES
 {
-	./matlab petster_decomposition.m 
+	./octave petster_decomposition.m 
 }
 
 dat-petster/delta.$SPECIES.mat:
-	$[-t MATLABPATH] petster_delta.m 
+	$[-t MATLABPATH] -t octave petster_delta.m 
 	dat-petster/n.$SPECIES
 	dat-petster/h.$SPECIES
 	dat-petster/decomposition.$SPECIES.mat
 	dat-petster/household.$SPECIES
 {
-	./matlab petster_delta.m
+	./octave petster_delta.m
 }
 
 plot-petster/spectral.a.$SPECIES.eps:
-	$[-t MATLABPATH] petster_spectral.m 
+	$[-t MATLABPATH] -t octave petster_spectral.m 
 	dat-petster/delta.$SPECIES.mat
 {
-	./matlab petster_spectral.m 
+	./octave petster_spectral.m 
 }
 
 dat-petster/diagonality.$SPECIES:
-	$[-t MATLABPATH] petster_diagonality.m 
+	$[-t MATLABPATH] -t octave petster_diagonality.m 
 	dat-petster/delta.$SPECIES.mat
 {
-	./matlab petster_diagonality.m
+	./octave petster_diagonality.m
 }
