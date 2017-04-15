@@ -74,4 +74,3 @@ OUT_H = fopen(sprintf('dat-petster/h.%s', species), 'w');
 if OUT_H < 0,  error();  end
 fprintf(OUT_H, '%u\n', h);
 if fclose(OUT_H) < 0;  error();  end
-

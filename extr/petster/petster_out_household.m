@@ -47,4 +47,3 @@ if OUT < 0,  error();  end
 fprintf(OUT, '%% sym unweighted\n'); 
 fprintf(OUT, '%u\t%u\n', [x y]');
 if fclose(OUT) < 0,  error();  end
-

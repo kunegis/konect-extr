@@ -1,0 +1,74 @@
+#! /bin/sh
+#
+# Execute an Octave script.  This is a thin wrapper around Octave that
+# is used in KONECT Analysis, but is not necessarily specific to it. 
+#
+# 	$1	FILENAME
+#
+# The given file is usually a *.m script. 
+#
+# OUTPUT FILES 
+#	error.log	Errors from all runs of this script are appended
+#	                to this file  
+#
+
+SCRIPT="$1"
+
+[ "$PREFIX" ] && PREFIX=."$PREFIX"
+LOGNAME="$(basename "$SCRIPT" .m)"
+
+# Error log
+exec 6>>error.log
+
+# Words to use in the logfile are the lowercase environment variables.
+# This may break in some cases. 
+for NAME in $(set | sed -e 's,=.*$,,;/^[a-z][a-z_-]*$/!d') ; do
+	eval VALUE=\"\$"$NAME"\"
+	LOGNAME="$LOGNAME"."$VALUE"
+done
+
+export LOG="${TMPDIR-/tmp}/o.$LOGNAME$PREFIX.log"
+echo >&2 "   $LOG"
+
+#
+# -q	Quiet
+# -f	Don't read initialization files
+#
+# We'd like to usee --no-window-system but it isn't supported by Octave 3.0 
+#
+
+DIR_SCRIPT="$(dirname "$SCRIPT")"
+if echo "$DIR_SCRIPT" | grep -vq '^/' ; then
+	DIR_SCRIPT="$PWD/$DIR_SCRIPT"
+fi
+
+OCTAVE_PATH="$OCTAVE_PATH:$MATLABPATH"
+OCTAVE_PATH="$DIR_SCRIPT:$OCTAVE_PATH"
+export OCTAVE_PATH
+exec 3>$LOG 
+ISPLAY= GNUTERM=dumb DISPLAY= octave -q -f -W --no-gui --no-window-system "$SCRIPT" "$LOG" >&3 2>&1  ||
+{
+	# The error message of Octave don't conform to any standard, and
+	# usually don't even show the location first.  Therefore, we
+	# first extract all "location" lines, and then output the full
+	# log. 
+
+	<"$LOG" sed >&2 -E -e '
+		s|^error:\s*(.*) at line ([0-9]+), column ([0-9]+)\s*$|\1:\2:\3:|;t
+		s,^parse error near line ([0-9]+) of file (.+)$,\2:\1:,;t
+		d
+	'
+
+ 	<"$LOG" sed >&2 -n -E -e '
+		/^(error:|parse error)/,$p
+	'
+
+	echo >&2 "*** error in $LOG"
+	echo >&6 "*** error in $LOG"
+
+	exit 1
+}
+
+echo >&3 '=== FINISHED ==='
+
+exit 0
