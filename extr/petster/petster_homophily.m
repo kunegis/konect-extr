@@ -68,7 +68,8 @@ fprintf(OUT, '\\multicolumn{10}{l}{\\textsuperscript{a} Categorical variable; nu
 fprintf(OUT, '\\multicolumn{10}{l}{\\textsuperscript{b} Numerical variable; numbers denote the Pearson correlation coefficient \\cite[Eq. (21)]{b854}} \\\\ \n'); 
 fprintf(OUT, '\\multicolumn{10}{l}{\\textsuperscript{c} In Dogster, the weight can only be chosen from a predefined set of ranges} \\\\ \n'); 
 fprintf(OUT, '\\multicolumn{10}{l}{\\textsuperscript{d} In Catster, the exact pet weight can be specified} \\\\ \n'); 
-fprintf(OUT, '\\multicolumn{10}{l}{\\textsuperscript{e} Not computed for households as all pets in one household share their location} \\\\ \n');
+fprintf(OUT, '\\multicolumn{10}{l}{\\textsuperscript{e} Not computed for households as all pets in one household share their location; geographical variable,} \\\\ \n');
+fprintf(OUT, '\\multicolumn{10}{l}{\\phantom{\\textsuperscript{e}} numbers denote the distance correlation \\cite{b855}} \\\\ \n');
 fprintf(OUT, '\\end{tabular} \n');
 
 if fclose(OUT) < 0;  error;  end;
