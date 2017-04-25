@@ -30,13 +30,13 @@ dblp.xml:
 >out.dblp-cite:  <dblp.dat 
 {
 	sed -re '/^cite /!d;s,^cite ,,' | 
-	../mkrel --enforce-edgeweights 'asym' 'unweighted'
+	../../sh/mkrel --enforce-edgeweights 'asym' 'unweighted'
 }
 
 >out.dblp-author:  <dblp.dat 
 {
 	sed -re '/^author /!d;s,^author ,,;s,(.* .*) ,\1_,;s,(.* .*) ,\1_,' | 
-	../mkrel --enforce-edgeweights 'bip' 'unweighted' 
+	../../sh/mkrel --enforce-edgeweights 'bip' 'unweighted' 
 }
 
 >out.dblp_coauthor:  dblp.xml mkco ../mkuniq1

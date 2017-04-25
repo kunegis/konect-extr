@@ -247,10 +247,10 @@ if [ "$1" == "bip" ]; then
 		if [ "$GENUID" ]; then
 			MYARGS="$GENUID $MYARGS"
 		fi
-		verbose -n "with entites:mkuniqent)"
+		verbose -n "with entities:mkuniqent)"
 		../../sh/mkuniqent "$MYARGS" > $TMPFILE
 	else
-		verbose -n "without entites:mkuniq)"
+		verbose -n "without entities:mkuniq)"
 		../../sh/mkuniq >"$TMPFILE"
 	fi
 	doCheckError $? "Execution of mkuniq[ent] failed."
