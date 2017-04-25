@@ -29,43 +29,60 @@ while (<IN>)
 {
     if (/<(article|inproceedings|proceedings|book|incollection|phdthesis|masterthesis|www) .*key=\"([^\"]*)\"/)
     {
-	$key= $2;
-	@authors = (); 
+        # if last paper did not end "properly" (e.g., with no new line)
+        if (@authors)
+        {
+            my $n = scalar @authors; 
+            foreach my $i (@authors)
+            {
+                foreach my $j (@authors)
+                {
+                    next if $i eq $j;
+                    my $i_e = $i;
+                    my $j_e = $j;
+                    $i_e =~ s/ /_/g;
+                    $j_e =~ s/ /_/g;
+                    $i_e = encode("utf-8", decode_entities($i_e)); 
+                    $j_e = encode("utf-8", decode_entities($j_e)); 
+                    my $timestamp = timelocal(1,1,1,1,0,$year);
+                    print "$i_e $j_e 1 $timestamp\n"; 
+                }
+            }
+        }
+        @authors = (); 
+
+        $key= $2;
     }
 
     elsif (/<year>([0-9]+)<\/year>/)
     {
-	$year = $1;
+        $year = $1;
     }
 
     elsif (/<author>(.+)<\/author>/)
     {
-	my $author = $1;
-	push(@authors, $author); 
+        my $author = $1;
+        push(@authors, $author); 
     }
 
     elsif (/<\/(article|inproceedings|proceedings|book|incollection|phdthesis|masterthesis|www)>/)
     {
-	my $n = scalar @authors; 
-	foreach my $i (@authors)
-	{
-	    foreach my $j (@authors)
-	    {
-		next if $i eq $j;
-		my $i_e = $i;
-		my $j_e = $j;
-		$i_e =~ s/ /_/g;
-		$j_e =~ s/ /_/g;
-		$i_e = encode("utf-8", decode_entities($i_e)); 
-		$j_e = encode("utf-8", decode_entities($j_e)); 
-		# This ignores leap years
-		# TODO use a Perl function to make the conversion
-		# -> done
-		my $timestamp = timelocal(1,1,1,1,0,$year);
-		#= ($year - 1970) * (365 * 24 * 60 * 60); 
-  	        print "$i_e $j_e 1 $timestamp\n"; 
-	    }
-	}
+        my $n = scalar @authors; 
+        foreach my $i (@authors)
+        {
+            foreach my $j (@authors)
+            {
+                next if $i eq $j;
+                my $i_e = $i;
+                my $j_e = $j;
+                $i_e =~ s/ /_/g;
+                $j_e =~ s/ /_/g;
+                $i_e = encode("utf-8", decode_entities($i_e)); 
+                $j_e = encode("utf-8", decode_entities($j_e)); 
+                my $timestamp = timelocal(1,1,1,1,0,$year);
+                print "$i_e $j_e 1 $timestamp\n"; 
+            }
+        }
     }
 }
 

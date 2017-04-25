@@ -6,7 +6,7 @@
 #	pipe in dblp.xml
 #
 # STDOUT
-#	one reference per line:  CITING_PAPER CITED_PAPER
+#	one reference per line:  CITING_PAPER CITED_PAPER TIMESTAMP
 #
 
 use strict;
