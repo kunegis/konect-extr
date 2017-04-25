@@ -44,4 +44,4 @@ dblp.xml:
 	./mkco | ../../sh/mkuniq1 ent.author 
 }
 
-ent.dblp_coauthor:  out.dblp_coauthor; 
+ent.author:  out.dblp_coauthor; 

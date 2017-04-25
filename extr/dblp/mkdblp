@@ -11,24 +11,76 @@
 
 use strict;
 
+use Encode; 
+use HTML::Entities;
+use Time::Local;
+
 my $lastkey= "";
+my $year = "";
+my $timestamp = 0;
+my @authors = (); 
+my @refs = (); 
 
 while (<>) 
 {
     if (/<(article|inproceedings|proceedings|book|incollection|phdthesis|masterthesis|www) .*key=\"([^\"]*)\"/)
     {
-	$lastkey= $2;
+        # if last paper did not end "properly" (e.g., with no new line)
+        if (@authors)
+        {
+            foreach my $author (@authors)
+            {
+                print "author $author $lastkey $timestamp\n";
+            }
+        }
+        @authors = ();
+
+        if (@refs)
+        {
+            foreach my $ref (@refs)
+            {
+                print "cite $lastkey $ref $timestamp\n";
+            }
+        }
+        @refs = ();
+
+        $lastkey = $2;
     }
+
+    elsif (/<year>([0-9]+)<\/year>/)
+    {
+        $year = $1;
+        $timestamp = timelocal(1,1,1,1,0,$year);
+    }
+
     elsif (/<cite .*>([^<]+)<.*/) 
     {
-	my $ref = $1;
-	next if $ref eq "...";
-	print "cite $lastkey $ref\n";
+        my $ref = $1;
+        next if $ref eq "...";
+        push(@refs, $ref); 
     }
+
     elsif (/<author>([^<]+)<.*/) 
     {
-	my $author = $1;
-	$author =~ s, ,_,g;
-	print "author $author $lastkey\n";
+        my $author = $1;
+        $author =~ s, ,_,g;
+        $author = encode("utf-8", decode_entities($author));
+        push(@authors, $author); 
+    }
+
+    # end of a paper
+    elsif (/<\/(article|inproceedings|proceedings|book|incollection|phdthesis|masterthesis|www)>/)
+    {
+        foreach my $author (@authors)
+        {
+            print "author $author $lastkey $timestamp\n";
+        }
+        @authors = (); 
+
+        foreach my $ref (@refs)
+        {
+            print "cite $lastkey $ref $timestamp\n";
+        }
+        @refs = ();
     }
 }
