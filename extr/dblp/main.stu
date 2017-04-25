@@ -12,7 +12,7 @@
 
 @clean:
 {
-	rm -f out.* dblp.xml* dblp.dat
+	rm -f out.* ent.* dblp.xml* dblp.dat
 }
 
 dblp.xml:
@@ -39,9 +39,9 @@ dblp.xml:
 	../../sh/mkrel --enforce-edgeweights 'bip' 'unweighted' 
 }
 
->out.dblp_coauthor:  dblp.xml mkco ../mkuniq1
+>out.dblp_coauthor:  dblp.xml mkco ../../sh/mkuniq1
 {
-	./mkco | ../mkuniq1 ent.author 
+	./mkco | ../../sh/mkuniq1 ent.author 
 }
 
 ent.dblp_coauthor:  out.dblp_coauthor; 
