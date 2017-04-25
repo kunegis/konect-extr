@@ -6,7 +6,7 @@
 # out.dblp_coauthor:  co-authorship links between authors 
 #
 
-% version 1.4
+% version 2.4
 
 @all:  out.dblp-cite out.dblp-author out.dblp_coauthor ent.author; 
 
