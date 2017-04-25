@@ -24,6 +24,7 @@ my $key  = "";
 my @authors = (); 
 
 my $year = "";
+my $timestamp = 0;
 
 while (<IN>)
 {
@@ -38,14 +39,7 @@ while (<IN>)
                 foreach my $j (@authors)
                 {
                     next if $i eq $j;
-                    my $i_e = $i;
-                    my $j_e = $j;
-                    $i_e =~ s/ /_/g;
-                    $j_e =~ s/ /_/g;
-                    $i_e = encode("utf-8", decode_entities($i_e)); 
-                    $j_e = encode("utf-8", decode_entities($j_e)); 
-                    my $timestamp = timelocal(1,1,1,1,0,$year);
-                    print "$i_e $j_e 1 $timestamp\n"; 
+                    print "$i $j 1 $timestamp\n"; 
                 }
             }
         }
@@ -57,11 +51,14 @@ while (<IN>)
     elsif (/<year>([0-9]+)<\/year>/)
     {
         $year = $1;
+        $timestamp = timelocal(1,1,1,1,0,$year);
     }
 
     elsif (/<author>(.+)<\/author>/)
     {
         my $author = $1;
+        $author =~ s/ /_/g;
+        $author = encode("utf-8", decode_entities($author)); 
         push(@authors, $author); 
     }
 
@@ -73,16 +70,10 @@ while (<IN>)
             foreach my $j (@authors)
             {
                 next if $i eq $j;
-                my $i_e = $i;
-                my $j_e = $j;
-                $i_e =~ s/ /_/g;
-                $j_e =~ s/ /_/g;
-                $i_e = encode("utf-8", decode_entities($i_e)); 
-                $j_e = encode("utf-8", decode_entities($j_e)); 
-                my $timestamp = timelocal(1,1,1,1,0,$year);
-                print "$i_e $j_e 1 $timestamp\n"; 
+                print "$i $j 1 $timestamp\n"; 
             }
         }
+        @authors = ()
     }
 }
 
