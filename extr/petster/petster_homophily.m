@@ -38,9 +38,9 @@ if OUT < 0,  error;  end;
 
 fprintf(OUT, '\\begin{tabular}{ l | llr | llr | llr } \n');
 fprintf(OUT, '\\toprule \n');
-fprintf(OUT, '& \\multicolumn{3}{|c|}{\\textbf{Catster}} \n');
+fprintf(OUT, '& \\multicolumn{3}{c}{\\textbf{Catster}} \n');
 fprintf(OUT, '& \\multicolumn{3}{|c|}{\\textbf{Dogster}} \n');
-fprintf(OUT, '& \\multicolumn{3}{|c}{\\textbf{Hamsterster}} \\\\ \n');
+fprintf(OUT, '& \\multicolumn{3}{c}{\\textbf{Hamsterster}} \\\\ \n');
 fprintf(OUT, '& \\textbf{\\quad $r_{\\mathrm p}$} & \\textbf{\\quad $r_{\\mathrm a}$} & \\textbf{$r_{\\mathrm rel}$} & \\textbf{\\quad $r_{\\mathrm p}$} ');
 fprintf(OUT, '& \\textbf{\\quad $r_{\\mathrm a}$} & \\textbf{$r_{\\mathrm rel}$} & \\textbf{\\quad $r_{\\mathrm p}$} & \\textbf{\\quad $r_{\\mathrm a}$} & \\textbf{$r_{\\mathrm rel}$} \\\\ \n');
 fprintf(OUT, '\\midrule \n');

@@ -51,7 +51,7 @@ if OUT < 0,  error('tex-petster/auc.tex');  end;
 
 fprintf(OUT, '\\begin{tabular}{ l | r r r | r r r }\n');
 fprintf(OUT, '\\toprule\n');
-fprintf(OUT, ' & \\multicolumn{3}{|c|}{\\textbf{AUC}} & \\multicolumn{3}{|c}{\\textbf{Regression weights}} \\\\ \n');
+fprintf(OUT, ' & \\multicolumn{3}{c|}{\\textbf{AUC}} & \\multicolumn{3}{c}{\\textbf{Regression weights}} \\\\ \n');
 fprintf(OUT, '\\textbf{Feature} & \\textbf{Cat} & \\textbf{Dog} & \\textbf{Ham.} & \\textbf{Cat} & \\textbf{Dog} & \\textbf{Ham.} \\\\ \n'); 
 fprintf(OUT, '\\midrule\n');
 
