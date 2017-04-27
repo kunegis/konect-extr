@@ -1,6 +1,4 @@
-These are the extraction todos for KONECT.
-
-== Current ==
+== Current == 
 * Check DBLP:
 
 Hi Jerome,
@@ -9,6 +7,8 @@ This is How Jing and I am interested in getting the network data of DBLP from yo
 
 Thanks,
 How
+
+* regenerate DBLP (changes by Jun :)
 
 == Simple ==
 * http://www.cs.cornell.edu/home/llee/data/convote.html 
