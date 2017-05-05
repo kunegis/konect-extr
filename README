@@ -3,8 +3,9 @@ KONECT Extraction
 
 This collection of network extraction tools is part of the KONECT
 project, i.e., the Koblenz Network Collection, a network analysis
-project by Jérôme Kunegis and colleagues at the University of
-Koblenz-Landau: 
+project by Jérôme Kunegis at the University of Namur, Belgium, with
+hosting provided by the Institute for Web Science and Technologies
+(WeST) at the University of Koblenz-Landau, Germany. 
 
 http://konect.uni-koblenz.de/ 
 
@@ -115,6 +116,6 @@ In particular:
 
 Also, some directories use Stu and older ones Make.  
 
-If you need help, please politely ask Jérôme Kunegis <kunegis@gmail.com>
-and he may update the code to work.  (Up to websites that have
-disappeared; Jérôme can't do anything about those ;) 
+If you need help, please politely ask Jérôme Kunegis
+<jerome.kunegis@unamur.be> and he may update the code to work.  (Up to
+websites that have disappeared; Jérôme can't do anything about those ;)
