@@ -180,6 +180,18 @@ How
 * http://www.correlatesofwar.org/data-sets/direct-contiguity/direct-contiguity-v3-1
 * which country borders which country (same with subnational entities)
 * http://icwsm.cs.mcgill.ca/
+* https://ls11-www.cs.uni-dortmund.de/staff/morris/graphkerneldatasets
+
+* Dear Jérôme,
+I am very glad to hear from you! I wish to contribution a
+co-authorship network of 402.39K authors on Google Scholar
+(https://github.com/chenyang03/co-authorship-network). The
+corresponding paper is our work "Building and Analyzing a Global
+Co-Authorship Network Using Google Scholar Data" in BigScholar'17
+(http://user.informatik.uni-goettingen.de/%7Eychen/papers/GoogleScholar_BigScholar17.pdf).
+Thanks so much!
+Best regards,
+Yang
 
 == Needs complex extraction ==
 * http://openplanb.tumblr.com/
