@@ -1,4 +1,5 @@
 == Current == 
+
 * Check DBLP:
 
 Hi Jerome,
@@ -9,6 +10,12 @@ Thanks,
 How
 
 * regenerate DBLP (changes by Jun :)
+
+* tntp-ChicagoRegional:  contains no triangles, although it is
+  unipartite.  Check what is up with that.  
+
+* Add the tag #missingmultiplicity in networks where appropriate:  in
+  particular, in communication networks that don't have multiple edges. 
 
 == Simple ==
 * http://www.cs.cornell.edu/home/llee/data/convote.html 
