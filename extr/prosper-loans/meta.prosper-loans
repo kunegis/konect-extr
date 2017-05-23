@@ -7,3 +7,5 @@ entity-names:  person
 relationship-names:  loan
 extr:  prosper-loans
 url:  http://mlg.ucd.ie/datasets/prosper.html
+cite:  konect:prosper-loans
+
