@@ -1,0 +1,13 @@
+name:  Convote
+code:  CO
+url:  http://www.cs.cornell.edu/home/llee/data/convote.html
+category:  Misc
+cite:  konect:convote
+long-description:  In this network, nodes are politicians speaking in the United States Congress, and a directed edge denotes that a speaker mentions another speaker.  The weight of an edge (positive or negative) denotes whether the mention is in support of or opposition to the mentioned politician.  Multiple parallel edges are possible.  Loops are allowed, i.e., speakers may mention themselves. 
+entity-names:  politician
+relationship-names:  mention
+extr:  convote
+timeiso:  2005
+tags:  #loop
+
+
