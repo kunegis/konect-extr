@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 #
 # Count rel,obj1,obj2 for bipartite datasets. 
 # Does not require previous invokation of mkuniq

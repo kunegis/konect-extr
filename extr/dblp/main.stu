@@ -27,10 +27,13 @@ dblp.xml:
 	./mkdblp 
 }
 
->out.dblp-cite:  <dblp.dat 
+>out.dblp-cite:  <dblp.dat
+# Note:  we use rmmulti due to erroneous data in the DBLP dataset, in
+# which certain (paperA->paperB) citation edges are included multiple
+# times, in all likelihood wrongly.  See 'DUPLICATES'. 
 {
-	sed -re '/^cite /!d;s,^cite ,,' | 
-	../../sh/mkrel --enforce-edgeweights 'asym' 'unweighted'
+	echo '% asym unweighted'
+	sed -E -e 's,^cite (\S+) (\S+) (\S+),\1 \2 1 \3,;t;d' | ../../sh/mkuniq1 | ../../sh/rmmulti
 }
 
 >out.dblp-author:  <dblp.dat 
@@ -39,7 +42,7 @@ dblp.xml:
 	../../sh/mkrel --enforce-edgeweights 'bip' 'unweighted' 
 }
 
->out.dblp_coauthor:  dblp.xml mkco ../../sh/mkuniq1
+>out.dblp_coauthor:  dblp.xml mkco 
 {
 	./mkco | ../../sh/mkuniq1 ent.author 
 }

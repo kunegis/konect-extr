@@ -5,7 +5,7 @@ description: Publication–publication citations
 url: http://dblp.uni-trier.de/xml/
 cite: konect:DBLP
 extr: dblp
-long-description: This is the citation network of DBLP, a database of scientific publications such as papers and books.  Each node in the network is a publication, and each edge represents a citation of a publication by another publication.  In other words, the directed edge (A → B) denotes that publication A cites publication B.  Publications are allowed to cite themselves, and therefore the network contains loops.
+long-description: This is the citation network of DBLP, a database of scientific publications such as papers and books.  Each node in the network is a publication, and each edge represents a citation of a publication by another publication.  In other words, the directed edge (A → B) denotes that publication A cites publication B.  Publications are allowed to cite themselves, and therefore the network contains loops.  The original dataset contains a small number (<100) of erroneous duplicate edges, i.e., a paper citing another paper multiple times.  These have been removed from this version of the dataset. 
 tags: #loop #regenerate
 entity-names: publication
 relationship-names: citation

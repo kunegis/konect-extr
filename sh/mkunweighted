@@ -1,3 +1,5 @@
+DEPRECATED
+
 #! /bin/sh
 #
 # Convert a weighted graph to an unweighted graph.

@@ -81,7 +81,7 @@ while (<STDIN>) {
 
     my $id_user_new_string = entity_id($id_user_old); 
     my $id_item_new_string = entity_id($id_item_old); 
-    print "$id_user_new_string $id_item_new_string $rol\n";
+    print "$id_user_new_string\t$id_item_new_string\t$rol\n";
 }
 
 if ($write_entities)

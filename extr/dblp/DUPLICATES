@@ -1,0 +1,38 @@
+# List of pairs of papers (A,B) such that A cites B multiple times.  We
+# filter these out. 
+
+books/aw/AbiteboulHV95 conf/dbpl/DongS93
+books/aw/AbiteboulHV95 conf/iclp/MorrisUG86
+books/aw/AbiteboulHV95 journals/jacm/BeeriV84
+books/aw/AbiteboulHV95 journals/ngc/RohmerLK86
+books/cs/Ullman89 journals/tse/MenasceM79
+books/cu/Appel2002 books/fm/GareyJ79
+books/cu/Appel2002 conf/pldi/Boehm96
+books/mitp/SaakeH99 journals/tkde/ChenHY96
+conf/dasfaa/UnlandS89 conf/sigmod/LorieP83
+conf/dbpl/AlbanoDGMMOS89 conf/oodbs/88
+conf/er/Chen79 conf/er/McLeodK79
+conf/er/Hainaut91a conf/er/BouzeghoubC90
+conf/er/Hainaut91a conf/er/ReinerBFLMRR86
+conf/icde/KiernanM91 journals/sigmod/StonebrakerHP89
+conf/icde/LeeL90 journals/sigmod/Bancilhon86
+conf/icdt/BidoitL90 conf/pods/GelderRS88
+conf/icdt/ChanH86 journals/tods/MaierUV84
+conf/pods/IbarraS97 conf/pods/LevyRU96
+conf/pods/Tsur91 conf/sigmod/GangulyST90
+conf/sigmod/BreitbartS88 journals/debu/BreitbartST87
+conf/sigmod/ChanDFGRS83 conf/pods/Dayal83
+conf/sigmod/FukudaMMT96 conf/vldb/NgH94
+conf/sigmod/Swartwout77 conf/sigmod/Shoshani75
+conf/ssdbm/RafanelliS90 journals/tse/ShoshaniW85
+conf/vldb/AdibaCDGB78 conf/sigmod/PaoliniP77
+conf/vldb/ChenY77 journals/cacm/Cardenas73
+conf/vldb/SteenhagenABB94 conf/edbt/SteenhagenAB94
+journals/csur/ShethL90 journals/tse/LarsonNE89
+journals/csur/YuC84 journals/tods/BernsteinGWRR81
+journals/sigmod/Palpanas00 conf/ssdbm/PoosalaG99
+journals/sigmod/Roussopoulos98 conf/sigmod/BlakeleyLT86
+journals/tods/LiuHD98 conf/icdcs/Kumar90
+journals/vldb/AbiteboulB95 conf/lics/HillebrandKM93
+journals/vldb/AtkinsonM95 conf/pos/KirbyCCMDF92
+

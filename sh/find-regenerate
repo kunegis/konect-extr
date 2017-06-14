@@ -3,7 +3,7 @@
 #prints "NETWORKNAME FOLDER" of networks supporting #regenerate
 ./find-tag '#regenerate' | while read line
 do
-	NETWORK=`echo $line|awk -F/ '{print $NF}'|cut -d. -f2|cut -d_ -f1`
-	FOLDER=`echo $line|rev|cut -d/ -f1 --complement|rev`
-	echo "$NETWORK $FOLDER"
+	NETWORK="`echo $line|awk -F/ '{print $NF}'|cut -d. -f2|cut -d_ -f1`"
+	DIRECTORY="`echo $line|rev|cut -d/ -f1 --complement|rev`"
+	echo "$NETWORK $DIRECTORY"
 done

@@ -15,7 +15,7 @@ Note:  many scripts in this directory are deprecated.
 See each script for a detailed description of that script's function. 
 
 Scripts in this directory are written in the shell, in Perl 5, in Sed,
-and in AWK. 
+and in AWK.  AWK is deprecated in favor of Perl 5. 
 
 
 Preprocessing
@@ -37,6 +37,7 @@ roughly in the order they should be used:
 - mkunweighted:  Make unweighted
 - mkuniq1:       Give unique node IDs (for unipartite networks)
 - mkuniq:        Give unique node IDs (for bipartite networks)
+- rmmulti:	 Collapse multiple edges
 
 
 All-in-one Solution
@@ -46,4 +47,3 @@ Use 'mkrel' to generate the dataset at once.  This has lots of options.
 
 This method is semi-deprecated, but it is the only method that is able
 to generate entity files. 
-

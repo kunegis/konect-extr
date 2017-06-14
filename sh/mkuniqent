@@ -1,3 +1,5 @@
+DEPRECATED
+
 #! /usr/bin/perl -w
 #
 #
@@ -195,7 +197,7 @@ while (<STDIN>)
     }
     my $id_item_new_string = "" . $id_item_new;
 
-    print "$id_user_new_string $id_item_new_string $rating\n";
+    print "$id_user_new_string\t$id_item_new_string\t$rating\n";
     addent($id_user_old,$id_user_new,$id_item_old,$id_item_new,$rating);
 
 }

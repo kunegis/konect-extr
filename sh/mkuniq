@@ -51,5 +51,5 @@ while (<>)
     }
     my $id_item_new_string = "" . $id_item_new;
 
-    print "$id_user_new_string $id_item_new_string $rating\n";
+    print "$id_user_new_string\t$id_item_new_string\t$rating\n";
 }

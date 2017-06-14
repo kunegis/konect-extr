@@ -1,3 +1,5 @@
+DEPRECATED
+
 #! /bin/sh
 #
 # Build all directories.  This is out of date, because it only calls

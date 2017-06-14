@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# Remove multiple edges.  This discards subsequent appearances of the
+# same ID-ID pair.  When a dataset consists only of two columns, this
+# can be realized with sort -u, but when more columns are present, this
+# is needs the more complex -k option.
+#
+# Works only with single tab characters.
+#
+# This assumes all edges are directed -- for an undirected network, the
+# edges should first be put in canonical order. 
+#
+
+LC_ALL=C sort -u -t '	' -k 1,2
