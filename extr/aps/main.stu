@@ -1,0 +1,33 @@
+#
+# This project uses Stu instead of Make.  Get it at:
+#
+# https://github.com/kunegis/stu
+#
+
+% version 2.4
+
+@all: data/citation-network;
+
+$DIR:
+{
+    mkdir -p $DIR
+}
+
+>data/paper-timestamp:
+    extr-paper-timestamp.py
+    -p aps-dataset-metadata-2015/
+    -p data/
+{
+    find aps-dataset-metadata-2015/ -type f -print0 | xargs -0 python extr-paper-timestamp.py
+}
+
+>data/citation-network:
+    extr-citation.py
+    data/paper-timestamp
+    -p aps-dataset-citations-2015/aps-dataset-citations-2015.csv
+{
+    python extr-citation.py \
+        aps-dataset-citations-2015/aps-dataset-citations-2015.csv \
+        data/paper-timestamp | \
+    ../common/mkuniq1 data/id-doi-dict
+}
