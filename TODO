@@ -4,7 +4,7 @@
 * Add the tag #missingmultiplicity in networks where appropriate:  in
   particular, in communication networks that don't have multiple edges. 
 * Check that all datasets have a bibtex citation that is present in konect.bib 
-* run @check 
+* run @check, and in particular dat/check-meta
 
 == Simple ==
 * http://www.zubiaga.org/resources/socialbm0311/
