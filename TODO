@@ -8,8 +8,6 @@
 
 == Simple ==
 * http://www.zubiaga.org/resources/socialbm0311/
-* political interactions from Brandes et al. http://www.inf.uni-konstanz.de/algo/research/conflict/#downloads
-* Bag of Words http://archive.ics.uci.edu/ml/datasets/Bag+of+Words
 * http://caw2.barcelonamedia.org/node/7
 * http://www.grouplens.org/node/425#attachments
 * http://www.datawrangling.com/some-datasets-available-on-the-web
@@ -17,12 +15,8 @@
 * Yahoo song review:    Finally, we present experiments over a set of Yahoo song reviews. Here, 14,596 songs are reviewed by a total of 120,397 reviewers. Each review has a score ranging from ‘1’ (the reviewer does not like the song) to ‘5’ (the reviewer liked the song). Further, each song is categorized into one of five genres: Rock, R&B, Pop, Rap, and Country. [Structured Metric Learning for High Dimensional Problems, Jason V. Davis & Inderjit S. Dhillon]
 * WikiLens
 * Wikipedia article×term bipartite graph for all languages
-* http://twitter.mpi-sws.org/
 * http://demeter.inf.ed.ac.uk/index.php?option=com_content&view=category&layout=blog&id=1&Itemid=2
 * http://thepiratebay.org/torrent/5722635/Facebook_directory_-_personal_details_for_100_million_users
-* all twitter datasets from file.isweb:/data/workinggroup/twitter-datasets/
-* flickr from Rabeeh
-** /data/www/klaasd/flickr/ auf file.isweb (mail Klaas)
 * sergej:  cosmiq.de (a.k.a. Lycos IQ)
 * Christian Bauckhage:  http://build.kiva.org/
 * Christian Bauckhage:  lending club
@@ -213,3 +207,4 @@ Yang
 * Category tree from Wikipedia
 * wordnet antonym
 * http://www.wikipathways.org/index.php/Download_Pathways
+* political interactions from Brandes et al. http://www.inf.uni-konstanz.de/algo/research/conflict/#downloads

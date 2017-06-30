@@ -1,0 +1,6 @@
+DATASETS
+dep.*
+docword.*
+meta.*
+*~
+out.*

@@ -1,0 +1,38 @@
+#
+# Bag-of-words data from
+#
+# http://archive.ics.uci.edu/ml/datasets/Bag+of+Words
+#
+
+@all:  [dep.all];
+>dep.all:  DATASETS {
+	for dataset in $(cat DATASETS) ; do
+		echo @dataset."$dataset"
+	done
+}
+
+DATASETS = { kos nips enron nytimes pubmed }
+
+@dataset.$dataset:  out.bag-$dataset meta.bag-$dataset;
+
+>out.bag-$dataset:
+	<docword.$dataset.txt
+{
+	echo '% bip positive'
+	sed -E -e '1,3d' | ../../sh/mkuniq 
+}
+
+docword.$dataset.txt
+{
+	rm -f docword."$dataset".txt docword."$dataset".txt.gz
+	wget http://archive.ics.uci.edu/ml/machine-learning-databases/bag-of-words/docword."$dataset".txt.gz \
+	     -O docword."$dataset".txt.gz
+	gunzip -f docword."$dataset".txt.gz
+	touch docword."$dataset".txt 
+}
+
+>meta.bag-$dataset:  <template.meta  metafile.$dataset
+{
+	sed -E -f metafile.$dataset
+}
+
