@@ -194,6 +194,8 @@ Yang
 * http://www-levich.engr.ccny.cuny.edu/webpage/hmakse/software-and-data/
 * for everything from wikipedia, extract it for *all* languages.  This will increase the number of networks in KONECT accordingly.
 * Add missing datasets from SNAP.  Even multiple versions of the same actual dataset.
+* https://github.com/gephi/gephi/wiki/Datasets
+* http://networkrepository.com/
 
 == Needs complex extraction ==
 * http://openplanb.tumblr.com/
