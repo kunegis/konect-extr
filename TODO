@@ -5,7 +5,6 @@
 * run @check, and in particular dat/check-meta
 
 == Simple ==
-* http://www.grouplens.org/node/425#attachments
 * http://www.datawrangling.com/some-datasets-available-on-the-web
 * http://www.cs.cornell.edu/People/pabo/movie-review-data/
 * Yahoo song review:    Finally, we present experiments over a set of Yahoo song reviews. Here, 14,596 songs are reviewed by a total of 120,397 reviewers. Each review has a score ranging from ‘1’ (the reviewer does not like the song) to ‘5’ (the reviewer liked the song). Further, each song is categorized into one of five genres: Rock, R&B, Pop, Rap, and Country. [Structured Metric Learning for High Dimensional Problems, Jason V. Davis & Inderjit S. Dhillon]
@@ -207,4 +206,3 @@ Yang
 * http://www.wikipathways.org/index.php/Download_Pathways
 * political interactions from Brandes et al. http://www.inf.uni-konstanz.de/algo/research/conflict/#downloads
 * http://www.zubiaga.org/resources/socialbm0311/ (easy big very large, and we have almost the same already)
-
