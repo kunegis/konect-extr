@@ -42,7 +42,7 @@ if expr $network : ^com- >/dev/null ; then format=sym ; fi
 # Weights 
 #
 weights=unweighted
-if expr $network : ^soc-sign- >/dev/null ; then
+if expr "$network" : ^soc-sign- >/dev/null ; then
 	weights=signed
 fi
 
@@ -51,5 +51,5 @@ fi
 	sed -re 's/\t/ /g' |  
 	$rm_weights | 
 	$rm_loops | 
-	../mkrel "$format" "$weights"
+	../../sh/mkrel "$format" "$weights"
 } >out/out."$network"

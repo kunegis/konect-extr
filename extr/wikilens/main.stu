@@ -1,0 +1,29 @@
+#
+# WikiLens -- https://grouplens.org/datasets/wikilens/
+# 
+
+@all:  meta.wikilens-ratings  out.wikilens-ratings;
+
+meta.wikilens-ratings;
+
+>out.wikilens-ratings:
+	<wikilens.20080202.data/dump.txt  mk convdate
+{
+	./mk
+}
+
+wikilens.20080202.tar.gz:
+{
+	rm -f wikilens.20080202.tar.gz
+	wget http://files.grouplens.org/datasets/wikilens/wikilens.20080202.tar.gz -O wikilens.20080202.tar.gz
+	touch -c wikilens.20080202.tar.gz
+}
+
+wikilens.20080202.data/dump.txt:
+	wikilens.20080202.tar.gz
+{
+	rm -Rf wikilens.20080202.data
+	tar xfvvz wikilens.20080202.tar.gz
+	touch -c wikilens.20080202.data/*
+	gunzip wikilens.20080202.data/dump.txt.gz
+}

@@ -74,14 +74,14 @@ while (<STDIN>) {
 
     if(/^\#/) { next; }
 
-    /^\s*(\S+)\s+(\S+)\s*(.*)$/ or die "*** error:  invalid input:  >>$_<<";
+    /^\s*(\S+)\s+(\S+)(.*)$/ or die "*** error:  invalid input:  >>$_<<";
     my $id_user_old= $1;
     my $id_item_old= $2;
     my $rol= $3; 
 
     my $id_user_new_string = entity_id($id_user_old); 
     my $id_item_new_string = entity_id($id_item_old); 
-    print "$id_user_new_string\t$id_item_new_string\t$rol\n";
+    print "$id_user_new_string\t$id_item_new_string$rol\n";
 }
 
 if ($write_entities)

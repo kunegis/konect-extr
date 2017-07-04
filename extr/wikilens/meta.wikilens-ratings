@@ -1,0 +1,12 @@
+name:  WikiLens
+code:  WL
+url:   https://grouplens.org/datasets/wikilens/
+category:  Rating
+description:  User–ratee rating
+cite:  konect:wikilens
+long-description:  The is the bipartite rating network of WikiLens, an academic project to create a wiki-like site (WikiLens) on which any type of could be rated.
+entity-names:  user, ratee
+relationship-names:  rating
+extr:  wikilens
+timeiso:  2004/2008
+tags:

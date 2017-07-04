@@ -1,0 +1,15 @@
+#! /usr/bin/perl -w
+
+use strict;
+use warnings FATAL => 'all';
+
+use HTTP::Date;
+
+while (<>) {
+    /^(\S+	\S+	\S+	)(.*)$/  or die "$!";
+    my $date_text = $2;
+    my $date = str2time($date_text);
+##    print "date_text:$date_text\n"; 
+    print "$1$date\n"; 
+}
+

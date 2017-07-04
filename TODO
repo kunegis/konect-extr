@@ -1,14 +1,10 @@
 == Fixes == 
-* tntp-ChicagoRegional:  contains no triangles, although it is
-  unipartite.  Check what is up with that.  
 * Add the tag #missingmultiplicity in networks where appropriate:  in
   particular, in communication networks that don't have multiple edges. 
 * Check that all datasets have a bibtex citation that is present in konect.bib 
 * run @check, and in particular dat/check-meta
 
 == Simple ==
-* http://www.zubiaga.org/resources/socialbm0311/
-* http://caw2.barcelonamedia.org/node/7
 * http://www.grouplens.org/node/425#attachments
 * http://www.datawrangling.com/some-datasets-available-on-the-web
 * http://www.cs.cornell.edu/People/pabo/movie-review-data/
@@ -191,6 +187,7 @@ Yang
 * https://github.com/gephi/gephi/wiki/Datasets
 * http://networkrepository.com/
 * http://snap.stanford.edu/temporal-motifs/data.html
+* http://www.bgu.ac.il/~bargera/tntp/Austin/Austin_net.txt
 
 == Needs complex extraction ==
 * http://openplanb.tumblr.com/
@@ -209,3 +206,5 @@ Yang
 * wordnet antonym
 * http://www.wikipathways.org/index.php/Download_Pathways
 * political interactions from Brandes et al. http://www.inf.uni-konstanz.de/algo/research/conflict/#downloads
+* http://www.zubiaga.org/resources/socialbm0311/ (easy big very large, and we have almost the same already)
+

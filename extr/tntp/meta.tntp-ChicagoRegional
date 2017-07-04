@@ -2,9 +2,10 @@ category:  Infrastructure
 code:  CR
 name:  Chicago
 description:  Node–node connection
-long-description:  This is the road transportation network of the Chicago region (USA).  Nodes are transport nodes, and edges are connections.  
+long-description:  This is the directed road transportation network of the Chicago region (USA).  Nodes are transport nodes, and edges are directed connections.  The dataset does not contain any triangles. 
 url:  http://www.bgu.ac.il/~bargera/tntp/
 extr:  tntp
 entity-names:  node,node
 relationship-names:  road
 cite:  konect:tntp-chicago1, konect:tntp-chicago2
+tags:  #trianglefree

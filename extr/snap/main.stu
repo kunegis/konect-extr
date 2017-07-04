@@ -11,7 +11,7 @@
 # https://github.com/kunegis/stu
 #
 
-% version 1.15
+% version 2.4 
 
 @all: 
 	@all.datasets @all.datasets-citation 
@@ -81,14 +81,14 @@ SYMDATASETS = {
 	done
 }
 
-out/out.$name:  out/$name.txt SYMDATASETS mk ../mkrel
+out/out.$name:  out/$name.txt SYMDATASETS mk 
 {
 	if grep -qE '(^|[[:space:]])'"$name"'($|[[:space:]])' SYMDATASETS ; then
 
 		# This is a SYMDATASETS dataset
 		sed -e '/^#/d' out/"$name".txt | 
 		tr -s ' ' ' ' | 
-		../mkrel "sym" "unweighted" >out/out."$name"
+		../../sh/mkrel "sym" "unweighted" >out/out."$name"
 
 	else
  		./mk "$name"
@@ -101,7 +101,7 @@ work/ego-$name:  work/$name.tar.gz
 	mv work/"$name" work/ego-"$name"
 }
 
-work/$name.tar.gz: ! work
+work/$name.tar.gz: -p work
 {
 	wget --no-use-server-timestamps -O work/"$name".tar.gz http://snap.stanford.edu/data/"$name".tar.gz 
 }
@@ -114,7 +114,7 @@ work: {
 	mkdir -p work 
 }
 
-out/com-livejournal.txt:  !out
+out/com-livejournal.txt:  -p out
 {
 	wget --no-use-server-timestamps http://snap.stanford.edu/data/bigdata/communities/com-lj.all.cmty.txt.gz \
 		-O out/com-livejournal.txt.gz
@@ -124,7 +124,7 @@ out/com-livejournal.txt:  !out
 	fromdos com-livejournal.txt
 }
 
-out/com-$name.txt:  !out
+out/com-$name.txt:  -p out
 {
 	wget --no-use-server-timestamps http://snap.stanford.edu/data/bigdata/communities/com-"$name".ungraph.txt.gz \
 		-O out/com-"$name".ungraph.txt.gz
@@ -134,7 +134,7 @@ out/com-$name.txt:  !out
 	mv com-"$name".ungraph.txt com-"$name".txt
 }
 
-out/$name.txt:  !out
+out/$name.txt:  -p out
 {
 	wget --no-use-server-timestamps http://snap.stanford.edu/data/"$name".txt.gz -O out/"$name".txt.gz
 	cd out
@@ -143,19 +143,14 @@ out/$name.txt:  !out
 	fromdos "$name".txt
 }
 
-# out/out.$name:  out/$name.txt mk
-# {
-# 	./mk "$name"
-# }
-
 # Special collaboration datasets derived from citation (cit-*) datasets
 # by bipartite projection. 
 >out/out.ca-$name:  
-	mkcit ../mkrel
+	mkcit 
 	out/$name.txt out/$name-dates.txt 
 {
 	./mkcit "$name" | 
-	../mkrel 'sym' 'positive' 
+	../../sh/mkrel 'sym' 'positive' 
 }
 
 out/tmp.elec:  mkelec out/wikiElec.ElecBs3.txt
@@ -165,10 +160,10 @@ out/tmp.elec:  mkelec out/wikiElec.ElecBs3.txt
 
 >out/out.elec:  <out/tmp.elec
 {
-	../mkrel --enforce-edgeweights 'asym' 'signed' 
+	../../sh/mkrel --enforce-edgeweights 'asym' 'signed' 
 }
 
->out/out.ego-$name:  work/ego-$name !out
+>out/out.ego-$name:  work/ego-$name -p out
 {
 	{ 
 		find work/ego-"$name"/ -name '*.circles' | 
