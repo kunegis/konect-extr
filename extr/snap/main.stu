@@ -1,6 +1,6 @@
 #
 # Large networks from the Stanford Network Analysis Project (SNAP) by Jure
-# Leskovec. 
+# Leskovec and colleagues. 
 #
 # http://snap.stanford.edu/
 #
@@ -15,7 +15,7 @@
 
 @all: 
 	@all.datasets @all.datasets-citation 
-	out/out.elec @all.egodatasets @all.symdatasets 
+	out/out.elec meta.elec @all.egodatasets @all.symdatasets 
 ; 
 
 # For these datasets, also extract the temporal co-citation graph. 
@@ -54,7 +54,8 @@ SYMDATASETS = {
 >dep.all.datasets:  DATASETS
 {
 	for name in $(cat DATASETS) ; do
-		echo out/out."$name" 
+		echo out/out."$name"
+		echo meta."$name"
 	done
 }
 
@@ -63,6 +64,7 @@ SYMDATASETS = {
 {
 	for name in $(cat SYMDATASETS) ; do
 		echo out/out."$name"
+		echo meta."$name"
 	done
 }
 
@@ -70,7 +72,8 @@ SYMDATASETS = {
 >dep.all.datasets-citation:  DATASETS_CITATION
 {
 	for name in $(cat DATASETS_CITATION) ; do
-		echo out/out.ca-"$name" 
+		echo out/out.ca-"$name"
+		echo meta.ca-"$name"
 	done
 }
 
@@ -78,6 +81,7 @@ SYMDATASETS = {
 >dep.all.egodatasets: EGODATASETS {
 	for name in $(cat EGODATASETS) ; do
 		echo out/out.ego-"$name"
+		echo meta.ego-"$name"
 	done
 }
 

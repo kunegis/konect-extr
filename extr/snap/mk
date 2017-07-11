@@ -22,7 +22,7 @@ fi
 #
 if [ "$network" = ca-AstroPh ] || [ "$network" = soc-LiveJournal1 ]
 then
-	rm_loops="../mkrmdup"
+	rm_loops="../../sh/mkrmdup"
 else
 	rm_loops=cat
 fi

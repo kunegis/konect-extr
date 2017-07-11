@@ -8,6 +8,7 @@ extr: snap
 entity-names: user
 relationship-names: message 
 long-description: This is the communication network of the English Wikipedia. Nodes represent users of the English Wikipedia, and an edge from user A to user B denotes that user A has written a message on the talk page of user B. 
+tags:  #missingmultiplicity 
 n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
 n3-prefix-m: konect_wiki_talk_user: <http://konect.uni-koblenz.de/networks/wiki-Talk/User/> .
 n3-prefix-k: konect_wiki_talk_page: <http://konect.uni-koblenz.de/networks/wiki-Talk/Wall/> .

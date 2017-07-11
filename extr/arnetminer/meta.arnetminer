@@ -1,0 +1,13 @@
+name:  Arnetminer ACM
+code:  AC
+url:   http://www.arnetminer.org/citation
+category:   Citation
+description:  Publication–publication citation
+cite:  konect:arnetminer
+long-description:  The directed citation network of ACM papers as extracted by the ArnetMiner project.  Directed edges of the from A→B denote a paper A citing a paper B.
+entity-names:  publication
+relationship-names:  citation
+extr:  arnetminer
+timeiso:  1976/2016
+tags:  #loop
+

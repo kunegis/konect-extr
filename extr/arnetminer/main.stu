@@ -1,0 +1,29 @@
+#
+# ArnetMiner -- citation datasets
+#
+# http://www.arnetminer.org/citation
+#
+
+@all:  meta.arnetminer  out.arnetminer;
+
+meta.arnetminer;
+
+>citation-acm-v8.txt:  citation-acm-v8.txt.tgz
+{
+	gunzip -f -k -c citation-acm-v8.txt.tgz
+}
+
+# Note:  the filename is wrong, as this is not a tarball, but simply a
+# gnuzip-compressed file.  
+citation-acm-v8.txt.tgz:
+{
+	wget --no-use-server-timestamps https://static.aminer.org/lab-datasets/citation/citation-acm-v8.txt.tgz -O citation-acm-v8.txt.tgz
+}
+
+>out.arnetminer:
+	<citation-acm-v8.txt
+	mk
+{
+	echo '% asym unweighted'
+	./mk | ../../sh/mkuniq1 
+}

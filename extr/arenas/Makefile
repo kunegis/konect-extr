@@ -1,3 +1,5 @@
+DEPRECATE -- use main.stu 
+
 #
 # Alex Arenas - Network datasets
 #

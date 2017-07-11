@@ -1,0 +1,99 @@
+#
+# Alex Arenas -- Network datasets
+#
+# http://deim.urv.cat/~aarenas/data/welcome.htm
+# 
+
+@all:
+	out.arenas-email out.arenas-pgp out.arenas-meta out.arenas-jazz
+	meta.arenas-email meta.arenas-pgp meta.arenas-meta meta.arenas-jazz;
+
+#
+# ZIP files
+#
+email.zip:
+{
+	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/email.zip -O email.zip
+}
+
+jazz.zip:
+{
+	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/jazz.zip -O jazz.zip
+}
+
+PGP.zip:
+{
+	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/PGP.zip -O PGP.zip
+}
+
+celegans_metabolic.zip:
+{
+	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/celegans_metabolic.zip -O celegans_metabolic.zip
+}
+
+#
+# Text files
+#
+email.txt:  email.zip
+{
+	unzip email.zip
+	touch -c email.txt
+}
+
+jazz.net:  jazz.zip
+{
+	unzip jazz.zip
+	touch -c jazz.net
+}
+
+PGPgiantcompo.net:  PGP.zip
+{
+	unzip PGP.zip
+	touch -c PGPgiantcompo.net
+}
+
+celegans_metabolic.net:  celegans_metabolic.zip
+{
+	unzip celegans_metabolic.zip
+	touch -c celegans_metabolic.net
+}
+
+#
+# OUT files
+#
+
+# Note:  the data does *not* have multiple edges, and it is also
+# undirected, contains each edge in both directions. 
+>out.arenas-email:  <email.txt	
+{
+	echo '% sym unweighted'
+	<email.txt sed -E -e '/^([0-9]+)\s+\1\s/d' |
+		../../sh/mkuniq1 | 
+		awk '$$1 < $$2 {print $$1, $$2}'
+}
+
+# The file jazz.net contains each edge just once.  The network is undirected. 
+>out.arenas-jazz:  <jazz.net
+{
+	echo '% sym unweighted' 
+        sed -E -e '/^\*/d;s,^\s*([0-9]+)\s+([0-9]+)\s.*$$,\1	\2,' |
+		../../sh/mkuniq1 |
+		../../sh/mksym
+} 
+
+>out.arenas-pgp:  PGPgiantcompo.net
+{
+	sed -E -e '/"v/d;/^\*/d;s,\s+1\s+$$,,' PGPgiantcompo.net |
+		../../sh/mkrel sym unweighted 
+}
+
+>out.arenas-meta:  <celegans_metabolic.net
+{
+	echo '% sym positive'
+	sed -E -e '/"v/d;/^\*/d;s,\s+1\s+$$,,' |
+		../../sh/mkuniq1
+} 
+
+@clean: {
+	rm -f out.* *.zip *.net *.txt
+}

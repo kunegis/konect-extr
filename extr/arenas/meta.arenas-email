@@ -5,7 +5,7 @@ description: User–user emails
 url: http://deim.urv.cat/~aarenas/data/welcome.htm
 cite: konect:guimera03 
 extr: arenas
-long-description:  This is the email communication network at the University Rovira i Virgili in Tarragona in the south of Catalonia in Spain. Nodes are users and each edge represents that at least one email was sent.  The direction of emails or the number of emails are not stored.
-tags: #missingorientation
+long-description:  This is the email communication network at the University Rovira i Virgili in Tarragona in the south of Catalonia in Spain. Nodes are users and each edge represents that at least one email was sent.  The direction of emails and the number of emails between two persons are not stored.
+tags: #missingorientation #missingmultiplicity 
 entity-names: user
 relationship-names: communication  

@@ -1,41 +1,6 @@
 == Fixes == 
-* Add the tag #missingmultiplicity in networks where appropriate:  in
-  particular, in communication networks that don't have multiple edges. 
-* Check that all datasets have a bibtex citation that is present in konect.bib 
-* run @check, and in particular dat/check-meta
 
 == Simple ==
-* http://www.datawrangling.com/some-datasets-available-on-the-web
-* http://www.cs.cornell.edu/People/pabo/movie-review-data/
-* Yahoo song review:    Finally, we present experiments over a set of Yahoo song reviews. Here, 14,596 songs are reviewed by a total of 120,397 reviewers. Each review has a score ranging from ‘1’ (the reviewer does not like the song) to ‘5’ (the reviewer liked the song). Further, each song is categorized into one of five genres: Rock, R&B, Pop, Rap, and Country. [Structured Metric Learning for High Dimensional Problems, Jason V. Davis & Inderjit S. Dhillon]
-* WikiLens
-* Wikipedia article×term bipartite graph for all languages
-* http://demeter.inf.ed.ac.uk/index.php?option=com_content&view=category&layout=blog&id=1&Itemid=2
-* http://thepiratebay.org/torrent/5722635/Facebook_directory_-_personal_details_for_100_million_users
-* sergej:  cosmiq.de (a.k.a. Lycos IQ)
-* Christian Bauckhage:  http://build.kiva.org/
-* Christian Bauckhage:  lending club
-* HuDiNe:  http://barabasilab.neu.edu/projects/hudine/resource/data/data.html
-* http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html
-* Damien:  new AS dataset appcluster directory, there is a file called adjacency.gz
-* http://synthese.wordpress.com/2010/11/02/mendeley-data-vs-netflix-data/
-* http://infolab.tamu.edu/resources/dataset/
-* everything from ROBUST
-* SNAP Twitter dataset:  file.isweb:/data/workinggroup/twitter-datasets/twitter-snap/
-* the wikipedia hyperlink graph and category tree are available in an easy to parse format on download.wikimedia.org
-* http://dev.mendeley.com/datachallenge/
-* DBLP:  build the author-conference bipartite network with timestamps
-* multilingual dbpedia
-* what wikipedia user speaks what language (or commons user, etc.)
-* http://www.gnuband.org/2011/04/19/wikipedia_datasets_released/
-* http://www.graph-database.org/
-* http://diglib.stanford.edu:8091/~testbed/doc2/WebBase/
-* http://www.graph-archive.org/doku.php
-* http://webscope.sandbox.yahoo.com/
-* Damien:  http://anonymity-in-bitcoin.blogspot.com/2011/09/code-datasets-and-spsn11.html
-* http://www.cliquecluster.org/data
-* kdd cup 2012 dataset
-* http://www.arnetminer.org/citation
 * http://graphlab.org/datasets.html
 * http://data.stackexchange.com/
 * DIMACS challenge
@@ -183,6 +148,7 @@ Yang
 * http://www-levich.engr.ccny.cuny.edu/webpage/hmakse/software-and-data/
 * for everything from wikipedia, extract it for *all* languages.  This will increase the number of networks in KONECT accordingly.
 * Add missing datasets from SNAP.  Even multiple versions of the same actual dataset.
+** http://snap.stanford.edu/data/wiki-RfA.html : has negative edges 
 * https://github.com/gephi/gephi/wiki/Datasets
 * http://networkrepository.com/
 * http://snap.stanford.edu/temporal-motifs/data.html
@@ -206,3 +172,13 @@ Yang
 * http://www.wikipathways.org/index.php/Download_Pathways
 * political interactions from Brandes et al. http://www.inf.uni-konstanz.de/algo/research/conflict/#downloads
 * http://www.zubiaga.org/resources/socialbm0311/ (easy big very large, and we have almost the same already)
+* Wikipedia article×term bipartite graph for all languages
+* http://build.kiva.org/
+* hudine.neu.edu (does not respond) -- disease information
+* the wikipedia hyperlink graph and category tree are available in an easy to parse format on download.wikimedia.org
+* DBLP:  build the author-conference bipartite network with timestamps
+* multilingual dbpedia
+* what wikipedia user speaks what language (or commons user, etc.)
+* http://webscope.sandbox.yahoo.com/
+* http://anonymity-in-bitcoin.blogspot.com/2011/09/code-datasets-and-spsn11.html
+* https://www.kaggle.com/c/kddcup2012-track1#description

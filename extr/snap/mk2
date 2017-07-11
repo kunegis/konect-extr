@@ -1,8 +1,8 @@
-#!/bin/bash
+#! /bin/sh
 
 if [ "$1" != "facebook" ]; then
 	rel='asym'
 else
 	rel='sym'
 fi
-../mkrel $rel unweighted
+../../sh/mkrel $rel unweighted

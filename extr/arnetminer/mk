@@ -1,0 +1,19 @@
+#! /usr/bin/perl -w
+#
+# Filter via stdin/stdout
+#
+
+use strict;
+use warnings FATAL => 'all';
+
+my $from= undef; 
+
+while (<>) {
+    if (/^#index(.+)\s*$/) {
+	$from = $1; 
+    } elsif (/^#%(.+)\s*$/) {
+	print "$from\t$1\n"; 
+    } else {
+	# Another type of line -- ignore 
+    }
+}
