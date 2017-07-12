@@ -12,8 +12,6 @@
 * http://kdd.ics.uci.edu/databases/movies/movies.html
 * http://challenge.semanticweb.org/ Billon Triple Challenge
 * http://labs.systemone.at/wikipedia3 47 million triples
-* http://www.dfki.uni-kl.de/~obradovic/download/blogspider.zip,
-** needs database
 * http://musicbrainz.org/doc/DatabaseDownload
 * GeoWordNet
 * YAGO
@@ -178,3 +176,5 @@ Yang
 * http://webscope.sandbox.yahoo.com/
 * http://anonymity-in-bitcoin.blogspot.com/2011/09/code-datasets-and-spsn11.html
 * https://www.kaggle.com/c/kddcup2012-track1#description
+* http://www.dfki.uni-kl.de/~obradovic/download/blogspider.zip,
+** needs database
