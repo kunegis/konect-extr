@@ -19,9 +19,7 @@
 * YAGO
 * http://allurbuzz.appspot.com/  Buzz feed from Peter Dolan
 * corpora from WWW paper [336]
-* slashdot:  tags for stories, with negative tags beginning with »!«.
 * movielens tags (from the million dataset)
-* ask the MPI guys for the full Facebook datasets, after having analysed the small datasets
 * Orkut user-community network [Collaborative Filtering for Orkut Communities: Discovery of User Latent Behavior, Chen &al]
 * [486] The Dynamics of Web-based Social Networks: Membership, Relationships, and Change, Jennifer Golbeck; lots of adjacency lists.
 * [490] Mining Graph Evolution Rules, Michele Berlingerio, Francesco Bonchi, Björn Bringmann, and Aristides Gionis.
@@ -29,7 +27,6 @@
 * Pavel Braslavski:  MoiKrug social network:  Anton Volnuhin [anton@yandex-team.ru]
 * munmun large twitter dataset
 * [620] cyworld
-* http://openstudy.com/ (Steffen has contact)
 * http://manyeyes.alphaworks.ibm.com/manyeyes/datasets?tag=movie
 * http://reality.media.mit.edu/download.php
 * linkedct.org
@@ -40,7 +37,6 @@
 * http://ingrid.ldeo.columbia.edu/dochelp/topics/DATASETS/
 * http://cophir.isti.cnr.it/whatis.html
 * CDNow – Musik-Ratings
-* XING relations (crawlable?)
 * filmtrust (Jennifer Golbeck)
 * moleskiing.it
 * http://www.ist-chorus.org/wiki/index.php/Category:Dataset
