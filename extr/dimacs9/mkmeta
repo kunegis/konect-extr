@@ -1,0 +1,48 @@
+#! /bin/sh
+#
+# PARAMETERS
+#	$name
+#
+# STDOUT
+#	Content of meta.* file
+#
+
+set -e
+
+  if [ "$name" = USA ] ; then Name="Full USA"
+elif [ "$name" = CTR ] ; then Name="Central USA"
+elif [ "$name" = W   ] ; then Name="Western USA"
+elif [ "$name" = E   ] ; then Name="Eastern USA"
+elif [ "$name" = LKS ] ; then Name="Great Lakes"
+elif [ "$name" = CAL ] ; then Name="California and Nevada"
+elif [ "$name" = NE  ] ; then Name="Northeast USA"
+elif [ "$name" = NW  ] ; then Name="Northwest USA"
+elif [ "$name" = FLA ] ; then Name="Florida"
+elif [ "$name" = COL ] ; then Name="Colorado"
+elif [ "$name" = BAY ] ; then Name="San Francisco Bay Area"
+elif [ "$name" = NY  ] ; then Name="New York City"
+else
+	echo >&2 "*** Invalid name '$name'"
+	exit 2
+fi
+
+Code=9"$(echo "$name" | sed -E -e 's,^(.).*$,\1,')"
+
+[ -n "$Name" ] || {
+	echo >&2 "*** empty \$Name"
+	exit 2
+}
+
+cat <<EOF
+name:	$Name
+code:	$Code
+url:	http://www.diag.uniroma1.it/challenge9/download.shtml
+category:	Infrastructure
+description:	Node–node road
+long-description:  This is the directed road network from the 9th DIMACS Implementation Challenge, for the area "$Name". 
+entity-names:	node
+relationship-names:	road
+extr:	dimacs9
+timeiso:	1991
+tags:	
+EOF

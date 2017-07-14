@@ -1,9 +1,6 @@
 == Fixes == 
 
 == Simple ==
-* http://graphlab.org/datasets.html
-* http://data.stackexchange.com/
-* DIMACS challenge
 * http://lemire.me/blog/archives/2012/03/27/publicly-available-large-data-sets-for-database-research/
 * http://www.reddit.com/r/redditdev/comments/dtg4j/want_to_help_reddit_build_a_recommender_a_public/
 * IMDB full semantic network:  movie, actor, director, etc.
@@ -147,6 +144,7 @@ Yang
 * http://networkrepository.com/
 * http://snap.stanford.edu/temporal-motifs/data.html
 * http://www.bgu.ac.il/~bargera/tntp/Austin/Austin_net.txt
+* DIMACS challenge:  all others (apart from number 9)
 
 == Needs complex extraction ==
 * http://openplanb.tumblr.com/
@@ -176,5 +174,6 @@ Yang
 * http://webscope.sandbox.yahoo.com/
 * http://anonymity-in-bitcoin.blogspot.com/2011/09/code-datasets-and-spsn11.html
 * https://www.kaggle.com/c/kddcup2012-track1#description
-* http://www.dfki.uni-kl.de/~obradovic/download/blogspider.zip,
-** needs database
+* http://www.dfki.uni-kl.de/~obradovic/download/blogspider.zip : needs database
+* http://data.stackexchange.com/ : only via API
+

@@ -1,0 +1,40 @@
+#
+# 9th DIMACS Implementation Challenge - Shortest Paths
+#
+# http://www.diag.uniroma1.it/challenge9/download.shtml
+#
+
+@all:  [dep.all];
+>dep.all:   NAMES
+{
+	for name in $(cat NAMES) ; do
+		echo @network."$name"
+	done
+}
+
+NAMES = { NY BAY COL FLA NW NE CAL LKS E W CTR USA }
+
+@network.$name:   meta.dimacs9-$name  out.dimacs9-$name;
+
+>out.dimacs9-$name:
+	mk
+	<USA-road-d.$name.gr
+{
+	echo '% asym unweighted'
+	./mk
+}
+
+USA-road-d.$name.gr
+{
+	rm -f USA-road-d."$name".gr USA-road-d."$name".gr.gz
+	wget http://www.diag.uniroma1.it/challenge9/data/USA-road-d/USA-road-d."$name".gr.gz \
+	     -O USA-road-d."$name".gr.gz
+	gunzip -f USA-road-d."$name".gr.gz
+	touch -c USA-road-d."$name".gr 
+}
+
+>meta.dimacs9-$name:
+	mkmeta
+{
+	./mkmeta
+}
