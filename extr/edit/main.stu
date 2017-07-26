@@ -1,3 +1,13 @@
+#
+# Wikimedia edit graphs, i.e., for each Wikimedia site, the bipartite
+# graph of users and articles, with each timestamped edge represented an
+# edit.
+#
+# $lg:  Language code with '_' (rather than '-')
+#
+
+% version 2.4 
+
 @all:   [dep.all];
 >dep.all:  WIKIS
 {
@@ -62,17 +72,17 @@ tmp/$wiki-latest-stub-meta-history.xml:
 	out/field.code.$wiki
 {
 	sed -E -e '
-		s,\$\{sitename\},'"$(echo $(cat out/field.sitename.$wiki))"',g
-		s,\$\{sitenamefield\},'"$(echo $(cat out/field.sitenamefield.$wiki))"',g
-		s,\$\{code\},'"$(echo $(cat out/field.code.$wiki))"',g
+		s,\$\{sitename\},'"$(echo $(cat out/field.sitename.$wiki) | sed -E -e 's,_,-,g')"',g
+		s,\$\{sitenamefield\},'"$(echo $(cat out/field.sitenamefield.$wiki) | sed -E -e 's,_,-,g')"',g
+		s,\$\{code\},'"$(echo $(cat out/field.code.$wiki) | sed -E -e 's,_,-,g')"',g
 		s,\$\{timeiso\},'"$(date +%F)"',g
 	'
 }
 
 >out/lname.$lg:
-	<sitematrix.json
+	<sitematrix.json  mklname
 {
-	sed -E -e 's,^.*"code":"'"$lg"'"[^[]*\[[^]]*\][^[]*"localname":"([^"]+)".*$,\1,'
+	./mklname
 }
 
 >out/field.sitename.${lg}wiki: $[lname = out/lname.$lg]		{ echo "$lname Wikipedia" ; }
@@ -102,4 +112,8 @@ tmp/$wiki-latest-stub-meta-history.xml:
 >out/field.sitename.${lg}wikiversity: $[lname = out/lname.$lg]	{ echo "$lname Wikiversity" ; }
 >out/field.sitenamefield.${lg}wikiversity:			{ echo "Wikiversity ($lg)" ; }
 >out/field.code.${lg}wikiversity:				{ echo "y$lg" ; }
+
+>out/field.sitename.${lg}wikivoyage: $[lname = out/lname.$lg]	{ echo "$lname Wikivoyage" ; }
+>out/field.sitenamefield.${lg}wikivoyage:			{ echo "Wikivoyage ($lg)" ; }
+>out/field.code.${lg}wikivoyage:				{ echo "v$lg" ; }
 
