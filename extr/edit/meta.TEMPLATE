@@ -1,0 +1,12 @@
+long-description: This is the bipartite edit network of the ${sitename}. It contains users and pages from the ${sitename}, connected by edit events. Each edge represents an edit. The dataset includes the timestamp of each edit.
+name: ${sitenamefield}
+extr: edit
+description: User–article edit
+url: http://dumps.wikimedia.org/
+category: Authorship
+cite: download.wikimedia.org
+code: ${code}
+tags: #regenerate
+entity-names:  user, article
+relationship-names:  edit
+timeiso:  ${timeiso}

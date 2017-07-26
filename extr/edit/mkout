@@ -3,15 +3,16 @@
 # Generate outfile. 
 #
 # PARAMETERS
-#	$1	name of wiki
+#	$wiki	Name of wikimedia site, e.g. "frwiki" or "nlwiktionary"
 #
 # INPUT
-#	tmp/$1-latest-stub-meta-history.xml
+#	tmp/$wiki-latest-stub-meta-history.xml
 #
 # OUTPUT
-#	out/out.edit-$1
-#	out/ent.edit-$1-user
-#	out/ent.edit-$1-page
+#	out/raw.edit-$wiki
+#	out/out.edit-$wiki
+#	out/ent.edit-$wiki-user
+#	out/ent.edit-$wiki-page
 #
 
 use strict; 
@@ -19,22 +20,22 @@ use strict;
 use Date::Parse;
 
 # Current wiki
-my $wiki = $ARGV[0]; 
+my $wiki = $ENV{'wiki'}; 
 
-open(XML, "<tmp/$wiki-latest-stub-meta-history.xml");
-open(OUT, ">out/out.edit-$wiki"); 
-open(ENT_PAGE, ">out/ent.edit-$wiki-page"); 
-open(ENT_USER, ">out/ent.edit-$wiki-user"); 
+open(XML, "<tmp/$wiki-latest-stub-meta-history.xml") or die;
+open(RAW, ">out/raw.edit-$wiki") or die; 
+open(OUT, ">out/out.edit-$wiki") or die; 
+open(ENT_PAGE, ">out/ent.edit-$wiki-page") or die; 
+open(ENT_USER, ">out/ent.edit-$wiki-user") or die; 
 
 print OUT "% bip positive\n"; 
-
 print ENT_PAGE "%\n%\n% ent dat.string.name\n"; 
-
 print ENT_USER "%\n%\n% ent dat.string.name\n"; 
 
 # Current page name and ID
 my $page = "";
 my $pageid = 0; 
+my $page_nospace;
 
 # Current timestamp
 my $timestamp;
@@ -50,10 +51,12 @@ while (<XML>)
 	++ $pageid; 
 
 	my $page_esc = $page; 
-
 	$page_esc =~ s,\\,\\\\,g; 
 	$page_esc =~ s,",\\",g;
 
+	$page_nospace = $page;
+	$page_nospace =~ s,\s,_,g;
+	
 	print ENT_PAGE "$pageid \"$page_esc\"\n"; 
     }
 
@@ -76,12 +79,17 @@ while (<XML>)
 	}
 	my $userid = $users{$username}; 
 
-	print OUT "$userid $pageid 1 $timestamp\n"; 
+	my $username_nospace= $username;
+	$username_nospace = $username;
+	$username_nospace =~ s,\s,_,g;
+	
+	print RAW "$username_nospace\t$page_nospace\t$timestamp\n"; 
+	print OUT "$userid\t$pageid\t1\t$timestamp\n"; 
     }    
 }
 
 close(XML) or die; 
+close(RAW) or die; 
 close(OUT) or die; 
 close(ENT_PAGE) or die; 
 close(ENT_USER) or die; 
-

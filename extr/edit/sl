@@ -1,0 +1,5 @@
+#! /bin/bash
+
+len="$((RANDOM / 100))"
+echo "len='$len'"
+sleep "$len"

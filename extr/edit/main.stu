@@ -1,0 +1,105 @@
+@all:   [dep.all];
+>dep.all:  WIKIS
+{
+	for wiki in $(cat WIKIS)
+	do
+		echo @wiki."$wiki"
+	done
+}
+
+@wiki.$wiki:
+	out/meta.edit-$wiki
+	out/out.edit-$wiki;
+
+@clean {
+	rm -Rf out tmp
+}
+
+out { mkdir -p out ; }
+tmp { mkdir -p tmp ; }
+
+>WIKIS:  <sitematrix.json
+{
+	sed -E -e 's,("dbname"),\
+\1,g' |
+		sed -E -e 's,^"dbname":"([^"]+)".*$,\1,;t;d'
+}
+
+sitematrix.json:  -t sl
+{
+	./sl
+	wget 'https://commons.wikimedia.org/w/api.php?action=sitematrix&smtype=language&format=json' \
+	     -O sitematrix.json
+	echo >>sitematrix.json # Make it end in space 
+}
+
+out/raw.edit-$wiki
+out/out.edit-$wiki
+out/ent.edit-$wiki-user
+out/ent.edit-$wiki-page
+:
+	tmp/$wiki-latest-stub-meta-history.xml -p out mkout
+{
+	./mkout
+}
+
+tmp/$wiki-latest-stub-meta-history.xml:
+	-p tmp -t sl
+{
+	./sl
+	rm -f tmp/"$wiki"-latest-stub-meta-history.xml*
+	cd tmp
+	wget https://dumps.wikimedia.org/"$wiki"/latest/"$wiki"-latest-stub-meta-history.xml.gz \
+	     -O "$wiki"-latest-stub-meta-history.xml.gz
+	gunzip -f "$wiki"-latest-stub-meta-history.xml.gz
+	touch "$wiki"-latest-stub-meta-history.xml
+}
+
+>out/meta.edit-$wiki:
+	<meta.TEMPLATE
+	out/field.sitename.$wiki
+	out/field.sitenamefield.$wiki
+	out/field.code.$wiki
+{
+	sed -E -e '
+		s,\$\{sitename\},'"$(echo $(cat out/field.sitename.$wiki))"',g
+		s,\$\{sitenamefield\},'"$(echo $(cat out/field.sitenamefield.$wiki))"',g
+		s,\$\{code\},'"$(echo $(cat out/field.code.$wiki))"',g
+		s,\$\{timeiso\},'"$(date +%F)"',g
+	'
+}
+
+>out/lname.$lg:
+	<sitematrix.json
+{
+	sed -E -e 's,^.*"code":"'"$lg"'"[^[]*\[[^]]*\][^[]*"localname":"([^"]+)".*$,\1,'
+}
+
+>out/field.sitename.${lg}wiki: $[lname = out/lname.$lg]		{ echo "$lname Wikipedia" ; }
+>out/field.sitenamefield.${lg}wiki:				{ echo "Wikipedia ($lg)" ; }
+>out/field.code.${lg}wiki:					{ echo "$lg" ; }
+
+>out/field.sitename.${lg}wiktionary: $[lname = out/lname.$lg]	{ echo "$lname Wiktionary" ; }
+>out/field.sitenamefield.${lg}wiktionary:			{ echo "Wiktionary ($lg)" ; }
+>out/field.code.${lg}wiktionary:				{ echo "m$lg" ; }
+
+>out/field.sitename.${lg}wikibooks: $[lname = out/lname.$lg]	{ echo "$lname Wikibooks" ; }
+>out/field.sitenamefield.${lg}wikibooks: 			{ echo "Wikibooks ($lg)" ; }
+>out/field.code.${lg}wikibooks:					{ echo "b$lg" ; }
+
+>out/field.sitename.${lg}wikiquote: $[lname = out/lname.$lg]	{ echo "$lname Wikiquote" ; }
+>out/field.sitenamefield.${lg}wikiquote:			{ echo "Wikiquote ($lg)" ; }
+>out/field.code.${lg}wikiquote:					{ echo "q$lg" ; }
+
+>out/field.sitename.${lg}wikisource: $[lname = out/lname.$lg]	{ echo "$lname Wikisource" ; }
+>out/field.sitenamefield.${lg}wikisource:			{ echo "Wikiquote ($lg)" ; }
+>out/field.code.${lg}wikisource:				{ echo "q$lg" ; }
+
+>out/field.sitename.${lg}wikinews: $[lname = out/lname.$lg]	{ echo "$lname Wikinews" ; }
+>out/field.sitenamefield.${lg}wikinews:				{ echo "Wikinews ($lg)" ; }
+>out/field.code.${lg}wikinews:					{ echo "n$lg" ; }
+
+>out/field.sitename.${lg}wikiversity: $[lname = out/lname.$lg]	{ echo "$lname Wikiversity" ; }
+>out/field.sitenamefield.${lg}wikiversity:			{ echo "Wikiversity ($lg)" ; }
+>out/field.code.${lg}wikiversity:				{ echo "y$lg" ; }
+
