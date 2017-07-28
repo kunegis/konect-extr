@@ -38,3 +38,8 @@ USA-road-d.$name.gr
 {
 	./mkmeta
 }
+
+@clean
+{
+	rm -f dep.* NAMES out.* *.gr meta.dimacs9-*
+}

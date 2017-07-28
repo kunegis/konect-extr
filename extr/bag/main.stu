@@ -36,3 +36,7 @@ docword.$dataset.txt
 	sed -E -f metafile.$dataset
 }
 
+@clean
+{
+	rm -f docword.*.txt meta.* out.* dep.* DATASETS 
+}

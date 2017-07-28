@@ -27,3 +27,8 @@ citation-acm-v8.txt.tgz:
 	echo '% asym unweighted'
 	./mk | ../../sh/mkuniq1 
 }
+
+@clean
+{
+	rm -f *.txt *.tgz out.*
+}
