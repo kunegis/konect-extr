@@ -5,7 +5,9 @@
 # The network has loops, i.e. some users trust themselves.
 #
 
-@all:    [FILES];
+% version 2.4 
+
+@all:    meta.advogato out.advogato;
 
 graph.dot:  {
 	wget http://www.advogato.org/person/graph.dot -O graph.dot
@@ -25,8 +27,7 @@ out.advogato:  graph.dot  mkout
 
 @deploy:  konect/dat/advogato/out.advogato konect/dat/advogato/meta.advogato;
 
-konect/dat/advogato/$NAME:  $NAME !konect
+konect/dat/advogato/$NAME:  $NAME -p konect
 {
 	cp -b "$NAME" "konect/dat/advogato/$NAME"
 }
-

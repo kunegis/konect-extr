@@ -6,7 +6,7 @@
 # The strict datasets are downloaded.  The old datasets are in own/. 
 #
 
-% version 1.15 
+% version 2.4 
 
 @all:  
 	@all-dbpedia 
@@ -31,7 +31,7 @@
 
 @clean: 
 {
-	rm -rf out.* stat.* *.nt
+	rm -Rf out.* stat.* *.nt
 }
 
 #
@@ -152,7 +152,7 @@ oldlenientmappingbased_en.nt:
 # Statistics
 #
 
-stat.$NAME:  $NAME.nt 
+>stat.$NAME:  $NAME.nt 
 {
-	../semstat "$NAME".nt >stat."$NAME"
+	../semstat "$NAME".nt 
 }
