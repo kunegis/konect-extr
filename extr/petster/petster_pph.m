@@ -31,10 +31,10 @@ ax = [ 1 1250 0.000001 1 ];
 
 axis(ax);
 
-konect_power_law_plot(d_cat,     [], 0, colors.cat,      0, 0);
-konect_power_law_plot(d_dog,     [], 0, colors.dog,      0, 0);
-konect_power_law_plot(d_catdog,  [], 0, colors.catdog,   0, 0);
-konect_power_law_plot(d_hamster, [], 0, colors.hamster,  0, 0);
+konect_plot_power_law(d_cat,     [], 0, colors.cat,      0, 0);
+konect_plot_power_law(d_dog,     [], 0, colors.dog,      0, 0);
+konect_plot_power_law(d_catdog,  [], 0, colors.catdog,   0, 0);
+konect_plot_power_law(d_hamster, [], 0, colors.hamster,  0, 0);
 
 set(gca, 'XTick', [1 10 100 1000 10000 100000]); 
 set(gca, 'XMinorTick', 'on'); 

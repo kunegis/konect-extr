@@ -19,11 +19,13 @@ colors = petster_colors();
 
 color = colors.(species); 
 
-%color = [1 0 0];
+filename = 'map/Blank_Map_Equirectangular_states.light.png';
+%%filename = 'map/equidistant_cylindrical.png';
+%%filename = 'map/Projection_4326.png';
+%%filename = 'map/projection_plate_carree.png';
 
-% filename = 'map/Projection_4326.png';
-% filename = 'map/projection_plate_carree.png';
-filename = 'map/equidistant_cylindrical.png';
+offset_lat  = +3;	fact_lat  = 1.03;
+offset_long = -5;	fact_long = 0.97;
 
 I = imread(filename);
 
@@ -49,10 +51,10 @@ res_lng = size(I,2)
 % Max points per pixel
 k = inverse_density / res_lat / res_lng * 256 * 128; 
 
-%res_lat = 180 * 2;
-%res_lng = 360 * 2;
-
 M = load(sprintf('dat-petster/ent.petster-%s.latlong', species));
+
+M(:,1) = M(:,1) * fact_lat  + offset_lat;
+M(:,2) = M(:,2) * fact_long + offset_long;
 
 M_1_min = min(M(:,1))
 M_1_max = max(M(:,1))

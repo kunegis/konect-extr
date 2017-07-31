@@ -35,12 +35,12 @@ d_dh = sparse([T_dh(:,1); T_dh(:,2)], 1, 1);
 
 hold on; 
 
-konect_power_law_plot(d_cf, [], 0, colors.cat,     0, 0, '-');
-konect_power_law_plot(d_df, [], 0, colors.dog,     0, 0, '-');
-konect_power_law_plot(d_hf, [], 0, colors.hamster, 0, 0, '-');
-konect_power_law_plot(d_ch, [], 0, colors.cat,     0, 0, '--');
-konect_power_law_plot(d_dh, [], 0, colors.dog,     0, 0, '--');
-konect_power_law_plot(d_hh, [], 0, colors.hamster, 0, 0, '--');
+konect_plot_power_law(d_cf, [], 0, colors.cat,     0, 0, '-');
+konect_plot_power_law(d_df, [], 0, colors.dog,     0, 0, '-');
+konect_plot_power_law(d_hf, [], 0, colors.hamster, 0, 0, '-');
+konect_plot_power_law(d_ch, [], 0, colors.cat,     0, 0, '--');
+konect_plot_power_law(d_dh, [], 0, colors.dog,     0, 0, '--');
+konect_plot_power_law(d_hh, [], 0, colors.hamster, 0, 0, '--');
 
 set(gca, 'XMinorTick', 'on'); 
 

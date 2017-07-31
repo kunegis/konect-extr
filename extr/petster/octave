@@ -28,11 +28,10 @@ for NAME in $(set | sed -e 's,=.*$,,;/^[a-z][a-z_-]*$/!d') ; do
 done
 
 export LOG="${TMPDIR-/tmp}/o.$LOGNAME$PREFIX.log"
-echo >&2 "   $LOG"
+printf >&2 '\t%s\n' "$LOG"
 
 #
 # -q	Quiet
-# -f	Don't read initialization files
 #
 # We'd like to usee --no-window-system but it isn't supported by Octave 3.0 
 #
@@ -46,7 +45,7 @@ OCTAVE_PATH="$OCTAVE_PATH:$MATLABPATH"
 OCTAVE_PATH="$DIR_SCRIPT:$OCTAVE_PATH"
 export OCTAVE_PATH
 exec 3>$LOG 
-ISPLAY= GNUTERM=dumb DISPLAY= octave -q -f -W --no-gui --no-window-system "$SCRIPT" "$LOG" >&3 2>&1  ||
+ISPLAY= GNUTERM=dumb DISPLAY= octave -q -W --no-gui --no-window-system "$SCRIPT" "$LOG" >&3 2>&1  ||
 {
 	# The error message of Octave don't conform to any standard, and
 	# usually don't even show the location first.  Therefore, we
@@ -69,6 +68,6 @@ ISPLAY= GNUTERM=dumb DISPLAY= octave -q -f -W --no-gui --no-window-system "$SCRI
 	exit 1
 }
 
-echo >&3 '=== FINISHED ==='
+echo >&3 '=== FINISHED SUCCESSFULLY ==='
 
 exit 0
