@@ -4,33 +4,18 @@
 # http://deim.urv.cat/~aarenas/data/welcome.htm
 # 
 
-% version 2.4
+% version 2.5
 
-@all:
-	out.arenas-email out.arenas-pgp out.arenas-meta out.arenas-jazz
-	meta.arenas-email meta.arenas-pgp meta.arenas-meta meta.arenas-jazz;
+@all:  meta.arenas-[NAMES] out.arenas-[NAMES]; 
+
+NAMES = { email pgp meta jazz }
 
 #
 # ZIP files
 #
-email.zip:
+$name.zip:
 {
-	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/email.zip -O email.zip
-}
-
-jazz.zip:
-{
-	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/jazz.zip -O jazz.zip
-}
-
-PGP.zip:
-{
-	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/PGP.zip -O PGP.zip
-}
-
-celegans_metabolic.zip:
-{
-	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/celegans_metabolic.zip -O celegans_metabolic.zip
+	wget --no-use-server-timestamps http://deim.urv.cat/~aarenas/data/xarxes/"$name".zip -O "$name".zip
 }
 
 #
