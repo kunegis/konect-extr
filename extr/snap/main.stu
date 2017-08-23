@@ -11,11 +11,11 @@
 # https://github.com/kunegis/stu
 #
 
-% version 2.4 
+% version 2.5
 
 @all: 
 	@all.datasets @all.datasets-citation 
-	out/out.elec meta.elec @all.egodatasets @all.symdatasets 
+	@all.egodatasets @all.symdatasets 
 ; 
 
 # For these datasets, also extract the temporal co-citation graph. 
@@ -25,15 +25,14 @@ DATASETS_CITATION = { cit-HepPh cit-HepTh }
 {
 	cat DATASETS_CITATION
 	echo \
-		soc-Slashdot0902 wiki-Vote email-EuAll amazon0601 wiki-Talk \
-		soc-sign-Slashdot081106 soc-sign-Slashdot090216 soc-sign-Slashdot090221 \
+		email-EuAll amazon0601 wiki-Talk \
 		as-skitter \
 		soc-LiveJournal1 \
 		p2p-Gnutella31 \
 		web-NotreDame web-BerkStan web-Google web-Stanford \
 		as20000102 as-caida20071105 \
 		soc-pokec-relationships soc-Epinions1 \
-		com-livejournal com-dblp com-youtube com-amazon
+		elec
 }
 
 #
@@ -41,7 +40,7 @@ DATASETS_CITATION = { cit-HepPh cit-HepTh }
 #
 #   ca-AstroPh 
 #
-# There code is still in this stufile, so they can just be re-added to
+# There code is still in this Stu script, so they can just be re-added to
 # DATASETS if necessary.  Maybe their source was just moved. 
 #
 
@@ -50,40 +49,13 @@ SYMDATASETS = {
 	loc-gowalla_edges loc-brightkite_edges flickrEdges roadNet-CA roadNet-TX roadNet-PA 
 } 
 
-@all.datasets:  [dep.all.datasets];
->dep.all.datasets:  DATASETS
-{
-	for name in $(cat DATASETS) ; do
-		echo out/out."$name"
-		echo meta."$name"
-	done
-}
+@all.datasets:  meta.[DATASETS] out/out.[DATASETS]; 
 
-@all.symdatasets:  [dep.all.symdatasets];
->dep.all.symdatasets:  SYMDATASETS
-{
-	for name in $(cat SYMDATASETS) ; do
-		echo out/out."$name"
-		echo meta."$name"
-	done
-}
+@all.symdatasets:  meta.[SYMDATASETS] out/out.[SYMDATASETS]; 
 
-@all.datasets-citation:  [dep.all.datasets-citation]; 
->dep.all.datasets-citation:  DATASETS_CITATION
-{
-	for name in $(cat DATASETS_CITATION) ; do
-		echo out/out.ca-"$name"
-		echo meta.ca-"$name"
-	done
-}
+@all.datasets-citation:  meta.ca-[DATASETS_CITATION] out/out.ca-[DATASETS_CITATION]; 
 
-@all.egodatasets:  [dep.all.egodatasets];
->dep.all.egodatasets: EGODATASETS {
-	for name in $(cat EGODATASETS) ; do
-		echo out/out.ego-"$name"
-		echo meta.ego-"$name"
-	done
-}
+@all.egodatasets:  meta.ego-[EGODATASETS] out/out.ego-[EGODATASETS]; 
 
 out/out.$name:  out/$name.txt SYMDATASETS mk 
 {
@@ -147,7 +119,7 @@ out/$name.txt:  -p out
 	fromdos "$name".txt
 }
 
-# Special collaboration datasets derived from citation (cit-*) datasets
+# Special cocitation datasets derived from citation (cit-*) datasets
 # by bipartite projection. 
 >out/out.ca-$name:  
 	mkcit 

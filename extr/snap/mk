@@ -12,7 +12,7 @@ network="$1"
 # Remove weights
 #
 if expr $network : '^as-caida' >/dev/null ; then
-	rm_weights="sed -re s,\\s*\\S+\$,,"
+	rm_weights="sed -E -e s,\\s*\\S+\$,,"
 else
 	rm_weights=cat
 fi
@@ -47,8 +47,8 @@ if expr "$network" : ^soc-sign- >/dev/null ; then
 fi
 
 { 
-	<out/"$network".txt sed -re '/^#/d' | 
-	sed -re 's/\t/ /g' |  
+	<out/"$network".txt sed -E -e '/^#/d' | 
+	sed -E -e 's/\t/ /g' |  
 	$rm_weights | 
 	$rm_loops | 
 	../../sh/mkrel "$format" "$weights"

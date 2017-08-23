@@ -1,6 +1,8 @@
 #! /usr/bin/perl -w
 #
-# Generate co-citation network on stdout. 
+# Generate co-citation network on stdout.  I.e., a graph where nodes are
+# papers, and an edge denotes that two papers are cited by the a same
+# other paper. 
 #
 # PARAMETERS
 #	$1	name of dataset, e.g. "cit-HepPh"
@@ -21,9 +23,10 @@ my $dataset = $ARGV[0];
 
 open(DATES, "<out/$dataset-dates.txt") or die; 
 
+# Publication dates by paper ID
 my %citers = (); 
 
-my $maxTimestamp = 0; 
+my $lastTimestamp = 0; 
 
 while (<DATES>)
 {
@@ -36,10 +39,10 @@ while (<DATES>)
 
    $citers{$citer} = $timestamp; 
 
-   if ($timestamp > $maxTimestamp)
-   {
-       $maxTimestamp = $timestamp; 
-   }
+##   if ($timestamp > $lastTimestamp)
+##   {
+##       $lastTimestamp = $timestamp; 
+##   }
 }
 
 close(DATES) or die; 
@@ -59,12 +62,13 @@ sub purge
 	foreach my $j (@citeds)
 	{
 	    next if $i eq $j; 
-	    my $timestamp = 1 + $maxTimestamp; 
+	    my $timestamp = 0; 
+		##1 + $maxTimestamp; 
 	    if (exists $citers{$last_citer})
 	    {
 		$timestamp = $citers{$last_citer}; 
 	    }
-	    print "$i $j 1 $timestamp\n"; 
+	    print "$i $j 1 $lastTimestamp\n"; 
 	}
     }
 }
