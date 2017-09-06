@@ -1,4 +1,4 @@
-#! /bin/sed -rf 
+#! /bin/sed -Ef 
 
 /^\s*<[^ ]+instances\/synset[^ ]+>\s+[^ ]+\s+<[^ ]+instances\/synset[^ ]+>\s+.\s*$/!d
 s,^\s*(<[^ ]+instances\/synset[^ ]+>)\s+[^ ]+\s+(<[^ ]+instances\/synset[^ ]+>)\s+.\s*$,\1 \2,

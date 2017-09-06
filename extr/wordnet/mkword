@@ -1,6 +1,6 @@
 #! /bin/sh
 
-sed -re '
+sed -E -e '
 
 s,@[^ ]+,,g
 s," ",	,

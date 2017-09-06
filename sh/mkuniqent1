@@ -1,7 +1,6 @@
-DEPRECATED
-
 #! /usr/bin/perl -w
 #
+# DEPRECATED
 #
 # Make IDs unique for bipartite dataset. 
 #

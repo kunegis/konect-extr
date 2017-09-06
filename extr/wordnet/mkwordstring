@@ -1,5 +1,4 @@
-#! /bin/sed -rf 
+#! /bin/sed -Ef 
 
-/^\s*[^ ]+\s+<http:\/\/www.w3.org\/2006\/03\/wn\/wn20\/schema\/lexicalForm>\s+"[^"]+"@[^ ]+\s+.\s*$/!d
-s,^\s*([^ ]+)\s+<http:\/\/www.w3.org\/2006\/03\/wn\/wn20\/schema\/lexicalForm>\s+("[^"]+"@[^ ]+)\s+.\s*$,\1 \2,
-
+/^\s*[^ ]+\s+<http:\/\/.*\/schema\/lexicalForm>\s+"[^"]+"@[^ ]+\s+.\s*$/!d
+s,^\s*([^ ]+)\s+<http:\/\/.*\/schema\/lexicalForm>\s+("[^"]+"@[^ ]+)\s+.\s*$,\1 \2,

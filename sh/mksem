@@ -1,17 +1,18 @@
 #! /bin/sh
 #
-# Extract a unirelational dataset out of a semantic web file.
+# Extract a unirelational dataset out of a "semantic web" file, i.e., a
+# file that is typically named '*.nt'. 
 #
-# INPUT 
+# STDIN
 #	The semantic web file
 #
-# OUTPUT
+# STDOUT
 #	The unirelational dataset in unipartite network format
 #
-# PARAMETERS
+# ARGUMENTS
 #	$1 	The relation to extract; empty to extract all relations
 #
-# ENVIRONMENT
+# PARAMETERS
 #	$FORMAT		(optional) "bip"/"sym"/"asym".  As in the first line of outfiles,
 #			defaults to "bip".
 #	$WEIGHTS	(optional) As in the first line of outfiles,
@@ -29,29 +30,16 @@ if [ -z "$WEIGHTS" ] ; then
     WEIGHTS=positive
 fi
 
-#echo "% $FORMAT $WEIGHTS"
-
 {
     if [ "$1" ]
     then
-
 	escaped="`echo $1 | sed -re 's,/,\\\\/,g'`"
-
-	echo >&4 ESCAPED=»$escaped«
-
-	sed -re  '/^\s*<\S+>\s+'"$escaped"'\s+<\S+>\s+\./!d;s/ '"$escaped"' / /;s,\.\s*$,,' 
-
+	echo >&4 "ESCAPED='$escaped'"
+	sed -E -e  '/^\s*<\S+>\s+'"$escaped"'\s+<\S+>\s+\./!d;s/ '"$escaped"' / /;s,\.\s*$,,' 
     else
-
-	sed -re 's,^\s*(<\S+>)\s+\S+\s+(<\S+>)\s+\.\s*,\1 \2,;t;d' 
-
+	sed -E -e 's,^\s*(<\S+>)\s+\S+\s+(<\S+>)\s+\.\s*,\1 \2,;t;d' 
     fi
 } |
 {
-  #  if [ "$FORMAT" = bip ]
-   # then
-	../mkrel --enforce-ignorenonexistant --enforce-edgeweights "$FORMAT" "$WEIGHTS" #../mkuniq
-    #else
-	#../mkuniq1
-   # fi
+	../../sh/mkrel --enforce-ignorenonexistant --enforce-edgeweights "$FORMAT" "$WEIGHTS" 
 } 
