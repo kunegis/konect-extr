@@ -1,5 +1,6 @@
 == Fixes == 
 * Regenerate extr/snap/
+* moreno_innovation:  add timeiso (1966)
 
 == Simple ==
 * snap:  com-* datasets
