@@ -1,7 +1,7 @@
 %
 % Generate the AUC Latex table.
 %
-% INPUT 
+% INPUT FILES 
 %	dat-petster/auc.hamster.mat
 %	dat-petster/auc.cat.mat
 %	dat-petster/auc.dog.mat
@@ -12,7 +12,7 @@
 %	dat-petster/regauc.cat.mat
 %	dat-petster/regauc.dog.mat
 %
-% OUTPUT 
+% OUTPUT FILES 
 %	tex-petster/auc.tex
 %
 
@@ -108,5 +108,3 @@ fprintf(OUT, '\\multicolumn{7}{l}{\\textsuperscript{c} Catster allows exact weig
 fprintf(OUT, '\\end{tabular}\n');
 
 if fclose(OUT) < 0,  error('tex-petster/auc.tex');  end;
-
-
