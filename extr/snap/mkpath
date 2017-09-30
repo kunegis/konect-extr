@@ -1,0 +1,23 @@
+#! /usr/bin/perl -w
+#
+# STDIN:  each line is one path of names, separated by semicolon
+# STDOUT:  pairwise names
+#
+
+use strict;
+use warnings FATAL => 'all';
+
+binmode(STDOUT, ":utf8");
+
+while (<>) {
+    chomp;
+    my @ids = split(';');
+    my $length= 0+@ids;
+    for (my $i= 0; $i + 1 < 0+@ids;  ++$i) {
+	my $from= $ids[$i];
+	my $to= $ids[$i + 1];
+	if ($from ne "<" && $to ne "<") {
+	    print "$ids[$i]\t$ids[$i+1]\n";
+	}
+    }
+}

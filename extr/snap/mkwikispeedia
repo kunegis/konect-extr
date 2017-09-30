@@ -1,0 +1,17 @@
+#! /bin/sh
+
+{
+
+<out/wikispeedia_paths-and-graph/paths_unfinished.tsv sed -E -e '
+	/^#/d
+	/^\s*$/d
+	s,^\S+\s+\S+\s+\S+\s+(.*)	\S+	\S+$,\1,
+'
+
+<out/wikispeedia_paths-and-graph/paths_finished.tsv sed -E -e '
+	/^#/d
+	/^\s*$/d
+	s,^\S+\s+\S+\s+\S+\s+(.*)	\S+$,\1,
+'
+
+} | ./mkpath | ../../sh/mkuniq1

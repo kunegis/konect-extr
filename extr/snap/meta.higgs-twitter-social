@@ -1,0 +1,12 @@
+name:  Higgs
+code:  HI
+url:   http://snap.stanford.edu/data/higgs-twitter.html
+category:  Social
+cite:   snap.stanford.edu
+long-description:  The is a directed follower social network from Twitter, in the context of the announcement of the discovery of a particle with the features of Higgs boson.
+entity-names:  user
+relationship-names:  follow
+extr:  snap
+timeiso:   2012-07-01/2012-07-07
+tags:  #incomplete
+

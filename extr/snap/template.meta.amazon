@@ -1,6 +1,6 @@
 category: Misc
 code: Am
-name: Amazon (TWEB, 0601)
+name: Amazon (TWEB, ${DATE})
 description: Item–item recommendation
 url: http://snap.stanford.edu/data/amazonDATE.html
 cite: konect:leskovec07

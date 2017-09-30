@@ -21,18 +21,11 @@
 # For these datasets, also extract the temporal co-citation graph. 
 DATASETS_CITATION = { cit-HepPh cit-HepTh }
 
->DATASETS :  DATASETS_CITATION
+DATASETS_OTHER;
+
+>DATASETS:  DATASETS_CITATION DATASETS_OTHER
 {
-	cat DATASETS_CITATION
-	echo \
-		email-EuAll amazon0601 wiki-Talk \
-		as-skitter \
-		soc-LiveJournal1 \
-		p2p-Gnutella31 \
-		web-NotreDame web-BerkStan web-Google web-Stanford \
-		as20000102 as-caida20071105 \
-		soc-pokec-relationships soc-Epinions1 \
-		elec
+	cat DATASETS_CITATION DATASETS_OTHER
 }
 
 #
@@ -153,4 +146,89 @@ out/tmp.elec:  mkelec out/wikiElec.ElecBs3.txt
 
 @clean: {
 	rm -Rf out/ work/
+}
+
+#
+# amazon
+#
+
+>meta.amazon$DATE:  <template.meta.amazon
+{
+	sed -E -e 's,\$\{DATE\},'"$DATE"',g'
+}
+
+#
+# Gnutella
+#
+
+>meta.p2p-Gnutella$NAME:  <template.meta.p2p-Gnutella
+{
+	sed -E -e 's,\$\{NAME\},'"$NAME"',g'
+}
+
+#
+# StackExchange
+#
+
+>meta.sx-$name:  <template.meta.sx
+{
+	sed -E -e 's,\$\{NAME\},'"$name"',g'
+}
+
+#
+# WikiSpeedia
+#
+
+>out/out.wikispeedia:  out/wikispeedia_paths-and-graph
+{
+	echo '% asym positive'
+	./mkwikispeedia
+}
+
+out/wikispeedia_paths-and-graph:  out/wikispeedia_paths-and-graph.tar.gz
+{
+	cd out
+	rm -Rf wikispeedia_paths-and-graph
+	tar xfvvz wikispeedia_paths-and-graph.tar.gz
+	touch -c wikispeedia_paths-and-graph
+}
+
+out/wikispeedia_paths-and-graph.tar.gz
+{
+	wget http://snap.stanford.edu/data/wikispeedia/wikispeedia_paths-and-graph.tar.gz -O out/wikispeedia_paths-and-graph.tar.gz
+	touch -c out/wikispeedia_paths-and-graph.tar.gz
+}
+
+#
+# Higgs
+#
+
+>out/out.higgs-twitter-social:
+	<out/higgs-social_network.edgelist
+{
+	echo '% asym unweighted'
+	../../sh/mkuniq1
+}
+
+out/higgs-social_network.edgelist.gz
+{
+	wget http://snap.stanford.edu/data/higgs-social_network.edgelist.gz -O out/higgs-social_network.edgelist.gz
+	touch -c out/higgs-social_network.edgelist.gz
+}
+
+out/higgs-social_network.edgelist:  out/higgs-social_network.edgelist.gz
+{
+	gunzip -k out/higgs-social_network.edgelist.gz
+	touch -c out/higgs-social_network.edgelist
+}
+
+#
+# CollegeMsg
+#
+
+>out/out.CollegeMsg:  <out/CollegeMsg.txt
+{
+	echo '% asym positive'
+	sed -E -e 's,^(\S+) (\S+) (\S+),\1	\2	1	\3,' |
+	../../sh/mkuniq1
 }

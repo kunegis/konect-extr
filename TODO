@@ -1,5 +1,8 @@
 == Fixes == 
-* Regenerate extr/snap/
+* snap/
+** new datasets:  amazon0302 amazon0312 amazon0505 p2p-Gnutella04 p2p-Gnutella05 p2p-Gnutella06 p2p-Gnutella08 p2p-Gnutella09 p2p-Gnutella24 p2p-Gnutella25 p2p-Gnutella30 wikispeedia sx-stackoverflow sx-mathoverflow sx-superuser sx-askubuntu CollegeMsg higgs-twitter-social
+** complete the meta.* files that contains 'TODO'
+** copy to /data/ and run 
 * moreno_innovation:  add timeiso (1966)
 * konect-extr/extr/wikipedia:  have ALL languages
 
