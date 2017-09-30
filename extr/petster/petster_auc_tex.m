@@ -87,6 +87,16 @@ for i = 1 : length(names)
     fprintf(OUT, '\\\\ \n'); 
 end
 
+% Inter
+fprintf(OUT, '%s ', 'Intercept'); 
+for j = 1 : length(species)
+  fprintf(OUT, ' & --- ');
+end
+for j = 1 : length(species)
+  fprintf(OUT, ' & $%.2f$ ', reg.(species{j}).one);
+end
+fprintf(OUT, '\\\\ \n'); 
+
 fprintf(OUT, '\\midrule\n');
 
 fprintf(OUT, 'Regression ');
