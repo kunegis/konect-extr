@@ -1,16 +1,7 @@
 == Fixes == 
-* snap/
-** new datasets:  amazon0302 amazon0312 amazon0505 p2p-Gnutella04 p2p-Gnutella05 p2p-Gnutella06 p2p-Gnutella08 p2p-Gnutella09 p2p-Gnutella24 p2p-Gnutella25 p2p-Gnutella30 wikispeedia sx-stackoverflow sx-mathoverflow sx-superuser sx-askubuntu CollegeMsg higgs-twitter-social
-** complete the meta.* files that contains 'TODO'
-** copy to /data/ and run 
-* moreno_innovation:  add timeiso (1966)
-* konect-extr/extr/wikipedia:  have ALL languages
+* ... konect-extr/extr/wikipedia:  have ALL languages
 
 == Simple ==
-* snap:  com-* datasets
-* http://lemire.me/blog/archives/2012/03/27/publicly-available-large-data-sets-for-database-research/
-* http://www.reddit.com/r/redditdev/comments/dtg4j/want_to_help_reddit_build_a_recommender_a_public/
-* IMDB full semantic network:  movie, actor, director, etc.
 * http://esw.w3.org/topic/TaskForces/CommunityProjects/LinkingOpenData/DataSets
 * http://bioinfo.uib.es/~joemiro/marvel.html
 * http://kdd.ics.uci.edu/databases/movies/movies.html
@@ -152,6 +143,7 @@ Yang
 * http://snap.stanford.edu/temporal-motifs/data.html
 * http://www.bgu.ac.il/~bargera/tntp/Austin/Austin_net.txt
 * DIMACS challenge:  all others (apart from number 9)
+* snap:  com-* datasets
 
 == Needs complex extraction ==
 * http://openplanb.tumblr.com/
@@ -183,4 +175,4 @@ Yang
 * https://www.kaggle.com/c/kddcup2012-track1#description
 * http://www.dfki.uni-kl.de/~obradovic/download/blogspider.zip : needs database
 * http://data.stackexchange.com/ : only via API
-
+* IMDB full semantic network:  movie, actor, director, etc.

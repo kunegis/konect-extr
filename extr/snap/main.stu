@@ -15,7 +15,7 @@
 
 @all: 
 	@all.datasets @all.datasets-citation 
-	@all.egodatasets @all.symdatasets 
+	@all.egodatasets @all.symdatasets
 ; 
 
 # For these datasets, also extract the temporal co-citation graph. 
@@ -26,6 +26,15 @@ DATASETS_OTHER;
 >DATASETS:  DATASETS_CITATION DATASETS_OTHER
 {
 	cat DATASETS_CITATION DATASETS_OTHER
+}
+
+>ALLDATASETS:  DATASETS EGODATASETS SYMDATASETS
+{
+	cat DATASETS
+	for network in $(cat EGODATASETS) ; do
+		echo ego-"$network"
+	done
+	cat SYMDATASETS
 }
 
 #
@@ -147,6 +156,16 @@ out/tmp.elec:  mkelec out/wikiElec.ElecBs3.txt
 @clean: {
 	rm -Rf out/ work/
 }
+
+@deploy:   ALLDATASETS out/out.[ALLDATASETS] meta.[ALLDATASETS] -p konect
+{
+	for network in $(cat ALLDATASETS) ; do
+		rsync -vtrl meta."$network" out/out."$network" konect/dat/snap/
+	done
+}
+
+# Symlink to the konect/ directory
+konect;
 
 #
 # amazon

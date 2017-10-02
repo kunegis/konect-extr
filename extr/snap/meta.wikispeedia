@@ -1,1 +1,10 @@
-TODO
+name:  Wikispeedia
+code:  WS
+url:   http://snap.stanford.edu/data/wikispeedia.html
+category:  Hyperlink
+cite:   snap.stanford.edu
+long-description:  These are paths from the Wikispeedia game, in which users are tasked to find a article of the English Wikipedia, starting from a given article of the English Wikipedia, being allowed to only click links.  Nodes are articles of the English Wikipedia, and edges represent clicks.
+entity-names:  article
+relationship-names:  click
+extr:  snap
+tags:  #path

@@ -2,10 +2,12 @@ DATASETS
 DATASETS_CITATION
 SYMDATASETS
 EGODATASETS
+ALLDATASETS
 dep.*
 *~
 out
 work
+konect
 meta.amazon*
 meta.p2p-Gnutella*
 meta.sx-*
