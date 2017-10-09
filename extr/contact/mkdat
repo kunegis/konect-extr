@@ -1,15 +1,14 @@
 #! /bin/sh
 #
-# INPUT
+# STDIN 
 #	Contact data in original format as described in README
 #
-# OUTPUT
-#	Data in Graph Store format
+# STDOUT 
+#	Data in KONECT format
 #
 
 echo '% sym positive'
 
 cut -f 1,2,3 |
-sed -re 's,	([0-9]+)$,	1 \1,' |
+sed -E -e 's,	([0-9]+)$,	1 \1,' |
 ../mkuniq1 
-

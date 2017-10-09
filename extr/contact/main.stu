@@ -1,8 +1,6 @@
-% version 1.9
+% version 2.1
 
 @all:  out.contact meta.contact;
-
-# FILENAME := contacts.Exp3.dat
 
 >out.contact:   <contacts.Exp3.dat mkdat
 {
