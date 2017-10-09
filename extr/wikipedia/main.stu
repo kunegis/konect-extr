@@ -1,28 +1,26 @@
 #
 # Interwiki and intrawiki links from language Wikipedias. 
 #
-
 # We only take the main Wikipedia namespace into account.
-
+#
 # "Wikipedia-ID" (wid) always refers to the Wikipedia-internal page ID, as
 # used as the key in all Wikipedia SQL tables.  Wikipedia-IDs are unique
 # within one language Wikipedia, across all of that language Wikipedia's
 # namespaces.  
-
+#
 # "Article-Name" (aname) is the name of the article.  (We only use
 # articles from the main namespace.)
-
 #
-# Filenames:
+# FILES 
 #	out/id.* 	Using Wikipedia article IDs, consistent over all
 # 			files  
 #	out/out.*	Using continuous IDs, specific to each file
 # 			(this is not very useful for interwiki links) 
 #
-
-#
 # Note:  The variable "$LANGUAGE" is used as part of the current locale,
-# so we don't use it here.   
+# so we don't use it here.
+#
+# Language codes include underscores, and never dashes. 
 #
 
 % version 2.5
@@ -43,12 +41,16 @@ out:  { mkdir -p out ; }
 	./mklname
 }
 
->LANGS:  <sitematrix.json
+>LANGS:  <sitematrix.json  rmlangs
 {
+	# We remove a hardcoded list of networks that apparently are not
+	# downloadable.  In any case, they are very small Wikipedias. 
+	
 	sed -E -e 's,("dbname"),\
 \1,g' |
 		sed -E -e 's,^"dbname":"([^"]+)".*$,\1,;t;d' |
-		sed -E -e 's,wiki$,,;t;d'
+		sed -E -e 's,wiki$,,;t;d' |
+		./rmlangs
 }
 
 sitematrix.json:  
@@ -121,32 +123,33 @@ out/pagelinks_$LANG.sql.gz:  -p out
 			if [ "$LANG1" = "$LANG2" ] ; then 
 				continue
 			fi
-			echo out/meta.wikipedia_link_"$LANG1"_"$LANG2"
-			echo out/out.wikipedia_link_"$LANG1"_"$LANG2"
+			echo out/meta.wikipedia_interlink-"$LANG1"-"$LANG2"
+			echo out/out.wikipedia_interlink-"$LANG1"-"$LANG2"
 		done
 	done
 }
 
-out/meta.wikipedia_link_${LANG1}_${LANG2}:
+out/meta.wikipedia_interlink-${LANG1}-${LANG2}:
 	-p out mkmetainterwiki
 {
 	./mkmetainterwiki "$LANG1" "$LANG2"
 }
 
->out/out.wikipedia_link_${LANG1}_${LANG2}:
-	<out/id.wikipedia_link_${LANG1}_${LANG2}
+>out/out.wikipedia_interlink-${LANG1}-${LANG2}:
+	<out/id.wikipedia_interlink-${LANG1}-${LANG2}
 {
 	echo '% bip unweighted'
-	../mkuniq 
+	../../sh/mkuniq 
 }
 
 # With Wikipedia article IDs
-out/id.wikipedia_link_${LANG1}_${LANG2}:   
+out/id.wikipedia_interlink-${LANG1}-${LANG2}:   
 	mkinterwiki
 	out/page_$LANG2.sql 
 	out/langlinks_$LANG1.sql
 {
-	./mkinterwiki
+	# Arguments are only used for easy tracking with top(1)
+	./mkinterwiki "$LANG1"-"$LANG2"
 }
 
 out/langlinks_$LANG.sql: 
@@ -175,6 +178,6 @@ out/page_$LANG.sql: out/page_$LANG.sql.gz
 
 out/page_$LANG.sql.gz:  -p out
 {
-	wget -q http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-page.sql.gz -O out/page_$LANG.sql.gz
+	wget http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-page.sql.gz -O out/page_$LANG.sql.gz
 	touch -c out/page_$LANG.sql.gz
 }

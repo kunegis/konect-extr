@@ -91,7 +91,7 @@ if ($lang1 eq $lang2) {
 } else {
     readNumbers("page_$lang1.sql.filtered");
     readNames("page_$lang2.sql.filtered");
-    open F_OUT,">out.wikipedia_link_$lang1"."_$lang2" or die "$!";
+    open F_OUT,">out.wikipedia_interlink-$lang1"."-$lang2" or die "$!";
     open F_IN,"<langlinks_$lang1.sql.filtered" or die "$!";
     print F_OUT "% bip positive\n";
 }

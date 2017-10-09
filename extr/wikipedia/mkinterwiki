@@ -10,7 +10,7 @@
 #	out/langlinks_$LANG1.sql
 #
 # OUTPUT FILES
-#	out/id.wikipedia_link_$LANG1_$LANG2
+#	out/id.wikipedia_interlink-$LANG1-$LANG2
 #
 
 use strict;
@@ -56,7 +56,7 @@ close IN_PAGE or die "$!";
 
 print "Process links\n";
 
-open OUT, ">out/id.wikipedia_link_${lang1}_${lang2}" or die "$!";
+open OUT, ">out/id.wikipedia_interlink-${lang1}-${lang2}" or die "$!";
 open IN, "<out/langlinks_${lang1}.sql" or die "$!";
 
 while (my $line= <IN>) 

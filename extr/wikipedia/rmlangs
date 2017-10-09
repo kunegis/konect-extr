@@ -1,0 +1,5 @@
+#! /bin/sh
+
+sed -E -e '/^(smg)$/d'
+
+

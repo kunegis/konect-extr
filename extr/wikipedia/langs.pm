@@ -1,3 +1,5 @@
+DEPRECATED -- read the files in out/
+
 package langs;
 
 %langs=(
