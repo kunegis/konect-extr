@@ -27,10 +27,10 @@ euroroad:
 	wget $(URL)/bpa/euroroad.net -O $@
 cora.map:
 	wget $(URL)/cpm/cora.map -O $@
-	
+
 euroroad.map: euroroad
 	<euroroad sed -ne '/\*vertices/,/\*edges/p' | tail -n +2 >$@
-	
+
 jdk.map:
 	wget $(URL)/other/jdk.map -O $@
 jung-j.map:
@@ -39,4 +39,3 @@ jung-j.map:
 .PHONY: clean
 clean:
 	rm -f jdk jung-j cora *.map ent.* out.*
-
