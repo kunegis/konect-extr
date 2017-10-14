@@ -1,0 +1,5 @@
+dep
+meta.linux
+linux-*
+filtered-files
+*~

@@ -2,7 +2,7 @@
 # The file inclusion graph of the Linux kernel.
 # 
 
-% version 1.9
+% version 2.5
 
 @all:  meta.linux out.linux @test;
 
