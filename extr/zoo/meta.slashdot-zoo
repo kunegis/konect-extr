@@ -1,0 +1,11 @@
+category: Social
+code: SZ
+name: Slashdot Zoo
+description: User–user friend/foe
+url: http://dai-labor.de/IRML/datasets
+cite: kunegis:slashdot-zoo
+extr: zoo
+long-description: This is the signed social network of users of the technology news site Slashdot (slashdot.org), connected by directed "friend" and "foe" relations.  The "friend" and "foe" labels are used on Slashdot to mark users, and influence the scores as seen by each user. For instance, If user A marks user B as a foe, the score of user B's posts will be decreased as shown to user A. 
+entity-names:  user
+relationship-names:  friend/foe
+timeiso:  1997/2009

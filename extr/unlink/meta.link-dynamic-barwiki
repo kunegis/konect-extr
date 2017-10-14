@@ -4,7 +4,7 @@ name: Wikipedia, bar (dynamic)
 description: Article–article hyperlinks
 entity-names: article
 extr: unlink
-long-description: This network shows the evolution of hyperlinks between artikels of the Bavarian Wikipedia. The nodes represent articles. An edge indicates that a hyperlink was added or removed depending on the edge weight (-1 for removal or +1 for addition).
+long-description: This network shows the evolution of hyperlinks between articles of the Bavarian Wikipedia. The nodes represent articles. An edge indicates that a hyperlink was added or removed depending on the edge weight (−1 for removal or +1 for addition).
 relationship-names: reference
 cite: konect:unlink
 tags:  #loop
