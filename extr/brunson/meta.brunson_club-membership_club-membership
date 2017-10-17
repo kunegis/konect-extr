@@ -1,6 +1,6 @@
 category: Affiliation
 code: BM
-name: Club membership
+name: Corporate club membership
 description: Person–organization memberships
 entity-names: person,organization
 extr: brunson

@@ -241,13 +241,3 @@ out/higgs-social_network.edgelist:  out/higgs-social_network.edgelist.gz
 	touch -c out/higgs-social_network.edgelist
 }
 
-#
-# CollegeMsg
-#
-
->out/out.CollegeMsg:  <out/CollegeMsg.txt
-{
-	echo '% asym positive'
-	sed -E -e 's,^(\S+) (\S+) (\S+),\1	\2	1	\3,' |
-	../../sh/mkuniq1
-}

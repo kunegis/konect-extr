@@ -1,6 +1,6 @@
 category: Affiliation
 code: SC
-name: South African Companies
+name: South African companies
 description: Person–company leaderships
 entity-names: person,company
 extr: brunson
