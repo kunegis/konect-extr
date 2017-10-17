@@ -1,9 +1,9 @@
-name:  ${name}
-code:  ${code}
-url:   http://snap.stanford.edu/data/sx-${name}.html
+name:  ${NAME}
+code:  ${CODE}
+url:   http://snap.stanford.edu/data/sx-${NAME}.html
 category:  OnlineContact
 cite:  snap.stanford.edu
-long-description:  These are interactions from the StackExchange site "${name}".  The network is between users, and directed edges represent three types of interactions:  answering a question of another user, commenting on another user's question, and commenting on another user's answer.  The network is temporal.  This network is part of a series of network from multiple StackExchange sites.
+long-description:  These are interactions from the StackExchange site "${NAME}".  The network is between users, and directed edges represent three types of interactions:  answering a question of another user, commenting on another user's question, and commenting on another user's answer.  The network is temporal.  This network is part of a series of network from multiple StackExchange sites.
 entity-names:  user
 relationship-names:  answer/comment
 extr:  snap

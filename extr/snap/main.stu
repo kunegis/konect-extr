@@ -191,7 +191,9 @@ konect;
 
 >meta.sx-$name:  <template.meta.sx
 {
-	sed -E -e 's,\$\{NAME\},'"$name"',g'
+	code=$(echo "$name" | sed -E -e 's,^(..).*$,\1,')
+	name_uc=$(echo "$name" | sed -E -e 's,^(.).*$,\1,' | tr a-z A-Z)$(echo "$name" | sed -E -e 's,^.(.*)$,\1,')
+	sed -E -e 's,\$\{NAME\},'"$name_uc"',g;s,\$\{CODE\},'"$code"',g'
 }
 
 #
