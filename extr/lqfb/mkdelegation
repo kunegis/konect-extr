@@ -1,0 +1,10 @@
+UNUSED
+#! /bin/sh
+
+{
+	echo '% asym positive'
+
+	sed <CSVs/delegation.txt -re '1d;s,^[0-9]+;([0-9]+);([0-9]+);.*$,\1	\2,;/;;/d' |
+	    ../konect/extr/mkuniq1 ;
+} >out.lqfb-delegation
+

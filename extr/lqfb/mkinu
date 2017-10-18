@@ -1,0 +1,57 @@
+#! /usr/bin/perl
+#
+# INPUT 
+#	in.lqfb-Area in.lqfb-Issue in.lqfb-Global in.lqfb-Unit 
+# 
+# OUTPUT 
+#	inu.lqfb-Area inu.lqfb-Issue inu.lqfb-Global inu.lqfb-Unit 
+#
+
+use strict;
+use warnings;
+
+my $next_from_id= 1;
+my %new_from_ids = ();
+my $next_to_id= 1;
+my %new_to_ids = ();
+
+my @names = ('Global', 'Unit', 'Area', 'Issue'); 
+
+for my $name (@names) {
+
+    my $filename_in = "in.lqfb-$name"; 
+#    print "filename_in = «$filename_in»\n"; 
+    open(IN, "<", $filename_in) or die "$!";
+    open(INU, ">", "inu.lqfb-$name") or die "$!"; 
+
+    while (<IN>) 
+    {
+	/^\s*(\S+)\s+(\S+)\s+(.*)$/ 
+	    or die "*** error:  invalid input:  $_";
+	
+	my $id_from_old = "" . $1;
+	my $id_to_old = "" . $2;
+	my $rest = "" . $3;
+
+	my $id_from_new = $new_from_ids{$id_from_old};
+	if (! exists $new_from_ids{$id_from_old}) {
+	    $id_from_new = $next_from_id;
+	    $new_from_ids{$id_from_old} = $id_from_new;
+	    ++ $next_from_id;
+	}
+	my $id_from_new_string = "" . $id_from_new;
+
+	my $id_to_new = $new_to_ids{$id_to_old};
+	if (! exists $new_to_ids{$id_to_old}) {
+	    $id_to_new = $next_to_id;
+	    $new_to_ids{$id_to_old} = $id_to_new;
+	    ++ $next_to_id;
+	}
+	my $id_to_new_string = "" . $id_to_new;
+
+	print INU "$id_from_new_string\t$id_to_new_string\t$rest\n";
+    }
+
+    close(IN) or die "$!"; 
+    close(INU) or die "$!"; 
+}

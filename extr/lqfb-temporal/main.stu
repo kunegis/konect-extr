@@ -1,0 +1,103 @@
+
+#
+# These are the temporal LiquidFeedback (LQFB) datasets.
+#
+
+# 
+# We don't make the distinction between the different types of edges.
+# Everything corresponds to the "All" network.
+#
+
+@all:  @data @analysis;
+
+@analysis:  @temporal @drawing; 
+
+@data:  out.lqfb-temporal meta.lqfb-temporal;
+
+# File is in SVN 
+meta.lqfb-temporal;
+
+out.lqfb-temporal:
+	in2.Area
+	in2.Global
+	in2.Issue
+	in2.Unit
+{
+    set -e
+    {
+	echo '% asym dynamic'
+	cat in2.Area in2.Global in2.Issue in2.Unit | ../konect/extr/mkuniq1
+    } >out.lqfb-temporal
+}
+
+#
+# Files with the fourth column removed (except Global)
+#
+
+in1.Global:
+	own/lqfb/linksGlobal.txt_new
+{
+    cp own/lqfb/linksGlobal.txt_new in1.Global
+}
+
+in1.[NAME]:
+	own/lqfb/links[NAME].txt_new
+{
+    cut -d ' ' -f 1,2,3,5 own/lqfb/links[NAME].txt_new >in1.[NAME]
+}
+
+#
+# Files with the end-removals removed
+#
+
+in2.[NAME]:
+	in1.[NAME]
+{
+    set -e
+    {
+	t_last="$(cut -d ' ' -f 4 in1.[NAME] | sort -un | tail -1)"
+	<in1.[NAME] sed -re '/ -1 '"$t_last"'$/d' 
+    } >in2.[NAME]
+}
+
+#
+# @temporal
+#
+
+@temporal:  plot-lqfb/temporal.a.eps;
+
+plot-lqfb/temporal.a.eps:
+	dat-lqfb/temporal.mat
+	$<MATLABPATH> lqfb_temporal_plot.m 
+{
+    ./matlab lqfb_temporal_plot.m 
+}
+
+dat-lqfb/temporal.mat:
+	out.lqfb-temporal
+	$<MATLABPATH> lqfb_temporal.m
+{
+    ./matlab lqfb_temporal.m 
+}
+
+#
+# Matlab
+#
+
+MATLABPATH:
+{
+    echo -n "$MATLABPATH:../konect/matlab/:../konect/analysis/lib/matlab_bgl/:../konect/analysis/lib/" >MATLABPATH
+}
+
+#
+# Graph drawing
+#
+
+@drawing:  plot-lqfb/drawing.a.eps; 
+
+plot-lqfb/drawing.a.eps:
+	out.lqfb-temporal
+	$<MATLABPATH> lqfb_drawing.m 
+{
+    ./matlab lqfb_drawing.m 
+}

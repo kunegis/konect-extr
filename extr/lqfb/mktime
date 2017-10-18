@@ -1,0 +1,24 @@
+#! /usr/bin/perl 
+#
+# Convert timestamps from LQFB format (number of days since start day)
+# to Unix format (number of seconds since 1970).  Input and output are
+# in out.* format. 
+#
+
+use strict;
+use warnings;
+
+while (<>) {
+
+    /^(.*\s)(\S+)\s*$/ or die;
+
+    my $t_lqfb = $2;
+
+    # 1281650400 is 2010-08013. 
+    # The value 1 is mapped to 0, and represents "edge was there before we started recording" 
+    my $t_konect = ($t_lqfb == 1) ? 0 : ($t_lqfb * (24 * 60 * 60)) + 1281650400;
+
+    print "$1\t$t_konect\n";
+}
+
+

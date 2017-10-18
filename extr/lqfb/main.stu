@@ -1,0 +1,129 @@
+
+@all:  
+	 out.lqfb-All
+	 out.lqfb-Global  out.lqfb-Area  out.lqfb-Issue  out.lqfb-Unit
+	meta.lqfb-All
+	meta.lqfb-Global meta.lqfb-Area meta.lqfb-Issue meta.lqfb-Unit
+	indirect.a.eps
+	out.flat-lqfb-All
+;
+
+#
+# Matlab
+#
+
+matlab:  ../konect/analysis/matlab
+{
+    cp ../konect/analysis/matlab matlab 
+}
+
+$MATLABPATH : ../konect/matlab; 
+
+# 
+# in.lqfb-[NAME]:  the file with -1 entries at the end removed.  Also, a
+# pseudo topic ID of 1 added to Global. 
+# 
+
+in.lqfb-Global:
+	/home/shuyi/liquidfeedback/links/linksGlobal.txt
+{
+    set -e
+    {
+	t_last="$(cut -d ' ' -f 4 /home/shuyi/liquidfeedback/links/linksGlobal.txt | sort -un | tail -1)"
+	</home/shuyi/liquidfeedback/links/linksGlobal.txt sed -re '/ -1 '"$t_last"'$/d'  |
+	sed -re 's,^\s*(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s*$,\1 \2 \3 1 \4,'
+    } >in.lqfb-Global
+}
+
+in.lqfb-[NAME]:
+	/home/shuyi/liquidfeedback/links/links[NAME].txt
+{
+    set -e
+    {
+	t_last="$(cut -d ' ' -f 5 /home/shuyi/liquidfeedback/links/links[NAME].txt | sort -un | tail -1)"
+	</home/shuyi/liquidfeedback/links/links[NAME].txt sed -re '/ -1 \S+ '"$t_last"'$/d' 
+    } >in.lqfb-[NAME]
+}
+
+#
+# in2:  the topic IDs removed. 
+#
+
+in2.lqfb-[NAME]:  in.lqfb-[NAME]
+{
+    <in.lqfb-[NAME] cut -d ' ' -f 1,2,3,5 >in2.lqfb-[NAME]
+}
+
+#
+# out.lqfb-[NAME] 
+#
+
+out.lqfb-[NAME]:
+	in2.lqfb-[NAME]
+	mktime
+{
+    set -e
+    {
+	echo '% asym dynamic'
+	<in2.lqfb-[NAME] ../konect/extr/mkuniq1 | ./mktime
+    } >out.lqfb-[NAME]
+}
+
+out.lqfb-All:
+	in2.lqfb-Global in2.lqfb-Area in2.lqfb-Issue in2.lqfb-Unit 
+	mktime
+{
+    set -e
+    {
+	echo '% asym dynamic'
+	cat in2.lqfb-Global in2.lqfb-Area in2.lqfb-Issue in2.lqfb-Unit | ../konect/extr/mkuniq1 | ./mktime
+    } >out.lqfb-All
+}
+
+#
+# Indirect
+# 
+
+indirect.a.eps:  
+	indirect
+	indirect_plot.m 
+	$MATLABPATH
+	matlab
+{
+    ./matlab indirect_plot.m 
+}
+
+indirect:
+	indirect.m 
+	matlab
+	inu.lqfb-Global inu.lqfb-Area inu.lqfb-Issue inu.lqfb-Unit 
+{
+    ./matlab indirect.m 
+}
+
+#
+# inu.lqfb-[NAME]
+#
+
+inu.lqfb-Area:
+	in.lqfb-Area in.lqfb-Issue in.lqfb-Global in.lqfb-Unit 
+	mkinu
+{
+    ./mkinu 
+}
+
+inu.lqfb-Issue:  inu.lqfb-Area {}
+inu.lqfb-Global: inu.lqfb-Area {}
+inu.lqfb-Unit:   inu.lqfb-Area {}
+
+#
+# Flat versions:  only the last state, without the dynamic edges
+#
+
+out.flat-lqfb-[NAME]:  
+	matlab
+	mkflat.m
+	out.lqfb-[NAME]
+{
+    NAME=[NAME] ./matlab mkflat.m 
+}

@@ -1,0 +1,6 @@
+Name LiquidFeedback (temporal)
+code: LQt
+category:  Social
+entity-names:  user
+relationship-names:  delegation
+cite:  kling:lqfb
