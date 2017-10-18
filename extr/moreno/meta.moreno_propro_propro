@@ -1,6 +1,6 @@
 category: Metabolic
 code: Mp
-name: Protein
+name: Yeast
 description: Protein–protein interactions
 entity-names: protein
 extr: moreno

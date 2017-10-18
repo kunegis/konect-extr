@@ -1,6 +1,6 @@
 category: Interaction
 code: Lb
-name: Last.fm band
+name: Last.fm bands
 description: User–band listening event
 url: http://www.dtic.upf.edu/~ocelma/MusicRecommendationDataset/lastfm-1K.html
 cite: lastfm

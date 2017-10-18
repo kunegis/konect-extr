@@ -6,16 +6,17 @@
 # $lg:  Language code with '_' (rather than '-')
 #
 
-% version 2.4 
+% version 2.5
 
-@all:   [dep.all];
->dep.all:  WIKIS
-{
-	for wiki in $(cat WIKIS)
-	do
-		echo @wiki."$wiki"
-	done
-}
+@all:  @wiki.[WIKIS]; 
+##[dep.all];
+##>dep.all:  WIKIS
+## {
+## 	for wiki in $(cat WIKIS)
+## 	do
+## 		echo @wiki."$wiki"
+## 	done
+## }
 
 @wiki.$wiki:
 	out/meta.edit-$wiki
@@ -30,9 +31,15 @@ tmp { mkdir -p tmp ; }
 
 >WIKIS:  <sitematrix.json
 {
+	# We remove a small set of very small and inactive projects that
+	# set off our unit tests because they do not have realistic
+	# structure.  We could also handle this by using specific tags
+	# to mark this, but for now we just remove these wikis. 
+
 	sed -E -e 's,("dbname"),\
 \1,g' |
-		sed -E -e 's,^"dbname":"([^"]+)".*$,\1,;t;d'
+		sed -E -e 's,^"dbname":"([^"]+)".*$,\1,;t;d' |
+		sed -E -e '/^(quwikiquote|ndswikiquote|aywikibooks|piwiktionary|nawikiquote|kwwikiquote|crwikiquote|zawikiquote|bawikibooks|gawikibooks)$/d'
 }
 
 sitematrix.json:  -t sl
@@ -50,7 +57,7 @@ out/ent.edit-$wiki-page
 :
 	tmp/$wiki-latest-stub-meta-history.xml -p out mkout
 {
-	./mkout
+	./mkout "$wiki"
 }
 
 tmp/$wiki-latest-stub-meta-history.xml:
@@ -86,34 +93,33 @@ tmp/$wiki-latest-stub-meta-history.xml:
 }
 
 >out/field.sitename.${lg}wiki: $[lname = out/lname.$lg]		{ echo "$lname Wikipedia" ; }
->out/field.sitenamefield.${lg}wiki:				{ echo "Wikipedia ($lg)" ; }
+>out/field.sitenamefield.${lg}wiki:				{ echo "Wikipedia edits ($lg)" ; }
 >out/field.code.${lg}wiki:					{ echo "$lg" ; }
 
 >out/field.sitename.${lg}wiktionary: $[lname = out/lname.$lg]	{ echo "$lname Wiktionary" ; }
->out/field.sitenamefield.${lg}wiktionary:			{ echo "Wiktionary ($lg)" ; }
+>out/field.sitenamefield.${lg}wiktionary:			{ echo "Wiktionary edits ($lg)" ; }
 >out/field.code.${lg}wiktionary:				{ echo "m$lg" ; }
 
 >out/field.sitename.${lg}wikibooks: $[lname = out/lname.$lg]	{ echo "$lname Wikibooks" ; }
->out/field.sitenamefield.${lg}wikibooks: 			{ echo "Wikibooks ($lg)" ; }
+>out/field.sitenamefield.${lg}wikibooks: 			{ echo "Wikibooks edits ($lg)" ; }
 >out/field.code.${lg}wikibooks:					{ echo "b$lg" ; }
 
 >out/field.sitename.${lg}wikiquote: $[lname = out/lname.$lg]	{ echo "$lname Wikiquote" ; }
->out/field.sitenamefield.${lg}wikiquote:			{ echo "Wikiquote ($lg)" ; }
+>out/field.sitenamefield.${lg}wikiquote:			{ echo "Wikiquote edits ($lg)" ; }
 >out/field.code.${lg}wikiquote:					{ echo "q$lg" ; }
 
 >out/field.sitename.${lg}wikisource: $[lname = out/lname.$lg]	{ echo "$lname Wikisource" ; }
->out/field.sitenamefield.${lg}wikisource:			{ echo "Wikiquote ($lg)" ; }
+>out/field.sitenamefield.${lg}wikisource:			{ echo "Wikiquote edits ($lg)" ; }
 >out/field.code.${lg}wikisource:				{ echo "q$lg" ; }
 
 >out/field.sitename.${lg}wikinews: $[lname = out/lname.$lg]	{ echo "$lname Wikinews" ; }
->out/field.sitenamefield.${lg}wikinews:				{ echo "Wikinews ($lg)" ; }
+>out/field.sitenamefield.${lg}wikinews:				{ echo "Wikinews edits ($lg)" ; }
 >out/field.code.${lg}wikinews:					{ echo "n$lg" ; }
 
 >out/field.sitename.${lg}wikiversity: $[lname = out/lname.$lg]	{ echo "$lname Wikiversity" ; }
->out/field.sitenamefield.${lg}wikiversity:			{ echo "Wikiversity ($lg)" ; }
+>out/field.sitenamefield.${lg}wikiversity:			{ echo "Wikiversity edits ($lg)" ; }
 >out/field.code.${lg}wikiversity:				{ echo "y$lg" ; }
 
 >out/field.sitename.${lg}wikivoyage: $[lname = out/lname.$lg]	{ echo "$lname Wikivoyage" ; }
->out/field.sitenamefield.${lg}wikivoyage:			{ echo "Wikivoyage ($lg)" ; }
+>out/field.sitenamefield.${lg}wikivoyage:			{ echo "Wikivoyage edits ($lg)" ; }
 >out/field.code.${lg}wikivoyage:				{ echo "v$lg" ; }
-

@@ -3,3 +3,5 @@ meta.linux
 linux-*
 filtered-files
 *~
+out.*
+noincludes

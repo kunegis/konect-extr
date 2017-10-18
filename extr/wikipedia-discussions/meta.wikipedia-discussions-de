@@ -1,6 +1,6 @@
 category:  Communication
 code:  WD
-name:  Wikipedia Threads (de)
+name:  Wikipedia threads (de)
 extr:  wikipedia-discussions
 long-description:  This is a dataset of discussion threads on the German Wikipedia.  Node of the network are users of the German Wikipedia.  A directed from user A to user B denotes that user A wrote a comment in a discussion as a reply to a comment of user B. 
 entity-names:  user,user

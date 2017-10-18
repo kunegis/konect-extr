@@ -1,0 +1,5 @@
+#! /bin/sh
+
+echo '% asym positive'
+sed -E -e 's,^([0-9]+)\s+([0-9]+)\s+([0-9]+)$,\1	\2	1	\3,' |
+../../sh/mkuniq1

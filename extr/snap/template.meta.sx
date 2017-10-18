@@ -7,4 +7,5 @@ long-description:  These are interactions from the StackExchange site "${NAME}".
 entity-names:  user
 relationship-names:  answer/comment
 extr:  snap
-tags:  #incomplete
+tags:  #incomplete #loop
+

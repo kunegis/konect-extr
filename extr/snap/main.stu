@@ -243,3 +243,11 @@ out/higgs-social_network.edgelist:  out/higgs-social_network.edgelist.gz
 	touch -c out/higgs-social_network.edgelist
 }
 
+#
+# sx-*
+#
+
+>out/out.sx-$name:  <out/sx-$name.txt   mksx
+{
+	./mksx
+}

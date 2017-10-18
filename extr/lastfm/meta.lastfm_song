@@ -1,6 +1,6 @@
 category: Interaction
 code: Ls
-name: Last.fm song
+name: Last.fm songs
 description: User–song listening event
 url: http://www.dtic.upf.edu/~ocelma/MusicRecommendationDataset/lastfm-1K.html
 cite: lastfm

@@ -1,6 +1,7 @@
+# coding: utf-8
 category: Communication
 code: Tru
-name: Wikipedia talk, Russian
+name: Wikipedia talk (ru)
 description: User–user messages
 entity-names: user
 extr: wiki-talk

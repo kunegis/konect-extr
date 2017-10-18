@@ -1,6 +1,6 @@
 #! /bin/sh
 
-sed -re '
+sed -E -e '
 
 # Double dot
 s,/[^/ ]+/\.\./,/,g

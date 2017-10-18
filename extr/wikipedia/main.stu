@@ -67,9 +67,9 @@ sitematrix.json:
 @intrawiki: out/(meta out).wikipedia_link_[LANGS]; 
 
 >out/meta.wikipedia_link_$LANG:
-	-p out <meta.template-intrawiki $[NAME = out/lname.$LANG]
+	-p out <meta.template-intrawiki
+	$[NAME = out/lname.$LANG]
 {
-##	NAME="$(<codes sed -E -e '/^'"$LANG"'	/!d;s,^.*	,,')"
 	echo >&2 "NAME=⟨$NAME⟩"
 	sed -E -e '
 		s,\$\{LANG\},'"$LANG"',g

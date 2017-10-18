@@ -1,0 +1,19 @@
+#! /bin/sh
+#
+# Generate the final dataset.
+#
+# INPUT FILES
+#	out.raw
+#
+# OUTPUT FILES
+#	out.linux
+#
+
+{
+	echo '% asym unweighted'
+
+	<out.raw sed -E -e '/ --$/d' | 
+	../../sh/mkuniq1 | 
+	sort -n |
+	uniq
+} >out.linux

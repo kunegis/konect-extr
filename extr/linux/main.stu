@@ -9,22 +9,19 @@
 >VERSION { echo 3.16 }
 >SERIES  { echo v3.x }
 
->out.linux:  <out.raw
+out.linux:  out.raw  mklinux
 {
-	echo '% asym unweighted'
-	sed -re '/ --$/d' | 
-	../mkuniq1 | 
-	sort -n | uniq
-}
-
->out.unfiltered:  [dep] $[VERSION] mkall  filtered-files
-{
-	./mkall linux-"$VERSION" 
+	./mklinux
 }
 
 >out.raw:  <out.unfiltered filter 
 {
 	./filter 
+}
+
+>out.unfiltered:  [dep] $[VERSION] mkall  filtered-files
+{
+	./mkall linux-"$VERSION" 
 }
 
 linux-$VERSION.tar.xz:  $[SERIES]
@@ -90,5 +87,5 @@ meta.linux.in;
 
 @clean:
 {
-	rm -rf out.* linux-* dep noincludes duplicates filtered-files 
+	rm -Rf out.* linux-* dep noincludes duplicates filtered-files 
 }
