@@ -1,6 +1,6 @@
 category: Software
 code: Dw
-name: Weka dependency
+name: Weka 
 description: Class–class dependencies
 entity-names: class
 extr: subelj

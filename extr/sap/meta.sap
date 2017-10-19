@@ -1,0 +1,10 @@
+name: SAP forums
+code: SA
+category: Communication
+description: User–user forum replies to topics
+long-description: This network contains SAP forum topics and replies. The edges are directed and unweighted, going from the responding user to the user who created the topic.
+entity-names: user 
+relationship-names: reply
+extr: sap
+tags: #loop
+

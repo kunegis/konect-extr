@@ -1,6 +1,6 @@
 category: Hyperlink
 code: GO
-name: Google
+name: Google hyperlinks
 description: Webpage–webpage hyperlinks
 url: http://snap.stanford.edu/data/web-Google.html
 cite: konect:leskovec08 

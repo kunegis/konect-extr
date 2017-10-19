@@ -1,11 +1,12 @@
 category: Misc
 code: SI
-name: Similarity
+name: Similarities (DBpedia)
 description: Entity–entity similarity
 url: http://wiki.dbpedia.org/Downloads
 cite: konect:dbpedia2
 extr: dbpedia
 long-description: This is the similarity graph from DBpedia. It contains the "similar to" links between pages of Wikipedia. The network is undirected and does not contain multiple edges. The "similar to" relationship was removed from DBpedia at a specific version. Thus, this dataset will not be updated with new versions of DBpedia. The edges correspond to the &lt;http://dbpedia.org/property/similar&gt; relationship type in DBpedia.
 tags: #regenerate #loop 
-entity-names: entity
+entity-names: concept
 relationship-names: similarity
+timeiso:  2001/2017

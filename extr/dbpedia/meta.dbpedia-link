@@ -1,6 +1,6 @@
 category: Hyperlink
 code: DL
-name: Wikipedia, English
+name: DBpedia links
 description: Article–article links
 url: http://wiki.dbpedia.org/Downloads
 cite: konect:dbpedia2
@@ -9,3 +9,4 @@ long-description: The network is the hyperlink network of Wikipedia, as extracte
 tags: #regenerate
 entity-names: article
 relationship-names: hyperlink
+timeiso:  2001/2017

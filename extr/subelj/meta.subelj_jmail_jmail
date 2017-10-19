@@ -1,6 +1,6 @@
 category: Software
 code: DM
-name: JMAIL dependency
+name: JMAIL 
 description: Class–class dependencies
 entity-names: class
 extr: subelj

@@ -1,6 +1,6 @@
 category: Feature
 code: LO
-name: Location
+name: DBpedia locations
 description: Entity–place location
 url: http://wiki.dbpedia.org/Downloads
 cite: konect:dbpedia2 
@@ -9,3 +9,4 @@ long-description: This is the bipartite network of entities in Wikipedia and the
 tags: #regenerate
 entity-names:  entity, place
 relationship-names:  location
+timeiso:  2001/2017

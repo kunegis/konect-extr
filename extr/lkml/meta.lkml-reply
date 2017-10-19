@@ -7,3 +7,5 @@ relationship-names:  reply
 extr:  lkml
 tags:  #loop
 long-description:  This is the communication network of the Linux kernel mailing list.  Nodes are persons (identified by their email addresses), and each directed edge represents a reply from a user to another.  
+cite:  konect:lkml
+timeiso:  2006/2013

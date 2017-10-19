@@ -1,6 +1,6 @@
 category: Software
 code: Dd
-name: Java dependency
+name: JDK-java
 description: Class–class dependencies
 entity-names: class
 extr: subelj

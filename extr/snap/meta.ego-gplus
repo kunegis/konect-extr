@@ -1,6 +1,6 @@
 category: Social
 code: GP
-name: Google+
+name: Google+ (NIPS)
 description: User–user friendship
 entity-names: user,user
 url: http://snap.stanford.edu/data/egonets-Gplus.html

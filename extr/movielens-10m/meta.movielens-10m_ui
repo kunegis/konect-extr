@@ -1,6 +1,6 @@
 category: Folksonomy
 code: Mui
-name: MovieLens u-i
+name: MovieLens user–item
 description: User–movie tag assignment
 url: http://www.grouplens.org/node/73
 cite: www.grouplens.org/node/73

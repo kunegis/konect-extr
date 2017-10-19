@@ -1,6 +1,6 @@
 category: Affiliation
 code: OC
-name: Occupation
+name: Occupations
 description: Person–occupation association
 url: http://wiki.dbpedia.org/Downloads
 cite: konect:dbpedia2
@@ -9,3 +9,4 @@ long-description: This is the bipartite occupation network of DBpedia. It contai
 tags: #regenerate
 entity-names:  person, occupation
 relationship-names:  association
+timeiso:  2001/2017

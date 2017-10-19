@@ -71,8 +71,9 @@ sitematrix.json:
 	$[NAME = out/lname.$LANG]
 {
 	echo >&2 "NAME=⟨$NAME⟩"
+	LANG_dash=$(echo "$LANG" | tr _ -)
 	sed -E -e '
-		s,\$\{LANG\},'"$LANG"',g
+		s,\$\{LANG\},'"$LANG_dash"',g
 		s,\$\{NAME\},'"$NAME"',g
 	'
 }
@@ -91,7 +92,7 @@ out/id.wikipedia_link_$LANG0:
 	out/page_$LANG0.sql
 	out/pagelinks_$LANG0.sql
 {
-	./mkintrawiki 
+	./mkintrawiki $LANG0
 }
 
 # The 'pagelinks' table contains information about which article (by
@@ -106,7 +107,7 @@ out/pagelinks_$LANG.sql:
 
 out/pagelinks_$LANG.sql.gz:  -p out
 {
-	wget -q http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pagelinks.sql.gz -O out/pagelinks_$LANG.sql.gz
+	wget http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pagelinks.sql.gz -O out/pagelinks_$LANG.sql.gz
 	touch -c out/pagelinks_$LANG.sql.gz
 }
 

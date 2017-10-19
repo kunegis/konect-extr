@@ -1,6 +1,6 @@
 category: Feature
 code: ST
-name: Movies
+name: Actors (DBpedia)
 description: Movie–actor starring
 url: http://wiki.dbpedia.org/Downloads
 cite: konect:dbpedia2 
@@ -9,3 +9,4 @@ long-description: This is the bipartite network of movies and the actors that ha
 tags: #regenerate
 entity-names:  movie, actor
 relationship-names:  starring
+timeiso:  2001/2017

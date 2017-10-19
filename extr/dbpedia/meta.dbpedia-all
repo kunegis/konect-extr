@@ -1,11 +1,12 @@
 category: Misc
 code: DB
-name: DBpedia
+name: DBpedia 
 description: Entity–entity relationship
 url: http://wiki.dbpedia.org/Downloads
 cite: konect:dbpedia2 
 extr: dbpedia
 long-description: This is the complete DBpedia network. Nodes are entities included in DBpedia and each edge represents one triple. The data is extracted from version 3.6 of DBpedia. 
 tags: #regenerate
-entity-names: entity
+entity-names: concept
 relationship-names: relationship
+timeiso:  2001/2017

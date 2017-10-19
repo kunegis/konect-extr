@@ -9,3 +9,4 @@ long-description: This is the bipartite producer network of DBpedia. Nodes are p
 tags: #regenerate
 entity-names:  producer, work
 relationship-names:  association
+timeiso:  2001/2017

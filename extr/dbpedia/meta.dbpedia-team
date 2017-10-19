@@ -9,3 +9,4 @@ long-description: The is the bipartite network of athletes and their teams, extr
 tags: #regenerate
 entity-names:  athlete, team
 relationship-names:  membership
+timeiso:  2001/2017

@@ -1,6 +1,6 @@
 category: Software
 code: DJ
-name: JDK dependency
+name: Java Development Kit
 description: Class–class dependencies
 entity-names: class
 extr: subelj

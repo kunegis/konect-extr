@@ -1,6 +1,6 @@
 category: Software
 code: DV
-name: Guava dependency
+name: Guava dependencies
 description: Class–class dependencies
 entity-names: class
 extr: subelj

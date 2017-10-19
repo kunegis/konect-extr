@@ -1,6 +1,6 @@
 category: Hyperlink
 code: Us
-name: Wikipedia, simple en (dynamic) 
+name: Wikipedia dynamic (simple)
 description: Article–article hyperlinks
 entity-names: article
 extr: unlink

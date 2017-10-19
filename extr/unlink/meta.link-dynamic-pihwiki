@@ -1,6 +1,6 @@
 category: Hyperlink
 code: Upi
-name: Wikipedia, pih (dynamic) 
+name: Wikipedia dynamic (pih)
 description: Article–article hyperlinks
 entity-names: article
 extr: unlink

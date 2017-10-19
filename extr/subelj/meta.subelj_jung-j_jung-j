@@ -1,12 +1,10 @@
 category: Software
 code: Dj
-name: JUNG dependency
-fullname: JUNG and javax dependency
+name: JUNG/Javax
 description: Class–class dependencies
 entity-names: class
 extr: subelj
 url: http://lovro.lpt.fri.uni-lj.si/support.jsp
-long-description: This is the software class dependency network of the JUNG 2.0.1 and javax 1.6.0.7 libraries, namespaces edu.uci.ics.jung and java/javax. The network is directed. Nodes represent classes. An edge between them indicates that there exists a dependency between two classes. As there may
-be multiple references between classes the network has multiple edges.
+long-description: This is the software class dependency network of the JUNG 2.0.1 and javax 1.6.0.7 libraries, namespaces edu.uci.ics.jung and java/javax. The network is directed. Nodes represent classes. An edge between them indicates that there exists a dependency between two classes. As there may be multiple references between classes the network has multiple edges.
 relationship-names: dependency
 cite: konect:dependency1

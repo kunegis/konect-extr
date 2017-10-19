@@ -1,6 +1,6 @@
 category: Software
 code: Dx
-name: Javax dependency
+name: Javax 
 description: Class–class dependencies
 entity-names: class
 extr: subelj

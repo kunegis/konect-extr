@@ -3,7 +3,10 @@
 #
 # http://wiki.dbpedia.org/Downloads34
 #
-# The strict datasets are downloaded.  The old datasets are in own/. 
+# The strict datasets are downloaded.  The old datasets are in own/.
+#
+# Note:  The 'timeiso' field in all meta.* files must be updated by hand
+# if these datasets are regenerated. 
 #
 
 % version 2.4 

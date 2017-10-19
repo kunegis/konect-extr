@@ -1,6 +1,6 @@
 category: Software
 code: Do
-name: JDK dependency
+name: JDK-org
 fullname: JDK dependency(org)
 description: Class–class dependencies
 entity-names: class

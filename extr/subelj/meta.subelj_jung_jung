@@ -1,6 +1,6 @@
 category: Software
 code: DS
-name: JUNG dependency
+name: JUNG 
 description: Class–class dependencies
 entity-names: class
 extr: subelj

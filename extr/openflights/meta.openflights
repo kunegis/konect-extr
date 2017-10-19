@@ -1,6 +1,6 @@
 category:  Infrastructure
 code:  OF
-name:  OpenFlights
+name:  OpenFlights (Patokallio)
 description:  Airport–airport flights
 url:  http://www.openflights.org/data.html
 extr:  openflights

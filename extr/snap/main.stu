@@ -193,6 +193,12 @@ konect;
 {
 	code=$(echo "$name" | sed -E -e 's,^(..).*$,\1,')
 	name_uc=$(echo "$name" | sed -E -e 's,^(.).*$,\1,' | tr a-z A-Z)$(echo "$name" | sed -E -e 's,^.(.*)$,\1,')
+
+	if [ "$name" = mathoverflow  ] ; then name_uc=MathOverflow     ; fi
+	if [ "$name" = askubuntu     ] ; then name_uc='Ask Ubuntu'     ; fi
+	if [ "$name" = stackoverflow ] ; then name_uc='Stack Overflow' ; fi
+	if [ "$name" = superuser     ] ; then name_uc='Super User'     ; fi
+
 	sed -E -e 's,\$\{NAME\},'"$name_uc"',g;s,\$\{CODE\},'"$code"',g'
 }
 

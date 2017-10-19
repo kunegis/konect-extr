@@ -1,7 +1,6 @@
 category: Software
 code: Dz
-name: JUNG dependency
-fullname: JUNG and Colt dependency
+name: JUNG/Colt
 description: Class–class dependencies
 entity-names: class
 extr: subelj

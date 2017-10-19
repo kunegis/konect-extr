@@ -1,6 +1,6 @@
 category: Hyperlink
 code: Ub
-name: Wikipedia, bar (dynamic) 
+name: Wikipedia dynamic (bar) 
 description: Article–article hyperlinks
 entity-names: article
 extr: unlink

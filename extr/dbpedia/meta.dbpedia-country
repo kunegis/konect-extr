@@ -1,6 +1,6 @@
 category: Affiliation
 code: CN
-name: Countries
+name: DBpedia countries		
 description: Entity–country affiliations
 url: http://wiki.dbpedia.org/Downloads
 cite: konect:dbpedia2
@@ -9,4 +9,4 @@ long-description: This is the bipartite network of entities from DBpedia and the
 tags: #regenerate
 entity-names:  entity, country
 relationship-names:  affiliation
-
+timeiso:  2001/2017

@@ -9,3 +9,4 @@ long-description: This is the bipartite network of musical artists and their rec
 tags: #regenerate
 entity-names:  artist, record
 relationship-names:  membership
+timeiso:  2001/2017

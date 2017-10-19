@@ -1,6 +1,6 @@
 category: Software
 code: DU
-name: JUnit dependency
+name: JUnit 
 description: Class–class dependencies
 entity-names: class
 extr: subelj
