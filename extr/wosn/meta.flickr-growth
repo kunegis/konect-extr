@@ -6,10 +6,6 @@ url: http://socialnetworks.mpi-sws.org/data-wosn2008.html
 cite: b494
 extr: wosn
 long-description: This is the social network of Flickr users and their friendship connections.
-n3-add-prefix-1: sioc: <http://rdfs.org/sioc/ns#> .
-n3-prefix-m: konect_flickr_growth_user: <http://konect.uni-koblenz.de/networks/flickr-growth/User/> .
-n3-type-m: sioc:UserAccount
-n3-edgedata-1: $m foaf:knows $n .
-n3-comment-1: # the original dataset contained timestamps which have been dropped during the conversion to RDF, because of the lack of an proper ontology
 entity-names: user
 relationship-names: friendship 
+timeiso:  2008

@@ -2,7 +2,7 @@ category: Communication
 code: RA
 name: Manufacturing emails
 description: Employee–employee email
-entity-names: employee,employee
+entity-names: employee
 extr: radoslaw
 url: http://www.ii.pwr.wroc.pl/~michalski/index.php?content=datasets#manufacturing
 long-description: This is the internal email communication network between employees of a mid-sized manufacturing company. The network is directed and nodes represent employees. The left node represents the sender and the right node represents the recipient. Edges between two nodes are individual emails. 

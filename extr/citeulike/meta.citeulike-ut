@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Interaction
 code: Cut
 name: CiteULike user–tag
 description: User–tag assignment
@@ -10,3 +10,4 @@ long-description:  This is the bipartite network of users and tags in CiteULike.
 tags: #regenerate
 entity-names:  user, tag
 relationship-names:  assignment
+timeiso:  2007

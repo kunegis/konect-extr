@@ -13,3 +13,4 @@ n3-edgedata-1: $m sioc:follows $n .
 entity-names: user
 relationship-names: following
 timeiso:  2006/2010
+tags:  #incomplete #lcc

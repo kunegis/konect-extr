@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Interaction
 code: Mut
 name: MovieLens user–tag
 description: User–tag assignment
@@ -9,3 +9,4 @@ fullname: MovieLens user–tag
 long-description: This bipartite network shows the tagging behaviour of 72,000 users of http://movielens.umn.edu/. Left nodes are users and right nodes are tags. An edge connects a user with a tag he applied to a movie.
 entity-names:  user, tag
 relationship-names:  assignment
+

@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Interaction
 code: But
 name: BibSonomy user–tag
 description: User–tag assignment
@@ -10,3 +10,4 @@ long-description:  This is the bipartite user–tag network from BibSonomy. Each
 tags: #regenerate
 entity-names:  user, tag
 relationship-names:  assignment
+timeiso:  2010

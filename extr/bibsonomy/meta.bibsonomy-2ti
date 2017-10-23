@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Feature
 code: Bti
 name: BibSonomy tag–item
 description: Tag–publication assignment
@@ -10,3 +10,4 @@ long-description:  This is the bipartite tag–publication network from BibSonom
 tags: #regenerate
 entity-names: tag, publication
 relationship-names: assignment
+timeiso:  2010

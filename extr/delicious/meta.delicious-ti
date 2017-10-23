@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Feature
 code: Dti
 name: Delicious tag–item
 description: Tag–URL assignment
@@ -8,5 +8,5 @@ extr: delicious
 fullname: Delicious tag–URL
 long-description: This network contains tag–URL relations from http://delicious.com/. Left nodes represent tags, right nodes represent URLs and an edge shows that a URL was tagged with a tag.
 tags:  #incomplete
-entity-names: tag,url
+entity-names: tag, URL
 relationship-names: tagging

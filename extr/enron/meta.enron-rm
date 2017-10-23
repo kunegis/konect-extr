@@ -1,0 +1,10 @@
+category: Communication
+code: EN2
+name: Enron
+url: http://www.cs.cmu.edu/~enron/
+cite: konect:klimt04
+extr: enron
+entity-names: user
+relationship-names: email 
+long-description: The Enron email network consists of 1,148,072 emails sent between employees of Enron between 1999 and 2003. Nodes in the network are individual employees and edges are individual emails.  It is possible to send an email to oneself, and thus this network contains loops.  In this version of the network, nodes with erroneous timestamps were removed.
+tags: #loop 

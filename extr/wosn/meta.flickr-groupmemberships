@@ -8,3 +8,4 @@ extr: wosn
 long-description: This is the bipartite network of Flickr users and their group memberships. 
 entity-names: user,group
 relationship-names: membership
+timeiso:  2007

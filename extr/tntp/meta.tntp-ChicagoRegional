@@ -5,7 +5,7 @@ description:  Node–node connection
 long-description:  This is the directed road transportation network of the Chicago region (USA).  Nodes are transport nodes, and edges are directed connections.  
 url:  http://www.bgu.ac.il/~bargera/tntp/
 extr:  tntp
-entity-names:  node,node
+entity-names:  node 
 relationship-names:  road
 cite:  konect:tntp-chicago1, konect:tntp-chicago2
 tags:

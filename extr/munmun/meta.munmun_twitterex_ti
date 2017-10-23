@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Feature
 code: Wti
 name: Twitter tag–item
 description: Hashtag–URL co-occurrence
@@ -10,3 +10,4 @@ long-description: This is a bipartite network of tag–URL relations in Twitter.
 tags: #incomplete
 entity-names:  hashtag, URL
 relationship-names:  co-occurrence
+timeiso:  2010

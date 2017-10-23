@@ -9,3 +9,4 @@ url: http://www.cs.berkeley.edu/~stevgong/gplus.html
 long-description: This bipartite network contains a snapshot of the Google+ social structure. Left nodes represent users and right nodes represent attributes. An edge links a user to a attribute which he may share with other users.  
 relationship-names: attribute-link
 cite: konect:stevgong
+timeiso:  2012

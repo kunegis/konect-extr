@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Interaction
 code: Wui
 name: Twitter user–item
 description: User–URL mention
@@ -10,3 +10,4 @@ long-description: This is the bipartite network consisting of Twitter users and 
 tags: #incomplete
 entity-names:  user, URL
 relationship-names:  mention
+timeiso:  2010

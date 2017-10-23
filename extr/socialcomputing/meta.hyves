@@ -6,5 +6,5 @@ url:  http://socialcomputing.asu.edu/datasets/Hyves
 extr:  socialcomputing
 long-description:  This is the social network of Hyves, a Dutch online social network.  The network is undirected and unweighted. 
 cite:  konect:socialcomputing
-entity-names:  user,user
+entity-names:  user
 relationship-names:  friendship

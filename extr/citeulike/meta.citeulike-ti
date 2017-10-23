@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Feature
 code: Cti
 name: CiteULike tag–item
 description: Tag–publication assignment
@@ -10,3 +10,4 @@ long-description:  This is the bipartite network of tags and publications in Cit
 tags: #regenerate
 entity-names:  tag, publication
 relationship-names:  assignment
+timeiso:  2007

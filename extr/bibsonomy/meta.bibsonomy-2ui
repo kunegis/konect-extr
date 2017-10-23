@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Interaction
 code: Bui
 name: BibSonomy user–item
 description: User–publication assignment
@@ -10,3 +10,4 @@ long-description:  This is the bipartite user–publication network from BibSono
 tags: #regenerate
 entity-names:  user, publication
 relationship-names:  tag assignment
+timeiso:  2010

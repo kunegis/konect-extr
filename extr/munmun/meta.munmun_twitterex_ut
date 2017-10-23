@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Interaction
 code: Wut
 name: Twitter user–tag
 description: User–hashtag usage
@@ -10,3 +10,4 @@ long-description: This is a bipartite network consisting of Twitter users and ta
 tags: #incomplete
 entity-names:  user, hashtag
 relationship-names:  usage
+timeiso:  2010

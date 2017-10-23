@@ -1,7 +1,6 @@
 category: OnlineContact
 code: Wa
 name: Twitter mentions
-description: User–user mentions
 url: http://www.public.asu.edu/~mdechoud/datasets.html
 cite: konect:choudhury10
 extr: munmun
@@ -9,3 +8,4 @@ long-description: This is the directed network of "@username" mentions on Twitte
 tags: #loop
 entity-names:  user
 relationship-names:  mention
+timeiso:  2010

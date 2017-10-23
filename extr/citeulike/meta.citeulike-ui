@@ -1,4 +1,4 @@
-category: Folksonomy
+category: Interaction
 code: Cui
 name: CiteULike user–item
 description: User–publication assignment
@@ -10,3 +10,4 @@ long-description:  This is the bipartite network of users and publications in Ci
 tags: #regenerate
 entity-names:  user, publication
 relationship-names:  tag assignment
+timeiso:  2007

@@ -1,6 +1,6 @@
 category: Hyperlink
 code: WP
-name: Wikipedia, English
+name: Wikipedia growth (en)
 description: Article–article links
 url: http://socialnetworks.mpi-sws.org/data-wosn2008.html
 cite: konect:mislove2
@@ -8,3 +8,4 @@ extr: wosn
 long-description: This is the hyperlink network of the English Wikipedia with edge arrival times.
 entity-names: article
 relationship-names: hyperlink
+timeiso: 2001/2008
