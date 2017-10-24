@@ -6,7 +6,7 @@ url:  http://deim.urv.cat/~alexandre.arenas/data/welcome.htm
 cite:  konect:arenas-jazz
 extr:  arenas
 long-description:  This is the collaboration network between Jazz musicians.  Each node is a Jazz musician and an edge denotes that two musicians have played together in a band.  The data was collected in 2003. 
-tags:  #incomplete 
+tags:  #incomplete #join 
 entity-names: musician
 relationship-names:  collaboration
 timeiso:  2003

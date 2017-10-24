@@ -5,6 +5,8 @@ description: Bison–bison dominances
 entity-names: bison
 extr: moreno
 url: http://moreno.ss.uci.edu/data.html#bison
-long-description: This directed network contains dominance between American bisons in 1972 on the National Bison Range in Moiese (Montana). A node represents a bison and an edge represents dominance of the left bison over the right bison. The edge values indicate how often this dominance behaviour was observed.
+long-description: This directed network contains dominance between American bison (<I>Bison bison</I>) in 1972 on the National Bison Range in Moiese (Montana). A node represents a bison and an edge represents dominance of the left bison over the right bison. The edge values indicate how often this dominance behaviour was observed.
 relationship-names: dominance
 cite: konect:lott
+tags:  #skew
+timeiso:  1972-07-25/1972-08-14

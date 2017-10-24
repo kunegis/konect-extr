@@ -7,5 +7,5 @@ extr:  chess
 long-description:  These are results of chess games.  Each node is a chess player, and a directed edge represents a game, with the white player having an outgoing edge and the black player having an ingoing edge.  The weight of the edge represents the outcome (+1 white won, 0 draw, −1 black won).  The dataset is anonymous:  the identity of the players is unknown, and timestamps are approximate.  Timestamps are given to a one month precision, and may have been shifted towards the future by an unknown amount.
 entity-names: player
 relationship-names:  game
-tags:  #zeroweight #incomplete
-
+tags:  #zeroweight #incomplete #skew
+timeiso:  1998/2008

@@ -1,6 +1,6 @@
 category: Text
 code: EX
-name: Wikipedia (en)
+name: Wikipedia words (en)
 description: Article–word inclusion
 url: http://en.wikipedia.org/wiki/Wikipedia:Featured_articles
 cite: download.wikimedia.org
@@ -8,3 +8,4 @@ extr: gottron
 long-description: This is the bipartite network of excellent articles in the English Wikipedia, and the words they contain. The edge multiplicities represent the word count for each article–word pair.
 entity-names:  article, word
 relationship-names:  inclusion
+tags:  #incomplete
