@@ -1,0 +1,16 @@
+% version 2.5
+
+@all:   meta.twin out.twin;
+
+meta.twin;
+
+>out.twin:   <workfile.txt
+{
+	echo '% sym unweighted'
+##	sed -E -e 's,,,g' |
+##	tr ' ' '_' |
+	../../sh/mkuniq1 |
+	../../sh/mksym
+}
+
+workfile.txt = own/twin/;

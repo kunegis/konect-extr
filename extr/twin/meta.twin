@@ -1,0 +1,10 @@
+name:  Sister cities
+code:  SC
+category:  Misc
+long-description:  This is an undirected network of cities of the world connected by "sister city" or "twin city" relationships, as extracted from WikiData.
+entity-names:  city
+relationship-names:   twinning
+extr:  twin
+timeiso:  2017-10
+tags:  #regenerate 
+
