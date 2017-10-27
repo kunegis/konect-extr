@@ -1,4 +1,10 @@
 #! /bin/sh
+#
+# Create the "Wikispeedia" dataset.
+#
+# Since article names can start with '%' due to the URL encoding used,
+# we prefix all names with 'X' before calliong sh/mkuniq1, which treats
+#
 
 {
 
@@ -14,4 +20,4 @@
 	s,^\S+\s+\S+\s+\S+\s+(.*)	\S+$,\1,
 '
 
-} | ./mkpath | ../../sh/mkuniq1
+} | ./mkpath | sed -E -e 's,^,X,;s,	,	X,' | ../../sh/mkuniq1

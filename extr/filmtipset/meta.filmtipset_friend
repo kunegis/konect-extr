@@ -1,6 +1,6 @@
 category: Social
 code: Ff
-name: Filmtipset
+name: Filmtipset friendships
 description: User–user friendship
 url: http://www.dai-labor.de/camra2010/datasets/
 cite: said:social-similarity
@@ -8,3 +8,4 @@ extr: filmtipset
 long-description: This is the social network from Filmtipset.se, a Swedish movie rating website. Nodes in the network are users of the website and links denote friendship. The network is undirected and simple, i.e. each node pair can only be connected by a single link. 
 entity-names:  user
 relationship-names:  friendship
+timeiso:  2010

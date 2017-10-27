@@ -1,6 +1,6 @@
 category: Interaction
 code: Fc
-name: Filmtipset
+name: Filmtipset comments
 description: User–movie comment
 url: http://www.dai-labor.de/camra2010/datasets/
 cite: said:social-similarity
@@ -8,3 +8,4 @@ extr: filmtipset
 long-description: This is the bipartite network of users commenting on movies, from the Swedish movie rating website Filmtipset.se. The nodes of the network are the users and the movie. Each link connects a user with a movie, and denote a single comment by that users on that movie. Multiple link between the same user–movie pair are allowed. Each link is annotated with the timestamp of the comment.
 entity-names:  user, movie
 relationship-names:  comment
+timeiso:  2010

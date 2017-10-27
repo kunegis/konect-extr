@@ -1,41 +1,65 @@
-@all: [dep.outs];
+% version 2.5
 
->LANGS: { echo ar de en es fr it nl pt ru zh }
-
->dep.outs: LANGS
-{
-    for LANG in $(cat LANGS) ; do
-        echo "out/out.wiki_talk_$LANG"
-    done
-}
+@all:   out/(meta out).wiki_talk_[LANGS];
 
 wiki-talk-dataset.tar.gz:
 {
-    wget https://zenodo.org/record/49561/files/wiki-talk-dataset.tar.gz -O wiki-talk-dataset.tar.gz
-    touch -c wiki-talk-dataset.tar.gz
+	wget https://zenodo.org/record/49561/files/wiki-talk-dataset.tar.gz -O wiki-talk-dataset.tar.gz
+	touch -c wiki-talk-dataset.tar.gz
 }
 
-data/ar-wiki-talk: wiki-talk-dataset.tar.gz
+data: wiki-talk-dataset.tar.gz
 {
-    tar -xvf wiki-talk-dataset.tar.gz
-    touch -c data/*
+	tar -xvf wiki-talk-dataset.tar.gz
+	touch -c data data/*
 }
 
-data/$LANG-wiki-talk: !data/ar-wiki-talk {}
+data/$lang-wiki-talk: -p data {}
+
+>LANGS:  data
+{
+	ls -1U data | sed -E -e 's,^([^-]+)-wiki-talk$,\1,;t;d'
+}
 
 out/:
 {
-    mkdir -p out
+	mkdir -p out
 }
 
-out/out.wiki_talk_$LANGU: !data/$LANGU-wiki-talk !out/ mktime ../mkuniq1
+>out/out.wiki_talk_$lang:
+	-p data/$lang-wiki-talk -p out/
+	mktime 
 {
-    ./mktime data/$LANGU-wiki-talk | ../mkuniq1 > out/out.wiki_talk_$LANGU
-    touch out/out.wiki_talk_$LANGU
+	./mktime data/$lang-wiki-talk |
+	../../sh/mkuniq1 
+}
+
+>out/meta.wiki_talk_$lang:
+	<template.meta
+	out/field.name.$lang
+{
+	sed -E -e '
+		s,\$\{name\},'"$(echo $(cat out/field.name.$lang) | sed -E -e 's,_,-,g')"',g
+		s,\$\{code\},'"$lang"',g
+		s,\$\{timeiso\},'"$(date +%F)"',g
+	'
+}
+
+>out/field.name.$lang:
+	<sitematrix.json  mklname -p out/
+{
+	./mklname
+}
+
+sitematrix.json:  
+{
+	rm -f sitematrix.json
+	wget 'https://commons.wikimedia.org/w/api.php?action=sitematrix&smtype=language&format=json' \
+	     -O sitematrix.json
+	echo >>sitematrix.json # Make it end in space 
 }
 
 @clean:
 {
-    rm -f LANGS *.gz dep.*
-    rm -rf data/ out/
+	rm -Rf LANGS *.gz data out sitematrix.json
 }

@@ -9,14 +9,6 @@
 % version 2.5
 
 @all:  @wiki.[WIKIS]; 
-##[dep.all];
-##>dep.all:  WIKIS
-## {
-## 	for wiki in $(cat WIKIS)
-## 	do
-## 		echo @wiki."$wiki"
-## 	done
-## }
 
 @wiki.$wiki:
 	out/meta.edit-$wiki

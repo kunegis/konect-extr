@@ -1,0 +1,11 @@
+category: Communication
+code: T${code}
+name: Wikipedia talk (${code})
+extr: wiki-talk
+url: https://zenodo.org/record/49561
+long-description: This is the communication network of the ${name} Wikipedia.  Nodes represent users, and an edge from user A to user B denotes that user A wrote a message on the talk page of user B at a certain timestamp.
+entity-names: user
+relationship-names: message
+cite: konect:sun_2016_49561
+tags: #loop #regenerate
+timeiso:  ${timeiso}

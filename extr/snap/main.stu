@@ -206,7 +206,7 @@ konect;
 # WikiSpeedia
 #
 
->out/out.wikispeedia:  out/wikispeedia_paths-and-graph
+>out/out.wikispeedia:  out/wikispeedia_paths-and-graph mkwikispeedia 
 {
 	echo '% asym positive'
 	./mkwikispeedia

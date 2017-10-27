@@ -1,6 +1,6 @@
 category: Rating
 code: Fr
-name: Filmtipset
+name: Filmtipset ratings
 description: User–movie ratings
 url: http://www.dai-labor.de/camra2010/datasets/
 cite: said:social-similarity
@@ -9,3 +9,4 @@ long-description: This is the bipartite rating graph of Filmtipset.se, a Swedish
 entity-names:  user, movie
 relationship-names:  rating
 tags:  #lowmultiplicity
+timeiso:  2010

@@ -1,0 +1,9 @@
+#! /bin/sh
+
+lang="$(echo "$lang" | sed -E -e 's,_,-,g')"
+
+sed -E -e 's,\\u200e,,g' |
+ascii2uni -a U -q |
+	sed -E -e 's/("localname":"[^"]+"\},)/\1\
+/g'  	|
+	sed -E -e 's,^.*"code":"'"$lang"'"[^[]*\[[^]]*\][^[]*"localname":"([^"]+)".*$,\1,;t;d'
