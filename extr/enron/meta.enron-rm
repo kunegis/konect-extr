@@ -1,6 +1,6 @@
 category: Communication
 code: EN2
-name: Enron
+name: Enron (clean) 
 url: http://www.cs.cmu.edu/~enron/
 cite: konect:klimt04
 extr: enron
