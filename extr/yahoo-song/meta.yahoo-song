@@ -6,5 +6,5 @@ url: http://www.kdnuggets.com/2011/02/kdd-cup-2011-recommending-music.html
 cite: yahoo-song
 extr: yahoo-song
 long-description: This is the bipartite person–song rating network used in the KDD Cup 2011. It contains ratings on a scale from 0 to 100 taken from Yahoo Music. This network contains over 250 million edges (i.e., ratings), and is one of the largest openly-available rating datasets.
-entity-names: person
+entity-names: person, song
 relationship-names: rating
