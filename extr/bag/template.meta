@@ -2,7 +2,7 @@ name:  ${name}
 code:  ${code}
 url:   http://archive.ics.uci.edu/ml/datasets/Bag+of+Words
 category:  Text
-long-description:   This is the bipartite document–word dataset of ${name}.  Left nodes are documents and right nodes are word.  Edge weights are multiplicities.
+long-description:   This is the bipartite document–word dataset of ${name}.  Left nodes are documents and right nodes are words.  Edge weights are multiplicities.
 cite:  konect:bag
 description:  Document–word occurences
 entity-names:  document, word

@@ -4,16 +4,18 @@
 # http://archive.ics.uci.edu/ml/datasets/Bag+of+Words
 #
 
-@all:  [dep.all];
->dep.all:  DATASETS {
-	for dataset in $(cat DATASETS) ; do
-		echo @dataset."$dataset"
-	done
-}
+% version 2.5
+
+@all: @dataset.[DATASETS];  ##[dep.all];
+##>dep.all:  DATASETS {
+##	for dataset in $(cat DATASETS) ; do
+##		echo @dataset."$dataset"
+##	done
+##}
 
 DATASETS = { kos nips enron nytimes pubmed }
 
-@dataset.$dataset:  out.bag-$dataset meta.bag-$dataset;
+@dataset.$dataset:  (meta out).bag-$dataset;
 
 >out.bag-$dataset:
 	<docword.$dataset.txt
