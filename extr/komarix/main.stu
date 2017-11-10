@@ -1,0 +1,39 @@
+#
+# Data from http://komarix.org/ac/ds/
+#
+
+@all:  (meta out).komarix-(imdb citeseer);
+ 
+Blanc__Mel.txt.bz2:
+{
+	wget http://komarix.org/ac/ds/Blanc__Mel.txt.bz2 -O Blanc__Mel.txt.bz2
+	touch -c Blanc__Mel.txt.bz2
+}
+
+Blanc__Mel.txt:  Blanc__Mel.txt.bz2
+{
+	bzip2 -d -k -f Blanc__Mel.txt.bz2
+	touch -c Blanc__Mel.txt
+}
+
+>out.komarix-imdb:  <Blanc__Mel.txt mk
+{
+	./mk | ../../sh/mkuniq
+}
+
+J_Lee.txt.bz2:
+{
+	wget http://komarix.org/ac/ds/J_Lee.txt.bz2 -O J_Lee.txt.bz2
+	touch -c J_Lee.txt.bz2
+}
+
+J_Lee.txt:  J_Lee.txt.bz2
+{
+	bzip2 -d -k -f J_Lee.txt.bz2
+	touch -c J_Lee.txt
+}
+
+>out.komarix-citeseer:  <J_Lee.txt
+{
+	./mk | ../../sh/mkuniq
+}

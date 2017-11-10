@@ -1,0 +1,11 @@
+name:  CiteSeer
+code:  CS
+category:  Authorship
+long-description:  This is an authorship network extracted from CiteSeer.  The network is bipartite.  Left nodes are authors and right nodes are scientific publications.  An edge represents that an author has (co-)published a given publication. 
+entity-names:  author, publication
+relationship-names:  authorship
+extr:  komarix
+url:  http://komarix.org/ac/ds/
+tags:  #incomplete
+
+

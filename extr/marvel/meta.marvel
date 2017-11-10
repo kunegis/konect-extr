@@ -1,0 +1,10 @@
+name:   Marvel
+code: MA
+category:  Misc
+long-description:   This is the fictional collaboration network of characters in works of Marvel, a publisher of comic books based in the United States of America.  The network is bipartite.  Nodes are characters and works, and an edge is present when a character appears in a work.  The dataset takes works only into account if thy were published starting in 1961.  To cite the paper:  "We only consider here comics published after Issue 1 of Fantastic Four (dated November 1961), which is understood as the point of departure of the Marvel Age of Comics."  The data was extracted from the Marvel Chronology Project (MCP) created by Russ Chappell (www.chronologyproject.com).   The dataset does contain the names of the characters, even though a few a empty strings. 
+entity-names:  character, work
+relationship-names:  appearance
+extr:  marvel
+url:  http://bioinfo.uib.es/~joemiro/marvel.html
+cite:  konect:marvel
+timeiso:  1961/2002

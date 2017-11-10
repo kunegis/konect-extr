@@ -1,0 +1,9 @@
+name:  IMDB
+code:  IM
+category:  Affiliation
+long-description:  These are persons associated with individual movies or television programs.  The network is bipartite.  Left nodes are persons (actors, directors, etc.), and right nodes are works (films, television programs, etc.).  An edge denotes that the person was involved in the work.
+entity-names:  person, work
+relationship-names:  association
+extr:  komarix
+url:  http://komarix.org/ac/ds/
+tags:

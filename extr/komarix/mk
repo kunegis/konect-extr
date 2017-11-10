@@ -1,0 +1,22 @@
+#! /usr/bin/perl -w
+
+use strict;
+use warnings FATAL => 'all';
+
+print "% bip unweighted\n"; 
+
+my $from = 1;
+
+while (<>) {
+    chomp;
+    /^[01]\s+(.*)$/ or die "*** Invalid line:  $_";
+    my $list = $1;
+    my @tos = split / /, $list;
+    foreach (@tos) {
+	my $str = $_;
+	/^([0-9]+):1$/ or die "*** Invalid item:  $_";
+	my $to = $1;
+	print "$to\t$from\n"; 
+    }
+    $from = $from + 1;
+}

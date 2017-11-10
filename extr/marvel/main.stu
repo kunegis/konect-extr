@@ -1,0 +1,19 @@
+#
+# Fictional social network of the Marvel universe.  Marvel us a
+# US-American publisher of comic books. 
+#
+# http://bioinfo.uib.es/~joemiro/marvel.html
+#
+
+@all:  (meta out ent.name).marvel;
+
+out.marvel ent.name.marvel:
+	porgat.txt  ../../sh/mkpajek
+{
+	../../sh/mkpajek bip unweighted porgat.txt 	out.marvel  ent.name.marvel
+}
+
+porgat.txt: {
+	wget http://bioinfo.uib.es/~joemiro/marvel/porgat.txt -O porgat.txt
+	touch -c porgat.txt
+}

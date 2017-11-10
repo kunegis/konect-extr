@@ -1,0 +1,74 @@
+#! /usr/bin/perl -w
+#
+# Create a dataset from a Pajek file.  Files in Pajek format contain
+# egde and node information.
+#
+# We assume the IDs are already continuous from 1 to N, which is the
+# case in the Pajek format.
+#
+# Empty entity labels are allowed. 
+#
+# INVOCATION
+#	$0 FORMAT WEIGHTS INPUT-FILE OUT-FILE ENT-FILE
+#	FORMAT		Internal name of network format
+#	WEIGHTS		Internal name of network weights
+#	INPUT-FILE	The input file in Pajek format
+#	OUT-FILE	The KONECT output file in KONECT out.* format
+#	ENT-FILE	The KONECT output file in KONECT ent.* format
+#
+
+use strict;
+use warnings FATAL => 'all';
+
+my $format = $ARGV[0];
+my $weights= $ARGV[1];
+my $input  = $ARGV[2];
+my $out    = $ARGV[3];
+my $ent    = $ARGV[4];
+
+open(INPUT, "<", $input) or die "$!";
+open(OUT,   ">", $out  ) or die "$!";
+open(ENT,   ">", $ent  ) or die "$!";
+
+print OUT "% $format $weights\n";
+
+my $in_edge = 0; 
+# 0:  we're reading nodes
+# 1:  we're reading edges
+
+my $next_node = 1; 
+
+while (<INPUT>) {
+    chomp;
+    if (/^\*Vertices/) {
+	$in_edge = 0;
+	next;
+    }
+    if (/^\*Edgeslist/) {
+	$in_edge = 1;
+	next;
+    }
+    if ($in_edge) {
+	/^([0-9]+) (.*)$/ or die "Invalid edge:  $_";
+	my $from = $1;
+	my $tos = $2;
+	my @toa = split / /, $tos;
+	foreach (@toa) {
+	    my $to = $_;
+	    print OUT "$from\t$to\n";
+	}
+    } else {
+	/^([0-9]+) "([^"]*)"$/ or die "*** Invalid node:  $_";
+	my $node = $1;
+	my $label = $2;
+	if ($node != $next_node) {
+	    die "*** Expected node $next_node, found $node";
+	}
+	print ENT "$label\n";
+	++ $next_node; 
+    }
+}
+
+close(INPUT) or die "$!";
+close(OUT)   or die "$!";
+close(ENT)   or die "$!";

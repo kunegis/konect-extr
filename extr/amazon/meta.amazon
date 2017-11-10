@@ -1,0 +1,11 @@
+name:  Amazon
+code:  AM
+category:  Rating
+long-description:  These are ratings from Amazon.
+entity-names:  user, product
+relationships-names:  rating
+extr:  amazon
+url:  http://jmcauley.ucsd.edu/data/amazon/
+cite:  konect:amazon
+timeiso:  1996-05/2014-07
+tags:

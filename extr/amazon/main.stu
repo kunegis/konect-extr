@@ -1,0 +1,19 @@
+#
+# Amazon ratings
+#
+
+@all:  (meta out).amazon;
+
+meta.amazon;
+
+item_dedup.csv {
+	echo >&2 "*** Ask Julian MacAuley for this file"
+	echo >&2 "*** See http://jmcauley.ucsd.edu/data/amazon/"
+	exit 1
+}
+
+>out.amazon:  <item_dedup.csv
+{
+	echo '% bip weighted'
+	tr ',' ' ' | ../../sh/mkuniq 
+}

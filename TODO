@@ -1,33 +1,8 @@
 * twitter:  may it be that the edge are oriented wrongly?  The in/out-degree distributions sure indicate it. 
 
 == Simple ==
-* http://bioinfo.uib.es/~joemiro/marvel.html
-* http://kdd.ics.uci.edu/databases/movies/movies.html
-* http://challenge.semanticweb.org/ Billon Triple Challenge
-* http://labs.systemone.at/wikipedia3 47 million triples
-* http://musicbrainz.org/doc/DatabaseDownload
-* GeoWordNet
-* YAGO
-* http://allurbuzz.appspot.com/  Buzz feed from Peter Dolan
-* corpora from WWW paper [336]
-* movielens tags (from the million dataset)
-* Orkut user-community network [Collaborative Filtering for Orkut Communities: Discovery of User Latent Behavior, Chen &al]
-* [486] The Dynamics of Web-based Social Networks: Membership, Relationships, and Change, Jennifer Golbeck; lots of adjacency lists.
-* [490] Mining Graph Evolution Rules, Michele Berlingerio, Francesco Bonchi, Björn Bringmann, and Aristides Gionis.
-* BibSonomy:  who follows whom
-* Pavel Braslavski:  MoiKrug social network:  Anton Volnuhin [anton@yandex-team.ru]
-* munmun large twitter dataset
-* [620] cyworld
-* http://manyeyes.alphaworks.ibm.com/manyeyes/datasets?tag=movie
-* http://reality.media.mit.edu/download.php
-* linkedct.org
-* citeseerx dataset or http://www.hpi.uni-potsdam.de/naumann/projekte/repeatability/datasets/cora_dataset.html / http://citeseerx.ist.psu.edu/about/metadata / http://komarix.org/ac/ds (contains citeseer at the end)
-* http://cwiki.apache.org/MAHOUT/collections.html
-* http://theinfo.org/get/data
-* http://delicious.com/pskomoroch/dataset
-* http://ingrid.ldeo.columbia.edu/dochelp/topics/DATASETS/
-* http://cophir.isti.cnr.it/whatis.html
-* CDNow – Musik-Ratings
+* http://times.cs.uiuc.edu/~wang296/Data/
+* http://storage.googleapis.com/books/ngrams/books/datasetsv2.html
 * filmtrust (Jennifer Golbeck)
 * moleskiing.it
 * http://www.ist-chorus.org/wiki/index.php/Category:Dataset
@@ -63,7 +38,6 @@
 * http://babelnet.org/
 * http://www.cs.umd.edu/projects/linqs/projects/lbc/index.html :  cora citation network
 * http://kevinchai.net/datasets
-* sister-city network from DBpedia
 * http://www.kde.cs.uni-kassel.de/ws/dc13/offline/
 * http://arcane-coast-3553.herokuapp.com/overview
 * http://ebiquity.umbc.edu/resource/html/id/82/
@@ -139,8 +113,9 @@ Yang
 * http://www.bgu.ac.il/~bargera/tntp/Austin/Austin_net.txt
 * DIMACS challenge:  all others (apart from number 9)
 * snap:  com-* datasets
+* citeseerx dataset or http://www.hpi.uni-potsdam.de/naumann/projekte/repeatability/datasets/cora_dataset.html / http://citeseerx.ist.psu.edu/about/metadata 
 
-== Needs complex extraction ==
+== Needs complex extraction or research ==
 * http://openplanb.tumblr.com/
 * dbpedia
 ** the whole file layout and URLs have changed.  Update the code.
@@ -171,3 +146,13 @@ Yang
 * http://www.dfki.uni-kl.de/~obradovic/download/blogspider.zip : needs database
 * http://data.stackexchange.com/ : only via API
 * IMDB full semantic network:  movie, actor, director, etc.
+* GeoWordNet
+* YAGO
+* corpora from WWW paper [336]
+* movielens tags (from the million dataset)
+* Orkut user-community network [Collaborative Filtering for Orkut Communities: Discovery of User Latent Behavior, Chen &al]
+* [486] The Dynamics of Web-based Social Networks: Membership, Relationships, and Change, Jennifer Golbeck; lots of adjacency lists.
+* [490] Mining Graph Evolution Rules, Michele Berlingerio, Francesco Bonchi, Björn Bringmann, and Aristides Gionis.
+* BibSonomy:  who follows whom
+* Pavel Braslavski:  MoiKrug social network:  Anton Volnuhin [anton@yandex-team.ru]
+* [620] cyworld
