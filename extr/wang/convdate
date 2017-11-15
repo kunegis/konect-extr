@@ -1,0 +1,25 @@
+#! /usr/bin/perl -w
+#
+# Convert dates.  Also remove lines with an empty username. 
+#
+# STDIN:  Lines of the form
+#	USER '\t' RATING '\t' TEXT_DATE
+#
+# STOUT:  Lines of the form
+#	USER '\t' RATING '\t' UNIX_DATE
+#
+
+use strict;
+use warnings FATAL => 'all';
+
+use Date::Parse;
+
+while (<>) {
+    /^([^	]*)	([0-9.]+)	(.*)$/ or die "*** Invalid line: '$_'";
+    my $user = $1;
+    my $rating = $2;
+    my $text_date = $3;
+    my $date = str2time($text_date);
+    if ($user eq "") { next ; }
+    print "$user\t$rating\t$date\n"; 
+}

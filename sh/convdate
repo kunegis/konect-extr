@@ -1,0 +1,25 @@
+#! /usr/bin/perl -w
+#
+# Convert dates from any text format to Unix dates.
+#
+# The dates are assumed to be in the fourth column, as in the out.*
+# format, and thus they cannot contain spaces.  Instead, underscores can
+# be used. 
+
+use strict;
+use warnings FATAL => 'all';
+
+use Date::Parse;
+
+while (<>) {
+    chomp;
+    /^(.*)\s([^	]+)\s*$/ or die "*** Invalid input: '$_'";
+    my $prefix = $1;
+    my $text_date = $2;
+    $text_date =~ y/_/ /;
+    my $date = str2time($text_date);
+    if (! defined($date)) {
+	die "*** Invalid date '$text_date'";
+    }
+    print "$prefix\t$date\n";
+}

@@ -1,0 +1,33 @@
+#! /bin/sh
+#
+# Build the "Tripadvisor" hotel rating dataset.
+#
+# PARAMETERS
+#	$verbose	If non-empty, output verbose messages on stderr
+#
+# INPUT FILES
+#	hotels/
+#
+# STDOUT
+#	The out.* file
+#
+
+[ "$verbose" ] && exec 4>&2 || exec 4>/dev/null
+
+echo '% bip multiweighted'
+
+cd hotels
+ls -1U |
+while IFS= read -r file ; do
+	echo >&4 "file='$file'"
+	hotel=$(echo "$file" | sed -E -e 's,^hotel_([0-9]+)\.dat$,\1,')
+	<"$file" tr -d '' |
+		sed -E -e '/<(Author|Date|Overall)>.*/!d' |
+		sed -E -e '/<Author>.*/{s,_,__,g;s, ,_,g;}' |
+		paste -s -d ';;\n' |
+		sed -E -e 's|^<Author>(.*);<Date>(.*);<Overall>(.*)$|\1	\3	\2|' |
+		../convdate |
+		sed -E -e 's,^([^	]+)	(\S+)	(\S+)$,\1	'"$hotel"'	\2	\3,' |
+		sed -E -e '/^(lass=|A_TripAdvisor_Member).*$/d'	# Remove dubious usernames that occur too often 
+done |
+../../../sh/mkuniq

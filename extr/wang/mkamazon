@@ -1,0 +1,24 @@
+#! /bin/sh
+#
+# Build the "Amazon" dataset.
+#
+# INPUT FILES
+#	amazon_mp3
+#
+# STDOUT:  File in out.* format
+#
+
+echo '% bip multiweighted'
+
+<amazon_mp3 \
+ sed -E -e '/^\[(productName|author|rating|createDate)\]/!d;s,_,__,g;s, ,_,g' |
+	paste -s -d ';;;\n' |
+	sed -E -e '/^.*\[createDate\]:;.*$/d' |
+	sed -E -e 's,^\[productName\]:(.*);\[author\]:(.*);\[createDate\]:(.*);\[rating]:(.*)$,\2	\1	\4	\3,' |
+	sed -E -e '/^	.*$/d' |
+	../../sh/convdate |
+	../../sh/mkuniq
+
+
+
+

@@ -1,0 +1,42 @@
+@all:  (meta out).wang-(tripadvisor amazon);
+
+>out.wang-tripadvisor:
+	hotels mktripadvisor convdate
+{
+	./mktripadvisor
+}
+
+>out.wang-amazon:
+	amazon_mp3 mkamazon
+{
+	./mkamazon
+}
+
+hotels:
+	Review_Texts.zip
+{
+	rm -Rf hotels
+	mkdir hotels
+	cd hotels
+	unzip ../Review_Texts.zip
+}
+
+amazon_mp3:
+	amazon_mp3.tar.gz
+{
+	rm -f amazon_mp3
+	tar xfvvz amazon_mp3.tar.gz
+	touch -c amazon_mp3
+}
+
+Review_Texts.zip:
+{
+	wget http://times.cs.uiuc.edu/~wang296/Data/LARA/TripAdvisor/Review_Texts.zip -O Review_Texts.zip
+	touch -c Review_Texts.zip
+}
+
+amazon_mp3.tar.gz:
+{
+	wget http://times.cs.uiuc.edu/~wang296/Data/LARA/Amazon/mp3/amazon_mp3.tar.gz -O amazon_mp3.tar.gz
+	touch -c amazon_mp3.tar.gz
+}

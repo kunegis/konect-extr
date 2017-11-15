@@ -1,0 +1,12 @@
+name:  TripAdvisor
+code:  TA
+category:  Rating
+long-description:  This is the rating network from TripAdvisor, where users rate individual hotels.  We filtered out ratings for which the username was "lass=" (26,590 instances) and "A TripAdvisor Member" (37,704 instances), as these are probably anonymous ratings, or errors in the dataset. 
+entity-names:   user, hotel
+relationship-names:  rating
+extr:  wang
+url:  http://times.cs.uiuc.edu/~wang296/Data/
+cite:  konect:wang2010, konect:wang2011
+timeiso:  2001-03-27/2009-01-11
+tags:  #incomplete #lowmultiplicity
+

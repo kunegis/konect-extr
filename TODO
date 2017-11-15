@@ -1,7 +1,7 @@
-* twitter:  may it be that the edge are oriented wrongly?  The in/out-degree distributions sure indicate it. 
+== Bugs ==
+* twitter:  the edges are oriented wrongly.  Running...
 
 == Simple ==
-* http://times.cs.uiuc.edu/~wang296/Data/
 * http://storage.googleapis.com/books/ngrams/books/datasetsv2.html
 * filmtrust (Jennifer Golbeck)
 * moleskiing.it
@@ -48,7 +48,6 @@
 * http://www.sogou.com/labs/dl/q.html
 * http://imat-relpred.yandex.ru/en/datasets
 * country adjacencies (also: historical country adjacencies)
-* Cities connected by twinning: https://en.wikipedia.org/wiki/Lists_of_twin_towns_and_sister_cities
 * regenerate the datasets with the tag #regenerate
 * http://kindred.stanford.edu/?utm_source=buffer&utm_campaign=Buffer&utm_content=buffer2a907&utm_medium=twitter#
 * http://www.caida.org/data/overview/

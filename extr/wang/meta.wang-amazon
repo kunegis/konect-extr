@@ -1,0 +1,11 @@
+name:  Amazon (Wang)
+code:  AM
+category:  Rating
+long-description:  This is the rating network from Amazon, where users rate individual items. 
+entity-names:   user, item
+relationship-names:  rating
+extr:  wang
+url:  http://times.cs.uiuc.edu/~wang296/Data/
+cite:  konect:wang2010, konect:wang2011
+tags:  #incomplete
+timeiso:  1999-06-13/2008-02-26
