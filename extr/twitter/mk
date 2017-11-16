@@ -1,0 +1,6 @@
+#! /bin/sh
+
+echo '% asym unweighted'
+
+sed -E -e 's,^([0-9]+)\s+([0-9]+)$,\2	\1,;t;q1' |
+../../sh/mkuniq1 

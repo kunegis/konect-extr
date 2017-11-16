@@ -1,11 +1,34 @@
-#!/bin/sh
-for i in "aria2c --seed-time=0" "bittorrent-console" "btdownloadheadless.bittornado" "btdownloadheadless.bittorrent"; do
-	#echo "testing $i";
-	#echo "`which $i`";
-	if [ "`which $i`" != "" ]; then
-		echo "using $i";
-		echo "downloading $1";
-		echo `$i $1`;
-		break;
+#! /bin/sh
+#
+# Wrapper around multiple BitTorrent clients.
+#
+# INVOCATION
+#	$1	BitTorrent URL to download
+#
+# STDOUT
+#	Verbose output is written on stdout 
+#
+
+address=$1
+
+[ "$address" ] || {
+	echo >&2 '*** Expected address in $1'
+	exit 1
+}
+
+for i in "aria2c --seed-time=0" "bittorrent-console" "btdownloadheadless.bittornado" "btdownloadheadless.bittorrent" ; do
+	echo "Trying $i"
+	path=$(which $i)
+	echo "	path='$path'"
+	if [ "$path" ] ; then
+		echo "	Found $i"
+		echo "Downloading $1"
+		echo "$i" "$1"
+		exec $i $1
+	else
+		echo >&2 "	Not found"
 	fi	
 done
+
+echo >&2 "*** No BitTorrent client found:  Install one of the tried clients"
+exit 1
