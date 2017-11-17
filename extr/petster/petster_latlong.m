@@ -4,10 +4,10 @@
 % PARAMETERS 
 %	$SPECIES
 %
-% INPUT 
+% INPUT FILES 
 %	dat-petster/ent.petster-$SPECIES.latlong
 %
-% OUTPUT 
+% OUTPUT FILES 
 % 	plot-petster/latlong.a.$SPECIES.eps
 %
 
@@ -93,3 +93,4 @@ image(I);
 axis off; 
 
 konect_print(sprintf('plot-petster/latlong.a.%s.eps', species));
+
