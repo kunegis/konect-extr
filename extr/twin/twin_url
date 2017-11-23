@@ -1,2 +1,0 @@
-https://query.wikidata.org/sparql?query=SELECT%20%3Fcity%20%3Fsister_city%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%3Fcity%20(wdt%3AP31%2Fwdt%3AP279*)%20wd%3AQ486972.%0A%20%20%3Fcity%20wdt%3AP190%20%3Fsister_city.%0A%7D
-

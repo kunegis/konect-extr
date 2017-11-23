@@ -5,10 +5,13 @@
 meta.twin;
 
 twin.csv:
-	twin_url
+	twin_query
+##	twin_url
 {
 	touch twin.csv
-	wget -i twin_url --header "Accept: text/csv" -O twin.csv
+	curl --header "Accept: text/csv" >twin.csv \
+		--data-urlencode query="$(cat twin_query)" \
+		https://query.wikidata.org/sparql 
 }
 
 >out.twin:   <twin.csv mk
