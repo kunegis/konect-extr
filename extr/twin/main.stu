@@ -4,15 +4,26 @@
 
 meta.twin;
 
-twin.csv
+twin.csv:
+	twin_url
 {
 	touch twin.csv
 	wget -i twin_url --header "Accept: text/csv" -O twin.csv
 }
 
->out.twin:   <twin.csv
+>out.twin:   <twin.csv mk
 {
 	echo '% sym unweighted'
+	./mk |
 	../../sh/mkuniq1 |
 	../../sh/mksym
+}
+
+# The URL of the request, including the actual request.  TODO:  generate
+# this automatically from the request using URL encoding. 
+twin_url;
+
+@clean
+{
+	rm -f out.* twin.csv 
 }

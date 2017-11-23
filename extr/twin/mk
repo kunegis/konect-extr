@@ -1,0 +1,10 @@
+#! /bin/sh
+#
+# Filter the CSV to an out.* file, via STDIN and STDOUT. 
+#
+
+sed -E -e '
+s,,,g
+1d
+y/,/ /
+'
