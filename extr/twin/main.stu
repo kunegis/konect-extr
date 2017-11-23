@@ -4,13 +4,15 @@
 
 meta.twin;
 
->out.twin:   <workfile.txt
+twin.csv
+{
+	touch twin.csv
+	wget -i twin_url --header "Accept: text/csv" -O twin.csv
+}
+
+>out.twin:   <twin.csv
 {
 	echo '% sym unweighted'
-##	sed -E -e 's,,,g' |
-##	tr ' ' '_' |
 	../../sh/mkuniq1 |
 	../../sh/mksym
 }
-
-workfile.txt = own/twin/;
