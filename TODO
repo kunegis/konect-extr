@@ -1,4 +1,5 @@
 == Simple ==
+* asoiaf:  also have the books individually 
 * http://storage.googleapis.com/books/ngrams/books/datasetsv2.html
 * filmtrust (Jennifer Golbeck)
 * moleskiing.it
@@ -110,6 +111,8 @@ Yang
 * DIMACS challenge:  all others (apart from number 9)
 * snap:  com-* datasets
 * citeseerx dataset or http://www.hpi.uni-potsdam.de/naumann/projekte/repeatability/datasets/cora_dataset.html / http://citeseerx.ist.psu.edu/about/metadata 
+* Boeing 767 structural network
+* a genealogical network 
 
 == Needs complex extraction or research ==
 * http://openplanb.tumblr.com/
