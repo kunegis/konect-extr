@@ -4,13 +4,27 @@
 
 meta.twin;
 
->out.twin:   <workfile.txt
+twin.csv:
+	twin_query
+{
+	touch twin.csv
+	curl --header "Accept: text/csv" >twin.csv \
+		--data-urlencode query="$(cat twin_query)" \
+		https://query.wikidata.org/sparql 
+}
+
+>out.twin:   <twin.csv mk
 {
 	echo '% sym unweighted'
-##	sed -E -e 's,,,g' |
-##	tr ' ' '_' |
+	./mk |
 	../../sh/mkuniq1 |
 	../../sh/mksym
 }
 
-workfile.txt = own/twin/;
+# The query to execute 
+twin_query;
+
+@clean
+{
+	rm -f out.* twin.csv 
+}
