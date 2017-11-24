@@ -1,0 +1,10 @@
+name:  A Song of Ice and Fire
+code:  IF
+category:  Misc
+long-description:   This is the fictional social network of the series of fantasy novels "A Song of Ice and Fire" by George R. R. Martin (1996–present).  An edge denotes that two characters are mentioned within fifteen words of each other; edge multiplicities denote the number of such appearances.  This version of the dataset covers books one to five. 
+entity-names:  character
+relationship-names:  co-appearance
+extr:  asoiaf
+url:  https://github.com/mathbeveridge/asoiaf
+tags:  #regenerate
+timeiso:  1996/2011

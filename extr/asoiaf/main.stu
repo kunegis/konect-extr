@@ -1,0 +1,20 @@
+#
+# Character network from _A Song of Ice and Fire_.
+#
+
+% version 2.5
+
+@all:  (meta out ent).asoiaf;
+
+meta.asoiaf;
+
+>out.asoiaf ent.asoiaf:  <asoiaf-all-edges.csv mk
+{
+	./mk
+}
+
+asoiaf-all-edges.csv
+{
+	wget https://raw.githubusercontent.com/mathbeveridge/asoiaf/master/data/asoiaf-all-edges.csv -O asoiaf-all-edges.csv
+	touch -c asoiaf-all-edges.csv
+}

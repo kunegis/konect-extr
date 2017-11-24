@@ -2,17 +2,18 @@
 #
 # Make IDs unique for unipartite datasets. 
 #
-# Filter a graph dataset, making IDs unique.
-#
-# INPUT format:         ID_A  ID_B   REST OF LINE
-# OUTPUT:  the same with continuous IDs
+# STDIN format:         ID_A  ID_B   REST OF LINE
+# STDOUT:  		the same with continuous IDs
 # 
 # Input IDs may be any string not containing spaces.
 # Output IDs are continuous integers beginning at 1.
 #
-# IDs can be separated by either a single space or tabulator. If both
-# are given, tabulator is used. Lines starting with % are left
-# unchanged. Lines starting with '#' are ignored.   
+# IDs can be separated by either a single space or tab.  If both
+# are given, tab is used.  Lines starting with % are left
+# unchanged.  Lines starting with '#' are ignored.
+#
+# If the argument is used, entity names are written to that file, one
+# per line, including entity IDs and quotes, and a header. 
 #
 # PARAMETERS
 #	$1 	(optional) entity filename 

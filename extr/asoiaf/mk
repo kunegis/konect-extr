@@ -1,0 +1,17 @@
+#! /bin/sh
+
+# Note:  the input file does not contain newline characters; instead, it
+# uses ^M. 
+
+echo '% sym positive'
+
+sed -E -e 's,,\
+,g' |
+sed -E -e '
+1d
+s|^([^,]+),([^,]+),[^,]+,[^,]+,([0-9]+)$|\1	\2	\3|
+' |
+../../sh/mkuniq1 ent.asoiaf
+
+
+	
