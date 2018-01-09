@@ -1,0 +1,75 @@
+#
+# https://www.librec.net/datasets.html
+#
+
+% version 2.5
+
+@all:   (out meta).librec-(filmtrust-(ratings trust) ciaodvd-(movie_ratings review_ratings trust));
+
+>out.librec-filmtrust-ratings:  <filmtrust/ratings.txt
+{
+	echo '% bip weighted'
+	../../sh/mkuniq
+}
+
+>out.librec-filmtrust-trust:  <filmtrust/trust.txt
+{
+	echo '% asym unweighted'
+	sed -E -e 's, 1$,,' | ../../sh/mkuniq1
+}
+
+filmtrust:  filmtrust.zip
+{
+	rm -Rf filmtrust
+	mkdir filmtrust
+	cd filmtrust
+	unzip ../filmtrust.zip
+	touch *.txt
+}
+
+filmtrust/$name.txt:  filmtrust; 
+
+filmtrust.zip:
+{
+	wget https://www.librec.net/datasets/filmtrust.zip -O filmtrust.zip
+	touch -c filmtrust.zip
+}
+
+>out.librec-ciaodvd-movie_ratings:  <ciaodvd/movie-ratings.txt 
+{
+	echo '% bip weighted'
+	sed -E -e 's|^([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9-]+)$|\1	\2	\5	\6|' |
+		../../sh/mkuniq |
+		../../sh/convdate
+}
+
+>out.librec-ciaodvd-review_ratings:  <ciaodvd/review-ratings.txt
+{
+	echo '% bip weighted'
+	tr ',' '	' |
+		../../sh/mkuniq
+}
+
+>out.librec-ciaodvd-trust:  <ciaodvd/trusts.txt
+{
+	echo '% asym unweighted'
+	tr ',' '	' |
+		../../sh/mkuniq1
+}
+
+ciaodvd/$name.txt:  ciaodvd;
+
+ciaodvd:  CiaoDVD.zip
+{
+	rm -Rf ciaodvd
+	mkdir ciaodvd
+	cd ciaodvd
+	unzip ../CiaoDVD.zip
+	touch *.txt
+}
+
+CiaoDVD.zip:
+{
+	wget https://www.librec.net/datasets/CiaoDVD.zip -O CiaoDVD.zip
+	touch -c CiaoDVD.zip
+}

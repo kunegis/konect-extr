@@ -1,0 +1,11 @@
+name:  CiaoDVD movie ratings
+code:  CM
+category:  Rating 
+long-description:  This is the bipartite user–movie rating network of the site http://dvd.ciao.co.uk/ from 2013.
+entity-names:  user, movie
+relationship-names:  rating
+extr:  librec
+url:  https://www.librec.net/datasets.html
+cite:  konect:ciaodvd
+timeiso:  2013
+tags:  #incomplete

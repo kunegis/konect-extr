@@ -1,6 +1,6 @@
 == Simple ==
-* http://storage.googleapis.com/books/ngrams/books/datasetsv2.html
 * https://www.librec.net/datasets.html
+** fix the errors found by @check 
 * http://www.data-publica.com/data
 * http://www.quora.com/Where-can-I-get-large-datasets-open-to-the-public
 * http://mldata.org/
@@ -151,3 +151,4 @@ Yang
 * BibSonomy:  who follows whom
 * Pavel Braslavski:  MoiKrug social network:  Anton Volnuhin [anton@yandex-team.ru]
 * [620] cyworld
+* http://storage.googleapis.com/books/ngrams/books/datasetsv2.html

@@ -1,0 +1,11 @@
+name:  CiaoDVD review ratings
+code:  CR
+category:  Rating 
+long-description:  This is the bipartite user–review rating network of the site http://dvd.ciao.co.uk/ from 2013.  It contains users and individual reviews as nodes, and user ratings of individual reviews as edges.  The author of each individual review is not given in the dataset. 
+entity-names:  user, review
+relationship-names:  rating
+extr:  librec
+url:  https://www.librec.net/datasets.html
+cite:  konect:ciaodvd
+timeiso:  2013
+tags:  #incomplete

@@ -1,0 +1,11 @@
+name:  FilmTrust ratings
+code:  FR
+category:  Rating
+long-description:  This is bipartite rating network of the FilmTrust project.
+entity-names:  user, film
+relationship-names:  rating
+extr:  librec
+url:  https://www.librec.net/datasets.html
+cite:  konect:filmtrust
+timeiso:  2011
+tags:  #incomplete

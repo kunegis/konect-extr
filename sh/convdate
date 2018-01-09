@@ -4,7 +4,12 @@
 #
 # The dates are assumed to be in the fourth column, as in the out.*
 # format, and thus they cannot contain spaces.  Instead, underscores can
-# be used. 
+# be used.
+#
+# This is a general-purpose date-parsing program that works for most
+# datasets.  For some very specifically formatted data, specific parsers
+# need to be written. 
+#
 
 use strict;
 use warnings FATAL => 'all';

@@ -1,0 +1,11 @@
+name:  FilmTrust trust
+code:  FT
+category:  Social
+long-description:  This is the user–user trust network of the FilmTrust project.
+entity-names:  user
+relationship-names:  film 
+extr:  librec
+url:  https://www.librec.net/datasets.html
+cite:  konect:filmtrust
+timeiso:  2011
+tags:  #incomplete

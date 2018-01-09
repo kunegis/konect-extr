@@ -1,0 +1,11 @@
+name:  CiaoDVD trust
+code:  CT
+category:  Social
+long-description:  This is the user–user trust network of the site http://dvd.ciao.co.uk/ from 2013.
+entity-names:  user
+relationship-names:  trust rating
+extr:  librec
+url:  https://www.librec.net/datasets.html
+cite:  konect:ciaodvd
+timeiso:  2013
+tags:  #incomplete
