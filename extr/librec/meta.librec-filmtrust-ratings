@@ -1,7 +1,7 @@
 name:  FilmTrust ratings
 code:  FR
 category:  Rating
-long-description:  This is bipartite rating network of the FilmTrust project.
+long-description:  This is bipartite rating network of the FilmTrust project.  We removed three instances of duplicate user–film pairs; making the network simple rather than having multiple edges.  
 entity-names:  user, film
 relationship-names:  rating
 extr:  librec

@@ -9,7 +9,9 @@
 >out.librec-filmtrust-ratings:  <filmtrust/ratings.txt
 {
 	echo '% bip weighted'
-	../../sh/mkuniq
+	tr ' ' '	' |
+		../../sh/mkuniq |
+		../../sh/rmmulti
 }
 
 >out.librec-filmtrust-trust:  <filmtrust/trust.txt
@@ -37,7 +39,7 @@ filmtrust.zip:
 
 >out.librec-ciaodvd-movie_ratings:  <ciaodvd/movie-ratings.txt 
 {
-	echo '% bip weighted'
+	echo '% bip multiweighted'
 	sed -E -e 's|^([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9-]+)$|\1	\2	\5	\6|' |
 		../../sh/mkuniq |
 		../../sh/convdate
