@@ -7,6 +7,6 @@ cite: konect:leskovec107
 extr: snap
 long-description: This is the co-citation graph of papers of scientific papers from the arXiv's High Energy Physics – Theory (hep-th) section. An edge between two papers represents a paper that cites both papers. Timestamps denote the date of a publication.
 entity-names: author
-relationship-names: collaboration
+relationship-names: co-citation 
 tags:  #join
  
