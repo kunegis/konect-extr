@@ -5,7 +5,7 @@ description: User–user link
 url: http://socialnetworks.mpi-sws.org/data-imc2007.html
 cite: konect:mislove
 extr: wosn
-long-description: This is the social network of Orkut users and their connections. 
+long-description: This is the social network of Orkut users and their connections.   The network is undirected.  The dataset was crawled from the orkut website and may thus be incomplete. 
 entity-names: user
 relationship-names: link 
 tags:  #incomplete #lcc

@@ -5,7 +5,7 @@ description: User–user link
 url: http://socialnetworks.mpi-sws.org/data-imc2007.html
 cite: konect:mislove
 extr: wosn
-long-description: This is the social network of Youtube users and their connections. The network is undirected.
+long-description: This is the social network of Youtube users and their connections. The network is directed.  The dataset was crawled from the YouTube website and may be incomplete. 
 tags: #incomplete
 entity-names: user
 relationship-names: link 
