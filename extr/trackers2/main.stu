@@ -2,7 +2,7 @@
 # "Tracking the Trackers"
 #
 
-% version 1.9
+% version 2.5
 
 @all:  
 	meta.trackers out.trackers 

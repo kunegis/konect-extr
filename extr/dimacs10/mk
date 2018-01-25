@@ -1,0 +1,61 @@
+#! /bin/sh
+#
+# PARAMETERS
+#	$name
+#
+# INPUT FILES
+#	dat/pre.dimacs10-$name
+#
+# OUTPUT FILES
+#	dat/out.dimacs10-$name
+#
+
+[ "$name" ] || {
+	echo >&2 '*** Expected $name to be the name of the network; got empty string instead'
+	exit 1
+}
+
+grep -E -q '^\s*'"$name"'\s*:' FORMAT || {
+     	echo >&2 "*** Error:  Expected the format of network '$name' to be declared in file FORMAT."
+	exit 1
+}
+format=$(<FORMAT sed -E -e 's,^\s*'"$name"'\s*:\s*(\S+)\s*$,\1,;t;d')
+	
+if head -1 dat/"$name".graph | grep -q -E '1$' ; then
+	weights=posweighted
+else
+	weights=unweighted 
+fi
+
+{
+	echo "% $format $weights" 
+
+	if [ "$format" = asym ] ; then
+		../../sh/mkuniq1
+	elif [ "$format" = sym ] ; then
+		# In these networks, all edges are represented twice (once in
+		# each direction), even though the networks are
+		# undirected; keep each only once.   
+		awk '{
+		if ($1 <= $2) 
+		{
+			printf ("%s\t%s",$1,$2) 
+			if ($3!="") 
+			{
+				printf ("\t%s",$3)
+			}; 
+			if ($4!="") 
+			{
+				printf ("\t%s",$4)
+			}; 
+			print "";
+		}
+		}' |
+		../../sh/mkuniq1
+	elif [ "$format" = bip ] ; then
+		../../sh/mkuniq
+	else
+		echo >&2 "*** Unknown network format '$format'"
+		exit 1
+	fi
+} <dat/pre.dimacs10-"$name" >dat/out.dimacs10-"$name"

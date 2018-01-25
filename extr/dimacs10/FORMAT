@@ -1,0 +1,20 @@
+# This file contains information about the format of each network
+
+celegans_metabolic	: sym
+as-22july06	: sym
+astro-ph	: sym
+celegansneural	: asym
+cond-mat-2003	: sym
+cond-mat-2005	: sym
+football	: sym
+netscience	: sym
+polblogs	: asym
+polbooks	: sym
+cnr-2000	: sym
+eu-2005		: sym
+in-2004		: sym
+uk-2002		: sym
+uk-2007-05	: sym
+chesapeake	: sym
+
+

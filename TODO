@@ -1,7 +1,4 @@
 == Simple ==
-* http://www.data-publica.com/data
-* http://www.quora.com/Where-can-I-get-large-datasets-open-to-the-public
-* http://mldata.org/
 * http://www.cc.gatech.edu/dimacs10/downloads.shtml
 * http://www.dis.uniroma1.it/~challenge9/
 * bitcoin dataset
@@ -107,6 +104,7 @@ Yang
 * citeseerx dataset or http://www.hpi.uni-potsdam.de/naumann/projekte/repeatability/datasets/cora_dataset.html / http://citeseerx.ist.psu.edu/about/metadata 
 * Boeing 767 structural network
 * a genealogical network 
+* https://meta.wikimedia.org/wiki/Research:Wikipedia_clickstream
 
 == Needs complex extraction or research ==
 * http://openplanb.tumblr.com/

@@ -1,0 +1,37 @@
+#
+# https://www.cc.gatech.edu/dimacs10/index.shtml
+#
+
+@all:   (meta/meta dat/out).dimacs10-[NAMES];
+
+@meta:  @meta.[NAMES];
+@out:   @out.[NAMES];
+
+@meta.$name:  meta/meta.dimacs10-$name;
+@out.$name:   dat/out.dimacs10-$name; 
+
+meta/meta.dimacs10-$name;
+
+dat/pre.dimacs10-$name:  dat/$name.graph ../../c/d.parse_adj
+{
+	../../c/d.parse_adj dat/"$name".graph dat/pre.dimacs10-"$name" 
+}
+
+dat/out.dimacs10-$name:  dat/pre.dimacs10-$name dat/$name.graph mk
+{
+	./mk
+}
+
+dat/$name.graph:  dat/$name.graph.bz2
+{
+	bzip2 -d -f -k dat/"$name".graph.bz2 
+	touch -c dat/"$name".graph
+}
+
+dat/$name.graph.bz2:  -p dat/
+{
+	wget https://www.cc.gatech.edu/dimacs10/archive/data/clustering/"$name".graph.bz2 -O dat/"$name".graph.bz2
+	touch -c dat/"$name".graph.bz2
+}
+
+dat/ { mkdir -p dat ; }

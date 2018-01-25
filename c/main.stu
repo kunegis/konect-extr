@@ -1,10 +1,11 @@
 #
-# C code that is faster that the Perl scripts.
+# C++ code that is faster that the Perl scripts.  While this is C++
+# code, we mostly use the C standard library for input and output. 
 #
 
-% version 2.4
+% version 2.5
 
-@all:  d.mkuniq n.mkuniq;
+@all: (d n).(mkuniq parse_adj);
 
 $x.$name:  $name.cc -t CXXFLAGS.$x $[-t CXXFLAGS]
 {
