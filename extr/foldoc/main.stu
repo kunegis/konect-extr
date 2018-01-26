@@ -1,3 +1,4 @@
+% version 2.5 
 
 @all:  meta.foldoc out.foldoc ent.foldoc;
 
@@ -6,7 +7,7 @@ meta.foldoc;
 >out.foldoc:  <foldoc.net
 {
 	echo '% asym positive'
-	sed -re '/^\s*[0-9]+\s+[0-9]+\s+[0-9]+\s*$/!d'
+	sed -E -e '/^\s*[0-9]+\s+[0-9]+\s+[0-9]+\s*$/!d;s,^\s*,,;s,\s*$,,;s,\s+,	,g;'
 }
 
 ent.foldoc:  foldoc.net
