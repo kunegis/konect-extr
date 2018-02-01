@@ -73,6 +73,13 @@ out/out.$name:  out/$name.txt SYMDATASETS mk
 	fi
 }
 
+>out/out.soc-sign-bitcoin$name:  <out/soc-sign-bitcoin$name.csv
+{
+	echo '% asym signed'
+	tr ',' '	' |
+	 ../../sh/mkuniq1
+}
+
 work/ego-$name:  work/$name.tar.gz
 {
 	tar xf work/"$name".tar.gz -C work -m
@@ -119,6 +126,15 @@ out/$name.txt:  -p out
 	gunzip -f "$name".txt.gz 
 	touch -- "$name".txt
 	fromdos "$name".txt
+}
+
+out/soc-sign-bitcoin$name.csv:  -p out
+{
+	wget --no-use-server-timestamps http://snap.stanford.edu/data/soc-sign-bitcoin"$name".csv.gz -O out/soc-sign-bitcoin"$name".csv.gz
+	cd out
+	gunzip -f soc-sign-bitcoin"$name".csv.gz 
+	touch -- soc-sign-bitcoin"$name".csv
+	fromdos soc-sign-bitcoin"$name".csv
 }
 
 # Special cocitation datasets derived from citation (cit-*) datasets

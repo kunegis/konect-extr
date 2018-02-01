@@ -55,7 +55,8 @@ filmtrust.zip:
 >out.librec-ciaodvd-trust:  <ciaodvd/trusts.txt
 {
 	echo '% asym unweighted'
-	tr ',' '	' |
+	sed -E -e 's|^([0-9]+),([0-9]+),1$|\1	\2|' |
+##	tr ',' '	' |
 		../../sh/mkuniq1
 }
 

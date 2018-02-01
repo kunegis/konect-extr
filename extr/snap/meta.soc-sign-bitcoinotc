@@ -1,0 +1,12 @@
+name:  Bitcoin OTC
+code:  BO
+category:  Social
+long-description:  This is a user–user trust network, from the Bitcoin OTC platform, on which Bitcoins are traded.  Each directed edge represents trust on a scale from −10 to +10.
+entity-names:  member
+relationship-names:  trust
+extr:  snap
+url:  http://cs.umd.edu/~srijan/wsn/, https://snap.stanford.edu/data/soc-sign-bitcoinotc.html
+cite:  konect:kumar2016wsn
+timeiso:  2010/2016
+tags:
+
