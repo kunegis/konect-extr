@@ -1,0 +1,20 @@
+#
+# Small "networks of the day" by Petter Holme via Twitter.
+#
+# They are so small that we just store all out.* files in version
+# control.
+#
+# These networks don't have a prefix in their name, and instead we rely
+# on the 'extr' field for identification. 
+#
+
+@all:  (meta out).(hiv iceland);
+
+>out.$name:   <$name.csv
+{
+	../../sh/mkuniq1 
+}
+
+# The CSV file from Petter, prefixed with the KONECT header line
+# (declaring format and weights).
+$name.csv;

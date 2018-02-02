@@ -1,0 +1,10 @@
+name:  HIV
+code:  HI
+category:  HumanContact
+long-description:  This is a network of sexual contacts between people involved in the early spread of the human immunodeficiency virus (HIV), in the United States of America (USA).  This network is the origin of the phrase "patient zero," referring a person from which an infection spreads initially.  Edges are undirected.
+entity-names:  AIDS patient
+relationship-names:  sexual contact
+extr:  pholme
+cite:  konect:hiv
+timeiso:  1984
+tags:  #incomplete #lcc

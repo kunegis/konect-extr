@@ -1,9 +1,9 @@
 name:  Bitcoin OTC
 code:  BO
 category:  Social
-long-description:  This is a user–user trust network, from the Bitcoin OTC platform, on which Bitcoins are traded.  Each directed edge represents trust on a scale from −10 to +10.
+long-description:  This is a user–user trust/distrust network, from the Bitcoin OTC platform, on which Bitcoins are traded.  Each directed edge represents trust or distrust on a scale from −10 to +10.  Positive edge weights denote trust, and negative edge weights denote distrust.  An edge weight of zero does not appear. 
 entity-names:  member
-relationship-names:  trust
+relationship-names:  trust/distrust
 extr:  snap
 url:  http://cs.umd.edu/~srijan/wsn/, https://snap.stanford.edu/data/soc-sign-bitcoinotc.html
 cite:  konect:kumar2016wsn
