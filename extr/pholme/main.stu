@@ -8,10 +8,11 @@
 # on the 'extr' field for identification. 
 #
 
-@all:  (meta out).(hiv iceland);
+@all:  (meta out).(hiv iceland gene_fusion);
 
 >out.$name:   <$name.csv
 {
+	tr ',' '	' |
 	../../sh/mkuniq1 
 }
 

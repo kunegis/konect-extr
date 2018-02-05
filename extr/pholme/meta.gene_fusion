@@ -1,0 +1,10 @@
+name:  Gene fusion
+code:  GF
+category:  Misc
+long-description:  This is a gene fusion network.  Nodes are genes, and two nodes are connected if the two genes can be fused during oncogenesis. 
+entity-names:  gene
+relationship-names:  ability to be fused
+extr:  pholme
+cite:  konect:gene_fusion
+timeiso:  2006
+tags:  #incomplete  
