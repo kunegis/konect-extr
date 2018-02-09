@@ -3,7 +3,7 @@ code:  FT
 category:  Social
 long-description:  This is the user–user trust network of the FilmTrust project.
 entity-names:  user
-relationship-names:  film 
+relationship-names:  trust
 extr:  librec
 url:  https://www.librec.net/datasets.html
 cite:  konect:filmtrust

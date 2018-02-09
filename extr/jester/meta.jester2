@@ -5,7 +5,7 @@ description: User–joke ratings
 entity-names: user, joke
 extr: jester
 url: http://eigentaste.berkeley.edu/dataset/
-long-description: This weighted network contains information about how users rated a total ammount of 150 jokes. Not every user rated every joke. Rating values are continuous values between −10 and +10. An edge shows that a user has rated a joke. Left nodes are users; right nodes are jokes. 
+long-description: This weighted network contains information about how users rated a total amount of 150 jokes. Not every user rated every joke. Rating values are continuous values between −10 and +10. An edge shows that a user has rated a joke. Left nodes are users; right nodes are jokes. 
 relationship-names: rating
 cite: konect:jester
 timeiso: 2006-11/2012-11

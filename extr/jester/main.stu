@@ -1,0 +1,74 @@
+#
+# The Jester datasets.  This is one of the oldest datasets in KONECT,
+# but this code was created later, first as a Makefile and now as a Stu
+# script.
+#
+# Respect goes to the EigenTaste site at
+# 	http://eigentaste.berkeley.edu/dataset/
+# that is still available after so many years.
+#
+# Some things don't work here; I was not able to re-create datasets that
+# are currently in KONECT with this code -- the Makefile itself was
+# probably wrong. 
+#
+# REQUIREMENTS
+#	py_xls2csv
+#
+
+% version 2.5
+
+@all: (meta out).jester(1 2);
+URL = {http://eigentaste.berkeley.edu/dataset}
+
+>out.jester2:
+	jester3xls
+	<jesterfinal151cols.csv mk
+{
+	./mk |
+	../../sh/mkrel bip weighted
+}
+
+>out.jester1:
+	jester1-1.csv jester1-2.csv jester1-3.csv
+	mk
+{
+	cat jester1-1.csv jester1-2.csv jester1-3.csv |
+	./mk |
+	../../sh/mkrel bip weighted 
+}
+
+$name.zip:  URL
+{
+	URL=$(cat URL)
+	wget "$URL"/"$(echo "$name" | sed -E -e 's,^jester,jester_dataset_,;s,-,_,g')".zip -O "$name".zip
+	touch -c "$name".zip
+}
+
+$name.xls: $name.zip
+{
+	unzip "$name".zip
+	mv jester-data-*.xls "$name".xls
+	touch -c "$name".xls
+}
+
+jester_ratings.dat: jester2.zip
+{
+	unzip jester2.zip
+}
+
+>$name.csv: <$name.xls
+{
+	py_xls2csv
+}
+
+@jester3xls: jester3.zip
+{
+	unzip jester3.zip
+}
+
+@clean:
+{
+	rm -f *.csv *.zip *.xls *.dat *.zip
+	rm -f out.*
+	rm -Rf __*
+}
