@@ -1,0 +1,11 @@
+name:  Indian domain
+code:  ID
+category:  Hyperlink
+long-description:  This is the hyperlink network of the .in domain for India. 
+entity-names:  page
+relationship-names:  hyperlink
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  2004
+tags:  #incomplete #missingmultiplicity #missingorientation 
+cite:  konect:BCSU3

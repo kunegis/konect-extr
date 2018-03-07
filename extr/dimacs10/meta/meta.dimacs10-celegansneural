@@ -1,0 +1,12 @@
+name:  Caenorhabditis elegans (neural)
+code:  CE
+category:  Neural
+long-description:  This is a weighted directed network representing the neural network of <I>Caenorhabditis elegans</I>.  The original network had directed edges allowing multiple parallel edges with integer weights.  In this version, the network is undirected, allows no multiple edges, and the given edge weights are the sum of the original edge weights.  As described in the original publication by J. G. White and colleagues, the data was assembled by hand and may contain a small number of errors.  To cite:  "We are reasonably confident that the structure that we present is substantially correct and gives a reasonable picture of the organization of the nervous system in a typical <I>C. elegans</I> hermaphrodite."
+entity-names:  neuron
+relationship-names:  connection
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  1986
+tags:  #incomplete #missingmultiplicity  
+cite:  konect:celegansneural1, konect:duncan98
+

@@ -1,0 +1,10 @@
+name:  Autonomous systems (DIMACS10)
+code:  AS
+category:  Computer
+long-description:  This is a snapshot of the structure of the Internet at the level of autonomous systems, reconstructed from BGP tables posted by the University of Oregon Route Views Project.
+entity-names:  autonomous system
+relationship-names:  connection
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  2006
+tags:  #incomplete #missingorientation

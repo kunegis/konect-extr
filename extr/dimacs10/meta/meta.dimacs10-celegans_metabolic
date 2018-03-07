@@ -1,0 +1,10 @@
+name:  Caenorhabditis elegans (metabolic)
+code:  CE
+category:  Metabolic
+long-description:  This is the metabolic network of <I>Caenorhabditis elegans</I>. 
+entity-names:  metabolite
+relationship-names:  interaction 
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+tags:  #incomplete  
+cite:  konect:duch05

@@ -1,0 +1,12 @@
+name:  Condensed matter (2003)
+code:  CM
+category:  Coauthorship
+long-description:  These are scientific collaboration in the area of Condensed Matter (physics).  It contains co-authorships from papers uploaded to arXiv in the "condensed matter" section, in the time range 1995 to 2003.  
+entity-names:  author
+relationship-names:  co-authorship
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  1995-01-01/2003-06-30
+tags:  #join #missingmultiplicity 
+cite:  konect:duch05, konect:newman01
+

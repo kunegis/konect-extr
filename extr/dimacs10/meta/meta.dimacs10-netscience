@@ -1,0 +1,11 @@
+name:  Network science
+code:  NS
+category:  Coauthorship
+long-description:  This is a network of co-authorships in the area of network science. 
+entity-names:  author
+relationship-names:  co-authorship
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  2006
+tags:  #join #missingmultiplicity
+cite: konect:adjnoun

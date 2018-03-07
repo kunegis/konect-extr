@@ -1,0 +1,11 @@
+name:  Political blogs 
+code:  PB
+category:  Hyperlink 
+long-description:  This is a directed network of hyperlinks between political blogs about politics in the United States of America. 
+entity-names:  blog
+relationship-names:  link
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  2005
+tags:  #incomplete 
+cite:  konect:adamic2005

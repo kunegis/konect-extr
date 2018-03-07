@@ -1,0 +1,12 @@
+name:  American football
+code:  AF
+category:  Interaction
+long-description:  This network contains "American football games between Division IA colleges during regular season Fall 2000."  Results are not included in the dataset, and neither is home/away information. 
+entity-names:  team
+relationship-names:  game
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  2000
+tags:  #missingorientation #missingmultiplicity 
+cite:  konect:football
+

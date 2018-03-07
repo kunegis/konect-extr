@@ -1,0 +1,11 @@
+name:  Italian CNR
+code:  IC
+category:  Hyperlink
+long-description:  This is a small version of the hyperlink network of the Italian CNR domain, i.e., the website of the Italian National Research Council (Consiglio Nazionale delle Ricerche). 
+entity-names:  page
+relationship-names:  hyperlink
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  2000
+tags:  #incomplete #missingmultiplicity #missingorientation 
+cite:  konect:BCSU3

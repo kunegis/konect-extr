@@ -1,0 +1,12 @@
+name:  Condensed matter (2005)
+code:  CM2
+category:  Coauthorship
+long-description:  These are co-authorships between authors of papers uploaded to the "condensed matter" section of arXiv.  As noted from the dataset source:  "[...] the original graph contains two edges with weight inf[ormation], these were removed before making the graph unweighted."
+entity-names:  author
+relationship-names:  co-authorship
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  1995-01-01/2005-03-31
+tags:  #join #missingmultiplicity 
+cite:  konect:newman01
+

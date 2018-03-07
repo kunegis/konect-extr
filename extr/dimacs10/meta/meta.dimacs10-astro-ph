@@ -1,0 +1,11 @@
+name:  Astrophysics
+code:  AP
+category:  Coauthorship
+long-description:  This is the co-authorship network from the "astrophysics" section (astro-ph) of arXiv.  Nodes are authors and an edge denotes a collaboration. 
+entity-names:  author
+relationship-names:  co-authorship
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  1995-01-01/1999-12-31
+tags:  #join #missingmultiplicity
+cite: konect:newman01

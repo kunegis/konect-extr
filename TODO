@@ -1,6 +1,5 @@
 == Simple ==
 * http://www.dis.uniroma1.it/~challenge9/
-* bitcoin dataset
 * money transfer dataset (skew symmetric network)
 * http://pajek.imfm.si/doku.php?id=data:urls:index
 * http://law.dsi.unimi.it/datasets.php
@@ -104,6 +103,7 @@ Yang
 * Boeing 767 structural network
 * a genealogical network 
 * https://meta.wikimedia.org/wiki/Research:Wikipedia_clickstream
+* https://sites.google.com/site/ucinetsoftware/datasets/covert-networks
 
 == Needs complex extraction or research ==
 * http://openplanb.tumblr.com/

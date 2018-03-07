@@ -1,0 +1,11 @@
+name:  UK domain (2002)
+code:  UD
+category:  Hyperlink
+long-description:  This is the hyperlink network of the .uk domain for the United Kingdom. 
+entity-names:  page
+relationship-names:  hyperlink
+extr:  dimacs10
+url:  https://www.cc.gatech.edu/dimacs10/archive/clustering.shtml
+timeiso:  2002
+tags:  #incomplete #missingmultiplicity #missingorientation 
+cite:  konect:BCSU3
