@@ -5,7 +5,7 @@ category: Hyperlink
 fullname: Hudong related pages
 description: Article–article connection
 long-description: These are "related to" links between articles of the Chinese online encyclopedia Hudong (互动百科, http://www.hudong.com/).
-entity-names: article, article
+entity-names: article 
 extr: zhishi
 cite: konect:zhishi
 tags: #loop

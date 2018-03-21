@@ -5,7 +5,7 @@ category: Hyperlink
 fullname: Baidu related pages
 description: Article–article connection
 long-description: These are "related to" links between articles of the Chinese online encyclopedia Baidu (百度百科,  http://baike.baidu.com/).  The graph does contain 52 instances of duplicate edge pairs, i.e., two directed edges between the same two nodes, with the same orientation.  We do not know whether these 52 pairs are an error in the extraction of the network, or represent cases where a pages is specified multiple times as a related page for a given page.  In any case, the duplicates were not removed from the dataset, and hence this is a network with multiple edges. 
-entity-names: article, article
+entity-names: article
 extr: zhishi
 cite: konect:zhishi
 tags: #loop #lowmultiplicity
