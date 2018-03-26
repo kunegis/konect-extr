@@ -1,0 +1,19 @@
+% version 2.5
+
+@all:  (meta/meta out/out).pajek-[NAMES];
+
+NAMES;
+
+out/  { mkdir -p out  ; }
+data/ { mkdir -p data ; }
+
+out/out.pajek-erdos out/ent.pajek-erdos:  data/Erdos02.net -p out/
+{
+	../../sh/mkpajek sym unweighted data/Erdos02.net out/out.pajek-erdos out/ent.pajek-erdos
+}
+
+data/Erdos02.net:  -p data/
+{
+	wget http://vlado.fmf.uni-lj.si/pub/networks/data/Erdos/Erdos02.net -O data/Erdos02.net
+	touch data/Erdos02.net
+}

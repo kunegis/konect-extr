@@ -55,6 +55,7 @@ out:  { mkdir -p out ; }
 
 sitematrix.json:  
 {
+	./sl
 	wget 'https://commons.wikimedia.org/w/api.php?action=sitematrix&smtype=language&format=json' \
 	     -O sitematrix.json
 	echo >>sitematrix.json # Make it have complete lines 
@@ -69,13 +70,22 @@ sitematrix.json:
 >out/meta.wikipedia_link_$LANG:
 	-p out <meta.template-intrawiki
 	$[NAME = out/lname.$LANG]
+	out/out.wikipedia_link_$LANG
 {
 	echo >&2 "NAME=⟨$NAME⟩"
 	LANG_dash=$(echo "$LANG" | tr _ -)
+
+	if grep -q -E '^([0-9]+)	\1$' out/out.wikipedia_link_"$LANG" ; then
+		rmloop=
+	else
+		rmloop='s,#loop,,g'
+	fi
+	
 	sed -E -e '
 		s,\$\{LANG\},'"$LANG_dash"',g
 		s,\$\{NAME\},'"$NAME"',g
-	'
+		'"$rmloop"'
+        '
 }
 
 # The network using continuous IDs 
@@ -107,6 +117,7 @@ out/pagelinks_$LANG.sql:
 
 out/pagelinks_$LANG.sql.gz:  -p out
 {
+	./sl
 	wget http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pagelinks.sql.gz -O out/pagelinks_$LANG.sql.gz
 	touch -c out/pagelinks_$LANG.sql.gz
 }
@@ -162,6 +173,7 @@ out/langlinks_$LANG.sql:
 
 out/langlinks_$LANG.sql.gz: -p out
 {
+	./sl
 	wget -q http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-langlinks.sql.gz -O out/langlinks_$LANG.sql.gz
 	touch -c out/langlinks_$LANG.sql.gz
 }
@@ -179,6 +191,7 @@ out/page_$LANG.sql: out/page_$LANG.sql.gz
 
 out/page_$LANG.sql.gz:  -p out
 {
+	./sl
 	wget http://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-page.sql.gz -O out/page_$LANG.sql.gz
 	touch -c out/page_$LANG.sql.gz
 }

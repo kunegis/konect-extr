@@ -1,7 +1,9 @@
 #! /usr/bin/perl -w
 #
 # Create a dataset from a Pajek file.  Files in Pajek format contain
-# egde and node information.
+# egde and node information.  Pajek files are usually named *.net.
+# (Note:  This format may not be exclusive to Pajek; other projects may
+# use it too.)
 #
 # We assume the IDs are already continuous from 1 to N, which is the
 # case in the Pajek format.
@@ -39,17 +41,24 @@ my $in_edge = 0;
 my $next_node = 1; 
 
 while (<INPUT>) {
+
     chomp;
+
+    if (/^%/) {
+	# Comment 
+	next; 
+    }
     if (/^\*Vertices/) {
 	$in_edge = 0;
 	next;
     }
-    if (/^\*Edgeslist/) {
+    if (/^\*(Edgeslist|Arcslist)/) {
 	$in_edge = 1;
 	next;
     }
+
     if ($in_edge) {
-	/^([0-9]+) (.*)$/ or die "Invalid edge:  $_";
+	/^([0-9]+) (.*\S)\s*$/ or die "*** Invalid edge:  $_";
 	my $from = $1;
 	my $tos = $2;
 	my @toa = split / /, $tos;
@@ -58,7 +67,7 @@ while (<INPUT>) {
 	    print OUT "$from\t$to\n";
 	}
     } else {
-	/^([0-9]+) "([^"]*)"$/ or die "*** Invalid node:  $_";
+	/^([0-9]+)\s+"([^"]*)"\s*$/ or die "*** Invalid node:  $_";
 	my $node = $1;
 	my $label = $2;
 	if ($node != $next_node) {

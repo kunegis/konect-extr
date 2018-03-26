@@ -1,7 +1,7 @@
 == Simple ==
-* http://www.dis.uniroma1.it/~challenge9/
-* money transfer dataset (skew symmetric network)
-* http://pajek.imfm.si/doku.php?id=data:urls:index
+* ... fix error in wikipedia_link_*
+** extr:  regenerate all @intrawiki in wikipedia/
+** re-execute @check for them 
 * http://law.dsi.unimi.it/datasets.php
 ** Datasets are only available in a custom binary format, and there is only a Java library to access it…
 * the Wikipedia interwiki networks (all bipartite combinations of two languages).  Is currently broken in extr/wikipedia/
@@ -104,6 +104,8 @@ Yang
 * a genealogical network 
 * https://meta.wikimedia.org/wiki/Research:Wikipedia_clickstream
 * https://sites.google.com/site/ucinetsoftware/datasets/covert-networks
+* http://vladowiki.fmf.uni-lj.si/doku.php?id=pajek:data:pajek:vlado
+* http://vladowiki.fmf.uni-lj.si/doku.php?id=pajek:data:urls:index
 
 == Needs complex extraction or research ==
 * http://openplanb.tumblr.com/
@@ -147,3 +149,4 @@ Yang
 * Pavel Braslavski:  MoiKrug social network:  Anton Volnuhin [anton@yandex-team.ru]
 * [620] cyworld
 * http://storage.googleapis.com/books/ngrams/books/datasetsv2.html
+* money transfer dataset (skew symmetric network)

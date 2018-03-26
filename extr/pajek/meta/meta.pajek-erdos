@@ -1,0 +1,11 @@
+name: Erdős
+code: EO
+category:  Coauthorship
+long-description:  This is the co-authorship graph around Paul Erdős.  The network is as of 2002, and contains people who have, directly and indirectly, written papers with Paul Erdős.  This network is used to define the "Erdős number", i.e., the distance between any node and Paul Erdős.  This dataset was assembled by the Pajek project; we do not know the extent of data that is included. 
+entity-names:  author
+relationship-names:  co-authorship
+extr:  pajek
+url:  http://vlado.fmf.uni-lj.si/pub/networks/data/Erdos/Erdos02.net
+timeiso:  2002
+tags:  #incomplete #join #lcc #missingmultiplicity
+cite:   konect:pajek
