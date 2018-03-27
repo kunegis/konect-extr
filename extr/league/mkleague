@@ -19,7 +19,8 @@ while (<>) {
     foreach my $result (@results) {
 	next if $result =~ /^\s*$/;
 	++$away;
-	next if $home eq $away; 
+	next if $home == $away; 
+	next if $result eq "np"; 
 	my ($a, $b) = split(/-/, $result);
 	my $diff = $a - $b;
 	print "$home\t$away\t$diff\n"; 

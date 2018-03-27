@@ -12,6 +12,24 @@ league=$(echo "$name" | sed -E -e 's,-.*$,,')
 date=$(echo "$name" | sed -E -e 's,^.*-,,')
 
 case "$league" in 
+	be1)
+		longname='Pro League'
+		sport='football'
+		region='Belgium'
+		code_a='b'
+		;;
+	fr1)
+		longname='Ligue 1'
+		sport='football'
+		region='France'
+		code_a='f'
+		;;
+	de1)
+		longname='Bundesliga'
+		sport='football'
+		region='Germany'
+		code_a='d'
+		;;
 	uk1)
 		longname='Premier League'
 		sport='football'
