@@ -6,3 +6,8 @@ entity-names:  team
 relationship-names:  game
 extr:  league
 cite:  konect:league
+timeiso: ${year}
+tags:  #skew #tournament #zeroweight
+
+
+

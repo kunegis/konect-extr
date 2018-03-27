@@ -8,6 +8,8 @@ use warnings FATAL => 'all';
 
 my $home = 0; 
 
+print "% asym multisigned\n";
+
 while (<>) {
 
     chomp;
