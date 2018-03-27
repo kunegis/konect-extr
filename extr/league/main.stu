@@ -1,0 +1,32 @@
+#
+# Datasets of individual sports league results. 
+#
+
+@all:  out/(meta out).league-[NAMES]; 
+
+meta.template; 
+
+out/ { mkdir -p out ; }
+
+>NAMES:  data
+{
+	ls -1U data | sed -E -e '/~$/d;s,^data\.,,;t;d'
+}
+
+>out/meta.league-$name:   -p out/ <meta.template setfields
+{
+	. ./setfields
+
+	sed -E -e '
+		s,\$\{longname\},'"$longname"',g
+		s,\$\{year\},'"$year"',g
+		s,\$\{code\},'"$code"',g
+		s,\$\{sport\},'"$sport"',g
+		s,\$\{region\},'"$region"',g
+	'
+}
+
+>out/out.league-$name:  <data/data.$name mkleague
+{
+	./mkleague
+}

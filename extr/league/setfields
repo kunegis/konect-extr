@@ -1,0 +1,30 @@
+#
+# A shell script to be sourced, determining fields for the meta file. 
+#
+# INPUT VARIABLES 
+#	$name
+#
+# OUTPUT VARIABLES 
+#	$longname, $year, $code, $sport, $region
+# 
+
+league=$(echo "$name" | sed -E -e 's,-.*$,,')
+date=$(echo "$name" | sed -E -e 's,^.*-,,')
+
+case "$league" in 
+	uk1)
+		longname='Premier League'
+		sport='football'
+		region='England and Wales'
+		code_a='u'
+		;;
+	*)
+		echo >&2 "*** Invalid league '$league' for name '$name'"
+		exit 1
+		;;
+esac
+
+code_b=$(echo "$date" | sed -E -e 's,^.*(.)$,\1,')
+code=$code_a$code_b
+
+year=$date/$((date+1))

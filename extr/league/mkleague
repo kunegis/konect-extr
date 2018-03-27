@@ -1,0 +1,27 @@
+#! /usr/bin/perl -w
+#
+# Create the out.* file in STDOUT, from the league table on STDIN.
+#
+
+use strict;
+use warnings FATAL => 'all';
+
+my $home = 0; 
+
+while (<>) {
+
+    chomp;
+    next if /^\s*(|#.*)$/;
+
+    my @results = split /\s+/;
+    ++$home; 
+    my $away = 0;
+    foreach my $result (@results) {
+	next if $result =~ /^\s*$/;
+	++$away;
+	next if $home eq $away; 
+	my ($a, $b) = split(/-/, $result);
+	my $diff = $a - $b;
+	print "$home\t$away\t$diff\n"; 
+    }
+}
