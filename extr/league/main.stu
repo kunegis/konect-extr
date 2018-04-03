@@ -13,7 +13,7 @@ out/ { mkdir -p out ; }
 	ls -1U data | sed -E -e '/~$/d;s,^data\.,,;t;d'
 }
 
->out/meta.league-$name:   -p out/ <meta.template setfields data/data.$name
+>out/meta.league-$name:   -p out/ <meta.template setfields data/data.$name 
 {
 	. ./setfields
 
@@ -25,7 +25,7 @@ out/ { mkdir -p out ; }
 		s,\$\{region\},'"$region"',g
 	' | {
 		if grep -q 'np' data/data."$name" ; then
-			sed -E -e 's,#tournament,,'
+			sed -E -e 's,#clique,,'
 		else
 			cat
 		fi
