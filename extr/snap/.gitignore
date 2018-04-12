@@ -4,7 +4,6 @@ SYMDATASETS
 EGODATASETS
 ALLDATASETS
 dep.*
-*~
 out
 work
 konect
