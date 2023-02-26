@@ -3,7 +3,7 @@ KONECT Extraction
 
 This collection of network extraction tools is part of the KONECT
 project, i.e., the Koblenz Network Collection, a network analysis
-project by Jérôme Kunegis at the University of Namur, Belgium. 
+project by Jérôme Kunegis.
 
 http://konect.cc/ 
 
@@ -88,7 +88,7 @@ Stu
 ===
 
 We're converting the directories to Stu, a replacement for Make, also
-written at the University of Namur.  Stu can be installed from
+written by Jérôme Kunegis.  Stu can be installed from
 
 https://github.com/kunegis/stu/
 
@@ -120,5 +120,5 @@ In particular:
 Also, some directories use Stu and older ones Make.  
 
 If you need help, please politely ask Jérôme Kunegis
-<jerome.kunegis@unamur.be> and he may update the code to work.  (Up to
+<konectproject@outlook.com> and he may update the code to work.  (Up to
 websites that have disappeared; Jérôme can't do anything about those ;)
